@@ -1,0 +1,51 @@
+docs/test-plan/
+dist-newstyle
+*.pdf
+
+# Dockerfiles, or docker-compose files are not how we build or deploy software.
+# Only Nix expressions are allowed.
+*Dockerfile*
+*docker-compose*
+
+# Github Workflows are not what we use to perform CI, we use Hercules-CI
+# instead.
+.github/workflows
+
+# There's a habit of putting random shell scripts into a folder named 'bin' or
+# 'ci' at the root of the Git repo. Shell scripts should, in most cases, not
+# exist in this repository.  Scripts should be encoded via nix, by being added
+# to the `apps` attribute of the flake.nix, and ran via `nix run`.  This way,
+# they work every single time and do not depend on the environment where they
+# are ran, or require the user to install any additional dependencies.
+bin
+ci
+
+# Editor Settings and more should not be added as files to root of the repo,
+# outside of Nix. Using Nix, you can provide a custom vscodium/vscode or other
+# editor binary which uses a specified config via a devshell.
+.vscode
+.editorconfig
+.tidyrc.json
+
+# Prevents Nix results from `nix build`, etc, from being checked in
+# accidentally.
+*result*
+
+# Ignore direnv cache and envrc
+.direnv
+.envrc
+
+# Ignore flake.nix anywhere except for the root
+flake.nix
+!/flake.nix
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+.Trash*

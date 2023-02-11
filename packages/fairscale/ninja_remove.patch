@@ -1,0 +1,12 @@
+diff --git a/setup.py b/setup.py
+index f7b6d94..fe64c96 100644
+--- a/setup.py
++++ b/setup.py
+@@ -58,7 +58,6 @@ if __name__ == "__main__":
+         name="fairscale",
+         description="FairScale: A PyTorch library for large-scale and high-performance training.",
+         version=find_version("fairscale/version.py"),
+-        setup_requires=["ninja"],  # ninja is required to build extensions
+         install_requires=fetch_requirements(),
+         include_package_data=True,
+         packages=setuptools.find_packages(exclude=("tests", "tests.*")),

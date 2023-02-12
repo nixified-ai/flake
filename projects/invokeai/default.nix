@@ -59,6 +59,11 @@
         wrapPythonPrograms
       '';
       doCheck = false;
+      meta = {
+        description = "Fancy Web UI for Stable Diffusion";
+        homepage = "https://invoke-ai.github.io/InvokeAI/";
+        mainProgram = "invoke.py";
+      };
     };
 
   in {

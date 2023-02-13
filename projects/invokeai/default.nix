@@ -10,7 +10,7 @@
       builtins.head
     ];
 
-    mkInvokeAIVariant = aipython3: aipython3.buildPythonPackage rec {
+    mkInvokeAIVariant = { aipython3, wsl ? false }: aipython3.buildPythonPackage rec {
       pname = "InvokeAI";
       version = getVersion src;
       src = inputs.invokeai-src;
@@ -55,6 +55,7 @@
       pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" ];
       pythonRelaxDeps = [ "protobuf" ];
       postFixup = ''
+        ${lib.optionalString wsl "makeWrapperArgs+=( --set LD_LIBRARY_PATH '/usr/lib/wsl/lib' )"}
         chmod +x $out/bin/*
         wrapPythonPrograms
       '';
@@ -68,8 +69,10 @@
 
   in {
     packages = {
-      invokeai-amd = mkInvokeAIVariant aipython3-amd;
-      invokeai-nvidia = mkInvokeAIVariant aipython3-nvidia;
+      invokeai-amd = mkInvokeAIVariant { aipython3 = aipython3-amd; };
+      invokeai-nvidia = mkInvokeAIVariant { aipython3 = aipython3-nvidia; };
+      invokeai-amd-wsl = mkInvokeAIVariant { aipython3 = aipython3-amd; wsl = true; };
+      invokeai-nvidia-wsl = mkInvokeAIVariant { aipython3 = aipython3-nvidia; wsl = true;};
     };
   };
 }

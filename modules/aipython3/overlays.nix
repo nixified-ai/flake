@@ -21,6 +21,7 @@ pkgs: {
     callPackage = final.callPackage;
     rmCallPackage = path: args: rm (callPackage path args);
   in {
+    apispec-webframeworks = callPackage ../../packages/apispec-webframeworks { };
     pydeprecate = callPackage ../../packages/pydeprecate { };
     taming-transformers-rom1504 =
       callPackage ../../packages/taming-transformers-rom1504 { };

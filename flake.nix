@@ -14,6 +14,10 @@
       url = "github:invoke-ai/InvokeAI/v2.2.5";
       flake = false;
     };
+    koboldai-src = {
+      url = "github:koboldai/koboldai-client/1.19.2";
+      flake = false;
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -28,6 +32,7 @@
         ./modules/dependency-sets
         ./modules/aipython3
         ./projects/invokeai
+        ./projects/koboldai
       ];
   };
 }

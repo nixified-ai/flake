@@ -15,14 +15,6 @@
       invokeai-nvidia = mkInvokeAIVariant {
         aipython3 = aipython3-nvidia;
       };
-      invokeai-amd-wsl = mkInvokeAIVariant {
-        aipython3 = aipython3-amd;
-        wsl = true;
-      };
-      invokeai-nvidia-wsl = mkInvokeAIVariant {
-        aipython3 = aipython3-nvidia;
-        wsl = true;
-      };
     };
   };
 }

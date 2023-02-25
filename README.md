@@ -1,5 +1,7 @@
 # nixified.ai
 
+![nixified.ai](/../images/nixified.ai-text.png)
+
 The goal of nixified.ai is to simplify and make available a large repository of
 AI executable code, that would otherwise be impractical to run yourself, due to
 package management issues.
@@ -8,10 +10,14 @@ The main outputs of the `flake.nix` at the moment are as follows:
 
 ###### Linux
 
+![invokeai](/../images/invokeai.webp)
+
 - `.#invokeai-amd`
 - `.#invokeai-nvidia`
 
 ###### Windows
+
+![koboldai](/../images/koboldai.webp)
 
 These outputs will run on Windows via [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)
 

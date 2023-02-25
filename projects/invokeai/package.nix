@@ -4,8 +4,6 @@
 # misc
 , lib
 , src
-# configuration
-, wsl ? false
 }:
 
 let
@@ -60,8 +58,19 @@ aipython3.buildPythonPackage {
   nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
   pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" ];
   pythonRelaxDeps = [ "protobuf" ];
+  makeWrapperArgs = [
+    '' --run '
+      if [ -d "/usr/lib/wsl/lib" ]
+      then
+          echo "Running via WSL (Windows Subsystem for Linux), setting LD_LIBRARY_PATH=/usr/lib/wsl/lib"
+          set -x
+          export LD_LIBRARY_PATH="/usr/lib/wsl/lib"
+          set +x
+      fi
+      '
+    ''
+  ];
   postFixup = ''
-    ${lib.optionalString wsl "makeWrapperArgs+=( --set LD_LIBRARY_PATH '/usr/lib/wsl/lib' )"}
     chmod +x $out/bin/*
     wrapPythonPrograms
   '';

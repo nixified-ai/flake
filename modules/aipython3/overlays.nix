@@ -62,26 +62,6 @@ pkgs: {
   };
 
   torchRocm = final: prev: rec {
-    # TODO: figure out how to patch torch-bin trying to access /opt/amdgpu
-    # there might be an environment variable for it, can use a wrapper for that
-    # otherwise just grep the world for /opt/amdgpu or something and substituteInPlace the path
-    # you can run this thing without the fix by creating /opt and running nix build nixpkgs#libdrm --inputs-from . --out-link /opt/amdgpu
-    torch-bin = prev.torch-bin.overrideAttrs (old: {
-      src = pkgs.fetchurl {
-        name = "torch-1.13.1+rocm5.1.1-cp310-cp310-linux_x86_64.whl";
-        url = "https://download.pytorch.org/whl/rocm5.1.1/torch-1.13.1%2Brocm5.1.1-cp310-cp310-linux_x86_64.whl";
-        hash = "sha256-qUwAL3L9ODy9hjne8jZQRoG4BxvXXLT7cAy9RbM837A=";
-      };
-    });
-    torchvision-bin = prev.torchvision-bin.overrideAttrs (old: {
-      src = pkgs.fetchurl {
-        name = "torchvision-0.14.1+rocm5.1.1-cp310-cp310-linux_x86_64.whl";
-        url = "https://download.pytorch.org/whl/rocm5.1.1/torchvision-0.14.1%2Brocm5.1.1-cp310-cp310-linux_x86_64.whl";
-        hash = "sha256-8CM1QZ9cZfexa+HWhG4SfA/PTGB2475dxoOtGZ3Wa2E=";
-      };
-    });
-    torch = torch-bin;
-    torchvision = torchvision-bin;
   };
 
   torchCuda = final: prev: {

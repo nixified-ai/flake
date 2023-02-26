@@ -74,7 +74,7 @@ let
     loguru
     termcolor
     psutil
-    torch-bin
+    torchWithRocm
     torchvision-bin
     apispec
     apispec-webframeworks

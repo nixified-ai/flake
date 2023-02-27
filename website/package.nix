@@ -23,7 +23,7 @@ lib.fix (self: stdenvNoCC.mkDerivation {
 
     webroot=$out/share/www/nixified.ai
     mkdir -p $webroot
-    cp -v index.html *.css *.png $webroot
+    cp -v index.html *.css *.png CNAME $webroot
   '';
 
   passthru.webroot = "${self}/share/www/nixified.ai";

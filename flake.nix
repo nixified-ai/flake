@@ -22,13 +22,18 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    hercules-ci-effects = {
+      url = "github:hercules-ci/hercules-ci-effects";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
   };
-  outputs = { flake-parts, invokeai-src, ... }@inputs:
+  outputs = { flake-parts, invokeai-src, hercules-ci-effects, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
       ];
       imports = [
+        hercules-ci-effects.flakeModule
         ./modules/dependency-sets
         ./modules/aipython3
         ./projects/invokeai

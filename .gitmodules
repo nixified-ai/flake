@@ -1,7 +1,0 @@
-[submodule "InvokeAI"]
-	path = InvokeAI
-	url = ../../invoke-ai/InvokeAI
-	branch = main
-[submodule "stable-diffusion-webui"]
-	path = stable-diffusion-webui
-	url = ../../AUTOMATIC1111/stable-diffusion-webui

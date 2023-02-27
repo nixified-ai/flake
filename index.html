@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Nixified AI</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="./nixified-ai-icon.png">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p align="center">
+<br/> <a href="https://nixified.ai">
+<img src="https://raw.githubusercontent.com/nixified-ai/flake/images/nixified.ai-text.png" width=60% height=60% title="nixified.ai"/>
+</a>
+</p>
+<hr />
+<h2 id="making-ai-reproducible-and-easy-to-run">Making AI reproducible
+and easy to run</h2>
+<p>The goal of nixified.ai is to simplify and make available a large
+repository of AI executable code that would otherwise be impractical to
+run yourself, due to package management and complexity issues.</p>
+<ul>
+<li>Self-contained</li>
+<li>Easy to run</li>
+<li>Support for NVIDIA and AMD GPUs</li>
+<li>Works with Windows Subsystem for Linux</li>
+</ul>
+<hr />
+<h1 id="koboldai">KoboldAI</h1>
+<ul>
+<li><a href="https://github.com/KoboldAI/KoboldAI-Client">Official
+website</a></li>
+</ul>
+<p>A browser-based front-end for AI-assisted writing with multiple local
+&amp; remote AI models.</p>
+<h4 id="get-started">Get started</h4>
+<ul>
+<li><code>nix run github:nixified-ai/flake#koboldai-amd</code></li>
+<li><code>nix run github:nixified-ai/flake#koboldai-nvidia</code></li>
+</ul>
+<p><img
+src="https://raw.githubusercontent.com/nixified-ai/flake/images/koboldai.webp" /></p>
+<hr />
+<h1 id="invokeai-a-stable-diffusion-webui">InvokeAI (A Stable Diffusion
+WebUI)</h1>
+<ul>
+<li><a href="https://invoke-ai.github.io/InvokeAI/">Official
+website</a></li>
+</ul>
+<p>InvokeAI is an implementation of Stable Diffusion, the open source
+text-to-image and image-to-image generator. It provides a streamlined
+process with various new features and options to aid the image
+generation process.</p>
+<h4 id="get-started-1">Get started</h4>
+<ul>
+<li><code>nix run github:nixified-ai/flake#invokeai-amd</code></li>
+<li><code>nix run github:nixified-ai/flake#invokeai-nvidia</code></li>
+</ul>
+<p><img
+src="https://raw.githubusercontent.com/nixified-ai/flake/images/invokeai.webp" /></p>
+</body>
+</html>

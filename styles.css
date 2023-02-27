@@ -1,0 +1,36 @@
+* {
+  color: #eeeeee;
+  font-family: sans-serif;
+}
+
+body {
+  background: radial-gradient(circle, #4362a0 0%, #000000 100%);
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+img {
+  max-width: 100%;
+}
+
+li code {
+  font-family: monospace;
+  font-size: 1.2em;
+  background-color: #111111;
+  border-radius: 0.3em;
+  padding: 0.2em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+hr {
+  border-color: #7ebae4;
+  color: #7ebae4;
+}
+
+h2 {
+  text-align: center;
+  width: 100%;
+}

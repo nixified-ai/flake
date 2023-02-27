@@ -33,6 +33,7 @@
         ./modules/aipython3
         ./projects/invokeai
         ./projects/koboldai
+        ./website
       ];
   };
 }

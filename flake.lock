@@ -98,7 +98,9 @@
       "inputs": {
         "flake-parts": "flake-parts_2",
         "hercules-ci-agent": "hercules-ci-agent",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1676558019,
@@ -206,21 +208,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1673760129,
-        "narHash": "sha256-m8JdWtElEMd4TY5eUUTbw+3yEjImsE9ifo/UVSbdU7g=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "e8e9febf8bc4e90f1b38d3b22a704d347a99a74a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1675763311,
         "narHash": "sha256-bz0Q2H3mxsF1CUfk26Sl9Uzi8/HFjGFD/moZHz1HebU=",
         "owner": "NixOS",
@@ -264,7 +251,7 @@
         "hercules-ci-effects": "hercules-ci-effects",
         "invokeai-src": "invokeai-src",
         "koboldai-src": "koboldai-src",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

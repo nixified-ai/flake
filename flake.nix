@@ -24,7 +24,7 @@
     };
     hercules-ci-effects = {
       url = "github:hercules-ci/hercules-ci-effects";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = { flake-parts, invokeai-src, hercules-ci-effects, ... }@inputs:

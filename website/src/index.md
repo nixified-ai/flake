@@ -1,12 +1,15 @@
 
 <p align="center">
 <br/>
-<a href="https://nixified.ai">
+<a href="github.com/nixified-ai">
   <img src="https://raw.githubusercontent.com/nixified-ai/flake/images/nixified.ai-text.png" width=60% height=60% title="nixified.ai"/>
 </a>
 </p>
 
+## [Contact](mailto:matthew.croughan@nix.how) / [GitHub](https://github.com/nixified-ai/flake)
+
 ---
+
 
 ## Making AI reproducible and easy to run
 

@@ -30,6 +30,12 @@ package management and complexity issues.
 - Works with Windows Subsystem for Linux
   - nixified.ai provides support for running AI executable code on the Windows Subsystem for Linux (WSL), a compatibility layer for running Linux applications on Windows. With the help of [NixOS-WSL](https://github.com/nix-community/NixOS-WSL), users can run GPU-accelerated AI workloads on WSL, providing a seamless experience for users who prefer to use Windows as their primary operating system.
 
+## Professional support
+
+If you need your own AI project packaged in nixified.ai or need support with nixified.ai, professional support is available through the authors and contributors of the project.
+
+Please contact [matthew.croughan@nix.how](mailto:matthew.croughan@nix.how) or [check the AUTHORS file](https://raw.githubusercontent.com/nixified-ai/flake/master/AUTHORS) for a list of contributors you can reach out to. We can assist you in your AI endeavors.
+
 ---
 
 # Packaged Projects

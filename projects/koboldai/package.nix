@@ -49,10 +49,11 @@ let
     cd src
     rm -rf models settings userscripts
     cd -
-    substituteInPlace ./src/aiserver.py --replace 'os.system("")' 'STATE_DIR = os.path.expandvars("${stateDir}")'
-    substituteInPlace ./src/aiserver.py --replace 'cache_dir="cache"' "cache_dir=os.path.join(STATE_DIR, 'cache')"
-    substituteInPlace ./src/aiserver.py --replace 'shutil.rmtree("cache/")' 'shutil.rmtree(os.path.join(STATE_DIR, "cache"))'
-    substituteInPlace ./src/aiserver.py --replace "app.config['SESSION_TYPE'] = 'filesystem'" "app.config['SESSION_TYPE'] = 'memcached'"
+    substituteInPlace ./src/aiserver.py \
+      --replace 'os.system("")' 'STATE_DIR = os.path.expandvars("${stateDir}")' \
+      --replace 'cache_dir="cache"' "cache_dir=os.path.join(STATE_DIR, 'cache')" \
+      --replace 'shutil.rmtree("cache/")' 'shutil.rmtree(os.path.join(STATE_DIR, "cache"))' \
+      --replace "app.config['SESSION_TYPE'] = 'filesystem'" "app.config['SESSION_TYPE'] = 'memcached'"
 
     # https://stackoverflow.com/questions/59433832/runtimeerror-only-tensors-of-floating-point-dtype-can-require-gradients
     # Typo in casing by author means that breakmodels crash the program, but

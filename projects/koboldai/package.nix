@@ -53,6 +53,11 @@ let
     substituteInPlace ./src/aiserver.py --replace 'cache_dir="cache"' "cache_dir=os.path.join(STATE_DIR, 'cache')"
     substituteInPlace ./src/aiserver.py --replace 'shutil.rmtree("cache/")' 'shutil.rmtree(os.path.join(STATE_DIR, "cache"))'
     substituteInPlace ./src/aiserver.py --replace "app.config['SESSION_TYPE'] = 'filesystem'" "app.config['SESSION_TYPE'] = 'memcached'"
+
+    # https://stackoverflow.com/questions/59433832/runtimeerror-only-tensors-of-floating-point-dtype-can-require-gradients
+    # Typo in casing by author means that breakmodels crash the program, but
+    # correcting the case from tensor -> Tensor fixes it
+    substituteInPlace ./src/breakmodel.py --replace "torch.tensor" "torch.Tensor"
     mv ./src $out
     ln -s ${tmpDir}/models/ $out/models
     ln -s ${tmpDir}/settings/ $out/settings

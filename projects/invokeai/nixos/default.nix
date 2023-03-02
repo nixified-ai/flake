@@ -93,6 +93,7 @@ in
         ln -sf ${initialModelsPath} '${cfg.dataDir}/configs/INITIAL_MODELS.yaml'
         cp -L --no-clobber --no-preserve=mode ${initialModelsPath} '${cfg.dataDir}/configs/models.yaml'
       '';
+      environment.HOME = "${cfg.dataDir}/.home";
       serviceConfig = {
         User = cfg.user;
         Group = cfg.group;
@@ -102,6 +103,7 @@ in
     systemd.tmpfiles.rules = [
       "d '${cfg.dataDir}' 0755 ${cfg.user} ${cfg.group} - -"
       "d '${cfg.dataDir}/configs' 0755 ${cfg.user} ${cfg.group} - -"
+      "d '${cfg.dataDir}/.home' 0750 ${cfg.user} ${cfg.group} - -"
     ];
   };
 }

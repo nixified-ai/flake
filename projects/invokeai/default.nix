@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ config, inputs, lib, withSystem, ... }:
 
 {
   perSystem = { config, pkgs, ... }: let
@@ -15,6 +15,28 @@
       invokeai-nvidia = mkInvokeAIVariant {
         aipython3 = aipython3-nvidia;
       };
+    };
+  };
+
+  flake.nixosModules = let
+    packageModule = pkgAttrName: { pkgs, ... }: {
+      services.invokeai.package = withSystem pkgs.system (
+        { config, ... }: lib.mkOptionDefault config.packages.${pkgAttrName}
+      );
+    };
+  in {
+    invokeai = ./nixos;
+    invokeai-amd = {
+      imports = [
+        config.flake.nixosModules.invokeai
+        (packageModule "invokeai-amd")
+      ];
+    };
+    invokeai-nvidia = {
+      imports = [
+        config.flake.nixosModules.invokeai
+        (packageModule "invokeai-nvidia")
+      ];
     };
   };
 }

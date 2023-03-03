@@ -1,13 +1,12 @@
 pkgs: {
-  fixPackages = final: prev: {
-    pytorch-lightning = prev.pytorch-lightning.overrideAttrs (old: {
+  fixPackages = final: prev: let
+    relaxProtobuf = pkg: pkg.overrideAttrs (old: {
       nativeBuildInputs = old.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
       pythonRelaxDeps = [ "protobuf" ];
     });
-    wandb = prev.wandb.overrideAttrs (old: {
-      nativeBuildInputs = old.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
-      pythonRelaxDeps = [ "protobuf" ];
-    });
+  in {
+    pytorch-lightning = relaxProtobuf prev.pytorch-lightning;
+    wandb = relaxProtobuf prev.wandb;
     markdown-it-py = prev.markdown-it-py.overrideAttrs (old: {
       nativeBuildInputs = old.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
       pythonRelaxDeps = [ "linkify-it-py" ];
@@ -30,7 +29,11 @@ pkgs: {
         broken = false;
       };
     });
-    scikit-image = final.scikitimage;
+    streamlit = let
+      streamlit = final.callPackage (pkgs.path + "/pkgs/applications/science/machine-learning/streamlit") {
+        protobuf3 = final.protobuf;
+      };
+    in final.toPythonModule (relaxProtobuf streamlit);
   };
 
   extraDeps = final: prev: let
@@ -41,20 +44,24 @@ pkgs: {
     callPackage = final.callPackage;
     rmCallPackage = path: args: rm (callPackage path args);
   in {
+    scikit-image = final.scikitimage;
+    opencv-python-headless = final.opencv-python;
+    opencv-python = final.opencv4;
+
     safetensors = callPackage ../../packages/safetensors { };
     compel = callPackage ../../packages/compel { };
     apispec-webframeworks = callPackage ../../packages/apispec-webframeworks { };
     pydeprecate = callPackage ../../packages/pydeprecate { };
     taming-transformers-rom1504 =
       callPackage ../../packages/taming-transformers-rom1504 { };
-    albumentations = rmCallPackage ../../packages/albumentations { opencv-python-headless = final.opencv4; };
-    qudida = rmCallPackage ../../packages/qudida { opencv-python-headless = final.opencv4; };
-    gfpgan = rmCallPackage ../../packages/gfpgan { opencv-python = final.opencv4; };
-    basicsr = rmCallPackage ../../packages/basicsr { opencv-python = final.opencv4; };
-    facexlib = rmCallPackage ../../packages/facexlib { opencv-python = final.opencv4; };
-    realesrgan = rmCallPackage ../../packages/realesrgan { opencv-python = final.opencv4; };
-    codeformer = callPackage ../../packages/codeformer { opencv-python = final.opencv4; };
-    clipseg = rmCallPackage ../../packages/clipseg { opencv-python = final.opencv4; };
+    albumentations = rmCallPackage ../../packages/albumentations { };
+    qudida = rmCallPackage ../../packages/qudida { };
+    gfpgan = rmCallPackage ../../packages/gfpgan { };
+    basicsr = rmCallPackage ../../packages/basicsr { };
+    facexlib = rmCallPackage ../../packages/facexlib { };
+    realesrgan = rmCallPackage ../../packages/realesrgan { };
+    codeformer = callPackage ../../packages/codeformer { };
+    clipseg = rmCallPackage ../../packages/clipseg { };
     kornia = callPackage ../../packages/kornia { };
     lpips = callPackage ../../packages/lpips { };
     ffmpy = callPackage ../../packages/ffmpy { };
@@ -70,7 +77,7 @@ pkgs: {
     torch-fidelity = callPackage ../../packages/torch-fidelity { };
     resize-right = callPackage ../../packages/resize-right { };
     torchdiffeq = callPackage ../../packages/torchdiffeq { };
-    k-diffusion = callPackage ../../packages/k-diffusion { clean-fid = final.clean-fid; };
+    k-diffusion = callPackage ../../packages/k-diffusion { };
     accelerate = callPackage ../../packages/accelerate { };
     clip-anytorch = callPackage ../../packages/clip-anytorch { };
     clean-fid = callPackage ../../packages/clean-fid { };

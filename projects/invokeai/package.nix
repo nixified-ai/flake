@@ -1,6 +1,4 @@
 { aipython3
-# dependencies
-, streamlit
 # misc
 , lib
 , src
@@ -33,10 +31,7 @@ aipython3.buildPythonPackage {
     protobuf
     omegaconf
     test-tube
-    ((streamlit.overrideAttrs (old: {
-      nativeBuildInputs = old.nativeBuildInputs ++ [ pythonRelaxDepsHook ];
-      pythonRelaxDeps = [ "protobuf" ];
-    })).override { protobuf3 = protobuf; })
+    streamlit
     einops
     taming-transformers-rom1504
     torch-fidelity

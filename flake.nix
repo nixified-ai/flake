@@ -11,7 +11,7 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     invokeai-src = {
-      url = "github:invoke-ai/InvokeAI/v2.2.5";
+      url = "github:invoke-ai/InvokeAI/v2.3.1.post2";
       flake = false;
     };
     koboldai-src = {

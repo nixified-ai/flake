@@ -8,14 +8,15 @@
 
 let
   getVersion = lib.flip lib.pipe [
-    (src: builtins.readFile "${src}/setup.py")
-    (builtins.match ".+VERSION = '([^']+)'.+")
+    (src: builtins.readFile "${src}/ldm/invoke/_version.py")
+    (builtins.match ".*__version__='([^']+)'.*")
     builtins.head
   ];
 in
 
 aipython3.buildPythonPackage {
   pname = "InvokeAI";
+  format = "pyproject";
   version = getVersion src;
   inherit src;
   propagatedBuildInputs = with aipython3; [
@@ -25,6 +26,8 @@ aipython3.buildPythonPackage {
     pudb
     imageio
     imageio-ffmpeg
+    compel
+    npyscreen
     pytorch-lightning
     protobuf
     omegaconf
@@ -54,10 +57,12 @@ aipython3.buildPythonPackage {
     eventlet
     clipseg
     getpass-asterisk
+    safetensors
+    datasets
   ];
   nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
-  pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" ];
-  pythonRelaxDeps = [ "protobuf" ];
+  pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" ];
+  pythonRelaxDeps = [ "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
   makeWrapperArgs = [
     '' --run '
       if [ -d "/usr/lib/wsl/lib" ]
@@ -70,6 +75,24 @@ aipython3.buildPythonPackage {
       '
     ''
   ];
+  patchPhase = ''
+    runHook prePatch
+
+    # Add subprocess to the imports
+    substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
+        'import shutil' \
+'
+import shutil
+import subprocess
+'
+    # shutil.copytree will inherit the permissions of files in the /nix/store
+    # which are read only, so we subprocess.call cp instead and tell it not to
+    # preserve the mode
+    substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
+      "shutil.copytree(configs_src, configs_dest, dirs_exist_ok=True)" \
+      "subprocess.call('cp -r --no-preserve=mode {configs_src} {configs_dest}'.format(configs_src=configs_src, configs_dest=configs_dest), shell=True)"
+    runHook postPatch
+  '';
   postFixup = ''
     chmod +x $out/bin/*
     wrapPythonPrograms

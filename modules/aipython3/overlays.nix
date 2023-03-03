@@ -21,6 +21,8 @@ pkgs: {
     callPackage = final.callPackage;
     rmCallPackage = path: args: rm (callPackage path args);
   in {
+    safetensors = callPackage ../../packages/safetensors { };
+    compel = callPackage ../../packages/compel { };
     apispec-webframeworks = callPackage ../../packages/apispec-webframeworks { };
     pydeprecate = callPackage ../../packages/pydeprecate { };
     taming-transformers-rom1504 =

@@ -56,6 +56,12 @@ in
 
     nsfwChecker = mkEnableOption "the NSFW Checker";
 
+    precision = mkOption {
+      description = "Set model precision.";
+      default = "auto";
+      type = types.enum [ "auto" "float32" "autocast" "float16" ];
+    };
+
     extraArgs = mkOption {
       description = "Extra command line arguments.";
       default = [];
@@ -74,6 +80,7 @@ in
       "--root_dir" cfg.dataDir
       "--max_loaded_models" cfg.maxLoadedModels
       (yesno cfg.nsfwChecker "nsfw_checker")
+      "--precision" cfg.precision
     ] ++ cfg.extraArgs;
     initialModelsPath = "${cfg.package}/${cfg.package.pythonModule.sitePackages}/invokeai/configs/INITIAL_MODELS.yaml";
   in mkIf cfg.enable {

@@ -251,7 +251,24 @@
         "hercules-ci-effects": "hercules-ci-effects",
         "invokeai-src": "invokeai-src",
         "koboldai-src": "koboldai-src",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "webui-src": "webui-src"
+      }
+    },
+    "webui-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1666795088,
+        "narHash": "sha256-eL6/di8lmSmZ8YFs0a9FuUZadM2TiCOerRqilmK3BfY=",
+        "owner": "AUTOMATIC1111",
+        "repo": "stable-diffusion-webui",
+        "rev": "737eb28faca8be2bb996ee0930ec77d1f7ebd939",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AUTOMATIC1111",
+        "repo": "stable-diffusion-webui",
+        "type": "github"
       }
     }
   },

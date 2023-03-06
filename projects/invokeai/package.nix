@@ -21,6 +21,7 @@ aipython3.buildPythonPackage {
   inherit src;
   propagatedBuildInputs = with aipython3; [
     numpy
+    dnspython
     albumentations
     opencv4
     pudb
@@ -62,7 +63,7 @@ aipython3.buildPythonPackage {
   ];
   nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
   pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" ];
-  pythonRelaxDeps = [ "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
+  pythonRelaxDeps = [ "dnspython" "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
   makeWrapperArgs = [
     '' --run '
       if [ -d "/usr/lib/wsl/lib" ]

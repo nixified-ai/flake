@@ -8,9 +8,29 @@ pkgs: {
       nativeBuildInputs = old.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
       pythonRelaxDeps = [ "protobuf" ];
     });
+    markdown-it-py = prev.markdown-it-py.overrideAttrs (old: {
+      nativeBuildInputs = old.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
+      pythonRelaxDeps = [ "linkify-it-py" ];
+      passthru = old.passthru // {
+        optional-dependencies = with final; {
+          linkify = [ linkify-it-py ];
+          plugins = [ mdit-py-plugins ];
+        };
+      };
+    });
+    filterpy = prev.filterpy.overrideAttrs (old: {
+      doInstallCheck = false;
+    });
+    shap = prev.shap.overrideAttrs (old: {
+      doInstallCheck = false;
+      propagatedBuildInputs = old.propagatedBuildInputs ++ [ final.packaging ];
+      pythonImportsCheck = [ "shap" ];
+
+      meta = old.meta // {
+        broken = false;
+      };
+    });
     scikit-image = final.scikitimage;
-    #overriding because of https://github.com/NixOS/nixpkgs/issues/196653
-    opencv4 = prev.opencv4.override { openblas = pkgs.blas; };
   };
 
   extraDeps = final: prev: let
@@ -35,21 +55,16 @@ pkgs: {
     realesrgan = rmCallPackage ../../packages/realesrgan { opencv-python = final.opencv4; };
     codeformer = callPackage ../../packages/codeformer { opencv-python = final.opencv4; };
     clipseg = rmCallPackage ../../packages/clipseg { opencv-python = final.opencv4; };
-    filterpy = callPackage ../../packages/filterpy { };
     kornia = callPackage ../../packages/kornia { };
     lpips = callPackage ../../packages/lpips { };
     ffmpy = callPackage ../../packages/ffmpy { };
-    shap = callPackage ../../packages/shap { };
     picklescan = callPackage ../../packages/picklescan { };
     diffusers = callPackage ../../packages/diffusers { };
     pypatchmatch = callPackage ../../packages/pypatchmatch { };
     fonts = callPackage ../../packages/fonts { };
     font-roboto = callPackage ../../packages/font-roboto { };
     analytics-python = callPackage ../../packages/analytics-python { };
-    markdown-it-py = callPackage ../../packages/markdown-it-py { };
     gradio = callPackage ../../packages/gradio { };
-    hatch-requirements-txt = callPackage ../../packages/hatch-requirements-txt { };
-    timm = callPackage ../../packages/timm { };
     blip = callPackage ../../packages/blip { };
     fairscale = callPackage ../../packages/fairscale { };
     torch-fidelity = callPackage ../../packages/torch-fidelity { };
@@ -58,7 +73,6 @@ pkgs: {
     k-diffusion = callPackage ../../packages/k-diffusion { clean-fid = final.clean-fid; };
     accelerate = callPackage ../../packages/accelerate { };
     clip-anytorch = callPackage ../../packages/clip-anytorch { };
-    jsonmerge = callPackage ../../packages/jsonmerge { };
     clean-fid = callPackage ../../packages/clean-fid { };
     getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
   };

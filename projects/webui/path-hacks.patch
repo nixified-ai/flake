@@ -1,0 +1,103 @@
+diff --git a/launch.py b/launch.py
+index 8affd410..394436e9 100644
+--- a/launch.py
++++ b/launch.py
+@@ -176,16 +176,16 @@ def prepare_enviroment():
+ 
+     os.makedirs(dir_repos, exist_ok=True)
+ 
+-    git_clone(stable_diffusion_repo, repo_dir('stable-diffusion'), "Stable Diffusion", stable_diffusion_commit_hash)
+-    git_clone(taming_transformers_repo, repo_dir('taming-transformers'), "Taming Transformers", taming_transformers_commit_hash)
+-    git_clone(k_diffusion_repo, repo_dir('k-diffusion'), "K-diffusion", k_diffusion_commit_hash)
+-    git_clone(codeformer_repo, repo_dir('CodeFormer'), "CodeFormer", codeformer_commit_hash)
+-    git_clone(blip_repo, repo_dir('BLIP'), "BLIP", blip_commit_hash)
++    #git_clone(stable_diffusion_repo, repo_dir('stable-diffusion'), "Stable Diffusion", stable_diffusion_commit_hash)
++    #git_clone(taming_transformers_repo, repo_dir('taming-transformers'), "Taming Transformers", taming_transformers_commit_hash)
++    #git_clone(k_diffusion_repo, repo_dir('k-diffusion'), "K-diffusion", k_diffusion_commit_hash)
++    #git_clone(codeformer_repo, repo_dir('CodeFormer'), "CodeFormer", codeformer_commit_hash)
++    #git_clone(blip_repo, repo_dir('BLIP'), "BLIP", blip_commit_hash)
+ 
+     if not is_installed("lpips"):
+         run_pip(f"install -r {os.path.join(repo_dir('CodeFormer'), 'requirements.txt')}", "requirements for CodeFormer")
+ 
+-    run_pip(f"install -r {requirements_file}", "requirements for Web UI")
++    #run_pip(f"install -r {requirements_file}", "requirements for Web UI")
+ 
+     if update_check:
+         version_check(commit)
+diff --git a/modules/deepbooru.py b/modules/deepbooru.py
+index 8bbc90a4..3b13f24d 100644
+--- a/modules/deepbooru.py
++++ b/modules/deepbooru.py
+@@ -88,8 +88,9 @@ def get_deepbooru_tags_model():
+     import deepdanbooru as dd
+     import tensorflow as tf
+     import numpy as np
++    from modules.paths import models_path
+     this_folder = os.path.dirname(__file__)
+-    model_path = os.path.abspath(os.path.join(this_folder, '..', 'models', 'deepbooru'))
++    model_path = os.path.abspath(os.path.join(models_path, 'deepbooru'))
+     if not os.path.exists(os.path.join(model_path, 'project.json')):
+         # there is no point importing these every time
+         import zipfile
+diff --git a/modules/modelloader.py b/modules/modelloader.py
+index b0f2f33d..45d0c726 100644
+--- a/modules/modelloader.py
++++ b/modules/modelloader.py
+@@ -120,11 +120,9 @@ def move_files(src_path: str, dest_path: str, ext_filter: str = None):
+ 
+ 
+ def load_upscalers():
+-    sd = shared.script_path
+     # We can only do this 'magic' method to dynamically load upscalers if they are referenced,
+     # so we'll try to import any _model.py files before looking in __subclasses__
+-    modules_dir = os.path.join(sd, "modules")
+-    for file in os.listdir(modules_dir):
++    for file in os.listdir(shared.modules_path):
+         if "_model.py" in file:
+             model_name = file.replace("_model.py", "")
+             full_model = f"modules.{model_name}_model"
+diff --git a/modules/paths.py b/modules/paths.py
+index 1e7a2fbc..2d6e1a59 100644
+--- a/modules/paths.py
++++ b/modules/paths.py
+@@ -3,8 +3,9 @@ import os
+ import sys
+ import modules.safe
+ 
+-script_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+-models_path = os.path.join(script_path, "models")
++modules_path = os.path.dirname(os.path.dirname(__file__))
++script_path = os.environ.get('SD_WEBUI_SCRIPT_PATH', '@out@/lib/stable-diffusion-webui')
++models_path = os.environ.get('SD_WEBUI_MODELS_PATH', os.path.join(script_path, "models"))
+ sys.path.insert(0, script_path)
+ 
+ # search for directory of stable diffusion in following places
+@@ -19,10 +20,10 @@ assert sd_path is not None, "Couldn't find Stable Diffusion in any of: " + str(p
+ 
+ path_dirs = [
+     (sd_path, 'ldm', 'Stable Diffusion', []),
+-    (os.path.join(sd_path, '../taming-transformers'), 'taming', 'Taming Transformers', []),
+-    (os.path.join(sd_path, '../CodeFormer'), 'inference_codeformer.py', 'CodeFormer', []),
+-    (os.path.join(sd_path, '../BLIP'), 'models/blip.py', 'BLIP', []),
+-    (os.path.join(sd_path, '../k-diffusion'), 'k_diffusion/sampling.py', 'k_diffusion', ["atstart"]),
++    ('@taming_transformers@', 'taming', 'Taming Transformers', []),            
++    ('@codeformer@', 'inference_codeformer.py', 'CodeFormer', []),             
++    ('@blip@', 'models/blip.py', 'BLIP', []),                                  
++    ('@k_diffusion@', 'k_diffusion/sampling.py', 'k_diffusion', ["atstart"]),  
+ ]
+ 
+ paths = {}
+diff --git a/modules/shared.py b/modules/shared.py
+index 1a9b8289..3335128f 100644
+--- a/modules/shared.py
++++ b/modules/shared.py
+@@ -16,7 +16,7 @@ import modules.styles
+ import modules.devices as devices
+ from modules import sd_samplers, sd_models, localization
+ from modules.hypernetworks import hypernetwork
+-from modules.paths import models_path, script_path, sd_path
++from modules.paths import models_path, script_path, modules_path, sd_path
+ 
+ sd_model_file = os.path.join(script_path, 'model.ckpt')
+ default_sd_model_file = sd_model_file

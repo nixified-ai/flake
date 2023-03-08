@@ -18,6 +18,10 @@
       url = "github:koboldai/koboldai-client/1.19.2";
       flake = false;
     };
+    webui-src = {
+      url = "github:AUTOMATIC1111/stable-diffusion-webui";
+      flake = false;
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -38,6 +42,7 @@
         ./modules/aipython3
         ./projects/invokeai
         ./projects/koboldai
+        ./projects/webui
         ./website
       ];
   };

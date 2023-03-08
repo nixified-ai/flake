@@ -22,6 +22,7 @@ pkgs: {
     rmCallPackage = path: args: rm (callPackage path args);
   in {
     safetensors = callPackage ../../packages/safetensors { };
+    tensorflow-io-bin = callPackage ../../packages/tensorflow-io-bin { };
     compel = callPackage ../../packages/compel { };
     apispec-webframeworks = callPackage ../../packages/apispec-webframeworks { };
     pydeprecate = callPackage ../../packages/pydeprecate { };
@@ -61,6 +62,10 @@ pkgs: {
     jsonmerge = callPackage ../../packages/jsonmerge { };
     clean-fid = callPackage ../../packages/clean-fid { };
     getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
+    stable-diffusion = callPackage ../../packages/stable-diffusion { };
+    deepdanbooru = callPackage ../../packages/deepdanbooru { };
+
+    tensorflow-io = final.tensorflow-io-bin;
   };
 
   torchRocm = final: prev: rec {

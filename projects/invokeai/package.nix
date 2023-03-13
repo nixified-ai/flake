@@ -1,6 +1,4 @@
 { aipython3
-# dependencies
-, streamlit
 # misc
 , lib
 , src
@@ -21,6 +19,7 @@ aipython3.buildPythonPackage {
   inherit src;
   propagatedBuildInputs = with aipython3; [
     numpy
+    dnspython
     albumentations
     opencv4
     pudb
@@ -32,10 +31,7 @@ aipython3.buildPythonPackage {
     protobuf
     omegaconf
     test-tube
-    ((streamlit.overrideAttrs (old: {
-      nativeBuildInputs = old.nativeBuildInputs ++ [ pythonRelaxDepsHook ];
-      pythonRelaxDeps = [ "protobuf" ];
-    })).override { protobuf3 = protobuf; })
+    streamlit
     einops
     taming-transformers-rom1504
     torch-fidelity
@@ -62,7 +58,7 @@ aipython3.buildPythonPackage {
   ];
   nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
   pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" ];
-  pythonRelaxDeps = [ "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
+  pythonRelaxDeps = [ "dnspython" "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
   makeWrapperArgs = [
     '' --run '
       if [ -d "/usr/lib/wsl/lib" ]

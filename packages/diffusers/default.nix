@@ -34,14 +34,14 @@
 
 buildPythonPackage rec {
   pname = "diffusers";
-  version = "0.13.1";
+  version = "0.14.0";
 
   disabled = isPy27;
   format = "pyproject";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-KbZ6HvNNn1sFw+qwpJZpfaskllLSmNp0JVuKpPxPjkw=";
+    sha256 = "sha256-sqQqEtq1OMtFo7DGVQMFO6RG5fLfSDbeOFtSON+DCkY=";
   };
 
   propagatedBuildInputs = [

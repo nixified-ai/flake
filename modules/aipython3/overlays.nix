@@ -1,16 +1,39 @@
 pkgs: {
-  fixPackages = final: prev: {
-    pytorch-lightning = prev.pytorch-lightning.overrideAttrs (old: {
+  fixPackages = final: prev: let
+    relaxProtobuf = pkg: pkg.overrideAttrs (old: {
       nativeBuildInputs = old.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
       pythonRelaxDeps = [ "protobuf" ];
     });
-    wandb = prev.wandb.overrideAttrs (old: {
+  in {
+    pytorch-lightning = relaxProtobuf prev.pytorch-lightning;
+    wandb = relaxProtobuf prev.wandb;
+    markdown-it-py = prev.markdown-it-py.overrideAttrs (old: {
       nativeBuildInputs = old.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
-      pythonRelaxDeps = [ "protobuf" ];
+      pythonRelaxDeps = [ "linkify-it-py" ];
+      passthru = old.passthru // {
+        optional-dependencies = with final; {
+          linkify = [ linkify-it-py ];
+          plugins = [ mdit-py-plugins ];
+        };
+      };
     });
-    scikit-image = final.scikitimage;
-    #overriding because of https://github.com/NixOS/nixpkgs/issues/196653
-    opencv4 = prev.opencv4.override { openblas = pkgs.blas; };
+    filterpy = prev.filterpy.overrideAttrs (old: {
+      doInstallCheck = false;
+    });
+    shap = prev.shap.overrideAttrs (old: {
+      doInstallCheck = false;
+      propagatedBuildInputs = old.propagatedBuildInputs ++ [ final.packaging ];
+      pythonImportsCheck = [ "shap" ];
+
+      meta = old.meta // {
+        broken = false;
+      };
+    });
+    streamlit = let
+      streamlit = final.callPackage (pkgs.path + "/pkgs/applications/science/machine-learning/streamlit") {
+        protobuf3 = final.protobuf;
+      };
+    in final.toPythonModule (relaxProtobuf streamlit);
   };
 
   extraDeps = final: prev: let
@@ -21,44 +44,42 @@ pkgs: {
     callPackage = final.callPackage;
     rmCallPackage = path: args: rm (callPackage path args);
   in {
+    scikit-image = final.scikitimage;
+    opencv-python-headless = final.opencv-python;
+    opencv-python = final.opencv4;
+
     safetensors = callPackage ../../packages/safetensors { };
     compel = callPackage ../../packages/compel { };
     apispec-webframeworks = callPackage ../../packages/apispec-webframeworks { };
     pydeprecate = callPackage ../../packages/pydeprecate { };
     taming-transformers-rom1504 =
       callPackage ../../packages/taming-transformers-rom1504 { };
-    albumentations = rmCallPackage ../../packages/albumentations { opencv-python-headless = final.opencv4; };
-    qudida = rmCallPackage ../../packages/qudida { opencv-python-headless = final.opencv4; };
-    gfpgan = rmCallPackage ../../packages/gfpgan { opencv-python = final.opencv4; };
-    basicsr = rmCallPackage ../../packages/basicsr { opencv-python = final.opencv4; };
-    facexlib = rmCallPackage ../../packages/facexlib { opencv-python = final.opencv4; };
-    realesrgan = rmCallPackage ../../packages/realesrgan { opencv-python = final.opencv4; };
-    codeformer = callPackage ../../packages/codeformer { opencv-python = final.opencv4; };
-    clipseg = rmCallPackage ../../packages/clipseg { opencv-python = final.opencv4; };
-    filterpy = callPackage ../../packages/filterpy { };
+    albumentations = rmCallPackage ../../packages/albumentations { };
+    qudida = rmCallPackage ../../packages/qudida { };
+    gfpgan = rmCallPackage ../../packages/gfpgan { };
+    basicsr = rmCallPackage ../../packages/basicsr { };
+    facexlib = rmCallPackage ../../packages/facexlib { };
+    realesrgan = rmCallPackage ../../packages/realesrgan { };
+    codeformer = callPackage ../../packages/codeformer { };
+    clipseg = rmCallPackage ../../packages/clipseg { };
     kornia = callPackage ../../packages/kornia { };
     lpips = callPackage ../../packages/lpips { };
     ffmpy = callPackage ../../packages/ffmpy { };
-    shap = callPackage ../../packages/shap { };
     picklescan = callPackage ../../packages/picklescan { };
     diffusers = callPackage ../../packages/diffusers { };
     pypatchmatch = callPackage ../../packages/pypatchmatch { };
     fonts = callPackage ../../packages/fonts { };
     font-roboto = callPackage ../../packages/font-roboto { };
     analytics-python = callPackage ../../packages/analytics-python { };
-    markdown-it-py = callPackage ../../packages/markdown-it-py { };
     gradio = callPackage ../../packages/gradio { };
-    hatch-requirements-txt = callPackage ../../packages/hatch-requirements-txt { };
-    timm = callPackage ../../packages/timm { };
     blip = callPackage ../../packages/blip { };
     fairscale = callPackage ../../packages/fairscale { };
     torch-fidelity = callPackage ../../packages/torch-fidelity { };
     resize-right = callPackage ../../packages/resize-right { };
     torchdiffeq = callPackage ../../packages/torchdiffeq { };
-    k-diffusion = callPackage ../../packages/k-diffusion { clean-fid = final.clean-fid; };
+    k-diffusion = callPackage ../../packages/k-diffusion { };
     accelerate = callPackage ../../packages/accelerate { };
     clip-anytorch = callPackage ../../packages/clip-anytorch { };
-    jsonmerge = callPackage ../../packages/jsonmerge { };
     clean-fid = callPackage ../../packages/clean-fid { };
     getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
   };

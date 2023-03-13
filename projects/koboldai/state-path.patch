@@ -1,0 +1,34 @@
+diff --git a/aiserver.py b/aiserver.py
+--- a/aiserver.py
++++ b/aiserver.py
+@@ -6,6 +6,6 @@
+-os.system("")
++STATE_DIR = os.path.expandvars("@stateDir@")
++CACHE_DIR = os.path.join(STATE_DIR, "cache")
+ __file__ = os.path.dirname(os.path.realpath(__file__))
+-os.chdir(__file__)
+ os.environ['EVENTLET_THREADPOOL_SIZE'] = '1'
+ os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+ from eventlet import tpool
+@@ -451,7 +451,7 @@ from werkzeug.exceptions import HTTPException, NotFound, InternalServerError
+ import secrets
+ app = Flask(__name__, root_path=os.getcwd())
+ app.secret_key = secrets.token_hex()
+-app.config['SESSION_TYPE'] = 'filesystem'
++app.config['SESSION_TYPE'] = 'memcached'
+ app.config['TEMPLATES_AUTO_RELOAD'] = True
+ socketio = SocketIO(app, async_method="eventlet")
+ 
+diff --git a/breakmodel.py b/breakmodel.py
+index 5200033..9af625f 100644
+--- a/breakmodel.py
++++ b/breakmodel.py
+@@ -358,7 +358,7 @@ def move_hidden_layers(transformer, h=None):
+     for i in range(ram_blocks):
+         h[i].to("cpu")
+         transformer.extrastorage[i] = copy.deepcopy(h[i])
+-        smalltensor = torch.tensor(0).to(primary_device)
++        smalltensor = torch.Tensor(0).to(primary_device)
+         for param1 in h[i].parameters():
+             param1.data = smalltensor
+         h[i].to(primary_device)

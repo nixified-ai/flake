@@ -80,7 +80,7 @@ InvokeAI is an implementation of Stable Diffusion, the open source text-to-image
 
 #### Get started
 
-- `nix run github:nixified-ai/flake#invokeai-amd`
-- `nix run github:nixified-ai/flake#invokeai-nvidia`
+- `nix run github:nixified-ai/flake#invokeai-amd -- --web`
+- `nix run github:nixified-ai/flake#invokeai-nvidia -- --web`
 
 ![](https://raw.githubusercontent.com/nixified-ai/flake/images/invokeai.webp)

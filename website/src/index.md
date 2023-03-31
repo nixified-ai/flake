@@ -1,7 +1,7 @@
 
 <p align="center">
 <br/>
-<a href="github.com/nixified-ai">
+<a href="https://github.com/nixified-ai">
   <img src="https://raw.githubusercontent.com/nixified-ai/flake/images/nixified.ai-text.png" width=60% height=60% title="nixified.ai"/>
 </a>
 </p>

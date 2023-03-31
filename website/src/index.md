@@ -13,7 +13,7 @@ Binary Cache sponsored by <a href="https://cachix.org"><img height="20" style="f
 </p>
 
 <p align="center">
-Continuous Integration sponsored by <a href="https://hercules-ci.com"><img height="20" src="https://hercules-ci.com/assets/hercules.460470fa.png"></a> [Hercules CI](https://hercules-ci.com")
+Continuous Integration sponsored by <a href="https://hercules-ci.com"><img height="20" src="https://hercules-ci.com/assets/hercules.460470fa.png"></a> [Hercules CI](https://hercules-ci.com)
 </p>
 
 ---

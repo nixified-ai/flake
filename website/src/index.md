@@ -8,6 +8,14 @@
 
 ## [Contact](mailto:matthew.croughan@nix.how) / [GitHub](https://github.com/nixified-ai/flake)
 
+<p align="center">
+Binary Cache sponsored by <a href="https://cachix.org"><img height="20" style="filter: invert(1);" src="https://user-images.githubusercontent.com/126339/130430964-7794b915-89d1-4b08-94be-3d32444dc8b2.png"></a>
+</p>
+
+<p align="center">
+Continuous Integration sponsored by <a href="https://hercules-ci.com"><img height="20" src="https://hercules-ci.com/assets/hercules.460470fa.png"></a> [Hercules CI](https://hercules-ci.com")
+</p>
+
 ---
 
 ## Introduction Video

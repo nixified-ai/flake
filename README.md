@@ -12,12 +12,17 @@ The goal of nixified.ai is to simplify and make available a large repository of
 AI executable code that would otherwise be impractical to run yourself, due to
 package management and complexity issues.
 
-The outputs run primarily on Linux, but can also run on Windows via [NixOS-WSL](https://github.com/nix-community/NixOS-WSL). It is able to utilize the GPU of the Windows host automatically, as our wrapper script sets `LD_LIBRARY_PATH` to make use of the host drivers.
+The outputs run primarily on Linux, but can also run on Windows via [NixOS-WSL](https://github.com/nix-community/NixOS-WSL) ([script below]([url](#install-nixos-wsl-in-windows))). It is able to utilize the GPU of the Windows host automatically, as our wrapper script sets `LD_LIBRARY_PATH` to make use of the host drivers.
+
+enter nix and get ready 
+- `nix -d NixOS-nixified-ai`
+- `nix-env -i git`
+- `git clone https://github.com/nixified-ai/flake`
+
 
 The main outputs of the `flake.nix` at the moment are as follows:
 
 #### KoboldAI ( A WebUI for GPT Writing )
-
 - `nix run .#koboldai-amd`
 - `nix run .#koboldai-nvidia`
 

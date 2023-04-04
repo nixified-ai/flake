@@ -11,7 +11,7 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     invokeai-src = {
-      url = "github:invoke-ai/InvokeAI/v2.3.1.post2";
+      url = "github:invoke-ai/InvokeAI/v2.3.3";
       flake = false;
     };
     koboldai-src = {
@@ -26,6 +26,11 @@
       url = "github:hercules-ci/hercules-ci-effects";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dream2nix = {
+      url = "github:nix-community/dream2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dream2nix.inputs.nixpkgsV1.follows = "nixpkgs";
   };
   outputs = { flake-parts, invokeai-src, hercules-ci-effects, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {

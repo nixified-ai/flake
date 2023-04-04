@@ -1,4 +1,4 @@
-{ config, inputs, lib, withSystem, ... }:
+{ config, inputs, lib, withSystem, self,... }:
 
 {
   perSystem = { config, pkgs, ... }: let
@@ -7,6 +7,12 @@
     src = inputs.invokeai-src;
 
     mkInvokeAIVariant = args: pkgs.callPackage ./package.nix ({ inherit src; } // args);
+
+    dream2nix-setup-module = {config, lib, ...}: {
+      lock.repoRoot = self;
+      lock.lockFileRel = "/projects/invokeai/lock-${config.deps.stdenv.system}.json";
+    };
+
   in {
     packages = {
       invokeai-amd = mkInvokeAIVariant {
@@ -14,6 +20,14 @@
       };
       invokeai-nvidia = mkInvokeAIVariant {
         aipython3 = aipython3-nvidia;
+      };
+      invokeai-d2n = inputs.dream2nix.lib.evalModules {
+        modules = [
+          dream2nix-setup-module
+          ./package-d2n.nix
+        ];
+        packageSets.nixpkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+        specialArgs.inputs = {inherit (inputs) invokeai-src;};
       };
     };
   };

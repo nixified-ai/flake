@@ -20,9 +20,9 @@ Continuous Integration sponsored by <a href="https://hercules-ci.com"><img heigh
 
 ## Introduction Video
 
-<p align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wJ0D7MrPNOw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</p>
+<div style="overflow:hidden; padding-bottom:56.25%; position:relative; height:0;" class="video-responsive">
+<iframe style="left:0; top:0; height:100%; width:100%; position:absolute;" width="420" height="315" src="https://www.youtube.com/embed/wJ0D7MrPNOw" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ## Making AI reproducible and easy to run
 

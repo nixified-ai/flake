@@ -1,4 +1,5 @@
 { aipython3
+, fetchFromGitHub
 # misc
 , lib
 , src
@@ -23,6 +24,10 @@ aipython3.buildPythonPackage {
     numpy
     dnspython
     albumentations
+    fastapi
+    fastapi-events
+    fastapi-socketio
+    peft
     opencv4
     pudb
     imageio
@@ -60,7 +65,7 @@ aipython3.buildPythonPackage {
   ];
   nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
   pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" ];
-  pythonRelaxDeps = [ "dnspython" "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
+  pythonRelaxDeps = [ "dnspython" "protobuf" "flask" "flask-socketio" "pytorch-lightning" "fastapi" ];
   makeWrapperArgs = [
     '' --run '
       if [ -d "/usr/lib/wsl/lib" ]
@@ -95,12 +100,33 @@ aipython3.buildPythonPackage {
 import shutil
 import subprocess
 '
+    substituteInPlace ./ldm/invoke/config/model_install_backend.py --replace \
+        'import shutil' \
+'
+import shutil
+import subprocess
+'
+    substituteInPlace ./ldm/invoke/CLI.py --replace \
+        'import os' \
+'
+import os
+import subprocess
+'
     # shutil.copytree will inherit the permissions of files in the /nix/store
     # which are read only, so we subprocess.call cp instead and tell it not to
     # preserve the mode
     substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
       "shutil.copytree(configs_src, configs_dest, dirs_exist_ok=True)" \
       "subprocess.call('cp -r --no-preserve=mode {configs_src} {configs_dest}'.format(configs_src=configs_src, configs_dest=configs_dest), shell=True)"
+
+    substituteInPlace ./ldm/invoke/config/model_install_backend.py --replace \
+      "shutil.copytree(configs_src, configs_dest, dirs_exist_ok=True)" \
+      "subprocess.call('cp -r --no-preserve=mode {configs_src} {configs_dest}'.format(configs_src=configs_src, configs_dest=configs_dest), shell=True)"
+
+    substituteInPlace ./ldm/invoke/CLI.py --replace \
+      "copyfile(src,dest)" \
+      "subprocess.call('cp -r --no-preserve=mode {src} {dest}'.format(src=src, dest=dest), shell=True)"
+
     runHook postPatch
   '';
   postFixup = ''

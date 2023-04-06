@@ -82,7 +82,25 @@ pkgs: {
     clip-anytorch = callPackage ../../packages/clip-anytorch { };
     clean-fid = callPackage ../../packages/clean-fid { };
     getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
+    peft = callPackage ../../packages/peft { };
+    fastapi-events = callPackage ../../packages/fastapi-events { };
+    fastapi-socketio = callPackage ../../packages/fastapi-socketio { };
+#    fastapi = (builtins.getFlake "github:nixos/nixpkgs/a8b721d4960189a6366f77baa3fd75b5673fac08").legacyPackages.${pkgs.hostPlatform.system}.python310Packages.fastapi;
+    transformers = (pkgs.python310Packages.transformers.overrideAttrs (old: rec {
+      propagatedBuildInputs = old.propagatedBuildInputs ++ [
+        pkgs.python310Packages.huggingface-hub ];
+      name = "transformers";
+      pname = "transformers";
+      version = "4.26.0";
+      src = pkgs.fetchFromGitHub {
+        owner = "huggingface";
+        repo = pname;
+        rev = "refs/tags/v${version}";
+        hash = "sha256-ouZdHIcFfXLGA/wGC7x8qfCznvwXyN31dFt7suiYtnQ=";
+      };
+    }));
   };
+
 
   torchRocm = final: prev: rec {
     # TODO: figure out how to patch torch-bin trying to access /opt/amdgpu

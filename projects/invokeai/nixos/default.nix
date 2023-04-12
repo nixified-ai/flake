@@ -105,6 +105,7 @@ in
         User = cfg.user;
         Group = cfg.group;
         ExecStart = "${getExe cfg.package} ${escapeShellArgs cliArgs}";
+        PrivateTmp = true;
       };
     };
     systemd.tmpfiles.rules = [

@@ -29,7 +29,6 @@
     koboldai-amd = {
       imports = [
         config.flake.nixosModules.koboldai
-        ./nixos/amd.nix
         (packageModule "koboldai-amd")
       ];
     };

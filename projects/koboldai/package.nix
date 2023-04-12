@@ -7,6 +7,7 @@
 , runCommand
 , tmpDir ? "/tmp/nix-koboldai"
 , stateDir ? "$HOME/.koboldai/state"
+, libdrm
 }:
 let
   overrides = {
@@ -87,6 +88,17 @@ let
     lupa
     memcached
   ]);
+
+  # See note about consumer GPUs:
+  # https://docs.amd.com/bundle/ROCm-Deep-Learning-Guide-v5.4.3/page/Troubleshooting.html
+  rocmInit = ''
+    if [ ! -e /tmp/nix-pytorch-rocm___/amdgpu.ids ]
+    then
+        mkdir -p /tmp/nix-pytorch-rocm___
+        ln -s ${libdrm}/share/libdrm/amdgpu.ids /tmp/nix-pytorch-rocm___/amdgpu.ids
+    fi
+    export HSA_OVERRIDE_GFX_VERSION=''${HSA_OVERRIDE_GFX_VERSION-'10.3.0'}
+  '';
 in
 (writeShellScriptBin "koboldai" ''
   if [ -d "/usr/lib/wsl/lib" ]
@@ -102,6 +114,7 @@ in
   ln -s ${stateDir}/models/   ${tmpDir}/models
   ln -s ${stateDir}/settings/ ${tmpDir}/settings
   ln -s ${stateDir}/userscripts/ ${tmpDir}/userscripts
+  ${lib.optionalString (aipython3.torch.rocmSupport or false) rocmInit}
   ${koboldPython}/bin/python ${patchedSrc}/aiserver.py $@
 '').overrideAttrs
   (_: {

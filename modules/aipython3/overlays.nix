@@ -95,6 +95,10 @@ pkgs: {
         url = "https://download.pytorch.org/whl/rocm5.1.1/torch-1.13.1%2Brocm5.1.1-cp310-cp310-linux_x86_64.whl";
         hash = "sha256-qUwAL3L9ODy9hjne8jZQRoG4BxvXXLT7cAy9RbM837A=";
       };
+      postFixup = (old.postFixup or "") + ''
+        ${pkgs.gnused}/bin/sed -i s,/opt/amdgpu/share/libdrm/amdgpu.ids,/tmp/nix-pytorch-rocm___/amdgpu.ids,g $out/${final.python.sitePackages}/torch/lib/libdrm_amdgpu.so
+      '';
+      rocmSupport = true;
     });
     torchvision-bin = prev.torchvision-bin.overrideAttrs (old: {
       src = pkgs.fetchurl {

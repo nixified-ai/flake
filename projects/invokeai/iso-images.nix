@@ -1,7 +1,7 @@
 { self, ... }:
 
 {
-  perSystem = { pkgs, system, ... }:
+  perSystem = { lib, pkgs, system, ... }:
   let
     mkIsoImage = { gpuType, system, pkgs, self }: let
       nixosSystem = self.inputs.nixpkgs.lib.nixosSystem {
@@ -33,13 +33,19 @@
               package = join;
             };
           in autostartItem;
-        in
-        {
+        in {
           imports = [ self.nixosModules."invokeai-${gpuType}" ];
+          services.invokeai.enable = true;
           environment.systemPackages = [
             launch-invokeai
           ];
         })
+        {
+          config = lib.mkIf (gpuType == "nvidia") {
+            services.xserver.videoDrivers = lib.mkOptionDefault [ "nvidia" ];
+            hardware.nvidia.nvidiaPersistenced = true;
+          };
+        }
       ];
     };
     in nixosSystem.config.system.build.isoImage;

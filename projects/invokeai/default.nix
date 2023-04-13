@@ -1,6 +1,7 @@
 { config, inputs, lib, withSystem, ... }:
 
 {
+  imports = [ ./iso-images.nix ];
   perSystem = { config, pkgs, ... }: let
     inherit (config.dependencySets) aipython3-amd aipython3-nvidia;
 

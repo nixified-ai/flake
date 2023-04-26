@@ -29,7 +29,7 @@
       };
     in
     {
-      textgen = ./nixos;
+      # textgen = ./nixos;
       textgen-amd = {
         imports = [
           config.flake.nixosModules.textgen

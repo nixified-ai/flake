@@ -1,5 +1,4 @@
-{ pkgs
-, lib
+{ lib
 , buildPythonPackage
 , fetchFromGitHub
 , python
@@ -8,10 +7,9 @@
 , setuptools
 , torch
 , cudaPackages
-  # , cudaVersion
-  # , cudaCapabilities
 , einops
 , lion-pytorch
+, gcc11
 , scipy
 , symlinkJoin
 }:
@@ -21,11 +19,7 @@ let
   version = "0.38.0";
 
   cudaSupport = true;
-  # inherit (pkgs) cudaPackages;
-  # inherit (pkgs.cudaPackages) cudaVersion;
   inherit (cudaPackages) cudaVersion;
-  # inherit (torch) cudaCapabilities cudaPackages cudaSupport;
-  # inherit (torch.cudaPackages) backendStdenv cudaVersion;
 
   # NOTE: torchvision doesn't use cudnn; torch does!
   #   For this reason it is not included.
@@ -76,16 +70,12 @@ buildPythonPackage {
 
   CUDA_HOME = "${cuda-native-redist}";
 
-  preBuild =
-    if cudaSupport then
-      with cudaPackages;
-      let cudaVersion = lib.concatStrings (lib.splitVersion cudaPackages.cudaMajorMinorVersion); in
-      ''make CUDA_VERSION=${cudaVersion} cuda${cudaMajorVersion}x''
-    else
-      ''make CUDA_VERSION=CPU cpuonly'';
+  preBuild = with cudaPackages;
+    let cudaVersion = lib.concatStrings (lib.splitVersion cudaPackages.cudaMajorMinorVersion); in
+    ''make CUDA_VERSION=${cudaVersion} cuda${cudaMajorVersion}x'';
 
-  nativeBuildInputs = [ setuptools ] ++ lib.optionals cudaSupport [ cuda-native-redist ];
-  buildInputs = lib.optionals cudaSupport [ cuda-redist ];
+  nativeBuildInputs = [ setuptools cuda-native-redist gcc11 ];
+  buildInputs = [ cuda-redist ];
 
   propagatedBuildInputs = [
     torch

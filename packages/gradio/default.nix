@@ -4,10 +4,13 @@
 , pythonOlder
 , writeTextFile
 , setuptools
+, altair
 , analytics-python
+, aiofiles
 , aiohttp
 , fastapi
 , ffmpy
+, gradio-client
 , markdown-it-py
 , linkify-it-py
 , mdit-py-plugins
@@ -34,6 +37,7 @@
 , wandb
 , respx
 , scikitimage
+, semantic-version
 , shap
 , ipython
 , hatchling
@@ -45,7 +49,7 @@
 
 buildPythonPackage rec {
   pname = "gradio";
-  version = "3.5";
+  version = "3.27.0";
   disabled = pythonOlder "3.7";
   format = "pyproject";
 
@@ -53,7 +57,7 @@ buildPythonPackage rec {
   # and its releases are also more frequent than github tags
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-8MmpH2N1twrPGHS+HBLDWRtpg2Gd1rQzulbOEDr3rNQ=";
+    sha256 = "sha256-xsAvpZ8blfvAtI+5XghGBCQTT6XQNbsJMLtFv0NpGxY=";
   };
 
   nativeBuildInputs = [
@@ -62,10 +66,13 @@ buildPythonPackage rec {
     hatch-fancy-pypi-readme
   ];
   propagatedBuildInputs = [
-    analytics-python
+    altair
     aiohttp
+    aiofiles
+    analytics-python
     fastapi
     ffmpy
+    gradio-client
     matplotlib
     numpy
     orjson
@@ -81,10 +88,11 @@ buildPythonPackage rec {
     fsspec
     httpx
     pydantic
+    semantic-version
     websockets
     markdown-it-py
   ] ++ markdown-it-py.optional-dependencies.plugins
-    ++ markdown-it-py.optional-dependencies.linkify;
+  ++ markdown-it-py.optional-dependencies.linkify;
 
   postPatch = ''
     # Unpin h11, as its version was only pinned to aid dependency resolution.

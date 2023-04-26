@@ -258,11 +258,11 @@
     "textgen-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1682468895,
-        "narHash": "sha256-Zuhd0K+l01O5/PL+yBCFqY9DFTd0WGTRUrk5l6Dl28o=",
+        "lastModified": 1682491654,
+        "narHash": "sha256-5LKjsf5kJ29BLW+w+aINeYI4sXHCN5pE++TByNxKZhI=",
         "owner": "oobabooga",
         "repo": "text-generation-webui",
-        "rev": "95aa43b9c28dac4748a1ce65da66bf87c8dc4441",
+        "rev": "d87ca8f2af2458e8b57b1ec9915c72a4ca5ca19f",
         "type": "github"
       },
       "original": {

@@ -33,6 +33,9 @@
   };
   outputs = { flake-parts, invokeai-src, hercules-ci-effects, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      perSystem = { system, ... }: {
+        _module.args.pkgs = import inputs.nixpkgs { config.allowUnfree = true; inherit system; };
+      };
       systems = [
         "x86_64-linux"
       ];

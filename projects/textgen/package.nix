@@ -15,11 +15,26 @@ let
     cp -r --no-preserve=mode ${src} ./src
     cd src
     rm -rf models loras cache
+    mv ./prompts ./_prompts
     cd -
+    substituteInPlace ./src/server.py \
+      --replace "Path('presets" "Path('$out/presets" \
+      --replace "Path('prompts" "Path('$out/prompts" \
+      --replace "Path(f'prompts" "Path(f'$out/prompts" \
+      --replace "Path('extensions" "Path('$out/extensions" \
+      --replace "Path(f'presets" "Path(f'$out/presets" \
+      --replace "Path('softprompts" "Path('$out/softprompts" \
+      --replace "Path(f'softprompts" "Path(f'$out/softprompts" \
+      --replace "Path('characters" "Path('$out/characters" \
+      --replace "Path('cache" "Path('$out/cache"
+    substituteInPlace ./src/download-model.py \
+      --replace "=args.output" "='$out/models/'" \
+      --replace "base_folder=None" "base_folder='$out/models/'"
     mv ./src $out
     ln -s ${tmpDir}/models/ $out/models
     ln -s ${tmpDir}/loras/ $out/loras
     ln -s ${tmpDir}/cache/ $out/cache
+    ln -s ${tmpDir}/prompts/ $out/prompts
   '';
   textgenPython = aipython3.python.withPackages (_: with aipython3; [
     accelerate
@@ -64,10 +79,12 @@ in
   fi
   rm -rf ${tmpDir}
   mkdir -p ${tmpDir}
-  mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/cache
+  mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/prompts
+  cp ${patchedSrc}/_prompts/* ${stateDir}/prompts/.
   ln -s ${stateDir}/models/ ${tmpDir}/models
   ln -s ${stateDir}/loras/ ${tmpDir}/loras
   ln -s ${stateDir}/cache/ ${tmpDir}/cache
+  ln -s ${stateDir}/prompts/ ${tmpDir}/prompts
   ${lib.optionalString (aipython3.torch.rocmSupport or false) rocmInit}
   ${textgenPython}/bin/python ${patchedSrc}/server.py $@ \
     --model-dir ${stateDir}/models/ \

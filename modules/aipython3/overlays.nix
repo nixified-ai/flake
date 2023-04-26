@@ -7,6 +7,21 @@ pkgs: {
       });
     in
     {
+      huggingface-hub =
+        let
+          inherit (prev.pkgs) fetchFromGitHub;
+          version = "0.14.1";
+        in
+        prev.huggingface-hub.overridePythonAttrs (old: {
+          inherit version;
+          src = fetchFromGitHub {
+            owner = "huggingface";
+            repo = "huggingface_hub";
+            rev = "refs/tags/v${version}";
+            hash = "sha256-+BtXi+O+Ef4p4b+8FJCrZFsxX22ZYOPXylexFtsldnA=";
+          };
+          propagatedBuildInputs = old.propagatedBuildInputs ++ [ prev.fsspec ];
+        });
       tokenizers =
         let
           inherit (prev.pkgs) fetchFromGitHub rustPlatform;
@@ -26,6 +41,22 @@ pkgs: {
             inherit src sourceRoot;
             name = "${pname}-${version}";
             hash = "sha256-G6BQpnGucqmbmADC47xV0Jm9JqYob7416FFHl8rRWh4=";
+          };
+        });
+
+      transformers =
+        let
+          inherit (prev.pkgs) fetchFromGitHub;
+          pname = "transformers";
+          version = "4.28.1";
+        in
+        prev.transformers.overridePythonAttrs (_: {
+          inherit version;
+          src = fetchFromGitHub {
+            owner = "huggingface";
+            repo = pname;
+            rev = "refs/tags/v${version}";
+            hash = "sha256-FmiuWfoFZjZf1/GbE6PmSkeshWWh+6nDj2u2PMSeDk0=";
           };
         });
       typing-extensions =
@@ -111,6 +142,7 @@ pkgs: {
       font-roboto = callPackage ../../packages/font-roboto { };
       analytics-python = callPackage ../../packages/analytics-python { };
       gradio = callPackage ../../packages/gradio { };
+      gradio-client = callPackage ../../packages/gradio-client { };
       blip = callPackage ../../packages/blip { };
       fairscale = callPackage ../../packages/fairscale { };
       torch-fidelity = callPackage ../../packages/torch-fidelity { };

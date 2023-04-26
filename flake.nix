@@ -18,6 +18,10 @@
       url = "github:koboldai/koboldai-client/1.19.2";
       flake = false;
     };
+    textgen-src = {
+      url = "github:oobabooga/text-generation-webui/main";
+      flake = false;
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -38,7 +42,8 @@
         ./modules/aipython3
         ./projects/invokeai
         ./projects/koboldai
+        ./projects/textgen
         ./website
       ];
-  };
+    };
 }

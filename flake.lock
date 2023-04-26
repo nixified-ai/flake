@@ -251,7 +251,25 @@
         "hercules-ci-effects": "hercules-ci-effects",
         "invokeai-src": "invokeai-src",
         "koboldai-src": "koboldai-src",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "textgen-src": "textgen-src"
+      }
+    },
+    "textgen-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682468895,
+        "narHash": "sha256-Zuhd0K+l01O5/PL+yBCFqY9DFTd0WGTRUrk5l6Dl28o=",
+        "owner": "oobabooga",
+        "repo": "text-generation-webui",
+        "rev": "95aa43b9c28dac4748a1ce65da66bf87c8dc4441",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oobabooga",
+        "ref": "main",
+        "repo": "text-generation-webui",
+        "type": "github"
       }
     }
   },

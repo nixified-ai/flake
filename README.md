@@ -1,4 +1,3 @@
-
 <p align="center">
 <br/>
 <a href="nixified.ai">
@@ -16,19 +15,24 @@ The outputs run primarily on Linux, but can also run on Windows via [NixOS-WSL](
 
 The main outputs of the `flake.nix` at the moment are as follows:
 
-#### KoboldAI ( A WebUI for GPT Writing )
+#### [KoboldAI](https://github.com/KoboldAI/KoboldAI-Client) ( A WebUI for GPT Writing )
 
 - `nix run .#koboldai-amd`
 - `nix run .#koboldai-nvidia`
 
 ![koboldai](/../images/koboldai.webp)
 
-#### InvokeAI ( A Stable Diffusion WebUI )
+#### [InvokeAI](https://github.com/invoke-ai/InvokeAI) ( A Stable Diffusion WebUI )
 
 - `nix run .#invokeai-amd`
 - `nix run .#invokeai-nvidia`
 
 ![invokeai](/../images/invokeai.webp)
+
+#### [textgen](https://github.com/oobabooga/text-generation-webui) ( A WebUI for LLMs and LoRA training )
+
+- `nix run .#textgen-amd`
+- `nix run .#textgen-nvidia`
 
 ## Install NixOS-WSL in Windows
 

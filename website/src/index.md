@@ -8,6 +8,8 @@
 
 ## [Contact](mailto:matthew.croughan@nix.how) / [GitHub](https://github.com/nixified-ai/flake)
 
+## <iframe src="https://github.com/sponsors/nixified-ai/button" title="Sponsor nixified-ai" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
+
 <p align="center">
 Binary Cache sponsored by <a href="https://cachix.org"><img height="20" style="filter: invert(1);" src="https://user-images.githubusercontent.com/126339/130430964-7794b915-89d1-4b08-94be-3d32444dc8b2.png"></a>
 </p>

@@ -7,12 +7,12 @@
 
 buildPythonPackage rec {
   pname = "rwkv";
-  version = "0.7.3";
+  version = "0.7.4";
   format = "pyproject";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-pk1ouAxS7sTz/MWgFccEfZvvd2KwgQQCSEh2ICZU3ig=";
+    hash = "sha256-35hoK+o0xE+Pcc3V7G/+c8rOpQL1Xwj3JbAU3oIHM+Y=";
   };
 
   propagatedBuildInputs = [

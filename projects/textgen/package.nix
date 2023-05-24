@@ -10,7 +10,6 @@
 , libdrm
 }:
 let
-  overrides = { };
   patchedSrc = runCommand "textgen-patchedSrc" { } ''
     cp -r --no-preserve=mode ${src} ./src
     cd src
@@ -38,7 +37,7 @@ let
   '';
   textgenPython = aipython3.python.withPackages (_: with aipython3; [
     accelerate
-    bitsandbytes
+    # bitsandbytes
     colorama
     datasets
     flexgen
@@ -80,7 +79,7 @@ in
   rm -rf ${tmpDir}
   mkdir -p ${tmpDir}
   mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/prompts
-  cp ${patchedSrc}/_prompts/* ${stateDir}/prompts/.
+  cp --no-preserve=mode ${patchedSrc}/_prompts/* ${stateDir}/prompts/
   ln -s ${stateDir}/models/ ${tmpDir}/models
   ln -s ${stateDir}/loras/ ${tmpDir}/loras
   ln -s ${stateDir}/cache/ ${tmpDir}/cache

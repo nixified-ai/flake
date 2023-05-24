@@ -155,7 +155,7 @@ pkgs: {
       getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
       peft = callPackage ../../packages/peft { };
       llama-cpp-python = callPackage ../../packages/llama-cpp-python { };
-      bitsandbytes = callPackage ../../packages/bitsandbytes { };
+      # bitsandbytes = callPackage ../../packages/bitsandbytes { };
       lion-pytorch = callPackage ../../packages/lion-pytorch { };
       flexgen = callPackage ../../packages/flexgen { };
       hf-doc-builder = callPackage ../../packages/hf-doc-builder { };

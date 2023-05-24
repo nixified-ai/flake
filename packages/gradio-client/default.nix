@@ -15,13 +15,13 @@
 
 buildPythonPackage rec {
   pname = "gradio-client";
-  version = "0.1.3";
+  version = "0.2.5";
   format = "pyproject";
 
   src = fetchPypi {
     pname = "gradio_client";
     inherit version;
-    hash = "sha256-fA/gJSHK02pK/QGmYyiHNbt2mi4r2+ChYQXRC9b6cEs=";
+    hash = "sha256-GiTdegmXbbcP0yzbVRK297FcGghPMQtfazAhyXlNkKQ=";
   };
 
   nativeBuildInputs = [

@@ -26,6 +26,9 @@ let
       --replace "Path(f'softprompts" "Path(f'$out/softprompts" \
       --replace "Path('characters" "Path('$out/characters" \
       --replace "Path('cache" "Path('$out/cache"
+    substituteInPlace ./src/modules/utils.py \
+      --replace "Path('prompts" "Path('$out/prompts" \
+      --replace "Path('softprompts" "Path('$out/softprompts"
     substituteInPlace ./src/download-model.py \
       --replace "=args.output" "='$out/models/'" \
       --replace "base_folder=None" "base_folder='$out/models/'"
@@ -40,6 +43,7 @@ let
     # bitsandbytes
     colorama
     datasets
+    einops
     flexgen
     gradio
     llama-cpp-python

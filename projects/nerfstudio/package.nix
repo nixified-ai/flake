@@ -4,6 +4,7 @@
 , src
 # extra deps
 , libdrm
+, ninja
 }:
 
 let
@@ -21,8 +22,22 @@ aipython3.buildPythonPackage {
   version = getVersion src;
   inherit src;
 
+  nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ninja ];
+
+  pythonRemoveDeps = [ "ninja" ];
+
   propagatedBuildInputs = with aipython3; [
     setuptools
+    matplotlib
+    pymeshlab
+    pyquaternion
+    appdirs
+    python-socketio
+    msgpack-numpy
+    av
+    nerfacc
+    ipywidgets
+    open3d
   ];
 
   makeWrapperArgs = [

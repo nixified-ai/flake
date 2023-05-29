@@ -82,6 +82,11 @@ pkgs: {
     clip-anytorch = callPackage ../../packages/clip-anytorch { };
     clean-fid = callPackage ../../packages/clean-fid { };
     getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
+    pymeshlab = callPackage ../../packages/pymeshlab { };
+    viser = callPackage ../../packages/viser { };
+    tyro = callPackage ../../packages/tyro { };
+    nerfacc = callPackage ../../packages/nerfacc { };
+    open3d = callPackage ../../packages/open3d { };
   };
 
   torchRocm = final: prev: rec {

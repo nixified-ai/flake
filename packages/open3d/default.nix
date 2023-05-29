@@ -15,6 +15,7 @@
 , libcxx
 , libcxxabi
 , libjpeg
+, libpng
 , nanoflann
 , nasm
 , ninja
@@ -39,9 +40,11 @@
 , useOldCXXAbi
 , gtest
 , librealsense
+, libsodium
 , zeromq
 , pkg-config
 , zlib
+, liblzf
 }:
 
 let
@@ -74,6 +77,8 @@ buildPythonPackage rec {
     "-DCPP_LIBRARY=${libcxx}/lib"
     "-DVULKAN_INCLUDE_DIR=${vulkan-headers}/include"
     "-Dmsgpack_DIR=${msgpack}"
+    "-DTinyGLTF_DIR=${tinygltf}"
+    "-Dvtk_DIR=${vtk}"
     # "-DBORINGSSL_ROOT_DIR=${boringssl}"
     # "-DImGui_LIBRARY=${imgui}/lib"
     # "-Dliblzf_DIR=${python-lzf}"
@@ -116,20 +121,26 @@ buildPythonPackage rec {
     else [ "-DBUILD_CUDA_MODULE=ON" ]
     );
 
-    MESA_TARBALL = fetchurl {
-      url = "https://github.com/isl-org/open3d_downloads/releases/download/mesa-libgl/mesa_libGL_22.1.4.tar.bz2";
-      sha256 = "sha256-VzK/tw6PzHRwGIILyP0xzRhn665aoJuvZUgrQsE01Fo=";
-    };
-
-    SPHINX_THEME_TARBALL = fetchurl {
-      url = "https://github.com/isl-org/open3d_sphinx_theme/archive/c71d2728eb5afd1aeeb20dc27a5a0d42bb402d83.tar.gz";
-      sha256 = "sha256-mK+Lf9t1p0KAthh9u1jqYB25eNTz+JVtPYfFnCB4b3M=";
-    };
+    downloadDepsHook = let
+      deps = {
+        "3rdparty_downloads/mesa/mesa_libGL_22.1.4.tar.bz2" = fetchurl {
+          url = "https://github.com/isl-org/open3d_downloads/releases/download/mesa-libgl/mesa_libGL_22.1.4.tar.bz2";
+          sha256 = "sha256-VzK/tw6PzHRwGIILyP0xzRhn665aoJuvZUgrQsE01Fo=";
+        };
+        "3rdparty_downloads/open3d_sphinx_theme/c71d2728eb5afd1aeeb20dc27a5a0d42bb402d83.tar.gz" = fetchurl {
+          url = "https://github.com/isl-org/open3d_sphinx_theme/archive/c71d2728eb5afd1aeeb20dc27a5a0d42bb402d83.tar.gz";
+          sha256 = "sha256-mK+Lf9t1p0KAthh9u1jqYB25eNTz+JVtPYfFnCB4b3M=";
+        };
+      };
+      downloadElement = name: value: ''
+        mkdir -p $(dirname ${name})
+        ln -s ${value} ${name}
+      '';
+      downloadCommands = builtins.mapAttrs (downloadElement) deps;
+    in builtins.concatStringsSep "\n" (builtins.attrValues downloadCommands);
 
     preConfigure = ''
-      mkdir -p 3rdparty_downloads/{mesa,open3d_sphinx_theme}
-      ln -s $MESA_TARBALL 3rdparty_downloads/mesa/mesa_libGL_22.1.4.tar.bz2
-      ln -s $SPHINX_THEME_TARBALL 3rdparty_downloads/open3d_sphinx_theme/c71d2728eb5afd1aeeb20dc27a5a0d42bb402d83.tar.gz
+      runHook downloadDepsHook
     '';
 
 
@@ -142,6 +153,7 @@ buildPythonPackage rec {
       jsoncpp
       libcxx
       libcxxabi
+      libsodium
       libjpeg
       nanoflann
       pybind11
@@ -151,7 +163,7 @@ buildPythonPackage rec {
       qhull
       fmt
       imgui
-      python-lzf
+      liblzf
       python
       msgpack
       vtk
@@ -162,6 +174,7 @@ buildPythonPackage rec {
       librealsense
       zeromq
       zlib
+      libpng
     ]
     ++ (if isRocm
       then []
@@ -174,8 +187,6 @@ buildPythonPackage rec {
 
     nativeBuildInputs = [
       cmake
-      nasm
-      gitMinimal
       # ninja
       useOldCXXAbi
       gtest

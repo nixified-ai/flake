@@ -87,6 +87,7 @@ pkgs: {
     tyro = callPackage ../../packages/tyro { };
     nerfacc = callPackage ../../packages/nerfacc { };
     open3d = callPackage ../../packages/open3d { };
+    liblzf = callPackage ../../packages/liblzf { };
   };
 
   torchRocm = final: prev: rec {
@@ -120,4 +121,5 @@ pkgs: {
     torch = final.torch-bin;
     torchvision = final.torchvision-bin;
   };
+
 }

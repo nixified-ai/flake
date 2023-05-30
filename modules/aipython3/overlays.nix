@@ -87,6 +87,7 @@ pkgs: {
     tyro = callPackage ../../packages/tyro { };
     nerfacc = callPackage ../../packages/nerfacc { };
     open3d = callPackage ../../packages/open3d { };
+    zipnerf-pytorch = callPackage ../../packages/zipnerf-pytorch { };
     liblzf = callPackage ../../packages/liblzf { };
   };
 

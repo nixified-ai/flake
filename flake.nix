@@ -43,6 +43,7 @@
         ./projects/invokeai
         ./projects/koboldai
         ./projects/nerfstudio
+        ./projects/pkgs
         ./website
       ];
   };

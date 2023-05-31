@@ -12,19 +12,22 @@
 , runCommand
 , gcc11Stdenv
 , stdenv
-, wrapPython
 , makeWrapper
 , accelerate
 # , nvidia-thrust
 , numpy
 , absl-py
 , gin-config
+, wheel
 , matplotlib
 , trimesh
 , opencv3
 , scipy
 , scikitimage
 , ninja
+, rawpy
+, addOpenGLRunpath
+, pillow
 }:
 
 let
@@ -54,7 +57,7 @@ let
 
     TORCH_CUDA_ARCH_LIST = "7.0+PTX";
 
-    buildInputs = [ ]
+    buildInputs = []
     ++ (if isRocm
       then [
         hipsparse
@@ -62,21 +65,31 @@ let
         rocblas-header
         rocthrust
       ]
-      else [ cudaPackages.cudatoolkit ]);
+      else [
+        cudaPackages.cudatoolkit
+      ]);
 
-    nativeBuildInputs = [ which ninja ]
+    nativeBuildInputs = [ which ninja addOpenGLRunpath ]
     ++ (if isRocm
       then [ hip ]
-      else [ cudaPackages.cuda_nvcc ]);
+      else [ cudaPackages.cudatoolkit ]);
 
-    postInstall = ''
-      ls -R $out
+    postFixup= ''
+      # addOpenGLRunpath $out/${python.sitePackages}/*.so
     '';
 
     pythonImportsCheck = [ "_gridencoder" ];
 
   }).overrideDerivation (old: {
     stdenv = if isRocm then stdenv else  gcc11Stdenv;
+  });
+
+  ourScikitImage = scikitimage.overrideAttrs (old: {
+    prePatch = (old.prePatch or "") + ''
+      echo resolvendo buxa
+      substituteInPlace skimage/color/colorconv.py \
+        --replace 'from scipy import linalg' 'from numpy import linalg'
+    '';
   });
 
 in
@@ -89,7 +102,9 @@ buildPythonPackage rec {
 
   inherit src;
 
-  _INSTALL_PATH = "${python.sitePackages}/zipnerf_pytorch";
+  PYTHONFAULTHANDLER=1;
+  DEBUG=1;
+  OPENBLAS_CORETYPE="haswell";
 
   prePatch = ''
     substituteInPlace internal/configs.py \
@@ -98,45 +113,45 @@ buildPythonPackage rec {
       --replace 'from internal' 'from zipnerf_pytorch.internal'
   '';
 
-  buildInputs = [
-    gridencoder
-  ];
-
-  nativeBuildInputs = [ wrapPython makeWrapper which ];
+  nativeBuildInputs = [ python.pkgs.wrapPython makeWrapper which ];
 
   propagatedBuildInputs = [
-    numpy
-    absl-py
-    accelerate
+    gridencoder
+    # accelerate
     gin-config
-    matplotlib
-    trimesh
     opencv3
-    scipy
-    scikitimage
+    pillow
+    matplotlib
+    # scipy
+    ourScikitImage
+    absl-py
+    torch
+    rawpy
   ];
 
-  pythonImportsCheck = [ pname ];
+  pythonPath = propagatedBuildInputs;
+
+  # the second import is to check if something is conflicting with scikit
+  pythonImportsCheck = [ pname "${pname}.internal.datasets" ];
 
   installPhase = ''
     export INSTALL_DIR=$out/$_INSTALL_PATH
-    mkdir -p $INSTALL_DIR
-    cp -r * $INSTALL_DIR
+    mkdir -p $out/${python.sitePackages}/$pname
+    cp -r * $out/${python.sitePackages}/$pname
 
-    buildPythonPath
-    echo pythonpath
-    echo $program_PYTHONPATH
-
-    touch $INSTALL_DIR/__init__.py
+    touch $out/${python.sitePackages}/$pname
 
     mkdir -p $out/bin
+  '';
 
+  preFixup = ''
+    buildPythonPath "$out $pythonPath"
     for bin in eval extract render train; do
-      makeWrapper ${(python.withPackages (p: propagatedBuildInputs)).interpreter} $out/bin/zipnerf_$bin \
-        --prefix PYTHONPATH : $out/${python.sitePackages} \
-        --add-flags $INSTALL_DIR/$bin.py \
+      makeWrapper ${python.interpreter} $out/bin/zipnerf_$bin \
         --prefix PYTHONPATH : "$program_PYTHONPATH" \
-        --prefix PATH : "$program_PATH"
+        --prefix PATH : "$program_PATH" \
+        --add-flags $out/${python.sitePackages}/$pname/$bin.py
     done
   '';
+
 }

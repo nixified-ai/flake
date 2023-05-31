@@ -89,6 +89,7 @@ pkgs: {
     open3d = callPackage ../../packages/open3d { };
     zipnerf-pytorch = callPackage ../../packages/zipnerf-pytorch { };
     liblzf = callPackage ../../packages/liblzf { };
+    rawpy = callPackage ../../packages/rawpy { };
   };
 
   torchRocm = final: prev: rec {

@@ -20,7 +20,6 @@
 , gin-config
 , wheel
 , matplotlib
-, trimesh
 , opencv3
 , scipy
 , scikitimage
@@ -28,6 +27,12 @@
 , rawpy
 , addOpenGLRunpath
 , pillow
+, torch_scatter
+, tensorboardx
+, tensorboard
+, trimesh
+, mediapy
+, pymeshlab
 }:
 
 let
@@ -86,7 +91,6 @@ let
 
   ourScikitImage = scikitimage.overrideAttrs (old: {
     prePatch = (old.prePatch or "") + ''
-      echo resolvendo buxa
       substituteInPlace skimage/color/colorconv.py \
         --replace 'from scipy import linalg' 'from numpy import linalg'
     '';
@@ -110,23 +114,40 @@ buildPythonPackage rec {
     substituteInPlace internal/configs.py \
       --replace "gin.add_config_file_search_path('configs/')" "gin.add_config_file_search_path('$out/$_INSTALL_PATH/configs/')"
     substituteInPlace $(find -type f | grep .py) \
-      --replace 'from internal' 'from zipnerf_pytorch.internal'
+      --replace 'from internal' 'from ${pname}.internal'
+
+    substituteInPlace internal/pycolmap/pycolmap/__init__.py \
+      --replace 'from ' 'from ${pname}.internal.pycolmap.'
+
+    substituteInPlace internal/pycolmap/pycolmap/scene_manager.py \
+      --replace 'from camera' 'from ${pname}.internal.pycolmap.camera' \
+      --replace 'from image' 'from ${pname}.internal.pycolmap.image' \
+      --replace 'from rotation' 'from ${pname}.internal.pycolmap.rotation'
+
+    substituteInPlace internal/datasets.py \
+      --replace 'import pycolmap' 'from ${pname}.internal import pycolmap'
   '';
 
   nativeBuildInputs = [ python.pkgs.wrapPython makeWrapper which ];
 
   propagatedBuildInputs = [
     gridencoder
-    # accelerate
+    accelerate
     gin-config
     opencv3
     pillow
     matplotlib
-    # scipy
-    ourScikitImage
+    scikitimage
+    # ourScikitImage
     absl-py
     torch
     rawpy
+    torch_scatter
+    tensorboardx
+    tensorboard
+    trimesh
+    mediapy
+    pymeshlab
   ];
 
   pythonPath = propagatedBuildInputs;
@@ -138,6 +159,7 @@ buildPythonPackage rec {
     export INSTALL_DIR=$out/$_INSTALL_PATH
     mkdir -p $out/${python.sitePackages}/$pname
     cp -r * $out/${python.sitePackages}/$pname
+    mv $out/${python.sitePackages}/$pname/internal/pycolmap/pycolmap/* $out/${python.sitePackages}/$pname/internal/pycolmap
 
     touch $out/${python.sitePackages}/$pname
 

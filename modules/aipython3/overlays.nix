@@ -29,6 +29,13 @@ pkgs: {
         broken = false;
       };
     });
+    scikitimage = prev.scikitimage.overrideAttrs (old: {
+      # fix weird crash
+      prePatch = (old.prePatch or "") + ''
+        substituteInPlace skimage/color/colorconv.py \
+          --replace 'from scipy import linalg' 'from numpy import linalg'
+      '';
+    });
     streamlit = let
       streamlit = final.callPackage (pkgs.path + "/pkgs/applications/science/machine-learning/streamlit") {
         protobuf3 = final.protobuf;
@@ -90,6 +97,8 @@ pkgs: {
     zipnerf-pytorch = callPackage ../../packages/zipnerf-pytorch { };
     liblzf = callPackage ../../packages/liblzf { };
     rawpy = callPackage ../../packages/rawpy { };
+    pycolmap = callPackage ../../packages/pycolmap { };
+    torch_scatter = callPackage ../../packages/torch_scatter { };
   };
 
   torchRocm = final: prev: rec {

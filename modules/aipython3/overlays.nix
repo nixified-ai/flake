@@ -99,6 +99,7 @@ pkgs: {
     rawpy = callPackage ../../packages/rawpy { };
     pycolmap = callPackage ../../packages/pycolmap { };
     torch_scatter = callPackage ../../packages/torch_scatter { };
+    libigl = callPackage ../../packages/libigl { };
   };
 
   torchRocm = final: prev: rec {

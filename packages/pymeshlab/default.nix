@@ -9,6 +9,7 @@
 , numpy
 , pyngrok
 , plotly
+, pybind11
 , jupyterlab
 , viser
 , cmake
@@ -18,10 +19,16 @@
 , eigen
 , boost
 , cgal
+, glew
 , levmar
 , lib3ds
 , muparser
 , nexus
+, python
+, pkg-config
+, structure-synth
+, libigl
+, tinygltf
 }:
 
 buildPythonPackage rec {
@@ -32,26 +39,29 @@ buildPythonPackage rec {
     owner = "cnr-isti-vclab";
     repo = pname;
     rev = "v${version}";
+    # sha256 = "sha256-CtzyKymM/SMoiw413Y+r89R6FEHvEaBS36iDcuRkDCo=";
+    sha256 = "sha256-nyXnqZkeHNEwoGAhJSFhgUUCvRKVRtEEKRQtzSZjXz0=";
     fetchSubmodules = true;
-    sha256 = "sha256-CtzyKymM/SMoiw413Y+r89R6FEHvEaBS36iDcuRkDCo=";
+    deepClone = true;
   };
+
+  cmakeFlags = [
+  ]
+    ++ meshlab.cmakeFlags
+  ;
 
   propagatedBuildInputs = [ numpy pyngrok plotly jupyterlab viser ];
 
-  nativeBuildInputs = [ cmake qt5.wrapQtAppsHook ];
+  nativeBuildInputs = [ cmake qt5.wrapQtAppsHook pkg-config ];
 
   buildInputs = [
+    pybind11
     meshlab
-    libGL
-    qt5.qtbase
-    eigen
-    boost
-    cgal
-    levmar
-    lib3ds
-    muparser
-    nexus
-  ];
+    structure-synth
+    tinygltf
+    libigl
+  ]
+  ++ meshlab.buildInputs;
 
   pythonImportsCheck = [ "pymeshlab" "pymeshlab.pmeshlab" ];
 

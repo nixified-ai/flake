@@ -8,6 +8,15 @@
 
 ---
 
+#### Discussion
+
+Anyone interested in discussing nixified.ai in realtime can join our matrix channel
+
+- In a Matrix client you can type `/join #nixified.ai:matrix.org`
+- Via the web you can join via https://matrix.to/#/#nixified.ai:matrix.org
+
+#### The Goal
+
 The goal of nixified.ai is to simplify and make available a large repository of
 AI executable code that would otherwise be impractical to run yourself, due to
 package management and complexity issues.

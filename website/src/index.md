@@ -6,7 +6,7 @@
 </a>
 </p>
 
-## [Contact](mailto:matthew.croughan@nix.how) / [GitHub](https://github.com/nixified-ai/flake)
+## [Contact](mailto:matthew.croughan@nix.how) / [GitHub](https://github.com/nixified-ai/flake) / [Chat](https://matrix.to/#/#nixified.ai:matrix.org)
 
 ## <iframe src="https://github.com/sponsors/nixified-ai/button" title="Sponsor nixified-ai" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
 

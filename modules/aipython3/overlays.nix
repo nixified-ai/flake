@@ -49,6 +49,7 @@ pkgs: {
     opencv-python = final.opencv4;
 
     safetensors = callPackage ../../packages/safetensors { };
+    tensorflow-io-bin = callPackage ../../packages/tensorflow-io-bin { };
     compel = callPackage ../../packages/compel { };
     apispec-webframeworks = callPackage ../../packages/apispec-webframeworks { };
     pydeprecate = callPackage ../../packages/pydeprecate { };
@@ -82,6 +83,10 @@ pkgs: {
     clip-anytorch = callPackage ../../packages/clip-anytorch { };
     clean-fid = callPackage ../../packages/clean-fid { };
     getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
+    stable-diffusion = callPackage ../../packages/stable-diffusion { };
+    deepdanbooru = callPackage ../../packages/deepdanbooru { };
+
+    tensorflow-io = final.tensorflow-io-bin;
   };
 
   torchRocm = final: prev: rec {

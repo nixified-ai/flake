@@ -100,6 +100,7 @@ pkgs: {
     pycolmap = callPackage ../../packages/pycolmap { };
     torch_scatter = callPackage ../../packages/torch_scatter { };
     libigl = callPackage ../../packages/libigl { };
+    glad = callPackage ../../packages/glad { };
   };
 
   torchRocm = final: prev: rec {

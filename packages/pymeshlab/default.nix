@@ -39,7 +39,6 @@ buildPythonPackage rec {
     owner = "cnr-isti-vclab";
     repo = pname;
     rev = "v${version}";
-    # sha256 = "sha256-CtzyKymM/SMoiw413Y+r89R6FEHvEaBS36iDcuRkDCo=";
     sha256 = "sha256-nyXnqZkeHNEwoGAhJSFhgUUCvRKVRtEEKRQtzSZjXz0=";
     fetchSubmodules = true;
     deepClone = true;

@@ -150,6 +150,23 @@
         "type": "github"
       }
     },
+    "nerfstudio-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1684777532,
+        "narHash": "sha256-9X/DyxSe4isIjlFmgTnk6brayqe/GKPzOcRcKcHWdBg=",
+        "owner": "nerfstudio-project",
+        "repo": "nerfstudio",
+        "rev": "bd04ceeb503658bbf0439261a6148fe26fdefa48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nerfstudio-project",
+        "ref": "v0.3.1",
+        "repo": "nerfstudio",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -251,6 +268,7 @@
         "hercules-ci-effects": "hercules-ci-effects",
         "invokeai-src": "invokeai-src",
         "koboldai-src": "koboldai-src",
+        "nerfstudio-src": "nerfstudio-src",
         "nixpkgs": "nixpkgs_2"
       }
     }

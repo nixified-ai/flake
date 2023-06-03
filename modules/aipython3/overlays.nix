@@ -29,6 +29,13 @@ pkgs: {
         broken = false;
       };
     });
+    scikitimage = prev.scikitimage.overrideAttrs (old: {
+      # fix weird crash
+      prePatch = (old.prePatch or "") + ''
+        substituteInPlace skimage/color/colorconv.py \
+          --replace 'from scipy import linalg' 'from numpy import linalg'
+      '';
+    });
     streamlit = let
       streamlit = final.callPackage (pkgs.path + "/pkgs/applications/science/machine-learning/streamlit") {
         protobuf3 = final.protobuf;
@@ -82,6 +89,20 @@ pkgs: {
     clip-anytorch = callPackage ../../packages/clip-anytorch { };
     clean-fid = callPackage ../../packages/clean-fid { };
     getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
+    pymeshlab = callPackage ../../packages/pymeshlab { };
+    viser = callPackage ../../packages/viser { };
+    tyro = callPackage ../../packages/tyro { };
+    nerfacc = callPackage ../../packages/nerfacc { };
+    open3d = callPackage ../../packages/open3d { };
+    zipnerf-pytorch = callPackage ../../packages/zipnerf-pytorch { };
+    liblzf = callPackage ../../packages/liblzf { };
+    rawpy = callPackage ../../packages/rawpy { };
+    pycolmap = callPackage ../../packages/pycolmap { };
+    torch_scatter = callPackage ../../packages/torch_scatter { };
+    libigl = callPackage ../../packages/libigl { };
+    glad = callPackage ../../packages/glad { };
+    openctm = callPackage ../../packages/openctm { };
+    u3d = callPackage ../../packages/u3d { };
   };
 
   torchRocm = final: prev: rec {
@@ -115,4 +136,5 @@ pkgs: {
     torch = final.torch-bin;
     torchvision = final.torchvision-bin;
   };
+
 }

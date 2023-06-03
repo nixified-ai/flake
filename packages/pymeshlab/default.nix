@@ -17,8 +17,8 @@
 , libGL
 , qt5
 , eigen
-, boost
-, cgal
+, boost17x
+, cgal_5
 , glew
 , levmar
 , lib3ds
@@ -26,9 +26,13 @@
 , nexus
 , python
 , pkg-config
-, structure-synth
 , libigl
 , tinygltf
+, openctm
+, xercesc
+, gmp
+, mpfr
+, u3d
 }:
 
 buildPythonPackage rec {
@@ -45,22 +49,44 @@ buildPythonPackage rec {
   };
 
   cmakeFlags = [
-  ]
-    ++ meshlab.cmakeFlags
-  ;
+    "-DALLOW_BUNDLED_EIGEN=OFF"
+    "-DALLOW_BUNDLED_GLEW=OFF"
+    "-DALLOW_BUNDLED_LIB3DS=OFF"
+    "-DALLOW_BUNDLED_MUPARSER=OFF"
+    "-DALLOW_BUNDLED_QHULL=OFF"
+    "-DALLOW_BUNDLED_OPENCTM=OFF"
+    "-DALLOW_BUNDLED_BOOST=OFF"
+    "-DALLOW_BUNDLED_NEWUOA=OFF"
+    "-DALLOW_BUNDLED_LEVMAR=OFF"
+    "-DALLOW_BUNDLED_SSYNTH=OFF"
+    "-DALLOW_BUNDLED_U3D=OFF"
+    # "-DSSYNTH_DIR=${structure-synth.src}"
+    "-DLEVMAR_DIR=${levmar.src}"
+
+    # "-DFETCHCONTENT_SOURCE_DIR_Teste="
+  ];
 
   propagatedBuildInputs = [ numpy pyngrok plotly jupyterlab viser ];
 
   nativeBuildInputs = [ cmake qt5.wrapQtAppsHook pkg-config ];
 
   buildInputs = [
+    gmp
+    xercesc
+    openctm
     pybind11
     meshlab
-    structure-synth
     tinygltf
     libigl
-  ]
-  ++ meshlab.buildInputs;
+    lib3ds
+    boost17x
+    cgal_5
+    libGL
+    eigen
+    glew
+    mpfr
+    muparser
+  ];
 
   pythonImportsCheck = [ "pymeshlab" "pymeshlab.pmeshlab" ];
 

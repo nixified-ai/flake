@@ -101,6 +101,8 @@ pkgs: {
     torch_scatter = callPackage ../../packages/torch_scatter { };
     libigl = callPackage ../../packages/libigl { };
     glad = callPackage ../../packages/glad { };
+    openctm = callPackage ../../packages/openctm { };
+    u3d = callPackage ../../packages/u3d { };
   };
 
   torchRocm = final: prev: rec {

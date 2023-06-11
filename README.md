@@ -52,3 +52,5 @@ The WSL must be installed via the Windows Store. The script will make an attempt
 See the following documentation from Microsoft for the details on how to enable and use the WSL manually
 
 - https://learn.microsoft.com/en-us/windows/wsl/install
+
+FOO

@@ -82,6 +82,12 @@ pkgs: {
     clip-anytorch = callPackage ../../packages/clip-anytorch { };
     clean-fid = callPackage ../../packages/clean-fid { };
     getpass-asterisk = callPackage ../../packages/getpass-asterisk { };
+    fastapi = callPackage ../../packages/fastapi { };
+    fastapi-events = callPackage ../../packages/fastapi-events { };
+    fastapi-socketio = callPackage ../../packages/fastapi-socketio { };
+    starlette = callPackage ../../packages/starlette { };
+    peft = callPackage ../../packages/peft { };
+    huggingface-hub = callPackage ../../packages/huggingface-hub { };
   };
 
   torchRocm = final: prev: rec {
@@ -91,9 +97,9 @@ pkgs: {
     # you can run this thing without the fix by creating /opt and running nix build nixpkgs#libdrm --inputs-from . --out-link /opt/amdgpu
     torch-bin = prev.torch-bin.overrideAttrs (old: {
       src = pkgs.fetchurl {
-        name = "torch-1.13.1+rocm5.1.1-cp310-cp310-linux_x86_64.whl";
-        url = "https://download.pytorch.org/whl/rocm5.1.1/torch-1.13.1%2Brocm5.1.1-cp310-cp310-linux_x86_64.whl";
-        hash = "sha256-qUwAL3L9ODy9hjne8jZQRoG4BxvXXLT7cAy9RbM837A=";
+        name = "torch-2.0.1+cpu.cxx11.abi-cp310-cp310-linux_x86_64.whl";
+        url = "https://download.pytorch.org/whl/cpu-cxx11-abi/torch-2.0.1%2Bcpu.cxx11.abi-cp310-cp310-linux_x86_64.whl";
+        hash = "sha256-IWbYvzl3h0yNZKZ+EXPWA5SM3lz6Lp9zxtH3soVlmes=";
       };
       postFixup = (old.postFixup or "") + ''
         ${pkgs.gnused}/bin/sed -i s,/opt/amdgpu/share/libdrm/amdgpu.ids,/tmp/nix-pytorch-rocm___/amdgpu.ids,g $out/${final.python.sitePackages}/torch/lib/libdrm_amdgpu.so

@@ -57,10 +57,17 @@ aipython3.buildPythonPackage {
     getpass-asterisk
     safetensors
     datasets
+    fastapi
+    fastapi-events
+    fastapi-socketio
+    peft
+    accelerate
+    python-multipart
+    diffusers
   ];
   nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
   pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" ];
-  pythonRelaxDeps = [ "dnspython" "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
+  pythonRelaxDeps = [ "dnspython" "protobuf" "flask" "flask-socketio" "pytorch-lightning" "torch" "transformers" ];
   makeWrapperArgs = [
     '' --run '
       if [ -d "/usr/lib/wsl/lib" ]

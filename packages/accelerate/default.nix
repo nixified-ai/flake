@@ -6,11 +6,11 @@
 
 buildPythonPackage rec {
   pname = "accelerate";
-  version = "0.13.1";
+  version = "0.16.0";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "1dk82s80rq8xp3v4hr9a27vgj9k3gy9yssp7ww7i3c0vc07gx2cv";
+    sha256 = "sha256-0T4w8+bev7Rsrae5Ma+FVgYZtqaoOdDK/uq27XxqSY0=";
   };
 
   propagatedBuildInputs = [ numpy packaging psutil pyyaml torch ];

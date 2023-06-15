@@ -34,6 +34,7 @@
       ];
       imports = [
         hercules-ci-effects.flakeModule
+        ./modules/nixpkgs-config
         ./modules/dependency-sets
         ./modules/aipython3
         ./projects/invokeai

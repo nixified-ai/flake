@@ -2,6 +2,8 @@
 , fetchPypi
 , runCommand
 , rustPlatform
+, cargo
+, rustc
 , buildPythonPackage
 , setuptools
 , setuptools-rust
@@ -51,8 +53,8 @@ buildPythonPackage {
     setuptools-rust
     wheel
     rustPlatform.cargoSetupHook
-    rustPlatform.rust.cargo
-    rustPlatform.rust.rustc
+    cargo
+    rustc
   ];
 
   propagatedBuildInputs = [

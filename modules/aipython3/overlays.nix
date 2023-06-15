@@ -44,7 +44,6 @@ pkgs: {
     callPackage = final.callPackage;
     rmCallPackage = path: args: rm (callPackage path args);
   in {
-    scikit-image = final.scikitimage;
     opencv-python-headless = final.opencv-python;
     opencv-python = final.opencv4;
 

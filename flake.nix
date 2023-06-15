@@ -11,11 +11,11 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     invokeai-src = {
-      url = "github:invoke-ai/InvokeAI/v2.3.1.post2";
+      url = "github:invoke-ai/InvokeAI/v3.3.0post3";
       flake = false;
     };
-    koboldai-src = {
-      url = "github:koboldai/koboldai-client/1.19.2";
+    textgen-src = {
+      url = "github:oobabooga/text-generation-webui/v1.7";
       flake = false;
     };
     flake-parts = {
@@ -29,16 +29,31 @@
   };
   outputs = { flake-parts, invokeai-src, hercules-ci-effects, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      perSystem = { system, ... }: {
+        _module.args.pkgs = import inputs.nixpkgs { config.allowUnfree = true; inherit system; };
+        legacyPackages = {
+          koboldai = builtins.throw ''
+
+
+                   koboldai has been dropped from nixified.ai due to lack of upstream development,
+                   try textgen instead which is better maintained. If you would like to use the last
+                   available version of koboldai with nixified.ai, then run:
+
+                   nix run github:nixified.ai/flake/0c58f8cba3fb42c54f2a7bf9bd45ee4cbc9f2477#koboldai
+          '';
+        };
+      };
       systems = [
         "x86_64-linux"
       ];
+      debug = true;
       imports = [
         hercules-ci-effects.flakeModule
-        ./modules/dependency-sets
-        ./modules/aipython3
+#        ./modules/nixpkgs-config
+        ./overlays
         ./projects/invokeai
-        ./projects/koboldai
+        ./projects/textgen
         ./website
       ];
-  };
+    };
 }

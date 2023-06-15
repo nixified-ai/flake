@@ -1,7 +1,9 @@
 { lib
-, fetchPypi
+, fetchFromGitHub
 , runCommand
 , rustPlatform
+, cargo
+, rustc
 , buildPythonPackage
 , setuptools
 , setuptools-rust
@@ -14,36 +16,30 @@
 , numpy
 , pytest
 , pytest-benchmark
-, tensorflow
 , torch
 }:
 
 let
-
   pname = "safetensors";
-  version = "0.2.8";
-
-  patchedSrc = runCommand "patched-src" {
-    src = fetchPypi {
-      inherit pname version;
-      hash = "sha256-JyCyCmo4x5ncp5vXbK7qwvffWFqdT31Z+n4o7/nMsn8=";
-    };
-  } ''
-    unpackPhase
-    cp ${./Cargo.lock} $sourceRoot/Cargo.lock
-    cp -r $sourceRoot $out
-  '';
+  version = "0.3.3";
+  src = fetchFromGitHub {
+    repo = pname;
+    owner = "huggingface";
+    rev = "v${version}";
+    hash = "sha256-U+indMoLFN6vMZkJTWFG08lsdXuK5gOfgaHmUVl6DPk=";
+  };
 in
 
-buildPythonPackage {
-  inherit pname version;
+buildPythonPackage rec {
+  inherit pname version src;
   format = "pyproject";
-  src = patchedSrc;
+  postPatch = "cd bindings/python";
 
   cargoDeps = rustPlatform.fetchCargoTarball {
-    src = patchedSrc;
+    inherit src;
+    postPatch = "cd bindings/python";
     name = "${pname}-${version}";
-    hash = "sha256-IZKaw4NquK/BbIv1xkMFgNR20vve4H6Re76mvxtcNUA=";
+    hash = "sha256-qiJtiPpNs7wycOyzef34OgXxUGMaKZIXEdqomxtmUD0=";
   };
 
   nativeBuildInputs = [
@@ -51,8 +47,8 @@ buildPythonPackage {
     setuptools-rust
     wheel
     rustPlatform.cargoSetupHook
-    rustPlatform.rust.cargo
-    rustPlatform.rust.rustc
+    cargo
+    rustc
   ];
 
   propagatedBuildInputs = [
@@ -68,7 +64,6 @@ buildPythonPackage {
     pytest
     pytest-benchmark
     setuptools-rust
-    tensorflow
     torch
   ];
 

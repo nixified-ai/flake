@@ -36,7 +36,6 @@
       imports = [
         hercules-ci-effects.flakeModule
         ./modules/nixpkgs-config
-        ./modules/dependency-sets
         ./overlays
         ./projects/invokeai
         ./projects/koboldai

@@ -32,11 +32,12 @@
       systems = [
         "x86_64-linux"
       ];
+      debug = true;
       imports = [
         hercules-ci-effects.flakeModule
         ./modules/nixpkgs-config
         ./modules/dependency-sets
-        ./modules/aipython3
+        ./overlays
         ./projects/invokeai
         ./projects/koboldai
         ./website

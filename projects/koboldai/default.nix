@@ -1,8 +1,27 @@
 { config, inputs, lib, withSystem, ... }:
 
+let
+  l = lib // config.flake.lib;
+  inherit (config.flake) overlays;
+in
+
 {
   perSystem = { config, pkgs, ... }: let
-    inherit (config.dependencySets) aipython3-amd aipython3-nvidia;
+    commonOverlays = [
+      overlays.python-fixPackages
+      (l.overlays.callManyPackages [
+        ../../packages/apispec-webframeworks
+      ])
+    ];
+
+    python3Variants = {
+      amd = l.overlays.applyPackageOverrides pkgs.python3 (commonOverlays ++ [
+        overlays.python-torchRocm
+      ]);
+      nvidia = l.overlays.applyPackageOverrides pkgs.python3 (commonOverlays ++ [
+        overlays.python-torchCuda
+      ]);
+    };
 
     src = inputs.koboldai-src;
 
@@ -10,10 +29,10 @@
   in {
     packages = {
       koboldai-nvidia = mkKoboldAIVariant {
-        aipython3 = aipython3-nvidia;
+        python3Packages = python3Variants.nvidia.pkgs;
       };
       koboldai-amd = mkKoboldAIVariant {
-        aipython3 = aipython3-amd;
+        python3Packages = python3Variants.amd.pkgs;
       };
     };
   };

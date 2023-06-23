@@ -1,4 +1,4 @@
-{ aipython3
+{ python3Packages
 , lib
 , src
 , wsl ? false
@@ -11,8 +11,8 @@
 }:
 let
   overrides = {
-    transformers = aipython3.transformers.overrideAttrs (old: rec {
-       propagatedBuildInputs = old.propagatedBuildInputs ++ [ aipython3.huggingface-hub ];
+    transformers = python3Packages.transformers.overrideAttrs (old: rec {
+       propagatedBuildInputs = old.propagatedBuildInputs ++ [ python3Packages.huggingface-hub ];
        pname = "transformers";
        version = "4.24.0";
        src = fetchFromGitHub {
@@ -22,7 +22,7 @@ let
          hash = "sha256-aGtTey+QK12URZcGNaRAlcaOphON4ViZOGdigtXU1g0=";
        };
     });
-    bleach = aipython3.bleach.overrideAttrs (old: rec {
+    bleach = python3Packages.bleach.overrideAttrs (old: rec {
        pname = "bleach";
        version = "4.1.0";
        src = fetchFromGitHub {
@@ -65,7 +65,7 @@ let
     ln -s ${tmpDir}/settings/ $out/settings
     ln -s ${tmpDir}/userscripts/ $out/userscripts
   '';
-  koboldPython = aipython3.python.withPackages (_: with aipython3; [
+  koboldPython = python3Packages.python.withPackages (_: with python3Packages; [
     overrides.bleach
     overrides.transformers
     colorama
@@ -114,7 +114,7 @@ in
   ln -s ${stateDir}/models/   ${tmpDir}/models
   ln -s ${stateDir}/settings/ ${tmpDir}/settings
   ln -s ${stateDir}/userscripts/ ${tmpDir}/userscripts
-  ${lib.optionalString (aipython3.torch.rocmSupport or false) rocmInit}
+  ${lib.optionalString (python3Packages.torch.rocmSupport or false) rocmInit}
   ${koboldPython}/bin/python ${patchedSrc}/aiserver.py $@
 '').overrideAttrs
   (_: {

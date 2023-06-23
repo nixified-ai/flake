@@ -1,4 +1,4 @@
-{ aipython3
+{ python3Packages
 # misc
 , lib
 , src
@@ -14,12 +14,12 @@ let
   ];
 in
 
-aipython3.buildPythonPackage {
+python3Packages.buildPythonPackage {
   pname = "InvokeAI";
   format = "pyproject";
   version = getVersion src;
   inherit src;
-  propagatedBuildInputs = with aipython3; [
+  propagatedBuildInputs = with python3Packages; [
     numpy
     dnspython
     albumentations
@@ -58,7 +58,7 @@ aipython3.buildPythonPackage {
     safetensors
     datasets
   ];
-  nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
+  nativeBuildInputs = [ python3Packages.pythonRelaxDepsHook ];
   pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" ];
   pythonRelaxDeps = [ "dnspython" "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
   makeWrapperArgs = [
@@ -72,7 +72,7 @@ aipython3.buildPythonPackage {
       fi
       '
     ''
-  ] ++ lib.optionals (aipython3.torch.rocmSupport or false) [
+  ] ++ lib.optionals (python3Packages.torch.rocmSupport or false) [
     '' --run '
       if [ ! -e /tmp/nix-pytorch-rocm___/amdgpu.ids ]
       then

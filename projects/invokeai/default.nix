@@ -1,8 +1,66 @@
 { config, inputs, lib, withSystem, ... }:
 
+let
+  l = lib // config.flake.lib;
+  inherit (config.flake) overlays;
+in
+
 {
   perSystem = { config, pkgs, ... }: let
-    inherit (config.dependencySets) aipython3-amd aipython3-nvidia;
+    commonOverlays = [
+      overlays.python-fixPackages
+      (l.overlays.callManyPackages [
+        ../../packages/safetensors
+        ../../packages/compel
+        ../../packages/taming-transformers-rom1504
+        ../../packages/albumentations
+        ../../packages/qudida
+        ../../packages/gfpgan
+        ../../packages/basicsr
+        ../../packages/facexlib
+        ../../packages/realesrgan
+        ../../packages/codeformer
+        ../../packages/clipseg
+        ../../packages/kornia
+        ../../packages/picklescan
+        ../../packages/diffusers
+        ../../packages/pypatchmatch
+        ../../packages/torch-fidelity
+        ../../packages/resize-right
+        ../../packages/torchdiffeq
+        ../../packages/k-diffusion
+        ../../packages/accelerate
+        ../../packages/clip-anytorch
+        ../../packages/clean-fid
+        ../../packages/getpass-asterisk
+      ])
+      (final: prev: lib.mapAttrs
+        (_: pkg: pkg.overrideAttrs (old: {
+          nativeBuildInputs = old.nativeBuildInputs ++ [ final.pythonRelaxDepsHook ];
+          pythonRemoveDeps = [ "opencv-python-headless" "opencv-python" "tb-nightly" "clip" ];
+        }))
+        {
+          inherit (prev)
+            albumentations
+            qudida
+            gfpgan
+            basicsr
+            facexlib
+            realesrgan
+            clipseg
+          ;
+        }
+      )
+    ];
+
+    python3Variants = {
+      amd = l.overlays.applyPackageOverrides pkgs.python3 (commonOverlays ++ [
+        overlays.python-torchRocm
+      ]);
+      nvidia = l.overlays.applyPackageOverrides pkgs.python3 (commonOverlays ++ [
+        overlays.python-torchCuda
+      ]);
+    };
 
     src = inputs.invokeai-src;
 
@@ -10,10 +68,10 @@
   in {
     packages = {
       invokeai-amd = mkInvokeAIVariant {
-        aipython3 = aipython3-amd;
+        python3Packages = python3Variants.amd.pkgs;
       };
       invokeai-nvidia = mkInvokeAIVariant {
-        aipython3 = aipython3-nvidia;
+        python3Packages = python3Variants.nvidia.pkgs;
       };
     };
   };

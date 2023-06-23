@@ -15,10 +15,10 @@ in
     ];
 
     python3Variants = {
-      amd = l.overlays.applyPackageOverrides pkgs.python3 (commonOverlays ++ [
+      amd = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays ++ [
         overlays.python-torchRocm
       ]);
-      nvidia = l.overlays.applyPackageOverrides pkgs.python3 (commonOverlays ++ [
+      nvidia = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays ++ [
         overlays.python-torchCuda
       ]);
     };

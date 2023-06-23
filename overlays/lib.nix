@@ -21,8 +21,19 @@ lib: _: {
         lib.mapAttrs (lib.const util.callPackageOrTuple) packages'
     );
 
-    applyPackageOverrides = pkg: overlays: pkg.override {
-      packageOverrides = lib.composeManyExtensions overlays;
-    };
+    applyOverlays = packageSet: overlays: let
+      combinedOverlay = lib.composeManyExtensions overlays;
+    in
+      # regular extensible package set
+      if packageSet ? extend then
+        packageSet.extend combinedOverlay
+      # makeScope-style package set, this case needs to be handled before makeScopeWithSplicing
+      else if packageSet ? overrideScope' then
+        packageSet.overrideScope' combinedOverlay
+      # makeScopeWithSplicing-style package set
+      else if packageSet ? overrideScope then
+        packageSet.overrideScope combinedOverlay
+      else
+        throw "don't know how to extend the given package set";
   };
 }

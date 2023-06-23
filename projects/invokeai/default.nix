@@ -54,10 +54,10 @@ in
     ];
 
     python3Variants = {
-      amd = l.overlays.applyPackageOverrides pkgs.python3 (commonOverlays ++ [
+      amd = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays ++ [
         overlays.python-torchRocm
       ]);
-      nvidia = l.overlays.applyPackageOverrides pkgs.python3 (commonOverlays ++ [
+      nvidia = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays ++ [
         overlays.python-torchCuda
       ]);
     };
@@ -68,10 +68,10 @@ in
   in {
     packages = {
       invokeai-amd = mkInvokeAIVariant {
-        python3Packages = python3Variants.amd.pkgs;
+        python3Packages = python3Variants.amd;
       };
       invokeai-nvidia = mkInvokeAIVariant {
-        python3Packages = python3Variants.nvidia.pkgs;
+        python3Packages = python3Variants.nvidia;
       };
     };
   };

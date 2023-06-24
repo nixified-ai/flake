@@ -40,14 +40,17 @@ lib: {
 
   torchRocm = final: prev: {
     torch = prev.torch.override {
-      magma = final.pkgs.magma-cuda;
+      magma = final.pkgs.magma-hip;
       cudaSupport = false;
       rocmSupport = true;
     };
   };
 
   torchCuda = final: prev: {
-    torch = final.torch-bin;
-    torchvision = final.torchvision-bin;
+    torch = prev.torch.override {
+      magma = final.pkgs.magma-cuda;
+      cudaSupport = true;
+      rocmSupport = false;
+    };
   };
 }

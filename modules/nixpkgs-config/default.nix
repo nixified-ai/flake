@@ -6,18 +6,20 @@
       inherit system;
       config = {
         allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-          # TODO: classify
-          "torch"
-          "triton"
-          "cuda_nvtx"
+          # for Triton
           "cuda_cudart"
-
-          # for ROCm?
-          "libcublas"
-          "libcusparse"
           "cuda_nvcc"
-          "cuda_nvprof"
+          "cuda_nvtx"
+
+          # for CUDA Torch
+          "cuda_cccl"
           "cuda_cupti"
+          "cuda_nvprof"
+          "cudatoolkit"
+          "cudatoolkit-11-cudnn"
+          "libcublas"
+          "libcusolver"
+          "libcusparse"
         ];
       };
     };

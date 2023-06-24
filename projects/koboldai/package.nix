@@ -81,8 +81,8 @@ let
     loguru
     termcolor
     psutil
-    torch-bin
-    torchvision-bin
+    torch
+    torchvision
     apispec
     apispec-webframeworks
     lupa

@@ -29,10 +29,10 @@ in
   in {
     packages = {
       koboldai-nvidia = mkKoboldAIVariant {
-        python3Packages = python3Variants.nvidia.pkgs;
+        python3Packages = python3Variants.nvidia;
       };
       koboldai-amd = mkKoboldAIVariant {
-        python3Packages = python3Variants.amd.pkgs;
+        python3Packages = python3Variants.amd;
       };
     };
   };

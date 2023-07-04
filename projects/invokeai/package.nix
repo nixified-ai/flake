@@ -73,8 +73,11 @@ aipython3.buildPythonPackage {
       if [ ! -d "$HOME/invokeai" ]
       then
           echo "Running invokeai-configure"
-          mkdir -p $HOME/invokeai/configs
+          set -x
+          mkdir -p $HOME/invokeai/configs/stable-diffusion
           invokeai-configure
+          cp $HOME/invokeai/configs/configs/stable-diffusion/v1-inference.yaml $HOME/invokeai/configs/stable-diffusion/v1-inference.yaml
+          set +x
       fi
 
       if [ -d "/usr/lib/wsl/lib" ]

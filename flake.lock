@@ -245,13 +245,31 @@
         "type": "github"
       }
     },
+    "rembg-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689217026,
+        "narHash": "sha256-ysYsbD+srq4PgkzyXbwiuP6DlE4wzhydpxINf+rireY=",
+        "owner": "danielgatis",
+        "repo": "rembg",
+        "rev": "a9c2a39213127073247637f441f1a94e8c61eee8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danielgatis",
+        "ref": "v2.0.50",
+        "repo": "rembg",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "hercules-ci-effects": "hercules-ci-effects",
         "invokeai-src": "invokeai-src",
         "koboldai-src": "koboldai-src",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "rembg-src": "rembg-src"
       }
     }
   },

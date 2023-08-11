@@ -18,6 +18,11 @@
         overlays.torchRocm
       ];
 
+      aipython3-cpu = mkPythonPackages [
+        overlays.fixPackages
+        overlays.extraDeps
+      ];
+
       aipython3-nvidia = mkPythonPackages [
         overlays.fixPackages
         overlays.extraDeps

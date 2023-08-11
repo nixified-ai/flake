@@ -39,6 +39,13 @@ The main outputs of the `flake.nix` at the moment are as follows:
 
 ![invokeai](/../images/invokeai.webp)
 
+#### Rembg ( Automatic Background Remover )
+
+- `nix run .#rembg-cpu -- i input.png output.png`
+- `nix run .#rembg-cpu -- s --port 9226`
+
+![rembg UI](/../images/rembg.webp)
+
 ## Install NixOS-WSL in Windows
 
 If you're interested in running nixified.ai in the Windows Subsystem for Linux, you'll need to enable the WSL and then install NixOS-WSL via it. We provide a script that will do everything for you.

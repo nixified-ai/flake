@@ -48,6 +48,8 @@ pkgs: {
     opencv-python-headless = final.opencv-python;
     opencv-python = final.opencv4;
 
+    asyncer = callPackage ../../packages/asyncer { };
+    pymatting = callPackage ../../packages/pymatting { };
     safetensors = callPackage ../../packages/safetensors { };
     compel = callPackage ../../packages/compel { };
     apispec-webframeworks = callPackage ../../packages/apispec-webframeworks { };

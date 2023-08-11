@@ -18,6 +18,10 @@
       url = "github:koboldai/koboldai-client/1.19.2";
       flake = false;
     };
+    rembg-src = {
+      url = "github:danielgatis/rembg/v2.0.50";
+      flake = false;
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -38,6 +42,7 @@
         ./modules/aipython3
         ./projects/invokeai
         ./projects/koboldai
+        ./projects/rembg
         ./website
       ];
   };

@@ -12,7 +12,7 @@
 
 in {
   imports = [
-    dream2nix.modules.drv-parts.mach-nix-xs
+    dream2nix.modules.drv-parts.pip
   ];
 
   name = "invokeai";
@@ -81,56 +81,56 @@ in {
     ];
   };
 
-  mach-nix.pythonSources.fetch-pip = {
+  pip = {
     pypiSnapshotDate = "2023-04-02";
     # remove last (windows only) requirement due to dream2nix splitting issue
     requirementsList = lib.init pyproject.project.dependencies;
   };
 
-  mach-nix.manualSetupDeps = {
-    basicsr = [
-      "lmdb"
-      "yapf"
-      "tb-nightly"
-      "tqdm"
-      "scikit-image"
-      "scipy"
-      "opencv-python"
-    ];
-  };
+  # mach-nix.manualSetupDeps = {
+  #   basicsr = [
+  #     "lmdb"
+  #     "yapf"
+  #     "tb-nightly"
+  #     "tqdm"
+  #     "scikit-image"
+  #     "scipy"
+  #     "opencv-python"
+  #   ];
+  # };
 
-  mach-nix.drvs = {
-    antlr4-python3-runtime.nixpkgs-overrides.enable = false;
-    test-tube = {
-      mkDerivation.doCheck = false;
-      mkDerivation.doInstallCheck = false;
-    };
+  # mach-nix.drvs = {
+  #   antlr4-python3-runtime.nixpkgs-overrides.enable = false;
+  #   test-tube = {
+  #     mkDerivation.doCheck = false;
+  #     mkDerivation.doInstallCheck = false;
+  #   };
 
-    urwid = {
-      mkDerivation.doCheck = lib.mkForce false;
-    };
+  #   urwid = {
+  #     mkDerivation.doCheck = lib.mkForce false;
+  #   };
 
-    filterpy = {
-      mkDerivation.doCheck = false;
-    };
+  #   filterpy = {
+  #     mkDerivation.doCheck = false;
+  #   };
 
-    basicsr = {
-      mkDerivation = {
-        nativeBuildInputs = [
-          config.deps.python.pkgs.cython
-          config.deps.python.pkgs.numpy
-          config.deps.python.pkgs.torch
-          config.deps.breakpointHook
-        ];
-        dontStrip = true;
-        doCheck = false;
-      };
-      buildPythonPackage = {
-        pipInstallFlags = [
-          "--ignore-installed"
-        ];
-        catchConflicts = false;
-      };
-    };
-  };
+  #   basicsr = {
+  #     mkDerivation = {
+  #       nativeBuildInputs = [
+  #         config.deps.python.pkgs.cython
+  #         config.deps.python.pkgs.numpy
+  #         config.deps.python.pkgs.torch
+  #         config.deps.breakpointHook
+  #       ];
+  #       dontStrip = true;
+  #       doCheck = false;
+  #     };
+  #     buildPythonPackage = {
+  #       pipInstallFlags = [
+  #         "--ignore-installed"
+  #       ];
+  #       catchConflicts = false;
+  #     };
+  #   };
+  # };
 }

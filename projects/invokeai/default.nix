@@ -13,6 +13,20 @@
       lock.lockFileRel = "/projects/invokeai/lock-${config.deps.stdenv.system}.json";
     };
 
+    _callModule = module:
+    lib.evalModules {
+      specialArgs.dream2nix = inputs.dream2nix;
+      specialArgs.packageSets.nixpkgs = pkgs;
+      specialArgs.inputs = {inherit (inputs) invokeai-src;};
+      modules = [
+        module
+        dream2nix-setup-module
+      ];
+    };
+
+  # like callPackage for modules
+  callModule = module: (_callModule module).config.public;
+
   in {
     packages = {
       invokeai-amd = mkInvokeAIVariant {
@@ -21,14 +35,7 @@
       invokeai-nvidia = mkInvokeAIVariant {
         aipython3 = aipython3-nvidia;
       };
-      invokeai-d2n = inputs.dream2nix.lib.evalModules {
-        modules = [
-          dream2nix-setup-module
-          ./package-d2n.nix
-        ];
-        packageSets.nixpkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-        specialArgs.inputs = {inherit (inputs) invokeai-src;};
-      };
+      invokeai-d2n = callModule ./package-d2n.nix;
     };
   };
 

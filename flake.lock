@@ -27,15 +27,16 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "dirtyRev": "f1baa1ebdd1ea12f931f22cd807e140af52d826d-dirty",
-        "dirtyShortRev": "f1baa1eb-dirty",
-        "lastModified": 1692271221,
-        "narHash": "sha256-5ijumVS8SWQrOAGFwOt9HSIbI0m875O9isseC6rE9Eo=",
-        "type": "git",
-        "url": "file:///home/grmpf/projects/github/dream2nix"
+        "lastModified": 1692701342,
+        "narHash": "sha256-PVKEP6CH/T0kPyGuyjQfWVCa4aLtMyMFxFjgl88xgnE=",
+        "owner": "nix-community",
+        "repo": "dream2nix",
+        "rev": "f67f7354ecd046609f49a4b70fb97c664ea2aa33",
+        "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "ref": "python",
         "repo": "dream2nix",
         "type": "github"
       }
@@ -214,16 +215,16 @@
     "invokeai-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1680358663,
-        "narHash": "sha256-4wz2GFVWgz3V0GjR5qPN0s2h5kjZHZs+k/JCTfEMAPw=",
+        "lastModified": 1691720621,
+        "narHash": "sha256-iARkE63vOd6+kIjxHqV9JDyYSvc+/4PPTpqg0QTBYCI=",
         "owner": "invoke-ai",
         "repo": "InvokeAI",
-        "rev": "fd74f5138437a43bea5b9bb186c84b6b0fd05d39",
+        "rev": "06296896a9db616fb44e747f7834cae0504926bf",
         "type": "github"
       },
       "original": {
         "owner": "invoke-ai",
-        "ref": "v2.3.3",
+        "ref": "v3.0.2",
         "repo": "InvokeAI",
         "type": "github"
       }

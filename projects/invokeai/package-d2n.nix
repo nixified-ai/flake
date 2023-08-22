@@ -24,6 +24,7 @@ in {
       fetchurl
       gcc-unwrapped
       glib
+      tbb
       xorg
       zlib
       ;
@@ -38,24 +39,24 @@ in {
     buildInputs = [
       config.deps.python.pkgs.setuptools
     ];
-    patchPhase = ''
-      runHook prePatch
+    # patchPhase = ''
+    #   runHook prePatch
 
-      # Add subprocess to the imports
-      substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
-          'import shutil' \
-      '
-      import shutil
-      import subprocess
-      '
-      # shutil.copytree will inherit the permissions of files in the /nix/store
-      # which are read only, so we subprocess.call cp instead and tell it not to
-      # preserve the mode
-      substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
-        "shutil.copytree(configs_src, configs_dest, dirs_exist_ok=True)" \
-        "subprocess.call('cp -r --no-preserve=mode {configs_src} {configs_dest}'.format(configs_src=configs_src, configs_dest=configs_dest), shell=True)"
-      runHook postPatch
-    '';
+    #   # Add subprocess to the imports
+    #   substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
+    #       'import shutil' \
+    #   '
+    #   import shutil
+    #   import subprocess
+    #   '
+    #   # shutil.copytree will inherit the permissions of files in the /nix/store
+    #   # which are read only, so we subprocess.call cp instead and tell it not to
+    #   # preserve the mode
+    #   substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
+    #     "shutil.copytree(configs_src, configs_dest, dirs_exist_ok=True)" \
+    #     "subprocess.call('cp -r --no-preserve=mode {configs_src} {configs_dest}'.format(configs_src=configs_src, configs_dest=configs_dest), shell=True)"
+    #   runHook postPatch
+    # '';
     postFixup = ''
       chmod +x $out/bin/*
       wrapPythonPrograms
@@ -82,55 +83,82 @@ in {
   };
 
   pip = {
-    pypiSnapshotDate = "2023-04-02";
+    pypiSnapshotDate = "2023-08-17";
     # remove last (windows only) requirement due to dream2nix splitting issue
     requirementsList = lib.init pyproject.project.dependencies;
+    pipVersion = "23.2.1";
+    flattenDependencies = true;
+    buildExtras = [
+      "standard"
+    ];
   };
 
-  # mach-nix.manualSetupDeps = {
-  #   basicsr = [
-  #     "lmdb"
-  #     "yapf"
-  #     "tb-nightly"
-  #     "tqdm"
-  #     "scikit-image"
-  #     "scipy"
-  #     "opencv-python"
-  #   ];
-  # };
+  pip.drvs.nvidia-cusolver-cu11.env.autoPatchelfIgnoreMissingDeps = [
+    "libcublas.so.11"
+    "libcublasLt.so.11"
+  ];
 
-  # mach-nix.drvs = {
-  #   antlr4-python3-runtime.nixpkgs-overrides.enable = false;
-  #   test-tube = {
-  #     mkDerivation.doCheck = false;
-  #     mkDerivation.doInstallCheck = false;
-  #   };
+  pip.drvs.nvidia-cudnn-cu11.env.autoPatchelfIgnoreMissingDeps = [
+    "libcublas.so.11"
+    "libcublasLt.so.11"
+  ];
 
-  #   urwid = {
-  #     mkDerivation.doCheck = lib.mkForce false;
-  #   };
+  pip.drvs.numba.mkDerivation.buildInputs = [
+    config.deps.tbb
+  ];
 
-  #   filterpy = {
-  #     mkDerivation.doCheck = false;
-  #   };
+  pip.drvs.numba.env.autoPatchelfIgnoreMissingDeps = [
+    "libtbb.so.12"
+  ];
 
-  #   basicsr = {
-  #     mkDerivation = {
-  #       nativeBuildInputs = [
-  #         config.deps.python.pkgs.cython
-  #         config.deps.python.pkgs.numpy
-  #         config.deps.python.pkgs.torch
-  #         config.deps.breakpointHook
-  #       ];
-  #       dontStrip = true;
-  #       doCheck = false;
-  #     };
-  #     buildPythonPackage = {
-  #       pipInstallFlags = [
-  #         "--ignore-installed"
-  #       ];
-  #       catchConflicts = false;
-  #     };
-  #   };
-  # };
+  pip.drvs.triton.mkDerivation.nativeBuildInputs = [
+    config.deps.python.pkgs.pythonRelaxDepsHook
+  ];
+
+  pip.drvs.triton.env.pythonRemoveDeps = [
+    "torch"
+  ];
+
+  pip.drvs.torch.env.autoPatchelfIgnoreMissingDeps = ["*"];
+
+  pip.drvs.torchvision.mkDerivation.preFixup = ''
+    addAutoPatchelfSearchPath ${config.pip.drvs.torch.public}/lib/python*/site-packages/torch/lib
+  '';
+  pip.drvs.torchvision.env.autoPatchelfIgnoreMissingDeps = [
+    "libcudart.so.11.0"
+  ];
+
+  # TODO: fix bug in dream2nix, where extras of sub-dependenceis are not included
+  pip.drvs.pytorch-lightning.mkDerivation.propagatedBuildInputs = [
+    config.pip.drvs.aiohttp.public
+    config.pip.drvs.requests.public
+  ];
+
+  pip.drvs.basicsr = {
+    mkDerivation = {
+      # basicsr needs some large python packages during build time only.
+      # The exact versions don't matter much, so we just take those from nixpkgs
+      nativeBuildInputs = [
+        config.deps.python.pkgs.cython
+        config.deps.python.pkgs.numpy
+        config.deps.python.pkgs.torch
+      ];
+      propagatedBuildInputs = [
+        config.pip.drvs.tensorboard-data-server.public
+      ];
+      dontStrip = true;
+      doCheck = false;
+    };
+    buildPythonPackage = {
+      # Installing the dependencies causes to may issues for this package.
+      # It's not important to fix it since all of the required dependencies
+      # are installed at the top-level anyways.
+      pipInstallFlags = [
+        "--no-deps"
+      ];
+      # ...giving up on pythonRemoveDeps. It doesn't seem to work, let's just
+      # ignore collisions for this package.
+      catchConflicts = false;
+    };
+  };
 }

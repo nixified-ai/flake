@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dream2nix = {
-      url = "github:nix-community/dream2nix/python";
+      url = "github:nix-community/dream2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

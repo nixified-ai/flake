@@ -9,8 +9,8 @@
     mkInvokeAIVariant = args: pkgs.callPackage ./package.nix ({ inherit src; } // args);
 
     dream2nix-setup-module = {config, lib, ...}: {
-      lock.repoRoot = self;
-      lock.lockFileRel = "/projects/invokeai/lock-${config.deps.stdenv.system}.json";
+      paths.projectRoot = self;
+      paths.lockFile = "lock-${pkgs.system}.json";
     };
 
     _callModule = module:

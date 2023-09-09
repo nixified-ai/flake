@@ -12,8 +12,10 @@
 
 in {
   imports = [
-    dream2nix.modules.drv-parts.pip
+    dream2nix.modules.dream2nix.pip
   ];
+
+  paths.package = "/projects/invokeai";
 
   name = "invokeai";
   version = "0.0.0";
@@ -24,10 +26,10 @@ in {
       fetchurl
       gcc-unwrapped
       glib
-      tbb
       xorg
       zlib
       ;
+    tbb = nixpkgs.tbb_2021_8;
   };
 
   buildPythonPackage = {
@@ -93,22 +95,9 @@ in {
     ];
   };
 
-  pip.drvs.nvidia-cusolver-cu11.env.autoPatchelfIgnoreMissingDeps = [
-    "libcublas.so.11"
-    "libcublasLt.so.11"
-  ];
-
-  pip.drvs.nvidia-cudnn-cu11.env.autoPatchelfIgnoreMissingDeps = [
-    "libcublas.so.11"
-    "libcublasLt.so.11"
-  ];
 
   pip.drvs.numba.mkDerivation.buildInputs = [
     config.deps.tbb
-  ];
-
-  pip.drvs.numba.env.autoPatchelfIgnoreMissingDeps = [
-    "libtbb.so.12"
   ];
 
   pip.drvs.triton.mkDerivation.nativeBuildInputs = [
@@ -120,13 +109,6 @@ in {
   ];
 
   pip.drvs.torch.env.autoPatchelfIgnoreMissingDeps = ["*"];
-
-  pip.drvs.torchvision.mkDerivation.preFixup = ''
-    addAutoPatchelfSearchPath ${config.pip.drvs.torch.public}/lib/python*/site-packages/torch/lib
-  '';
-  pip.drvs.torchvision.env.autoPatchelfIgnoreMissingDeps = [
-    "libcudart.so.11.0"
-  ];
 
   # TODO: fix bug in dream2nix, where extras of sub-dependenceis are not included
   pip.drvs.pytorch-lightning.mkDerivation.propagatedBuildInputs = [

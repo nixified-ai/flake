@@ -151,6 +151,12 @@
         "url": "https://files.pythonhosted.org/packages/5c/f9/695d6bedebd747e5eb0fe8fad57b72fdf25411273a39791cde838d5a8f51/cycler-0.11.0-py3-none-any.whl",
         "version": "0.11.0"
       },
+      "cython": {
+        "sha256": "33c900d1ca9f622b969ac7d8fc44bdae140a4a6c7d8819413b51f3ccd0586a09",
+        "type": "url",
+        "url": "https://files.pythonhosted.org/packages/6f/8c/68139f464aeee699b04ec401b9de0d7e05fdd3a123c4c13429b887e16c8f/Cython-3.0.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "version": "3.0.0"
+      },
       "datasets": {
         "sha256": "29336bd316a7d827ccd4da2236596279b20ca2ac78f64c04c9483da7cbc2459b",
         "type": "url",
@@ -643,6 +649,12 @@
         "url": "https://files.pythonhosted.org/packages/3d/36/e78f09d510354977e10102dd811e928666021d9c451e05df962d56477772/Pillow-10.0.0-cp310-cp310-manylinux_2_28_x86_64.whl",
         "version": "10.0.0"
       },
+      "pip": {
+        "sha256": "908c78e6bc29b676ede1c4d57981d490cb892eb45cd8c214ab6298125119e077",
+        "type": "url",
+        "url": "https://files.pythonhosted.org/packages/09/bd/2410905c76ee14c62baf69e3f4aa780226c1bbfc9485731ad018e35b0cb5/pip-22.3.1-py3-none-any.whl",
+        "version": "22.3.1"
+      },
       "platformdirs": {
         "sha256": "d7c24979f292f916dc9cbf8648319032f551ea8c49a4c9bf2fb556a02070ec1d",
         "type": "url",
@@ -860,10 +872,10 @@
         "version": "1.8.2"
       },
       "setuptools": {
-        "sha256": "e13e1b0bc760e9b0127eda042845999b2f913e12437046e663b833aa96d89715",
+        "sha256": "8ab4f1dbf2b4a65f7eec5ad0c620e84c34111a68d3349833494b9088212214dd",
         "type": "url",
-        "url": "https://files.pythonhosted.org/packages/b8/49/b3b29c52b09075fb77f69309763a563b4054d5808a3f3b95df3a62ef3d3f/setuptools-68.1.0-py3-none-any.whl",
-        "version": "68.1.0"
+        "url": "https://files.pythonhosted.org/packages/ff/97/9dc902414912192d68364cc01cf17e826d259ef9753504b7ae1a256f2e35/setuptools-65.7.0-py3-none-any.whl",
+        "version": "65.7.0"
       },
       "six": {
         "sha256": "8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254",
@@ -1182,6 +1194,7 @@
           "torchvision"
         ],
         "cycler": [],
+        "cython": [],
         "datasets": [
           "aiohttp",
           "dill",
@@ -1447,6 +1460,7 @@
         ],
         "picklescan": [],
         "pillow": [],
+        "pip": [],
         "platformdirs": [],
         "prompt-toolkit": [
           "wcwidth"

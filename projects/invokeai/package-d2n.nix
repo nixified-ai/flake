@@ -34,12 +34,14 @@ in {
 
   buildPythonPackage = {
     format = "pyproject";
+    # works around a problem in nixpkgs.
+    # TODO: remove once this is merged: https://github.com/NixOS/nixpkgs/pull/254547
+    catchConflicts = false;
   };
 
   mkDerivation = {
     src = inputs.invokeai-src;
     buildInputs = [
-      config.deps.python.pkgs.setuptools
     ];
     # patchPhase = ''
     #   runHook prePatch
@@ -87,7 +89,12 @@ in {
   pip = {
     pypiSnapshotDate = "2023-08-17";
     # remove last (windows only) requirement due to dream2nix splitting issue
-    requirementsList = lib.init pyproject.project.dependencies;
+    requirementsList =
+      (lib.init pyproject.project.dependencies)
+      ++ pyproject.build-system.requires
+      ++ [
+        "cython"
+      ];
     pipVersion = "23.2.1";
     flattenDependencies = true;
     buildExtras = [
@@ -108,22 +115,23 @@ in {
     "torch"
   ];
 
-  pip.drvs.torch.env.autoPatchelfIgnoreMissingDeps = ["*"];
+  pip.drvs.torch.env.autoPatchelfIgnoreMissingDeps = ["libcuda.so.1"];
 
-  # TODO: fix bug in dream2nix, where extras of sub-dependenceis are not included
-  pip.drvs.pytorch-lightning.mkDerivation.propagatedBuildInputs = [
-    config.pip.drvs.aiohttp.public
-    config.pip.drvs.requests.public
-  ];
+  pip.drvs.torchvision = {
+    mkDerivation.dontStrip = true;
+  };
+
+  pip.drvs.pypatchmatch = {
+    buildPythonPackage.pythonImportsCheck = ["patchmatch"];
+  };
 
   pip.drvs.basicsr = {
     mkDerivation = {
       # basicsr needs some large python packages during build time only.
       # The exact versions don't matter much, so we just take those from nixpkgs
       nativeBuildInputs = [
-        config.deps.python.pkgs.cython
-        config.deps.python.pkgs.numpy
-        config.deps.python.pkgs.torch
+        config.pip.drvs.cython.public
+        config.pip.drvs.pip.public
       ];
       propagatedBuildInputs = [
         config.pip.drvs.tensorboard-data-server.public

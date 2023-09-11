@@ -1,4 +1,4 @@
-{ config, inputs, lib, withSystem, ... }:
+{ config, inputs, lib, withSystem, self,... }:
 
 {
   perSystem = { config, pkgs, ... }: let
@@ -7,6 +7,26 @@
     src = inputs.invokeai-src;
 
     mkInvokeAIVariant = args: pkgs.callPackage ./package.nix ({ inherit src; } // args);
+
+    dream2nix-setup-module = {config, lib, ...}: {
+      paths.projectRoot = self;
+      paths.lockFile = "lock-${pkgs.system}.json";
+    };
+
+    _callModule = module:
+    lib.evalModules {
+      specialArgs.dream2nix = inputs.dream2nix;
+      specialArgs.packageSets.nixpkgs = pkgs;
+      specialArgs.inputs = {inherit (inputs) invokeai-src;};
+      modules = [
+        module
+        dream2nix-setup-module
+      ];
+    };
+
+  # like callPackage for modules
+  callModule = module: (_callModule module).config.public;
+
   in {
     packages = {
       invokeai-amd = mkInvokeAIVariant {
@@ -15,6 +35,7 @@
       invokeai-nvidia = mkInvokeAIVariant {
         aipython3 = aipython3-nvidia;
       };
+      invokeai-d2n = callModule ./package-d2n.nix;
     };
   };
 

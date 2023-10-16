@@ -57,6 +57,10 @@ aipython3.buildPythonPackage {
     getpass-asterisk
     safetensors
     datasets
+    peft
+    fastapi-socketio
+    fastapi-events
+    python-multipart
   ];
   nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
   pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" ];

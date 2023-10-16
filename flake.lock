@@ -119,16 +119,16 @@
     "invokeai-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1677475057,
-        "narHash": "sha256-REtyVcyRgspn1yYvB4vIHdOrPRZRNSSraepHik9MfgE=",
+        "lastModified": 1681061505,
+        "narHash": "sha256-COI3iOp3U23+KIwnz+vGErNNJ6wmNem2vDIOZqz1qqE=",
         "owner": "invoke-ai",
         "repo": "InvokeAI",
-        "rev": "650f4bb58ceca458bff1410f35cd6d6caad399c6",
+        "rev": "2af511c98aaefa6d9db12557ba20be636d7370de",
         "type": "github"
       },
       "original": {
         "owner": "invoke-ai",
-        "ref": "v2.3.1.post2",
+        "ref": "v2.3.4",
         "repo": "InvokeAI",
         "type": "github"
       }

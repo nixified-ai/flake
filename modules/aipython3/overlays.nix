@@ -50,6 +50,12 @@ pkgs: {
 
     safetensors = callPackage ../../packages/safetensors { };
     compel = callPackage ../../packages/compel { };
+    starlette = callPackage ../../packages/starlette { };
+    fastapi-events = callPackage ../../packages/fastapi-events { };
+    peft = callPackage ../../packages/peft { };
+    fastapi-socketio = callPackage ../../packages/fastapi-socketio { };
+    fastapi = callPackage ../../packages/fastapi { };
+    transformers = callPackage ../../packages/transformers { };
     apispec-webframeworks = callPackage ../../packages/apispec-webframeworks { };
     pydeprecate = callPackage ../../packages/pydeprecate { };
     taming-transformers-rom1504 =

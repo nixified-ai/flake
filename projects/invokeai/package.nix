@@ -1,26 +1,43 @@
-{ aipython3
+{ python3Packages
 # misc
 , lib
 , src
 # extra deps
-, libdrm
 }:
 
 let
   getVersion = lib.flip lib.pipe [
-    (src: builtins.readFile "${src}/ldm/invoke/_version.py")
-    (builtins.match ".*__version__='([^']+)'.*")
+    (src: builtins.readFile "${src}/invokeai/version/invokeai_version.py")
+    (builtins.match ".*__version__ = \"([^\"]+)\".*")
     builtins.head
   ];
 in
 
-aipython3.buildPythonPackage {
+python3Packages.buildPythonPackage {
   pname = "InvokeAI";
   format = "pyproject";
   version = getVersion src;
   inherit src;
-  propagatedBuildInputs = with aipython3; [
+  propagatedBuildInputs = with python3Packages; [
+    semver
+    mediapipe
     numpy
+    torchsde
+    uvicorn
+    pyperclip
+    invisible-watermark
+    fastapi
+    fastapi-events
+    fastapi-socketio
+    timm
+    scikit-image
+    controlnet-aux
+    compel
+    python-dotenv
+    uvloop
+    watchfiles
+    httptools
+    websockets
     dnspython
     albumentations
     opencv4
@@ -33,7 +50,6 @@ aipython3.buildPythonPackage {
     protobuf
     omegaconf
     test-tube
-    streamlit
     einops
     taming-transformers-rom1504
     torch-fidelity
@@ -48,7 +64,6 @@ aipython3.buildPythonPackage {
     pillow
     send2trash
     flask
-    flask-socketio
     flask-cors
     dependency-injector
     gfpgan
@@ -57,10 +72,16 @@ aipython3.buildPythonPackage {
     getpass-asterisk
     safetensors
     datasets
+    accelerate
+    huggingface-hub
+    easing-functions
+    dynamicprompts
+    torchvision
+    test-tube
   ];
-  nativeBuildInputs = [ aipython3.pythonRelaxDepsHook ];
-  pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" ];
-  pythonRelaxDeps = [ "dnspython" "protobuf" "flask" "flask-socketio" "pytorch-lightning" ];
+  nativeBuildInputs = with python3Packages; [ pythonRelaxDepsHook pip ];
+  pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" "fastapi-socketio" ];
+  pythonRelaxDeps = [ "dnspython" "flask" "requests" "numpy" "pytorch-lightning" "torchsde" "uvicorn" "invisible-watermark" "accelerate" "scikit-image" "safetensors" "huggingface-hub" "torchvision" "test-tube" "fastapi" ];
   makeWrapperArgs = [
     '' --run '
       if [ -d "/usr/lib/wsl/lib" ]
@@ -72,24 +93,33 @@ aipython3.buildPythonPackage {
       fi
       '
     ''
-  ] ++ lib.optionals (aipython3.torch.rocmSupport or false) [
-    '' --run '
-      if [ ! -e /tmp/nix-pytorch-rocm___/amdgpu.ids ]
-      then
-          mkdir -p /tmp/nix-pytorch-rocm___
-          ln -s ${libdrm}/share/libdrm/amdgpu.ids /tmp/nix-pytorch-rocm___/amdgpu.ids
-      fi
-      '
-    ''
     # See note about consumer GPUs:
     # https://docs.amd.com/bundle/ROCm-Deep-Learning-Guide-v5.4.3/page/Troubleshooting.html
     " --set-default HSA_OVERRIDE_GFX_VERSION 10.3.0"
+
+    '' --run 'export INVOKEAI_ROOT="''${INVOKEAI_ROOT:-$HOME/invokeai}"' ''
+    '' --run '
+      if [[ ! -d "$INVOKEAI_ROOT" && "''${0##*/}" != invokeai-configure ]]
+      then
+        echo "State directory does not exist, running invokeai-configure"
+        if [[ "''${NIXIFIED_AI_NONINTERACTIVE:-0}" != 0 ]]; then
+          ${placeholder "out"}/bin/invokeai-configure --yes --skip-sd-weights
+        else
+          ${placeholder "out"}/bin/invokeai-configure
+        fi
+      fi
+      '
+    ''
   ];
   patchPhase = ''
     runHook prePatch
 
+    substituteInPlace ./pyproject.toml \
+      --replace 'setuptools~=65.5' 'setuptools' \
+      --replace 'pip~=22.3' 'pip'
+
     # Add subprocess to the imports
-    substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
+    substituteInPlace ./invokeai/backend/install/invokeai_configure.py --replace \
         'import shutil' \
 '
 import shutil
@@ -98,19 +128,18 @@ import subprocess
     # shutil.copytree will inherit the permissions of files in the /nix/store
     # which are read only, so we subprocess.call cp instead and tell it not to
     # preserve the mode
-    substituteInPlace ./ldm/invoke/config/invokeai_configure.py --replace \
+    substituteInPlace ./invokeai/backend/install/invokeai_configure.py --replace \
       "shutil.copytree(configs_src, configs_dest, dirs_exist_ok=True)" \
       "subprocess.call('cp -r --no-preserve=mode {configs_src} {configs_dest}'.format(configs_src=configs_src, configs_dest=configs_dest), shell=True)"
     runHook postPatch
+
+    substituteInPlace ./pyproject.toml \
+      --replace 'pip~=22.3' 'pip' \
+      --replace 'setuptools~=65.5' 'setuptools'
   '';
-  postFixup = ''
-    chmod +x $out/bin/*
-    wrapPythonPrograms
-  '';
-  doCheck = false;
   meta = {
     description = "Fancy Web UI for Stable Diffusion";
     homepage = "https://invoke-ai.github.io/InvokeAI/";
-    mainProgram = "invoke.py";
+    mainProgram = "invokeai-web";
   };
 }

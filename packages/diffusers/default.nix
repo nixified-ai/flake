@@ -2,29 +2,9 @@
 , buildPythonPackage
 , fetchPypi
 , setuptools
-, writeText
+, safetensors
 , isPy27
-, pytestCheckHook
-, pytest-mpl
 , numpy
-, scipy
-, scikit-learn
-, pandas
-, transformers
-, opencv4
-, lightgbm
-, catboost
-, pyspark
-, sentencepiece
-, tqdm
-, slicer
-, numba
-, matplotlib
-, nose
-, lime
-, cloudpickle
-, ipython
-, packaging
 , pillow
 , requests
 , regex
@@ -34,17 +14,18 @@
 
 buildPythonPackage rec {
   pname = "diffusers";
-  version = "0.14.0";
+  version = "0.21.4";
 
   disabled = isPy27;
   format = "pyproject";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-sqQqEtq1OMtFo7DGVQMFO6RG5fLfSDbeOFtSON+DCkY=";
+    sha256 = "sha256-P6w4gzF5Qn8WfGdd2nHue09eYnIARXqNUn5Aza+XJog=";
   };
 
   propagatedBuildInputs = [
+    safetensors
     setuptools
     pillow
     numpy

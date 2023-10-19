@@ -72,18 +72,18 @@ See the following documentation from Microsoft for the details on how to enable 
 
 # Packaged Projects
 
-### KoboldAI
+### textgen (Also called text-generation-webui: A WebUI for LLMs and LoRA training)
 
-- [Official website](https://github.com/KoboldAI/KoboldAI-Client)
+- [Official website](https://github.com/oobabooga/text-generation-webui)
 
-A browser-based front-end for AI-assisted writing with multiple local & remote AI models.
+A Gradio web UI for Large Language Models. Supports transformers, GPTQ, AWQ, llama.cpp (GGUF), Llama models.
 
 #### Get started
 
-- `nix run github:nixified-ai/flake#koboldai-amd`
-- `nix run github:nixified-ai/flake#koboldai-nvidia`
+- `nix run github:nixified-ai/flake#textgen-amd`
+- `nix run github:nixified-ai/flake#textgen-nvidia`
 
-![](https://raw.githubusercontent.com/nixified-ai/flake/images/koboldai.webp)
+![](https://raw.githubusercontent.com/nixified-ai/flake/images/textgen.webp)
 
 ---
 

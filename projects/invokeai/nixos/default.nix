@@ -2,14 +2,22 @@
 
 let
   inherit (lib)
-    mkIf mkOption mkEnableOption types
-    escapeShellArgs getExe optionalString
+    mkIf mkOption mkEnableOption mkRenamedOptionModule types
+    escapeShellArgs flatten getExe mapAttrsToList
+    isBool isFloat isInt isList isString
+    floatToString optionalString
   ;
 
   cfg = config.services.invokeai;
 in
 
 {
+  imports = map ({ old, new ? old }: mkRenamedOptionModule [ "services" "invokeai" old ] [ "services" "invokeai" "settings" new ]) [
+    { old = "host"; }
+    { old = "port"; }
+    { old = "dataDir"; new = "root"; }
+    { old = "precision"; }
+  ];
   options.services.invokeai = {
     enable = mkEnableOption "InvokeAI Web UI for Stable Diffusion";
 
@@ -30,40 +38,48 @@ in
       type = types.str;
     };
 
-    host = mkOption {
-      description = "Which IP address to listen on.";
-      default = "127.0.0.1";
-      type = types.str;
-    };
+    settings = mkOption {
+      description = "Structured command line arguments.";
+      default = { };
+      type = types.submodule {
+        freeformType = with types; let
+          atom = nullOr (oneOf [
+            bool
+            str
+            int
+            float
+          ]);
+        in attrsOf (either atom (listOf atom));
+        options = {
+          host = mkOption {
+            description = "Which IP address to listen on.";
+            default = "127.0.0.1";
+            type = types.str;
+          };
 
-    port = mkOption {
-      description = "Which port to listen on.";
-      default = 9090;
-      type = types.port;
-    };
+          port = mkOption {
+            description = "Which port to listen on.";
+            default = 9090;
+            type = types.port;
+          };
 
-    dataDir = mkOption {
-      description = "Where to store InvokeAI's state.";
-      default = "/var/lib/invokeai";
-      type = types.path;
-    };
+          root = mkOption {
+            description = "Where to store InvokeAI's state.";
+            default = "/var/lib/invokeai";
+            type = types.path;
+          };
 
-    maxLoadedModels = mkOption {
-      description = "Maximum amount of models to keep in VRAM at once.";
-      default = 1;
-      type = types.ints.positive;
-    };
-
-    nsfwChecker = mkEnableOption "the NSFW Checker";
-
-    precision = mkOption {
-      description = "Set model precision.";
-      default = "auto";
-      type = types.enum [ "auto" "float32" "autocast" "float16" ];
+          precision = mkOption {
+            description = "Set model precision.";
+            default = "auto";
+            type = types.enum [ "auto" "float32" "autocast" "float16" ];
+          };
+        };
+      };
     };
 
     extraArgs = mkOption {
-      description = "Extra command line arguments.";
+      description = "Additional raw command line arguments.";
       default = [];
       type = with types; listOf str;
     };
@@ -71,18 +87,16 @@ in
 
   config = let
 
-    yesno = enable: text: "--${optionalString (!enable) "no-"}${text}";
+    cliArgs = (flatten (mapAttrsToList (n: v:
+      if v == null then []
+      else if isBool v then [ "--${optionalString (!v) "no-"}${n}" ]
+      else if isInt v then [ "--${n}" "${toString v}" ]
+      else if isFloat v then [ "--${n}" "${floatToString v}" ]
+      else if isString v then ["--${n}" v ]
+      else if isList v then [ "--${n}" (toString v) ]
+      else throw "Unhandled type for setting \"${n}\""
+    ) cfg.settings)) ++ cfg.extraArgs;
 
-    cliArgs = [
-      "--web"
-      "--host" cfg.host
-      "--port" cfg.port
-      "--root_dir" cfg.dataDir
-      "--max_loaded_models" cfg.maxLoadedModels
-      (yesno cfg.nsfwChecker "nsfw_checker")
-      "--precision" cfg.precision
-    ] ++ cfg.extraArgs;
-    initialModelsPath = "${cfg.package}/${cfg.package.pythonModule.sitePackages}/invokeai/configs/INITIAL_MODELS.yaml";
   in mkIf cfg.enable {
     users.users = mkIf (cfg.user == "invokeai") {
       invokeai = {
@@ -96,11 +110,11 @@ in
     systemd.services.invokeai = {
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
-      preStart = ''
-        ln -sf ${initialModelsPath} '${cfg.dataDir}/configs/INITIAL_MODELS.yaml'
-        cp -L --no-clobber --no-preserve=mode ${initialModelsPath} '${cfg.dataDir}/configs/models.yaml'
-      '';
-      environment.HOME = "${cfg.dataDir}/.home";
+      environment = {
+        HOME = "${cfg.settings.root}/.home";
+        INVOKEAI_ROOT = "${cfg.settings.root}";
+        NIXIFIED_AI_NONINTERACTIVE = "1";
+      };
       serviceConfig = {
         User = cfg.user;
         Group = cfg.group;
@@ -109,9 +123,9 @@ in
       };
     };
     systemd.tmpfiles.rules = [
-      "d '${cfg.dataDir}' 0755 ${cfg.user} ${cfg.group} - -"
-      "d '${cfg.dataDir}/configs' 0755 ${cfg.user} ${cfg.group} - -"
-      "d '${cfg.dataDir}/.home' 0750 ${cfg.user} ${cfg.group} - -"
+      "d '${cfg.settings.root}' 0755 ${cfg.user} ${cfg.group} - -"
+      "d '${cfg.settings.root}/configs' 0755 ${cfg.user} ${cfg.group} - -"
+      "d '${cfg.settings.root}/.home' 0750 ${cfg.user} ${cfg.group} - -"
     ];
   };
 }

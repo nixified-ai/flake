@@ -2,18 +2,18 @@
 # If you run pynixify again, the file will be either overwritten or
 # deleted, and you will lose the changes you made to it.
 
-{ buildPythonPackage, fetchPypi, lib, numpy, packaging, psutil, pyyaml, torch }:
+{ buildPythonPackage, fetchPypi, lib, numpy, packaging, psutil, pyyaml, torch, huggingface-hub }:
 
 buildPythonPackage rec {
   pname = "accelerate";
-  version = "0.13.1";
+  version = "0.23.0";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "1dk82s80rq8xp3v4hr9a27vgj9k3gy9yssp7ww7i3c0vc07gx2cv";
+    sha256 = "sha256-ITnSGfqaN3c8QnnJr+vp9oHy8p6FopsL6NdiV72OSr4=";
   };
 
-  propagatedBuildInputs = [ numpy packaging psutil pyyaml torch ];
+  propagatedBuildInputs = [ numpy packaging psutil pyyaml torch huggingface-hub ];
 
   # TODO FIXME
   doCheck = false;

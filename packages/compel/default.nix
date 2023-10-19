@@ -1,18 +1,19 @@
-{ buildPythonPackage, fetchPypi, lib, setuptools, transformers, diffusers, torch }:
+{ buildPythonPackage, fetchPypi, lib, setuptools, transformers, diffusers, pyparsing, torch }:
 
 buildPythonPackage rec {
   pname = "compel";
-  version = "0.1.7";
+  version = "2.0.2";
   format = "pyproject";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-JP+PX0yENTNnfsAJ/hzgIA/cr/RhIWV1GEa1rYTdlnc=";
+    sha256 = "sha256-Lp3mS26l+d9Z+Prn662aV9HzadzJU8hkWICkm7GcLHw=";
   };
 
   propagatedBuildInputs = [
     setuptools
     diffusers
+    pyparsing
     transformers
     torch
   ];

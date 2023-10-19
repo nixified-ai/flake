@@ -11,8 +11,11 @@
     div.columns{display: flex; gap: min(4vw, 1.5em);}
     div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
     ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
@@ -148,20 +151,24 @@ to enable and use the WSL manually</p>
 href="https://learn.microsoft.com/en-us/windows/wsl/install">https://learn.microsoft.com/en-us/windows/wsl/install</a></li>
 </ul>
 <h1 id="packaged-projects">Packaged Projects</h1>
-<h3 id="koboldai">KoboldAI</h3>
+<h3
+id="textgen-also-called-text-generation-webui-a-webui-for-llms-and-lora-training">textgen
+(Also called text-generation-webui: A WebUI for LLMs and LoRA
+training)</h3>
 <ul>
-<li><a href="https://github.com/KoboldAI/KoboldAI-Client">Official
+<li><a
+href="https://github.com/oobabooga/text-generation-webui">Official
 website</a></li>
 </ul>
-<p>A browser-based front-end for AI-assisted writing with multiple local
-&amp; remote AI models.</p>
+<p>A Gradio web UI for Large Language Models. Supports transformers,
+GPTQ, AWQ, llama.cpp (GGUF), Llama models.</p>
 <h4 id="get-started">Get started</h4>
 <ul>
-<li><code>nix run github:nixified-ai/flake#koboldai-amd</code></li>
-<li><code>nix run github:nixified-ai/flake#koboldai-nvidia</code></li>
+<li><code>nix run github:nixified-ai/flake#textgen-amd</code></li>
+<li><code>nix run github:nixified-ai/flake#textgen-nvidia</code></li>
 </ul>
 <p><img
-src="https://raw.githubusercontent.com/nixified-ai/flake/images/koboldai.webp" /></p>
+src="https://raw.githubusercontent.com/nixified-ai/flake/images/textgen.webp" /></p>
 <hr />
 <h3 id="invokeai-a-stable-diffusion-webui">InvokeAI (A Stable Diffusion
 WebUI)</h3>

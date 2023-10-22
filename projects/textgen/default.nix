@@ -30,6 +30,7 @@ in
       ]);
       nvidia = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays ++ [
         overlays.python-torchCuda
+        overlays.python-bitsAndBytesOldGpu
       ]);
     };
 

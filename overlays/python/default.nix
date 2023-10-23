@@ -63,4 +63,10 @@ lib: {
       rocmSupport = false;
     };
   };
+
+  bitsAndBytesOldGpu = final: prev: {
+    bitsandbytes = prev.bitsandbytes.overridePythonAttrs (old: {
+      preBuild = old.preBuild + " cuda${final.torch.cudaPackages.cudaMajorVersion}x_nomatmul";
+    });
+  };
 }

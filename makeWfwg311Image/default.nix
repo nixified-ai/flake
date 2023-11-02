@@ -60,6 +60,7 @@ let
 
   expectScript = let
     vncdoWrapper = writeScript "vncdoWrapper" ''
+      sleep 3
       ${vncdo}/bin/vncdo --force-caps -s 127.0.0.1::5900 "$@"
     '';
   in writeScript "expect.sh"
@@ -69,27 +70,27 @@ let
     set timeout -1
     spawn ${tesseractScript}
     expect "CiN"
-    exec ${vncdoWrapper} type "A:" key enter pause 1 type "SETUP.EXE" pause 1 key enter
+    exec ${vncdoWrapper} type "A:" key enter pause 3 type "SETUP.EXE" pause 3 key enter
     expect "Workgroups 3.11 Setup"
     exec ${vncdoWrapper} key enter
     expect "Express Setup"
     exec ${vncdoWrapper} key enter
     expect "Disk 2"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Windows Setup"
-    exec ${vncdoWrapper} type "Eelco Dolstra" pause 1 key alt-o pause 1 key alt-o
+    exec ${vncdoWrapper} type "Eelco Dolstra" pause 3 key alt-o pause 3 key alt-o
     expect "Disk 3"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Disk 4"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Disk §"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Disk 6"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Disk 7"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Disk 8"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Printer Installation"
     exec ${vncdoWrapper} key enter
     expect "Network Setup"

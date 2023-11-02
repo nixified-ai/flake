@@ -59,6 +59,7 @@ let
 
   expectScript = let
     vncdoWrapper = writeScript "vncdoWrapper" ''
+      sleep 3
       ${vncdo}/bin/vncdo --force-caps -s 127.0.0.1::5900 "$@"
     '';
   in writeScript "expect.sh"
@@ -68,21 +69,7 @@ let
     set timeout -1
     spawn ${tesseractScript}
     expect "CiN"
-    exec ${vncdoWrapper} type "A:" key enter pause 1 type "SETUP.EXE" pause 1 key enter
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
+    exec ${vncdoWrapper} type "A:" key enter pause 3 type "SETUP.EXE" pause 3 key enter
     expect "To exit Setup"
     exec ${vncdoWrapper} key enter
     expect "Setup is ready to install Windows"
@@ -90,17 +77,17 @@ let
     expect "No Changes"
     exec ${vncdoWrapper} key enter
     expect "Disk #2"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Windows Setup"
     exec ${vncdoWrapper} key tab key tab key tab key enter
     expect "Disk #3"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Disk #4"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Disk #5"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "Disk #6"
-    exec ${vncdoWrapper} key f12-o pause 1 key enter
+    exec ${vncdoWrapper} key f12-o pause 3 key enter
     expect "select the option you"
     exec ${vncdoWrapper} key enter
     expect "The new versions"
@@ -110,7 +97,7 @@ let
     expect "Set Up Applications"
     exec ${vncdoWrapper} key enter
     expect "applications for Windows 3.0"
-    exec ${vncdoWrapper} key enter pause 1 key tab pause 1 key tab pause 1 key tab pause 1 key tab pause 1 key tab pause 1 key enter
+    exec ${vncdoWrapper} key enter pause 3 key tab pause 3 key tab pause 3 key tab pause 3 key tab pause 3 key tab pause 3 key enter
     expect "For Help using Notepad"
     exec ${vncdoWrapper} key alt-f4
     expect "remove the floppy disk and choose Reboot"

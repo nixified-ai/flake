@@ -30,7 +30,6 @@ OVMF_DIR="."
 args=(
   -enable-kvm -m "$ALLOCATED_RAM" -cpu Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,"$MY_OPTIONS"
   -machine q35
-  -monitor unix:/tmp/qemu-control,server,nowait
   -usb -device usb-kbd -device usb-tablet
   -smp "$CPU_THREADS",cores="$CPU_CORES",sockets="$CPU_SOCKETS"
   -device usb-ehci,id=ehci

@@ -103,7 +103,7 @@ let
     expect "Software License"
     exec ${vncdoWrapper} "I have read and agree to the macOS Software License Agreement." key tab pause 1 key space
     expect "Create a Computer Account"
-    exec ${vncdoWrapper} "Create a Computer Account" type "admin" pause 1 key tab pause 1 type "admin" pause 1 key tab pause 1 type "admin" pause 1 key tab pause 1 type "admin" pause 1 key tab pause 1 key tab pause 1 key tab pause 1 key space
+    exec ${vncdoWrapper} "Create a Computer Account" pause 1 type "admin" pause 1 key tab pause 1 type "admin" pause 1 key tab pause 1 type "admin" pause 1 key tab pause 1 type "admin" pause 1 key tab pause 1 key tab pause 1 key tab pause 1 key space
     expect "Enable Location Services"
     exec ${vncdoWrapper} "Enable Location Services" key shift-tab pause 1 key space
     expect "Are you sure you don't want to"
@@ -117,7 +117,9 @@ let
     expect "Choose Your Look"
     exec ${vncdoWrapper} "Choose Your Look" key shift-tab pause 1 key space
     expect "Keyboard Setup Assistant"
-    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key super-q move 0 0 click 1 pause 1 key up pause 1 key up pause 1 key up pause 1 key enter pause 1 key enter
+    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key super-q pause 1 move 0 0 click 1
+    expect "Shut Down"
+    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key up pause 1 key up pause 1 key up pause 1 key enter pause 1 key enter
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';
@@ -134,7 +136,6 @@ let
     sh ./OpenCore-Boot.sh &
     openCoreBootPID=$!
     ${expectScript} &
-    echo "system_powerdown" > /tmp/qemu-control
     wait $openCoreBootPID
     mv mac_hdd_ng.img $out
   '';

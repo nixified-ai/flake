@@ -28,7 +28,7 @@
           msDos622-image = config.legacyPackages.makeMsDos622Image {};
           win30-image = config.legacyPackages.makeWin30Image {};
           wfwg311-image = config.legacyPackages.makeWfwg311Image {};
-          macOS-30 = pkgs.linkFarm [
+          macOS-30 = pkgs.linkFarm "macOS-Fuck" [
             { name = "macos1"; path = macOS-ventura-image.overrideAttrs { name = "macos1"; }; }
             { name = "macos2"; path = macOS-ventura-image.overrideAttrs { name = "macos2"; }; }
             { name = "macos3"; path = macOS-ventura-image.overrideAttrs { name = "macos3"; }; }

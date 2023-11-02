@@ -28,43 +28,38 @@
           msDos622-image = config.legacyPackages.makeMsDos622Image {};
           win30-image = config.legacyPackages.makeWin30Image {};
           wfwg311-image = config.legacyPackages.makeWfwg311Image {};
-          macOs32 = pkgs.symlinkJoin {
-            name = "everything";
-            paths = [
-              macOS-ventura-image.overrideAttrs { name = "macos1"; }
-              macOS-ventura-image.overrideAttrs { name = "macos2"; }
-              macOS-ventura-image.overrideAttrs { name = "macos3"; }
-              macOS-ventura-image.overrideAttrs { name = "macos4"; }
-              macOS-ventura-image.overrideAttrs { name = "macos5"; }
-              macOS-ventura-image.overrideAttrs { name = "macos6"; }
-              macOS-ventura-image.overrideAttrs { name = "macos7"; }
-              macOS-ventura-image.overrideAttrs { name = "macos8"; }
-              macOS-ventura-image.overrideAttrs { name = "macos9"; }
-              macOS-ventura-image.overrideAttrs { name = "macos10"; }
-              macOS-ventura-image.overrideAttrs { name = "macos11"; }
-              macOS-ventura-image.overrideAttrs { name = "macos12"; }
-              macOS-ventura-image.overrideAttrs { name = "macos13"; }
-              macOS-ventura-image.overrideAttrs { name = "macos14"; }
-              macOS-ventura-image.overrideAttrs { name = "macos15"; }
-              macOS-ventura-image.overrideAttrs { name = "macos16"; }
-              macOS-ventura-image.overrideAttrs { name = "macos17"; }
-              macOS-ventura-image.overrideAttrs { name = "macos18"; }
-              macOS-ventura-image.overrideAttrs { name = "macos19"; }
-              macOS-ventura-image.overrideAttrs { name = "macos20"; }
-              macOS-ventura-image.overrideAttrs { name = "macos21"; }
-              macOS-ventura-image.overrideAttrs { name = "macos22"; }
-              macOS-ventura-image.overrideAttrs { name = "macos23"; }
-              macOS-ventura-image.overrideAttrs { name = "macos24"; }
-              macOS-ventura-image.overrideAttrs { name = "macos25"; }
-              macOS-ventura-image.overrideAttrs { name = "macos26"; }
-              macOS-ventura-image.overrideAttrs { name = "macos27"; }
-              macOS-ventura-image.overrideAttrs { name = "macos28"; }
-              macOS-ventura-image.overrideAttrs { name = "macos29"; }
-              macOS-ventura-image.overrideAttrs { name = "macos30"; }
-              macOS-ventura-image.overrideAttrs { name = "macos31"; }
-              macOS-ventura-image.overrideAttrs { name = "macos32"; }
-            ];
-          };
+          macOS-30 = pkgs.linkFarm [
+            { name = "macos1"; path = macOS-ventura-image.overrideAttrs { name = "macos1"; }; }
+            { name = "macos2"; path = macOS-ventura-image.overrideAttrs { name = "macos2"; }; }
+            { name = "macos3"; path = macOS-ventura-image.overrideAttrs { name = "macos3"; }; }
+            { name = "macos4"; path = macOS-ventura-image.overrideAttrs { name = "macos4"; }; }
+            { name = "macos5"; path = macOS-ventura-image.overrideAttrs { name = "macos5"; }; }
+            { name = "macos6"; path = macOS-ventura-image.overrideAttrs { name = "macos6"; }; }
+            { name = "macos7"; path = macOS-ventura-image.overrideAttrs { name = "macos7"; }; }
+            { name = "macos8"; path = macOS-ventura-image.overrideAttrs { name = "macos8"; }; }
+            { name = "macos9"; path = macOS-ventura-image.overrideAttrs { name = "macos9"; }; }
+            { name = "macos10"; path = macOS-ventura-image.overrideAttrs { name = "macos10"; }; }
+            { name = "macos11"; path = macOS-ventura-image.overrideAttrs { name = "macos11"; }; }
+            { name = "macos12"; path = macOS-ventura-image.overrideAttrs { name = "macos12"; }; }
+            { name = "macos13"; path = macOS-ventura-image.overrideAttrs { name = "macos13"; }; }
+            { name = "macos14"; path = macOS-ventura-image.overrideAttrs { name = "macos14"; }; }
+            { name = "macos15"; path = macOS-ventura-image.overrideAttrs { name = "macos15"; }; }
+            { name = "macos16"; path = macOS-ventura-image.overrideAttrs { name = "macos16"; }; }
+            { name = "macos17"; path = macOS-ventura-image.overrideAttrs { name = "macos17"; }; }
+            { name = "macos18"; path = macOS-ventura-image.overrideAttrs { name = "macos18"; }; }
+            { name = "macos19"; path = macOS-ventura-image.overrideAttrs { name = "macos19"; }; }
+            { name = "macos20"; path = macOS-ventura-image.overrideAttrs { name = "macos20"; }; }
+            { name = "macos21"; path = macOS-ventura-image.overrideAttrs { name = "macos21"; }; }
+            { name = "macos22"; path = macOS-ventura-image.overrideAttrs { name = "macos22"; }; }
+            { name = "macos23"; path = macOS-ventura-image.overrideAttrs { name = "macos23"; }; }
+            { name = "macos24"; path = macOS-ventura-image.overrideAttrs { name = "macos24"; }; }
+            { name = "macos25"; path = macOS-ventura-image.overrideAttrs { name = "macos25"; }; }
+            { name = "macos26"; path = macOS-ventura-image.overrideAttrs { name = "macos26"; }; }
+            { name = "macos27"; path = macOS-ventura-image.overrideAttrs { name = "macos27"; }; }
+            { name = "macos28"; path = macOS-ventura-image.overrideAttrs { name = "macos28"; }; }
+            { name = "macos29"; path = macOS-ventura-image.overrideAttrs { name = "macos29"; }; }
+            { name = "macos30"; path = macOS-ventura-image.overrideAttrs { name = "macos30"; }; }
+          ];
         };
       };
     };

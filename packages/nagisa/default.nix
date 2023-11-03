@@ -14,8 +14,7 @@ buildPythonPackage rec {
 
   src = fetchPypi {
     inherit pname version;
-    # nix-prefetch-url --unpack https://files.pythonhosted.org/packages/source/n/nagisa/nagisa-0.2.9.tar.gz
-    sha256 = "0fh78ijd5s1fq66ib7f7cr1dykycbfzzjar2h1pznpr284lbjk7y";
+    sha256 = "rykmKR5+AkFigZ12n5KhnP3cm/34Fc0+aFdBLED/eOs=";
   };
 
   buildInputs = [ cython numpy ];

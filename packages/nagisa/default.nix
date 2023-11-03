@@ -6,7 +6,8 @@
 , six
 , dynalite-devices
 , pythonOlder
-, stdenv }:
+, stdenv
+}:
 
 buildPythonPackage rec {
   pname = "nagisa";
@@ -25,6 +26,11 @@ buildPythonPackage rec {
   ];
 
   checkInputs = [ ];
+
+  postPatch = ''
+    substituteInPlace setup.py \
+      --replace "if os.name == 'posix' and major == 3 and minor > 7:" "if False:"
+  '';
 
   meta = with lib; {
     description = "A Japanese tokenizer based on recurrent neural networks";

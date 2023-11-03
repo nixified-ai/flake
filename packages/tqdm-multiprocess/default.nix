@@ -7,7 +7,7 @@ buildPythonPackage rec {
   src = fetchPypi {
     inherit pname version;
     # nix-prefetch-url --unpack https://pypi.io/packages/source/t/tqdm-multiprocess/tqdm-multiprocess-0.0.11.tar.gz
-    sha256 = "1cl3qmm8zk8lq052svp0yhpcgg6n8n2gdvzlfpwvs1lk4mj6fl8i";
+    sha256 = "p0ACoSIuqcvozcm9RgEIxgCb41liH77puS0FFdTRgPc=";
   };
 
   propagatedBuildInputs = [

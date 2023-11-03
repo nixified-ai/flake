@@ -1,6 +1,6 @@
 { lib
 , buildPythonPackage
-, fetchPypi
+, fetchFromGitHub
 , datasets
 , jsonlines
 , numexpr
@@ -29,10 +29,11 @@ buildPythonPackage rec {
   pname = "lm-eval";
   version = "0.3.0";
 
-  src = fetchPypi {
-    inherit pname version;
-    # nix-prefetch-url --unpack https://pypi.io/packages/source/l/lm-eval/lm_eval-0.3.0.tar.gz
-    sha256 = "0qnhbvv7ch9945m4v1zpxxz9friwk2x3z0qw1dvn0lvrzw1ifjl3";
+  src = fetchFromGitHub {
+    owner = "EleutherAI";
+    repo = "lm-evaluation-harness";
+    rev = "v${version}";
+    sha256 = "1s2ayvkn9nqmfrayjwrb21xv6sb4qy5hw7vwcbfxpviw47q7m87y";
   };
 
   propagatedBuildInputs = [

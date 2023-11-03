@@ -4,8 +4,7 @@
 , cmake
 , python3Packages
 , eigen
-, cudatoolkit
-, cudnn
+, cudaPackages
 }:
 
 stdenv.mkDerivation rec {
@@ -24,8 +23,7 @@ stdenv.mkDerivation rec {
     eigen
     python3Packages.python 
     python3Packages.setuptools 
-    cudatoolkit
-    cudnn
+    cudaPackages.cudatoolkit
   ];
 
   cmakeFlags = [
@@ -34,7 +32,7 @@ stdenv.mkDerivation rec {
   ];
 
   preConfigure = ''
-    export CUDNN_ROOT=${cudnn}/lib
+    export CUDNN_ROOT=${cudaPackages.cudatoolkit}/lib
   '';
 
   meta = with lib; {

@@ -4,7 +4,7 @@
 , cython
 , numpy
 , six
-, dynalite-devices
+, dynet
 , pythonOlder
 , stdenv
 }:
@@ -23,6 +23,7 @@ buildPythonPackage rec {
   propagatedBuildInputs = [
     six
     numpy
+    dynet
   ];
 
   checkInputs = [ ];

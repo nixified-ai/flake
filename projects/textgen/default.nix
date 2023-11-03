@@ -29,6 +29,7 @@ in
         ../../packages/lm-eval
         ../../packages/nagisa
         ../../packages/tqdm-multiprocess
+        ../../packages/dynet
       ])
     ];
 

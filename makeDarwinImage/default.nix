@@ -30,7 +30,7 @@ let
     TEXT=""
     while true
     do
-      sleep 3
+      sleep 5
       ${vncdo}/bin/vncdo -s 127.0.0.1::5901 rcapture cap.png 0 0 1920 1080
       NEW_TEXT="$(${tesseract}/bin/tesseract cap.png stdout 2>/dev/null)"
       if [ "$TEXT" != "$NEW_TEXT" ]; then
@@ -43,7 +43,7 @@ let
   expectScript = let
     vncdoWrapper = writeScript "vncdoWrapper" ''
       echo Sending VNC inputs for $1
-      sleep 3
+      sleep 5
       ${vncdo}/bin/vncdo --force-caps -s 127.0.0.1::5901 "''${@:2}"
     '';
   in writeScript "expect.sh"
@@ -78,48 +78,48 @@ let
     expect "macOS Base"
     exec ${vncdoWrapper} "Boot Stage 5" key enter
     expect "Select Your Country or Region"
-    exec ${vncdoWrapper} "Select Your Country or Region" type "united states" pause 3 key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Select Your Country or Region" type "united states" pause 5 key shift-tab pause 5 key space
     expect "Written and Spoken Languages"
-    exec ${vncdoWrapper} "Written and Spoken Languages" key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Written and Spoken Languages" key shift-tab pause 5 key space
     expect "Accessibility"
-    exec ${vncdoWrapper} "Accessibility" key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Accessibility" key shift-tab pause 5 key space
     expect "How Do You Connect?"
-    exec ${vncdoWrapper} "How Do You Connect?" move 815 480 click 1 pause 3 move 1330 820 click 1
+    exec ${vncdoWrapper} "How Do You Connect?" move 815 480 click 1 pause 5 move 1330 820 click 1
     expect "Your Mac isn't connected to"
     exec ${vncdoWrapper} "Your Mac isn't connected to" move 1020 640 click 1
     expect "Data & Privacy"
-    exec ${vncdoWrapper} "Data & Privacy" key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Data & Privacy" key shift-tab pause 5 key space
     expect "Migration Assistant"
-    exec ${vncdoWrapper} "Migration Assistant" key tab pause 3 key tab pause 3 key tab pause 3 key space
+    exec ${vncdoWrapper} "Migration Assistant" key tab pause 5 key tab pause 5 key tab pause 5 key space
 
     ## Not needed when offline
     # expect "Sign In with Your Apple ID"
-    # exec ${vncdoWrapper} "Sign in with Your Apple ID" key shift-tab pause 3 key shift-tab pause 3 key space
+    # exec ${vncdoWrapper} "Sign in with Your Apple ID" key shift-tab pause 5 key shift-tab pause 5 key space
     # expect "Are you sure you want to skip"
-    # exec ${vncdoWrapper} "Are you sure you want to skip signing in with an Apple ID?" key tab pause 3 key space
+    # exec ${vncdoWrapper} "Are you sure you want to skip signing in with an Apple ID?" key tab pause 5 key space
     # expect "Terms and Conditions"
 
-    exec ${vncdoWrapper} "Terms and Conditions" key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Terms and Conditions" key shift-tab pause 5 key space
     expect "Software License"
-    exec ${vncdoWrapper} "I have read and agree to the macOS Software License Agreement." key tab pause 3 key space
+    exec ${vncdoWrapper} "I have read and agree to the macOS Software License Agreement." key tab pause 5 key space
     expect "Create a Computer Account"
-    exec ${vncdoWrapper} "Create a Computer Account" pause 3 type "admin" pause 3 key tab pause 3 type "admin" pause 3 key tab pause 3 type "admin" pause 3 key tab pause 3 type "admin" pause 3 key tab pause 3 key tab pause 3 key tab pause 3 key space
+    exec ${vncdoWrapper} "Create a Computer Account" pause 5 type "admin" pause 5 key tab pause 5 type "admin" pause 5 key tab pause 5 type "admin" pause 5 key tab pause 5 type "admin" pause 5 key tab pause 5 key tab pause 5 key tab pause 5 key space
     expect "Enable Location Services"
-    exec ${vncdoWrapper} "Enable Location Services" key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Enable Location Services" key shift-tab pause 5 key space
     expect "Are you sure you don't want to"
-    exec ${vncdoWrapper} "Are you sure you don't want to use Location Services?" key tab pause 3 key space
+    exec ${vncdoWrapper} "Are you sure you don't want to use Location Services?" key tab pause 5 key space
     expect "Select Your Time Zone"
-    exec ${vncdoWrapper} "Select Your Time Zone" key tab pause 3 type UTC pause 3 key enter pause 3 key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Select Your Time Zone" key tab pause 5 type UTC pause 5 key enter pause 5 key shift-tab pause 5 key space
     expect "Analytics"
-    exec ${vncdoWrapper} "Analytics" key tab pause 3 key space pause 3 key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Analytics" key tab pause 5 key space pause 5 key shift-tab pause 5 key space
     expect "Screen Time"
-    exec ${vncdoWrapper} "Screen Time" key tab pause 3 key space
+    exec ${vncdoWrapper} "Screen Time" key tab pause 5 key space
     expect "Choose Your Look"
-    exec ${vncdoWrapper} "Choose Your Look" key shift-tab pause 3 key space
+    exec ${vncdoWrapper} "Choose Your Look" key shift-tab pause 5 key space
     expect "Keyboard Setup Assistant"
-    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key super-q pause 3 move 0 0 click 1
+    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key super-q pause 5 move 0 0 click 1
     expect "Shut Down"
-    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key up pause 3 key up pause 3 key up pause 3 key enter pause 3 key enter
+    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key up pause 5 key up pause 5 key up pause 5 key enter pause 5 key enter
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';

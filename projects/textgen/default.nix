@@ -24,6 +24,7 @@ in
         ../../packages/autoawq
         ../../packages/attributedict
         ../../packages/lm-eval
+        ../../packages/nagisa
       ])
     ];
 

@@ -22,6 +22,7 @@ in
         ../../packages/autogptq
         ../../packages/rouge
         ../../packages/autoawq
+        ../../packages/attributedict
       ])
     ];
 

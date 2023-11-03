@@ -23,6 +23,9 @@ in
         ../../packages/rouge
         ../../packages/autoawq
         ../../packages/attributedict
+        ../../packages/colour-runner
+        ../../packages/inspecta
+        ../../packages/rootpath
         ../../packages/lm-eval
         ../../packages/nagisa
         ../../packages/tqdm-multiprocess

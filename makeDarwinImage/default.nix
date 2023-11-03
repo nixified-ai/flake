@@ -37,6 +37,7 @@ let
         echo "$NEW_TEXT"
         TEXT="$NEW_TEXT"
       fi
+      mv cap.png cap-$(date +%Y-%m-%dT%H:%M:%S).png
     done
   '';
 
@@ -109,7 +110,7 @@ let
     expect "Keyboard Setup Assistant"
     exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key super-q pause 10 move 0 0 click 1
     expect "Shut Down"
-    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key up pause 10 key up pause 10 key up pause 10 key enter pause 10 key enter
+    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key up pause 10 key up pause 10 key up pause 10 key enter
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';

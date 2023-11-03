@@ -25,6 +25,7 @@ in
         ../../packages/attributedict
         ../../packages/lm-eval
         ../../packages/nagisa
+        ../../packages/tqdm-multiprocess
       ])
     ];
 

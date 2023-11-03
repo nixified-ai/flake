@@ -21,8 +21,6 @@
 , flake8
 , pre-commit
 , pytest-cov
-, nagisa
-, jieba
 }:
 
 buildPythonPackage rec {
@@ -35,6 +33,10 @@ buildPythonPackage rec {
     rev = "v${version}";
     sha256 = "1s2ayvkn9nqmfrayjwrb21xv6sb4qy5hw7vwcbfxpviw47q7m87y";
   };
+
+  postPatch = ''
+    substituteInPlace setup.py --replace "'nagisa>=0.2.7', 'jieba>=0.42.1'" ""
+  '';
 
   propagatedBuildInputs = [
     datasets
@@ -56,7 +58,6 @@ buildPythonPackage rec {
 
   checkInputs = [ pytest ];
   devInputs = [ black flake8 pre-commit pytest-cov ];
-  multilingualInputs = [ nagisa jieba ];
 
   meta = with lib; {
     description = "A framework for evaluating autoregressive language models";

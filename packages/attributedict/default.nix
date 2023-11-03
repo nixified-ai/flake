@@ -6,8 +6,8 @@ buildPythonPackage rec {
 
   src = fetchPypi {
     inherit pname version;
-    # nix-prefetch-url --unpack https://pypi.io/packages/source/a/attributedict/attributedict-0.3.0.tar.gz
-    sha256 = "1hgbaj0p7ya4cb8w967j3qa7lzh3yp8b1m3yjyjgax3byybf3cgv";
+    # nix-prefetch fetchPypi --pname attributedict --version 0.3.0
+    sha256 = "mDw6tSyhgXeFo80i99l16tSxy+e8RmxewdRyjq55HHo=";
   };
 
   propagatedBuildInputs = [ ];

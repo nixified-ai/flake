@@ -21,6 +21,7 @@ in
         ../../packages/rwkv
         ../../packages/autogptq
         ../../packages/rouge
+        ../../packages/autoawq
       ])
     ];
 

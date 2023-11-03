@@ -98,6 +98,7 @@ let
     #autogptq # can't build this..
     torch
     torch-grammar
+    autoawq
   ]);
 
   # See note about consumer GPUs:

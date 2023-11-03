@@ -51,7 +51,10 @@ let
   ''
     #!${expect}/bin/expect -f
     set debug 2
+    set log_user 1
     set timeout -1
+    exp_internal 1
+
     spawn ${tesseractScript}
     expect "Continue"
     exec ${vncdoWrapper} "Open terminal" key shift-super-t
@@ -110,7 +113,7 @@ let
     expect "Keyboard Setup Assistant"
     exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key super-q pause 10 move 0 0 click 1
     expect "Shut Down"
-    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key up pause 10 key up pause 10 key up pause 10 key enter
+    exec ${vncdoWrapper} "Shut Down" key up pause 10 key up pause 10 key up pause 10 key enter
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';

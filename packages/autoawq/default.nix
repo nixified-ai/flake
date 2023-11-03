@@ -56,8 +56,8 @@ buildPythonPackage rec {
     owner = "casper-hansen";
     repo = "AutoAWQ";
     rev = "v${version}";
-    # nix-prefetch-url --unpack https://github.com/casper-hansen/AutoAWQ/archive/refs/tags/v0.1.5.tar.gz
-    hash = "0hi587zvlbzl264asz4s4rb7k98cab2wnpxnf536xzca626bi2bn";
+    # nix-prefetch-git https://github.com/casper-hansen/AutoAWQ.git --rev refs/tags/v0.1.5
+    hash = "sha256-dom4jDCK/W5GcbZfy8VSDKV5ViaafK2IEfQvuv9BJUI=";
   };
 
   pythonImportsCheck = [ "autoawq" ];

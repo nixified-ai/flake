@@ -9,6 +9,11 @@ buildPythonPackage rec {
     # nix-prefetch-url --unpack https://pypi.io/packages/source/t/tqdm-multiprocess/tqdm-multiprocess-0.0.11.tar.gz
     sha256 = "p0ACoSIuqcvozcm9RgEIxgCb41liH77puS0FFdTRgPc=";
   };
+  
+  # not included in PyPI version:
+  preBuild = ''
+    echo "twine" > requirements-dev.txt
+  '';
 
   propagatedBuildInputs = [
     tqdm

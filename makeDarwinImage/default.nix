@@ -52,8 +52,6 @@ let
     set debug 2
     set timeout -1
     spawn ${tesseractScript}
-    expect "macOS Base"
-    exec ${vncdoWrapper} "Boot Stage 1" key enter
     expect "Continue"
     exec ${vncdoWrapper} "Open terminal" key shift-super-t
     expect "Terminal"
@@ -69,14 +67,6 @@ let
     exec ${vncdoWrapper} "Select macOS as install disk" move 780 550 click 1
     expect "Continue"
     exec ${vncdoWrapper} "Continue" move 1000 710 click 1
-    expect "macOS Base"
-    exec ${vncdoWrapper} "Boot Stage 2" key enter
-    expect "macOS Base"
-    exec ${vncdoWrapper} "Boot Stage 3" key enter
-    expect "macOS Base"
-    exec ${vncdoWrapper} "Boot Stage 4" key enter
-    expect "macOS Base"
-    exec ${vncdoWrapper} "Boot Stage 5" key enter
     expect "Select Your Country or Region"
     exec ${vncdoWrapper} "Select Your Country or Region" type "united states" pause 10 key shift-tab pause 10 key space
     expect "Written and Spoken Languages"
@@ -126,7 +116,7 @@ let
 
   runInVm = runCommand "mac_hdd_ng.img" {
     buildInputs = [ parted qemu_kvm ];
-    # __impure = true; # set __impure = true; if debugging and want to connect via vnc
+     __impure = true; # set __impure = true; if debugging and want to connect via vnc
   } ''
     cp -v -r --no-preserve=mode ${./OSX-KVM} ./OSX-KVM
     cd ./OSX-KVM

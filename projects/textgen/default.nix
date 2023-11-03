@@ -23,6 +23,7 @@ in
         ../../packages/rouge
         ../../packages/autoawq
         ../../packages/attributedict
+        ../../packages/lm-eval
       ])
     ];
 

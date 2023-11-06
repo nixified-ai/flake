@@ -186,7 +186,7 @@ let
 
   runInVm = runCommand "mac_hdd_ng.img" {
     buildInputs = [ parted qemu_kvm ];
-     __impure = true; # set __impure = true; if debugging and want to connect via vnc
+    # __impure = true; # set __impure = true; if debugging and want to connect via vnc
   } ''
     cp -v -r --no-preserve=mode ${./OSX-KVM} ./OSX-KVM
     cd ./OSX-KVM

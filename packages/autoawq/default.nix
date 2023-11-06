@@ -60,7 +60,7 @@ buildPythonPackage rec {
     hash = "sha256-dom4jDCK/W5GcbZfy8VSDKV5ViaafK2IEfQvuv9BJUI=";
   };
 
-  pythonImportsCheck = [ "autoawq" ];
+  pythonImportsCheck = [ "awq" ];
 
   propagatedBuildInputs = [
     torch

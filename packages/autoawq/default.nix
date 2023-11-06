@@ -2,7 +2,9 @@
 , buildPythonPackage
 , fetchFromGitHub
 , torch
+, transformers
 , tokenizers
+, accelerate
 , sentencepiece
 , lm-eval
 , texttable
@@ -64,7 +66,9 @@ buildPythonPackage rec {
 
   propagatedBuildInputs = [
     torch
+    transformers
     tokenizers
+    accelerate
     sentencepiece
     lm-eval
     texttable

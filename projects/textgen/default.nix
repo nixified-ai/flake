@@ -30,6 +30,7 @@ in
         ../../packages/nagisa
         ../../packages/tqdm-multiprocess
         ../../packages/dynet
+        ../../packages/sacrebleu
       ])
     ];
 

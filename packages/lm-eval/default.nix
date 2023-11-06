@@ -38,6 +38,13 @@ buildPythonPackage rec {
     substituteInPlace setup.py --replace "'nagisa>=0.2.7', 'jieba>=0.42.1'" ""
   '';
 
+  # some tests try to connect to the Hugging Face Hub
+  doCheck = false;
+
+  preCheck = ''
+    export TRANSFORMERS_CACHE=$(mktemp -d)
+  '';
+
   propagatedBuildInputs = [
     datasets
     jsonlines

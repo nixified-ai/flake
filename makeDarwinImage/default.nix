@@ -1,4 +1,4 @@
-{ fetchurl, writeScript, writeShellScript, writeShellScriptBin, runCommand, lib, vncdo, dmg2img, cdrkit, parted, qemu_kvm, coreutils, python311, imagemagick, tesseract, expect }:
+{ fetchurl, writeScript, writeShellScript, writeShellScriptBin, runCommand, lib, vncdo, dmg2img, cdrkit, parted, qemu_kvm, coreutils, python311, imagemagick, tesseract, expect, socat, ruby }:
 { diskSizeBytes ? 50000000000 }:
 let
   installAssistant-fetched = fetchurl {
@@ -42,6 +42,24 @@ let
   '';
 
   expectScript = let
+    qemuSendMouse = writeScript "qemuSendMouse" ''
+      echo Sending QEMU inputs for $1
+      sleep 10
+      echo mouse_move $1 $2 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+      echo mouse_button 1 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+      echo mouse_button 0 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+    '';
+    qemuSendKeys = writeScript "qemuSendKeys" ''
+      input="$1"
+      cleaned_input=$(echo "$input" | sed 's/\\//g')
+      echo Sending QEMU inputs for "$cleaned_input" >> qemuSendKeysLog
+      sleep 10
+      ${ruby}/bin/ruby ${./sendkeys} "$cleaned_input" | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+    '';
+    qemuAddMouse = writeScript "qemuAddMouse" ''
+      sleep 10
+      echo -e "device_add usb-tablet,id=mouse1" | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+    '';
     vncdoWrapper = writeScript "vncdoWrapper" ''
       echo Sending VNC inputs for $1
       sleep 10
@@ -57,34 +75,60 @@ let
 
     spawn ${tesseractScript}
     expect "Continue"
-    exec ${vncdoWrapper} "Open terminal" key shift-super-t
+    exec ${qemuSendKeys} "\\<shift-meta_l-t>"
     expect "Terminal"
     expect "80x24"
-    exec ${vncdoWrapper} "Execute run_offline.sh" type "sh /Volumes/InstallAssistant/run_offline.sh" key enter
+    exec ${qemuSendKeys} "sh /Volumes/InstallAssistant/run_offline.sh<kp_enter>"
+
+    # Welcome to macOS
     expect "Continue"
-    exec ${vncdoWrapper} "Welcome to macOS" move 995 720 click 1
+    exec ${qemuSendMouse} 995 720
+
+    # Agree to EULA
     expect "Disagree"
-    exec ${vncdoWrapper} "Agree to EULA" move 995 720 click 1
+    exec ${qemuSendMouse} 995 720
+
+    # Really Agree to EULA
     expect "have read and agree to the"
-    exec ${vncdoWrapper} "Really Agree to EULA" move 1000 525 click 1
+    exec ${qemuSendMouse} 1000 525
+
+    # Select macOS as install disk
     expect "Select the disk where you want to install macOS"
-    exec ${vncdoWrapper} "Select macOS as install disk" move 780 550 click 1
+    exec ${qemuSendMouse} 780 550
+
+    # Continue
     expect "Continue"
-    exec ${vncdoWrapper} "Continue" move 1000 710 click 1
+    exec ${qemuSendMouse} 1000 710
+
+    # "Select Your Country or Region"
     expect "Select Your Country or Region"
-    exec ${vncdoWrapper} "Select Your Country or Region" type "united states" pause 10 key shift-tab pause 10 key space
+    exec ${qemuSendKeys} "united states<delay><shift-tab><delay><spc>"
+
+    # "Written and Spoken Languages"
     expect "Written and Spoken Languages"
-    exec ${vncdoWrapper} "Written and Spoken Languages" key shift-tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+
+    # "Accessibility"
     expect "Accessibility"
-    exec ${vncdoWrapper} "Accessibility" key shift-tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+
+    # "How Do You Connect?"
     expect "How Do You Connect?"
-    exec ${vncdoWrapper} "How Do You Connect?" move 815 480 click 1 pause 10 move 1330 820 click 1
+    exec ${qemuSendMouse} 815 480
+    exec sleep 10
+    exec ${qemuSendMouse} 1330 820
+
+    # "Your Mac isn't connected to the internet"
     expect "Your Mac isn't connected to"
-    exec ${vncdoWrapper} "Your Mac isn't connected to" move 1020 640 click 1
+    exec ${qemuSendMouse} 1020 640
+
+    # "Data & Privacy"
     expect "Data & Privacy"
-    exec ${vncdoWrapper} "Data & Privacy" key shift-tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+
+    # "Migration Assistant"
     expect "Migration Assistant"
-    exec ${vncdoWrapper} "Migration Assistant" key tab pause 10 key tab pause 10 key tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<tab><delay><tab><delay><tab><delay><spc>"
 
     ## Not needed when offline
     # expect "Sign In with Your Apple ID"
@@ -93,34 +137,56 @@ let
     # exec ${vncdoWrapper} "Are you sure you want to skip signing in with an Apple ID?" key tab pause 10 key space
     # expect "Terms and Conditions"
 
-    exec ${vncdoWrapper} "Terms and Conditions" key shift-tab pause 10 key space
+    # "Terms and Conditions"
+    expect "Terms and Conditions"
+    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+
+    # "I have read and agree to the macOS Software License Agreement."
     expect "Software License"
-    exec ${vncdoWrapper} "I have read and agree to the macOS Software License Agreement." key tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<tab><delay><spc>"
+
+    # "Create a Computer Account"
     expect "Create a Computer Account"
-    exec ${vncdoWrapper} "Create a Computer Account" pause 10 type "admin" pause 10 key tab pause 10 type "admin" pause 10 key tab pause 10 type "admin" pause 10 key tab pause 10 type "admin" pause 10 key tab pause 10 key tab pause 10 key tab pause 10 key space
+    exec ${qemuSendKeys} "admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay><tab><delay><tab><delay><spc>"
+
+    # "Enable Location Services"
     expect "Enable Location Services"
-    exec ${vncdoWrapper} "Enable Location Services" key shift-tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+
+    # "Are you sure you don't want to use Location Services?"
     expect "Are you sure you don't want to"
-    exec ${vncdoWrapper} "Are you sure you don't want to use Location Services?" key tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<tab><delay><spc>"
+
+    # "Select Your Time Zone"
     expect "Select Your Time Zone"
-    exec ${vncdoWrapper} "Select Your Time Zone" key tab pause 10 type UTC pause 10 key enter pause 10 key shift-tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<tab><delay>UTC<delay><kp_enter><delay><shift-tab><delay><spc>"
+
+    # "Analytics"
     expect "Analytics"
-    exec ${vncdoWrapper} "Analytics" key tab pause 10 key space pause 10 key shift-tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<tab><delay><spc><delay><shift-tab><delay><spc>"
+
+    # "Screen Time"
     expect "Screen Time"
-    exec ${vncdoWrapper} "Screen Time" key tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<tab><delay><spc>"
+
+    # "Choose Your Look"
     expect "Choose Your Look"
-    exec ${vncdoWrapper} "Choose Your Look" key shift-tab pause 10 key space
+    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+
+    # "Quit Keyboard Setup Assistant"
     expect "Keyboard Setup Assistant"
-    exec ${vncdoWrapper} "Quit Keyboard Setup Assistant" key super-q pause 10 move 0 0 click 1
+    exec ${qemuSendKeys} "\\\\\<meta_l-q><delay>"
+    exec ${qemuSendMouse} 1 1
+
     expect "Shut Down"
-    exec ${vncdoWrapper} "Shut Down" key up pause 10 key up pause 10 key up pause 10 key enter
+    exec ${qemuSendKeys} "\\\\\<up><delay><up><delay><up><delay><delay><kp_enter>"
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';
 
   runInVm = runCommand "mac_hdd_ng.img" {
     buildInputs = [ parted qemu_kvm ];
-    # __impure = true; # set __impure = true; if debugging and want to connect via vnc
+     __impure = true; # set __impure = true; if debugging and want to connect via vnc
   } ''
     cp -v -r --no-preserve=mode ${./OSX-KVM} ./OSX-KVM
     cd ./OSX-KVM
@@ -129,6 +195,7 @@ let
     qemu-img create -f qcow2 ./mac_hdd_ng.img ${toString diskSizeBytes} # 50 Gigabytes, not Gibibytes
     sh ./OpenCore-Boot.sh &
     openCoreBootPID=$!
+    echo EXECUTING THIS FUCKER ${expectScript}
     ${expectScript} &
     wait $openCoreBootPID
     mv mac_hdd_ng.img $out

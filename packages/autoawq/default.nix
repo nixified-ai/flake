@@ -62,8 +62,6 @@ buildPythonPackage rec {
     hash = "sha256-dom4jDCK/W5GcbZfy8VSDKV5ViaafK2IEfQvuv9BJUI=";
   };
 
-  pythonImportsCheck = [ "awq" ];
-
   propagatedBuildInputs = [
     torch
     transformers
@@ -78,6 +76,12 @@ buildPythonPackage rec {
     torchvision
     tabulate
   ];
+
+  pythonImportsCheck = [ "awq" ];
+
+  preCheck = ''
+    export TRANSFORMERS_CACHE=$(mktemp -d)
+  '';
 
   meta = with lib; {
     description = "AutoAWQ implements the AWQ algorithm for 4-bit quantization with a 2x speedup during inference.";

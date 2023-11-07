@@ -167,16 +167,11 @@ let
 
 
     # "Screen Time"
-    expect {
-      "Screen Time" {}
-      -timeout 10 "Checking iCloud status" {}
-      timeout {
-        send_user "### Did not find iCloud status blocking installer progression, hooray ###"
-      }
-    }
+    send_user "### Waiting for iCloud status check to appear ###"
+    expect -timeout 10 "iCloud Status"
+    expect "Screen Time"
     send_user "### Waiting for iCloud status check to disappear ###"
     expect -re "^(?!.*Checking iCloud status).*$"
-
     exec ${qemuSendKeys} "\\\\\<tab><delay><spc>"
 
     # "Choose Your Look"
@@ -196,7 +191,7 @@ let
 
   runInVm = runCommand "mac_hdd_ng.img" {
     buildInputs = [ parted qemu_kvm ];
-    __impure = true; # set __impure = true; if debugging and want to connect via vnc
+    # __impure = true; # set __impure = true; if debugging and want to connect via vnc
   } ''
     cp -v -r --no-preserve=mode ${./OSX-KVM} ./OSX-KVM
     cd ./OSX-KVM

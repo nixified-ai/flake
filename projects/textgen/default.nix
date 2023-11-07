@@ -10,13 +10,9 @@ in
     commonOverlays = [
       overlays.python-fixPackages
       (l.overlays.callManyPackages [
-        ../../packages/apispec-webframeworks
         ../../packages/torch-grammar
         ../../packages/flexgen
-        ../../packages/gradio
-        ../../packages/gradio-client
         ../../packages/analytics-python
-        ../../packages/ffmpy
         ../../packages/llama-cpp-python
         ../../packages/rwkv
         ../../packages/autogptq

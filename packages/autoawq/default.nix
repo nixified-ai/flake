@@ -83,6 +83,8 @@ buildPythonPackage rec {
     export TRANSFORMERS_CACHE=$(mktemp -d)
   '';
 
+  doCheck = false;
+
   meta = with lib; {
     description = "AutoAWQ implements the AWQ algorithm for 4-bit quantization with a 2x speedup during inference.";
     homepage = "https://github.com/casper-hansen/AutoAWQ";

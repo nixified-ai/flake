@@ -27,6 +27,7 @@ in
         ../../packages/tqdm-multiprocess
         ../../packages/dynet
         ../../packages/sacrebleu
+        ../../packages/tokenizers
       ])
     ];
 

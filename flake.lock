@@ -106,16 +106,16 @@
     "textgen-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1696789008,
-        "narHash": "sha256-+V8XOVnEyImj+a8uCkZXEHXW8bTIBRlnfMcQfcZNgqg=",
+        "lastModified": 1699125171,
+        "narHash": "sha256-28OhIq/c35/Pcp7TciUUgXaUNWO3z/Z2x2Opd++Ss7U=",
         "owner": "oobabooga",
         "repo": "text-generation-webui",
-        "rev": "2e471071af48e19867cfa522d2def44c24785c50",
+        "rev": "e18a0460d446f72f015f2fdc6b8b5962574dde98",
         "type": "github"
       },
       "original": {
         "owner": "oobabooga",
-        "ref": "v1.7",
+        "ref": "snapshot-2023-11-05",
         "repo": "text-generation-webui",
         "type": "github"
       }

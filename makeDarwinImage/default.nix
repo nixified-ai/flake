@@ -56,10 +56,6 @@ let
       sleep 10
       ${ruby}/bin/ruby ${./sendkeys} "$cleaned_input" | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
     '';
-    qemuAddMouse = writeScript "qemuAddMouse" ''
-      sleep 10
-      echo -e "device_add usb-tablet,id=mouse1" | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
-    '';
     vncdoWrapper = writeScript "vncdoWrapper" ''
       echo Sending VNC inputs for $1
       sleep 10
@@ -178,18 +174,26 @@ let
     expect "Choose Your Look"
     exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
 
+
     # "Quit Keyboard Setup Assistant"
     expect "Keyboard Setup Assistant"
-    exec ${qemuSendKeys} "\\\\\<meta_l-q><delay>"
-    exec ${qemuSendMouse} 1 1
+    exec ${qemuSendKeys} "\\\\\<ctrl-alt-meta_l-power>"
 
-    expect "Shut Down"
-    exec ${qemuSendKeys} "\\\\\<up><delay><up><delay><up><delay><delay><kp_enter>"
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';
 
-  runInVm = runCommand "mac_hdd_ng.img" {
+  runInVm = let
+    mouseJiggler = writeScript "mouseJiggler" ''
+      while true
+      do
+        sleep $((RANDOM % (240 - 120 + 1) + 120))
+        randomX=$((RANDOM % (1920 - 1910 + 1) + 1910))
+        randomY=$((RANDOM % (1080 - 1070 + 1) + 1070))
+        echo -e mouse_move $randomX $randomY | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+      done
+    '';
+  in runCommand "mac_hdd_ng.img" {
     buildInputs = [ parted qemu_kvm ];
     # __impure = true; # set __impure = true; if debugging and want to connect via vnc
   } ''
@@ -202,6 +206,7 @@ let
     openCoreBootPID=$!
     echo EXECUTING THIS FUCKER ${expectScript}
     ${expectScript} &
+    ${mouseJiggler} &
     wait $openCoreBootPID
     mv mac_hdd_ng.img $out
   '';

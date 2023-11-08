@@ -10,17 +10,24 @@ in
     commonOverlays = [
       overlays.python-fixPackages
       (l.overlays.callManyPackages [
-        ../../packages/apispec-webframeworks
         ../../packages/torch-grammar
         ../../packages/flexgen
-        ../../packages/gradio
-        ../../packages/gradio-client
         ../../packages/analytics-python
-        ../../packages/ffmpy
         ../../packages/llama-cpp-python
         ../../packages/rwkv
         ../../packages/autogptq
         ../../packages/rouge
+        ../../packages/autoawq
+        ../../packages/attributedict
+        ../../packages/colour-runner
+        ../../packages/inspecta
+        ../../packages/rootpath
+        ../../packages/lm-eval
+        ../../packages/nagisa
+        ../../packages/tqdm-multiprocess
+        ../../packages/dynet
+        ../../packages/sacrebleu
+        ../../packages/tokenizers
       ])
     ];
 

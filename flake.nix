@@ -15,7 +15,7 @@
       flake = false;
     };
     textgen-src = {
-      url = "github:oobabooga/text-generation-webui/v1.7";
+      url = "github:oobabooga/text-generation-webui/snapshot-2023-11-05";
       flake = false;
     };
     flake-parts = {

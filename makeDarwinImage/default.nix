@@ -146,7 +146,17 @@ let
     exec ${qemuSendKeys} "admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay><tab><delay><tab><delay><spc>"
 
     # "Enable Location Services"
-    expect "Enable Location Services"
+    expect {
+      "Enable Location Services" {}
+      "account creation failed" {
+        puts "###############################################################"
+        puts "            ACCOUNT CREATION FAILED IN macOS VM"
+        puts "            Perhaps the VM is too slow? Try again."
+        puts "https://twitter.com/MatthewCroughan/status/1722665023338672230"
+        puts "###############################################################"
+        exit 1
+      }
+    }
     exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
 
     # "Are you sure you don't want to use Location Services?"

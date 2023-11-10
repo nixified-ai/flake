@@ -64,7 +64,7 @@ args=(
   -nic none
   -vnc 0.0.0.0:1
 #  -rtc base=1970-01-01T12:12:12,clock=vm,driftfix=slew
-  -rtc base=2023-10-10T12:12:12,driftfix=slew,clock=vm
+  -rtc base=2023-10-10T12:12:12
 
 )
 

@@ -187,6 +187,7 @@ let
 
     # "Quit Keyboard Setup Assistant"
     expect "Keyboard Setup Assistant"
+    expect "Finder"
     exec ${qemuSendKeys} "\\\\\<ctrl-alt-meta_l-power>"
 
     send_user "\n### OMG DID IT WORK???!!!! ###\n"

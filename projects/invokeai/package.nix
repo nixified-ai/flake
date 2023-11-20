@@ -78,6 +78,8 @@ python3Packages.buildPythonPackage {
     dynamicprompts
     torchvision
     test-tube
+    onnx
+    onnxruntime
   ];
   nativeBuildInputs = with python3Packages; [ pythonRelaxDepsHook pip ];
   pythonRemoveDeps = [ "clip" "pyreadline3" "flaskwebgui" "opencv-python" "fastapi-socketio" ];

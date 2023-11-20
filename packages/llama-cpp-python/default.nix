@@ -1,24 +1,24 @@
-{ buildPythonPackage, fetchFromGitHub, lib, stdenv, darwin, cmake, ninja, pathspec, poetry-core, pyproject-metadata, scikit-build-core, setuptools, diskcache, numpy, typing-extensions }:
+{ buildPythonPackage, fetchFromGitHub, lib, stdenv, darwin, cmake, ninja, poetry-core, scikit-build, setuptools, typing-extensions }:
 let
   inherit (stdenv) isDarwin;
   osSpecific = with darwin.apple_sdk.frameworks; if isDarwin then [ Accelerate CoreGraphics CoreVideo ] else [ ];
   llama-cpp-pin = fetchFromGitHub {
     owner = "ggerganov";
     repo = "llama.cpp";
-    rev = "a98b1633d5a94d0aa84c7c16e1f8df5ac21fc850";
-    hash = "sha256-HNwyPJXsUL41zLA+90Yu7kCpihW0HBOeW2jDs8sw7qs=";
+    rev = "2e6cd4b02549e343bef3768e6b946f999c82e823";
+    hash = "sha256-VzY3e/EJ+LLx55H0wkIVoHfZ0zAShf6Y9Q3fz4xQ0V8=";
   };
 in
 buildPythonPackage rec {
   pname = "llama-cpp-python";
-  version = "0.2.7";
+  version = "0.1.54";
 
   format = "pyproject";
   src = fetchFromGitHub {
     owner = "abetlen";
     repo = pname;
     rev = "refs/tags/v${version}";
-    hash = "sha256-jL2jVTKwmTx6pSnoN5n4NtQ3hs3weXiQTKFQdjL172U=";
+    hash = "sha256-8YIMbJIMwWJWkXjnjcgR5kvSq4uBd6E/IA2xRm+W5dM=";
   };
 
   preConfigure = ''
@@ -33,16 +33,12 @@ buildPythonPackage rec {
   nativeBuildInputs = [
     cmake
     ninja
-    pathspec
     poetry-core
-    pyproject-metadata
-    scikit-build-core
+    scikit-build
     setuptools
   ];
 
   propagatedBuildInputs = [
-    diskcache
-    numpy
     typing-extensions
   ];
 

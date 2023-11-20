@@ -6,6 +6,7 @@
 , aiofiles
 , anyio
 , contextlib2
+, hatchling
 , itsdangerous
 , jinja2
 , python-multipart
@@ -20,8 +21,8 @@
 
 buildPythonPackage rec {
   pname = "starlette";
-  version = "0.20.4";
-  format = "setuptools";
+  version = "0.22.0";
+  format = "pyproject";
 
   disabled = pythonOlder "3.6";
 
@@ -29,16 +30,8 @@ buildPythonPackage rec {
     owner = "encode";
     repo = pname;
     rev = "refs/tags/${version}";
-    hash = "sha256-vP2TJPn9lRGnLGkO8lUmnsoT6rSnhuWDD3WqNk76SM0=";
+    hash = "sha256-vyGLNQMCWu3zGFF7jRuozVLCqwR1zWBWuYTIDRBncHk=";
   };
-
-  patches = [
-    (fetchpatch {
-      url = "https://github.com/encode/starlette/commit/ab70211f0e1fb7390668bf4891eeceda8d9723a0.diff";
-      excludes = [ "requirements.txt" ]; # conflicts
-      hash = "sha256-UHf4c4YUWp/1I1vD8J0hMewdlfkmluA+FyGf9ZsSv3Y=";
-    })
-  ];
 
   postPatch = ''
     # remove coverage arguments to pytest
@@ -48,6 +41,7 @@ buildPythonPackage rec {
   propagatedBuildInputs = [
     aiofiles
     anyio
+    hatchling
     itsdangerous
     jinja2
     python-multipart

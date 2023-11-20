@@ -46,8 +46,6 @@ args=(
   -drive if=pflash,format=raw,file="$REPO_PATH/$OVMF_DIR/OVMF_VARS-1920x1080.fd"
   -smbios type=2
   -device ich9-intel-hda -device hda-duplex
-  -drive id=run_offline,snapshot=on,file="$REPO_PATH/run_offline.iso",format=raw
-  -drive id=InstallMedia,snapshot=on,file="$REPO_PATH/BaseSystem.qcow2",format=qcow2
   -drive id=OpenCoreBoot,if=virtio,snapshot=on,format=qcow2,file="$REPO_PATH/OpenCore/OpenCore.qcow2"
   -drive id=MacHDD,if=virtio,file="$REPO_PATH/mac_hdd_ng.qcow2",format=qcow2
   # -netdev tap,id=net0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
@@ -55,13 +53,10 @@ args=(
   # -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27  # Note: Use this line for High Sierra
   -monitor stdio
   -device vmware-svga
-
-  -drive id=MacDVD,if=virtio,snapshot=on,file="$REPO_PATH/InstallAssistant.qcow2",format=qcow2
   -nic none
   -vnc 0.0.0.0:1
 #  -rtc base=1970-01-01T12:12:12,clock=vm,driftfix=slew
   -rtc base=2023-10-10T12:12:12
-  -no-reboot
 
 )
 

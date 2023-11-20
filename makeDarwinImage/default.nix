@@ -1,17 +1,19 @@
-{ fetchurl, writeScript, writeShellScript, writeShellScriptBin, runCommand, lib, vncdo, dmg2img, cdrkit, parted, qemu_kvm, coreutils, python311, imagemagick, tesseract, expect, socat, ruby }:
+{ fetchurl, writeScript, writeShellScript, supermin, writeShellScriptBin, runCommand, lib, vncdo, dmg2img, cdrkit, parted, qemu, coreutils, python311, imagemagick, tesseract, expect, socat, ruby, xorriso, callPackage }:
 { diskSizeBytes ? 50000000000 }:
 let
-  installAssistant-fetched = fetchurl {
+  diskSize = if diskSizeBytes < 50000000000 then throw "diskSizeBytes ${toString diskSizeBytes} too small for macOS" else diskSizeBytes;
+
+  installAssistant-fetched = import <nix/fetchurl.nix> {
     url = "https://swcdn.apple.com/content/downloads/28/01/042-55926-A_7GZJNO2M4I/asqcyheggme9rflzb3z3pr6vbp0gxyk2eh/InstallAssistant.pkg";
     sha256 = "74c1893ef0df8ec39875d8475aa614de0395d556a531a161538a13f8bb17ac42";
   };
+
   installAssistant-iso = runCommand "InstallAssistant.iso" { buildInputs = [ cdrkit ]; } ''
-    cp --no-preserve=mode ${./OSX-KVM/scripts/run_offline.sh} ./run_offline.sh
     cp --no-preserve=mode ${installAssistant-fetched} ./InstallAssistant.pkg
-    mkisofs -allow-limited-size -l -J -r -iso-level 3 -V InstallAssistant -o $out ./InstallAssistant.pkg ./run_offline.sh
+    mkisofs -allow-limited-size -l -J -r -iso-level 3 -V InstallAssistant -o $out ./InstallAssistant.pkg
   '';
 
-  baseSystem-img = runCommand "BaseSystem.img" { nativeBuildInputs = [ python311 dmg2img qemu_kvm ];
+  baseSystem-img = runCommand "BaseSystem.img" { nativeBuildInputs = [ python311 dmg2img qemu ];
     outputHashAlgo = "sha256";
     outputHash = "sha256-Qy9Whu8pqHo+m6wHnCIqURAR53LYQKc0r87g9eHgnS4=";
     outputHashMode = "recursive";
@@ -61,7 +63,9 @@ let
       sleep 10
       ${vncdo}/bin/vncdo --force-caps -s 127.0.0.1::5901 "''${@:2}"
     '';
+    sendUser = text: ''send_user "\n### NixThePlanet: ${text} ###\n"'';
   in writeScript "expect.sh"
+  # Expect scripts treat the first < as a special char, so need escapes like \\<
   ''
     #!${expect}/bin/expect -f
     set debug 2
@@ -74,57 +78,57 @@ let
     exec ${qemuSendKeys} "\\<shift-meta_l-t>"
     expect "Terminal"
     expect "80x24"
-    exec ${qemuSendKeys} "sh /Volumes/InstallAssistant/run_offline.sh<kp_enter>"
+    exec ${qemuSendKeys} "sh /Volumes/run_offline/run_offline.sh<kp_enter>"
 
-    # Welcome to macOS
+    ${sendUser "Welcome to macOS"}
     expect "Continue"
     exec ${qemuSendMouse} 995 720
 
-    # Agree to EULA
+    ${sendUser "Agree to EULA"}
     expect "Disagree"
     exec ${qemuSendMouse} 995 720
 
-    # Really Agree to EULA
+    ${sendUser "Really Agree to EULA"}
     expect "have read and agree to the"
     exec ${qemuSendMouse} 1000 525
 
-    # Select macOS as install disk
+    ${sendUser "Select macOS as install disk"}
     expect "Select the disk where you want to install macOS"
     exec ${qemuSendMouse} 780 550
 
-    # Continue
+    ${sendUser "Continue"}
     expect "Continue"
     exec ${qemuSendMouse} 1000 710
 
-    # "Select Your Country or Region"
+    ${sendUser "Select Your Country or Region"}
     expect "Select Your Country or Region"
     exec ${qemuSendKeys} "united states<delay><shift-tab><delay><spc>"
 
-    # "Written and Spoken Languages"
+    ${sendUser "Written and Spoken Languages"}
     expect "Written and Spoken Languages"
-    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<shift-tab><delay><spc>"
 
-    # "Accessibility"
+    ${sendUser "Accessibility"}
     expect "Accessibility"
-    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<shift-tab><delay><spc>"
 
-    # "How Do You Connect?"
+    ${sendUser "How Do You Connect?"}
     expect "How Do You Connect?"
     exec ${qemuSendMouse} 815 480
     exec sleep 10
     exec ${qemuSendMouse} 1330 820
 
-    # "Your Mac isn't connected to the internet"
+    ${sendUser "Your Mac isn't connected to the internet"}
     expect "Your Mac isn't connected to"
     exec ${qemuSendMouse} 1020 640
 
-    # "Data & Privacy"
+    ${sendUser "Data & Privacy"}
     expect "Data & Privacy"
-    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<shift-tab><delay><spc>"
 
-    # "Migration Assistant"
+    ${sendUser "Migration Assistant"}
     expect "Migration Assistant"
-    exec ${qemuSendKeys} "\\\\\<tab><delay><tab><delay><tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<tab><delay><tab><delay><tab><delay><spc>"
 
     ## Not needed when offline
     # expect "Sign In with Your Apple ID"
@@ -133,19 +137,19 @@ let
     # exec ${vncdoWrapper} "Are you sure you want to skip signing in with an Apple ID?" key tab pause 10 key space
     # expect "Terms and Conditions"
 
-    # "Terms and Conditions"
+    ${sendUser "Terms and Conditions"}
     expect "Terms and Conditions"
-    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<shift-tab><delay><spc>"
 
-    # "I have read and agree to the macOS Software License Agreement."
+    ${sendUser "I have read and agree to the macOS Software License Agreement."}
     expect "Software License"
-    exec ${qemuSendKeys} "\\\\\<tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<tab><delay><spc>"
 
-    # "Create a Computer Account"
+    ${sendUser "Create a Computer Account"}
     expect "Create a Computer Account"
     exec ${qemuSendKeys} "admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay><tab><delay><tab><delay><spc>"
 
-    # "Enable Location Services"
+    ${sendUser "Enable Location Services"}
     expect {
       "Enable Location Services" {}
       "account creation failed" {
@@ -157,40 +161,38 @@ let
         exit 1
       }
     }
-    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<shift-tab><delay><spc>"
 
-    # "Are you sure you don't want to use Location Services?"
+    ${sendUser "Are you sure you don't want to use Location Services?"}
     expect "Are you sure you don't want to"
-    exec ${qemuSendKeys} "\\\\\<tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<tab><delay><spc>"
 
-    # "Select Your Time Zone"
+    ${sendUser "Select Your Time Zone"}
     expect "Select Your Time Zone"
-    exec ${qemuSendKeys} "\\\\\<tab><delay>UTC<delay><kp_enter><delay><shift-tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<tab><delay>UTC<delay><kp_enter><delay><shift-tab><delay><spc>"
 
-    # "Analytics"
+    ${sendUser "Analytics"}
     expect "Analytics"
-    exec ${qemuSendKeys} "\\\\\<tab><delay><spc><delay><shift-tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<tab><delay><spc><delay><shift-tab><delay><spc>"
 
-
-    # "Screen Time"
-    send_user "### Waiting for iCloud status check to appear ###"
+    ${sendUser "Screen Time"}
+    ${sendUser "Waiting for iCloud status check to appear"}
     expect -timeout 10 "iCloud Status"
     expect "Screen Time"
-    send_user "### Waiting for iCloud status check to disappear ###"
+    ${sendUser "Waiting for iCloud status check to disappear"}
     expect -re "^(?!.*Checking iCloud status).*$"
-    exec ${qemuSendKeys} "\\\\\<tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<tab><delay><spc>"
 
-    # "Choose Your Look"
+    ${sendUser "Choose Your Look"}
     expect "Choose Your Look"
-    exec ${qemuSendKeys} "\\\\\<shift-tab><delay><spc>"
+    exec ${qemuSendKeys} "\\<shift-tab><delay><spc>"
 
-
-    # "Quit Keyboard Setup Assistant"
+    ${sendUser "Quit Keyboard Setup Assistant"}
     expect "Keyboard Setup Assistant"
     expect "Finder"
-    exec ${qemuSendKeys} "\\\\\<ctrl-alt-meta_l-power>"
+    exec ${qemuSendKeys} "\\<ctrl-alt-meta_l-power>"
 
-    send_user "\n### OMG DID IT WORK???!!!! ###\n"
+    ${sendUser "OMG DID IT WORK???!!!!"}
     exit 0
   '';
 
@@ -204,21 +206,35 @@ let
         echo -e mouse_move $randomX $randomY | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
       done
     '';
-  in runCommand "mac_hdd_ng.img" {
-    buildInputs = [ parted qemu_kvm ];
-    # __impure = true; # set __impure = true; if debugging and want to connect via vnc
+  in runCommand "mac_hdd_ng.qcow2" {
+    passthru.runScript = callPackage ./run.nix {};
+    buildInputs = [ parted qemu xorriso ];
+    # __impure = true; # set __impure = true; if debugging and want to connect via VNC during the build
   } ''
     cp -v -r --no-preserve=mode ${./OSX-KVM} ./OSX-KVM
     cd ./OSX-KVM
+
+    substituteInPlace scripts/run_offline.sh --replace '50000000000' "${toString diskSizeBytes}"
+
+    mkdir x
+    cp scripts/run_offline.sh x/run_offline.sh
+    xorriso -volid run_offline -as mkisofs -o run_offline.iso x/
     qemu-img create -f qcow2 -b ${baseSystem-img} -F raw ./BaseSystem.qcow2
     qemu-img create -f qcow2 -b ${installAssistant-iso} -F raw ./InstallAssistant.qcow2
-    qemu-img create -f qcow2 ./mac_hdd_ng.img ${toString diskSizeBytes} # 50 Gigabytes, not Gibibytes
+    qemu-img create -f qcow2 ./mac_hdd_ng.qcow2 ${toString diskSize} # 50 Gigabytes, not Gibibytes
+
+    # Stage 1 installs macOS to the hard drive from the InstallAssistant
     sh ./OpenCore-Boot.sh &
     openCoreBootPID=$!
-    echo EXECUTING THIS FUCKER ${expectScript}
     ${expectScript} &
     ${mouseJiggler} &
     wait $openCoreBootPID
-    mv mac_hdd_ng.img $out
+
+    # Stage 2 continues the installation without the InstallAssistant drive attached
+    sh ./OpenCore-Boot2.sh &
+    openCoreBootPID=$!
+    wait $openCoreBootPID
+
+    mv mac_hdd_ng.qcow2 $out
   '';
 in runInVm

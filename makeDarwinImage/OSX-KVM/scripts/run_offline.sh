@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-diskutil eraseDisk APFS "macOS" /dev/$(diskutil list | grep -B1 50.0 | grep -E "disk\\d+" --only)
+diskToErase=$(diskutil list -plist | plutil -convert json -o - - -r | grep -B2 50000000000 | awk -F '"' '{print $4}' | tr -d '\n')
+
+diskutil eraseDisk APFS "macOS" "/dev/$diskToErase"
 cd /Volumes/macOS
 mkdir -p private/tmp
 cp -R "/Install macOS Ventura.app" private/tmp

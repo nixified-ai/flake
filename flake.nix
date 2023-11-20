@@ -24,7 +24,7 @@
         overlayAttrs = config.legacyPackages;
         legacyPackages = {
           makeDarwinImage = pkgs.callPackage ./makeDarwinImage {
-            qemu_kvm = pkgs.qemu_kvm.overrideAttrs {
+            qemu = pkgs.qemu.overrideAttrs {
               prePatch = ''
                 substituteInPlace ui/ui-hmp-cmds.c --replace "qemu_input_queue_rel(NULL, INPUT_AXIS_X, dx);" "qemu_input_queue_abs(NULL, INPUT_AXIS_X, dx, 0, 1920);"
                 substituteInPlace ui/ui-hmp-cmds.c --replace "qemu_input_queue_rel(NULL, INPUT_AXIS_Y, dy);" "qemu_input_queue_abs(NULL, INPUT_AXIS_Y, dy, 0, 1080);"

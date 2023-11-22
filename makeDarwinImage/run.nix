@@ -4,8 +4,8 @@
 , OVMF_CODE ? ./OSX-KVM/OVMF_CODE.fd
 , OVMF_VARS ? ./OSX-KVM/OVMF_VARS-1920x1080.fd
 , OpenCoreBoot ? ./OSX-KVM/OpenCore/OpenCore.qcow2
-, threads ? 4
-, cores ? 2
+, threads ? 1
+, cores ? 1
 , sockets ? 1
 , mem ? "4G"
 , diskImage ? (makeDarwinImage {})

@@ -27,13 +27,10 @@ writeShellScriptBin "run-macOS.sh" ''
     -drive if=pflash,format=raw,readonly=on,file="${OVMF_CODE}"
     -drive if=pflash,format=raw,readonly=on,file="${OVMF_VARS}"
     -smbios type=2
-    -device ich9-intel-hda -device hda-duplex
     -drive id=OpenCoreBoot,if=virtio,snapshot=on,readonly=on,format=qcow2,file="${OpenCoreBoot}"
     -drive id=MacHDD,if=virtio,file="macos-ventura.qcow2",format=qcow2
     -netdev user,id=net0,hostfwd=tcp::2222-:22 -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
     -monitor stdio
-    -nographic
-    -vnc 0.0.0.0:1
     -device vmware-svga
     ${lib.concatStringsSep " " extraQemuFlags}
   )

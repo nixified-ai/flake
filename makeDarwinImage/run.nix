@@ -33,7 +33,7 @@ writeShellScriptBin "run-macOS.sh" ''
     -netdev user,id=net0,hostfwd=tcp::2222-:22 -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
     -monitor stdio
     -device vmware-svga
-#    -vnc 0.0.0.0:1
+    -vnc 0.0.0.0:1
     ${lib.concatStringsSep " " extraQemuFlags}
   )
 

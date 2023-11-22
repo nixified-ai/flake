@@ -43,5 +43,6 @@ writeShellScriptBin "run-macOS.sh" ''
     ${qemu}/bin/qemu-img create -b ${diskImage} -F qcow2 -f qcow2 ./macos-ventura.qcow2
   fi
 
+  unset LD_LIBRARY_PATH
   ${qemu}/bin/qemu-system-x86_64 "''${args[@]}"
 ''

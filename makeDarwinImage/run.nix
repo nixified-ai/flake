@@ -32,6 +32,8 @@ writeShellScriptBin "run-macOS.sh" ''
     -drive id=MacHDD,if=virtio,file="macos-ventura.qcow2",format=qcow2
     -netdev user,id=net0,hostfwd=tcp::2222-:22 -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
     -monitor stdio
+    -nographic
+    -vnc 0.0.0.0:1
     -device vmware-svga
     ${lib.concatStringsSep " " extraQemuFlags}
   )
@@ -42,6 +44,6 @@ writeShellScriptBin "run-macOS.sh" ''
     ${qemu}/bin/qemu-img create -b ${diskImage} -F qcow2 -f qcow2 ./macos-ventura.qcow2
   fi
 
-  unset LD_LIBRARY_PATH
+#  unset LD_LIBRARY_PATH
   ${qemu}/bin/qemu-system-x86_64 "''${args[@]}"
 ''

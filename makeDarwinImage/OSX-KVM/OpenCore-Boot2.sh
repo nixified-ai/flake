@@ -49,10 +49,10 @@ args=(
   -drive id=OpenCoreBoot,if=virtio,snapshot=on,format=qcow2,file="$REPO_PATH/OpenCore/OpenCore.qcow2"
   -drive id=MacHDD,if=virtio,file="$REPO_PATH/mac_hdd_ng.qcow2",format=qcow2
   # -netdev tap,id=net0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
-  # -netdev user,id=net0,hostfwd=tcp::2222-:22 -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
+  -netdev user,id=net0,hostfwd=tcp::2222-:22,restrict=yes -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
   # -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27  # Note: Use this line for High Sierra
   -monitor stdio
-  -device vmware-svga
+  -device virtio-vga
   -nic none
   -vnc 0.0.0.0:1
 #  -rtc base=1970-01-01T12:12:12,clock=vm,driftfix=slew

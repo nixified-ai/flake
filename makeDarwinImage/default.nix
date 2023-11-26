@@ -1,5 +1,6 @@
-{ fetchurl, writeScript, writeShellScript, supermin, writeShellScriptBin, runCommand, lib, vncdo, dmg2img, cdrkit, parted, qemu, coreutils, python311, imagemagick, tesseract, expect, socat, ruby, xorriso, callPackage }:
-{ diskSizeBytes ? 50000000000 }:
+{ fetchurl, writeScript, writeShellScript, runCommand, vncdo, dmg2img, cdrkit, qemu_kvm, python311, tesseract, expect, socat, ruby, xorriso, callPackage, sshpass, openssh }:
+{ diskSizeBytes ? 50000000000
+}:
 let
   diskSize = if diskSizeBytes < 50000000000 then throw "diskSizeBytes ${toString diskSizeBytes} too small for macOS" else diskSizeBytes;
 
@@ -13,7 +14,7 @@ let
     mkisofs -allow-limited-size -l -J -r -iso-level 3 -V InstallAssistant -o $out ./InstallAssistant.pkg
   '';
 
-  baseSystem-img = runCommand "BaseSystem.img" { nativeBuildInputs = [ python311 dmg2img qemu ];
+  baseSystem-img = runCommand "BaseSystem.img" { nativeBuildInputs = [ python311 dmg2img qemu_kvm ];
     outputHashAlgo = "sha256";
     outputHash = "sha256-Qy9Whu8pqHo+m6wHnCIqURAR53LYQKc0r87g9eHgnS4=";
     outputHashMode = "recursive";
@@ -39,34 +40,53 @@ let
         echo "$NEW_TEXT"
         TEXT="$NEW_TEXT"
       fi
-      mv cap.png cap-$(date +%Y-%m-%dT%H:%M:%S).png
+      cp cap.png cap-$(date +%Y-%m-%dT%H:%M:%S).png
     done
   '';
 
-  expectScript = let
-    qemuSendMouse = writeScript "qemuSendMouse" ''
-      echo Sending QEMU inputs for $1
-      sleep 10
-      echo mouse_move $1 $2 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
-      echo mouse_button 1 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
-      echo mouse_button 0 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
-    '';
-    qemuSendKeys = writeScript "qemuSendKeys" ''
-      input="$1"
-      cleaned_input=$(echo "$input" | sed 's/\\//g')
-      echo Sending QEMU inputs for "$cleaned_input" >> qemuSendKeysLog
-      sleep 10
-      ${ruby}/bin/ruby ${./sendkeys} "$cleaned_input" | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
-    '';
-    vncdoWrapper = writeScript "vncdoWrapper" ''
-      echo Sending VNC inputs for $1
-      sleep 10
-      ${vncdo}/bin/vncdo --force-caps -s 127.0.0.1::5901 "''${@:2}"
-    '';
-    sendUser = text: ''send_user "\n### NixThePlanet: ${text} ###\n"'';
-  in writeScript "expect.sh"
+  # Utilities for running against the VM
+  qemuSendMouse = writeScript "qemuSendMouse" ''
+    echo Sending QEMU inputs for $1
+    sleep 10
+    echo mouse_move $1 $2 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+    echo mouse_button 1 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+    echo mouse_button 0 | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+  '';
+  qemuSendKeys = writeScript "qemuSendKeys" ''
+    input="$1"
+    cleaned_input=$(echo "$input" | sed 's/\\//g')
+    echo Sending QEMU inputs for "$cleaned_input" >> qemuSendKeysLog
+    sleep 10
+    ${ruby}/bin/ruby ${./sendkeys} "$cleaned_input" | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+  '';
+  vncdoWrapper = writeScript "vncdoWrapper" ''
+    echo Sending VNC inputs for $1
+    sleep 10
+    ${vncdo}/bin/vncdo --force-caps -s 127.0.0.1::5901 "''${@:2}"
+  '';
+  powerOffWrapper = writeScript "powerOffWrapper" ''
+    while ! ${openssh}/bin/ssh-keyscan -p 2222 127.0.0.1
+    do
+      sleep 3
+      echo SSH Not Ready
+    done
+    ${sshpass}/bin/sshpass -p admin ${openssh}/bin/ssh -o StrictHostKeyChecking=no -p 2222 admin@127.0.0.1 'set -e; killall Terminal KeyboardSetupAssistant; while pgrep Terminal KeyboardSetupAssistant; do echo "Waiting for Terminal/KeyboardAssistant to die"; done; echo "admin" | sudo -S shutdown -h now'
+  '';
+  mouseJiggler = writeScript "mouseJiggler" ''
+    while true
+    do
+      sleep $((RANDOM % (240 - 120 + 1) + 120))
+      randomX=$((RANDOM % (1920 - 1910 + 1) + 1910))
+      randomY=$((RANDOM % (1080 - 1070 + 1) + 1070))
+      echo -e mouse_move $randomX $randomY | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
+    done
+  '';
+
+
   # Expect scripts treat the first < as a special char, so need escapes like \\<
-  ''
+  expectScript = let
+    sendUser = text: ''send_user "\n### NixThePlanet: ${text} ###\n"'';
+  in writeScript "expect.sh" ''
     #!${expect}/bin/expect -f
     set debug 2
     set log_user 1
@@ -187,31 +207,33 @@ let
     expect "Choose Your Look"
     exec ${qemuSendKeys} "\\<shift-tab><delay><spc>"
 
-    ${sendUser "Quit Keyboard Setup Assistant"}
+    ${sendUser "Setting up SSH"}
     expect "Keyboard Setup Assistant"
     expect "Finder"
-    exec ${qemuSendKeys} "\\<ctrl-alt-meta_l-power>"
+    exec ${qemuSendMouse} 365 1035
+    expect "App Store"
+    exec ${qemuSendKeys} "terminal"
+    expect "Terminal"
+    exec ${qemuSendKeys} "\\<kp_enter>"
+    expect "80x24"
+    exec ${qemuSendKeys} "sudo sh -ec 'launchctl load -w /System/Library/LaunchDaemons/ssh.plist; while ! ssh-keyscan 127.0.0.1; do echo SSH Not Ready; done'<kp_enter>"
+    expect "Password"
+    exec ${qemuSendKeys} "admin<kp_enter>"
 
     ${sendUser "OMG DID IT WORK???!!!!"}
     exit 0
   '';
 
-  runInVm = let
-    mouseJiggler = writeScript "mouseJiggler" ''
-      while true
-      do
-        sleep $((RANDOM % (240 - 120 + 1) + 120))
-        randomX=$((RANDOM % (1920 - 1910 + 1) + 1910))
-        randomY=$((RANDOM % (1080 - 1070 + 1) + 1070))
-        echo -e mouse_move $randomX $randomY | ${socat}/bin/socat - unix-connect:qemu-monitor-socket
-      done
-    '';
-  in runCommand "mac_hdd_ng.qcow2" {
-    passthru.runScript = callPackage ./run.nix {};
-    buildInputs = [ parted qemu xorriso ];
+  runInVm = runCommand "mac_hdd_ng.qcow2" {
+    passthru = {
+      runScript = callPackage ./run.nix {};
+      makeRunScript = callPackage ./run.nix;
+    };
+    buildInputs = [ qemu_kvm xorriso ];
     # __impure = true; # set __impure = true; if debugging and want to connect via VNC during the build
   } ''
-    cp -v -r --no-preserve=mode ${./OSX-KVM} ./OSX-KVM
+    set -x
+    cp -r --no-preserve=mode ${./OSX-KVM} ./OSX-KVM
     cd ./OSX-KVM
 
     substituteInPlace scripts/run_offline.sh --replace '50000000000' "${toString diskSizeBytes}"
@@ -227,12 +249,17 @@ let
     sh ./OpenCore-Boot.sh &
     openCoreBootPID=$!
     ${expectScript} &
+    expectPID=$!
     ${mouseJiggler} &
     wait $openCoreBootPID
 
-    # Stage 2 continues the installation without the InstallAssistant drive attached
+    # Stage 2 continues the installation without the InstallAssistant drive
+    # attached, necessary because OpenCore boot ordering is screwed up when
+    # using Virtio
     sh ./OpenCore-Boot2.sh &
     openCoreBootPID=$!
+    wait $expectPID
+    ${powerOffWrapper}
     wait $openCoreBootPID
 
     mv mac_hdd_ng.qcow2 $out

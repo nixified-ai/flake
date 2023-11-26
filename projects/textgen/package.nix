@@ -16,6 +16,7 @@ let
     mv ./prompts ./_prompts
     mv ./characters ./_characters
     mv ./presets ./_presets
+    mv ./instruction-templates ./_instruction-templates
     cd -
     substituteInPlace ./src/modules/presets.py \
       --replace "Path(f'presets" "Path(f'$out/presets"
@@ -34,6 +35,12 @@ let
     substituteInPlace ./src/modules/chat.py \
       --replace "folder = 'characters'" "folder = '$out/characters'" \
       --replace "characters/" "$out/characters/"
+    substituteInPlace \
+      ./src/modules/prompts.py \
+      ./src/modules/ui_chat.py \
+      ./src/modules/utils.py \
+      ./src/modules/chat.py \
+      --replace "instruction-templates" "$out/instruction-templates"
     mv ./src $out
     ln -s ${tmpDir}/models/ $out/models
     ln -s ${tmpDir}/loras/ $out/loras
@@ -41,6 +48,7 @@ let
     ln -s ${tmpDir}/prompts/ $out/prompts
     ln -s ${tmpDir}/characters/ $out/characters
     ln -s ${tmpDir}/presets/ $out/presets
+    ln -s ${tmpDir}/instruction-templates $out/instruction-templates
   '';
   textgenPython = python3Packages.python.withPackages (_: with python3Packages; [
     accelerate
@@ -88,16 +96,18 @@ in
   fi
   rm -rf ${tmpDir}
   mkdir -p ${tmpDir}
-  mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/prompts ${stateDir}/characters ${stateDir}/presets
+  mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/prompts ${stateDir}/characters ${stateDir}/presets ${stateDir}/instruction-templates
   cp -r --no-preserve=mode ${patchedSrc}/_prompts/* ${stateDir}/prompts/
   cp -r --no-preserve=mode ${patchedSrc}/_characters/* ${stateDir}/characters/
   cp -r --no-preserve=mode ${patchedSrc}/_presets/* ${stateDir}/presets/
+  cp -r --no-preserve=mode ${patchedSrc}/_instruction-templates/* ${stateDir}/instruction-templates/
   ln -s ${stateDir}/models/ ${tmpDir}/models
   ln -s ${stateDir}/loras/ ${tmpDir}/loras
   ln -s ${stateDir}/cache/ ${tmpDir}/cache
   ln -s ${stateDir}/prompts/ ${tmpDir}/prompts
   ln -s ${stateDir}/characters/ ${tmpDir}/characters
   ln -s ${stateDir}/presets/ ${tmpDir}/presets
+  ln -s ${stateDir}/instruction-templates ${tmpDir}/instruction-templates
   ${lib.optionalString (python3Packages.torch.rocmSupport or false) rocmInit}
   export LD_LIBRARY_PATH=/run/opengl-driver/lib:${cudaPackages.cudatoolkit}/lib
   ${textgenPython}/bin/python ${patchedSrc}/server.py $@ \

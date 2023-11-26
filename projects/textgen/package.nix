@@ -18,15 +18,7 @@ let
     mv ./presets ./_presets
     cd -
     substituteInPlace ./src/modules/presets.py \
-      --replace "Path('presets" "Path('$out/presets" \
-      --replace "Path('prompts" "Path('$out/prompts" \
-      --replace "Path(f'prompts" "Path(f'$out/prompts" \
-      --replace "Path('extensions" "Path('$out/extensions" \
-      --replace "Path(f'presets" "Path(f'$out/presets" \
-      --replace "Path('softprompts" "Path('$out/softprompts" \
-      --replace "Path(f'softprompts" "Path(f'$out/softprompts" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "Path('cache" "Path('$out/cache"
+      --replace "Path(f'presets" "Path(f'$out/presets"
     substituteInPlace ./src/download-model.py \
       --replace "=args.output" "='$out/models/'" \
       --replace "base_folder=None" "base_folder='$out/models/'"
@@ -37,35 +29,10 @@ let
     substituteInPlace ./src/modules/utils.py \
       --replace "Path('css" "Path('$out/css" \
       --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
+      --replace "rel_path = abs_path.relative_to(root_folder)" "" \
+      --replace "rel_path.parts[0] == '..'" "False"
     substituteInPlace ./src/modules/chat.py \
       --replace "folder = 'characters'" "folder = '$out/characters'" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
-    substituteInPlace ./src/server.py \
-      --replace "Path('presets" "Path('$out/presets" \
-      --replace "Path('prompts" "Path('$out/prompts" \
-      --replace "Path(f'prompts" "Path(f'$out/prompts" \
-      --replace "Path('extensions" "Path('$out/extensions" \
-      --replace "Path(f'presets" "Path(f'$out/presets" \
-      --replace "Path('softprompts" "Path('$out/softprompts" \
-      --replace "Path(f'softprompts" "Path(f'$out/softprompts" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "Path('cache" "Path('$out/cache"
-    substituteInPlace ./src/download-model.py \
-      --replace "=args.output" "='$out/models/'" \
-      --replace "base_folder=None" "base_folder='$out/models/'"
-    substituteInPlace ./src/modules/html_generator.py \
-      --replace "../css" "$out/css" \
-      --replace 'Path(__file__).resolve().parent / ' "" \
-      --replace "Path(f'css" "Path(f'$out/css"
-    substituteInPlace ./src/modules/utils.py \
-      --replace "Path('css" "Path('$out/css" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
-    substituteInPlace ./src/modules/chat.py \
-      --replace "folder = 'characters'" "folder = '$out/characters'" \
-      --replace "Path('characters" "Path('$out/characters" \
       --replace "characters/" "$out/characters/"
     mv ./src $out
     ln -s ${tmpDir}/models/ $out/models

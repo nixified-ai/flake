@@ -18,6 +18,7 @@ let
     mv ./presets ./_presets
     mv ./instruction-templates ./_instruction-templates
     cd -
+
     substituteInPlace ./src/modules/presets.py \
       --replace "Path(f'presets" "Path(f'$out/presets"
     substituteInPlace ./src/download-model.py \
@@ -35,12 +36,23 @@ let
     substituteInPlace ./src/modules/chat.py \
       --replace "folder = 'characters'" "folder = '$out/characters'" \
       --replace "characters/" "$out/characters/"
+
     substituteInPlace \
       ./src/modules/prompts.py \
       ./src/modules/ui_chat.py \
       ./src/modules/utils.py \
       ./src/modules/chat.py \
       --replace "instruction-templates" "$out/instruction-templates"
+
+    substituteInPlace \
+      ./src/modules/evaluate.py \
+      ./src/modules/training.py \
+      ./src/modules/chat.py \
+      --replace "Path('logs" "Path('$out/logs"
+    substituteInPlace \
+      ./src/modules/chat.py \
+      --replace "Path(f'logs" "Path(f'$out/logs"
+
     mv ./src $out
     ln -s ${tmpDir}/models/ $out/models
     ln -s ${tmpDir}/loras/ $out/loras
@@ -49,6 +61,7 @@ let
     ln -s ${tmpDir}/characters/ $out/characters
     ln -s ${tmpDir}/presets/ $out/presets
     ln -s ${tmpDir}/instruction-templates $out/instruction-templates
+    ln -s ${tmpDir}/logs $out/logs
   '';
   textgenPython = python3Packages.python.withPackages (_: with python3Packages; [
     accelerate
@@ -96,7 +109,7 @@ in
   fi
   rm -rf ${tmpDir}
   mkdir -p ${tmpDir}
-  mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/prompts ${stateDir}/characters ${stateDir}/presets ${stateDir}/instruction-templates
+  mkdir -p ${stateDir}/{models,cache,loras,prompts,characters,presets,instruction-templates,logs}
   cp -r --no-preserve=mode ${patchedSrc}/_prompts/* ${stateDir}/prompts/
   cp -r --no-preserve=mode ${patchedSrc}/_characters/* ${stateDir}/characters/
   cp -r --no-preserve=mode ${patchedSrc}/_presets/* ${stateDir}/presets/
@@ -108,6 +121,7 @@ in
   ln -s ${stateDir}/characters/ ${tmpDir}/characters
   ln -s ${stateDir}/presets/ ${tmpDir}/presets
   ln -s ${stateDir}/instruction-templates ${tmpDir}/instruction-templates
+  ln -s ${stateDir}/logs ${tmpDir}/logs
   ${lib.optionalString (python3Packages.torch.rocmSupport or false) rocmInit}
   export LD_LIBRARY_PATH=/run/opengl-driver/lib:${cudaPackages.cudatoolkit}/lib
   ${textgenPython}/bin/python ${patchedSrc}/server.py $@ \

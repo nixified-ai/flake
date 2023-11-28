@@ -210,7 +210,7 @@ let
     ${sendUser "Setting up SSH"}
     expect "Keyboard Setup Assistant"
     expect "Finder"
-    exec ${qemuSendMouse} 365 1035
+    exec ${qemuSendMouse} 400 1035
     expect "App Store"
     exec ${qemuSendKeys} "terminal"
     expect "Terminal"

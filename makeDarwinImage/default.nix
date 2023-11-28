@@ -173,7 +173,7 @@ let
 
     ${sendUser "Create a Computer Account"}
     expect "Create a Computer Account"
-    exec ${qemuSendKeys} "admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay><tab><delay><tab><delay><spc>"
+    exec ${qemuSendKeys} "<delay>admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay>admin<delay><tab><delay><tab><delay><tab><delay><spc>"
 
     ${sendUser "Enable Location Services"}
     expect {

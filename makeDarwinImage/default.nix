@@ -70,7 +70,7 @@ let
       sleep 3
       echo SSH Not Ready
     done
-    ${sshpass}/bin/sshpass -p admin ${openssh}/bin/ssh -o StrictHostKeyChecking=no -p 2222 admin@127.0.0.1 'set -e; killall Terminal KeyboardSetupAssistant; while pgrep Terminal KeyboardSetupAssistant; do echo "Waiting for Terminal/KeyboardAssistant to die"; done; echo "admin" | sudo -S shutdown -h now'
+    ${sshpass}/bin/sshpass -p admin ${openssh}/bin/ssh -o StrictHostKeyChecking=no -p 2222 admin@127.0.0.1 'set -e; killall Terminal KeyboardSetupAssistant; sleep 10; echo "admin" | sudo -S shutdown -h now'
   '';
   mouseJiggler = writeScript "mouseJiggler" ''
     while true
@@ -225,9 +225,9 @@ let
   '';
 
   runInVm = runCommand "mac_hdd_ng.qcow2" {
-    passthru = {
-      runScript = callPackage ./run.nix {};
+    passthru = rec {
       makeRunScript = callPackage ./run.nix;
+      runScript = makeRunScript {};
     };
     buildInputs = [ qemu_kvm xorriso ];
     # __impure = true; # set __impure = true; if debugging and want to connect via VNC during the build

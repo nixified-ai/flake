@@ -70,7 +70,7 @@ let
       sleep 3
       echo SSH Not Ready
     done
-    ${sshpass}/bin/sshpass -p admin ${openssh}/bin/ssh -o StrictHostKeyChecking=no -p 2222 admin@127.0.0.1 'set -e; killall -9 Terminal KeyboardSetupAssistant; while pgrep Terminal KeyboardSetupAssistant; do echo "Waiting for Terminal/KeyboardAssistant to die"; sleep 10; done; echo "admin" | sudo -S shutdown -h now'
+    ${sshpass}/bin/sshpass -p admin ${openssh}/bin/ssh -o StrictHostKeyChecking=no -p 2222 admin@127.0.0.1 'set -e; killall -9 Terminal KeyboardSetupAssistant; while pgrep Terminal KeyboardSetupAssistant; do echo "Waiting for Terminal/KeyboardAssistant to die"; done; sleep 10; echo "admin" | sudo -S shutdown -h now'
     ssh_exit_code=$?
     if [ "$ssh_exit_code" == 255 ]; then
       echo "macOS terminated the SSH connection uncleanly on shutdown, ignoring..."

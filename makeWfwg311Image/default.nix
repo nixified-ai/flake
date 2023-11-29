@@ -15,14 +15,6 @@
 }:
 { ... }:
 let
-  dosbox-x-fix = dosbox-x.overrideAttrs {
-    src = fetchFromGitHub {
-      owner = "joncampbell123";
-      repo = "dosbox-x";
-      rev = "d2febc9ad28c7e3a4e4c3f52c8159d693078679b";
-      hash = "sha256-O+qpdkHOHSYG2BSlNxeTW+tMRUxrnQW/iEFx6DIGOik=";
-    };
-  };
   msDos622 = makeMsDos622Image {};
 
   wfwg311 = fetchFromBittorrent {
@@ -107,7 +99,7 @@ let
   '';
 
 in
-runCommand "wfwg311.img" { buildInputs = [ unzip dosbox-x-fix xvfb-run x11vnc ];
+runCommand "wfwg311.img" { buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
   # set __impure = true; for debugging
   # __impure = true;
     } ''
@@ -115,7 +107,7 @@ runCommand "wfwg311.img" { buildInputs = [ unzip dosbox-x-fix xvfb-run x11vnc ];
   mkdir wfwg311
   cp -r --no-preserve=mode ${wfwg311}/*.IMG wfwg311
   ls -lah wfwg311
-  dd if=/dev/zero of=disk.img count=8192 bs=31941
+#  dd if=/dev/zero of=disk.img count=8192 bs=31941
   cp --no-preserve=mode ${msDos622} ./msdos622.img
 
   xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &

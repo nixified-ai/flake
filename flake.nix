@@ -25,7 +25,22 @@
           genOverridenDrvLinkFarm = drv: howMany: pkgs.linkFarm (drv.name + "-linkfarm-${toString howMany}") (builtins.genList (x: rec { name = toString x + "-" + drv.name; path = drv.overrideAttrs { inherit name; }; }) howMany);
         in
       {
-        _module.args.pkgs = import inputs.nixpkgs { overlays = [ inputs.self.overlays.default ]; inherit system; };
+        _module.args.pkgs = import inputs.nixpkgs {
+          overlays = [
+            inputs.self.overlays.default
+            (self: super: {
+              dosbox-x = super.dosbox-x.overrideAttrs {
+                src = super.fetchFromGitHub {
+                  owner = "joncampbell123";
+                  repo = "dosbox-x";
+                  rev = "d2febc9ad28c7e3a4e4c3f52c8159d693078679b";
+                  hash = "sha256-O+qpdkHOHSYG2BSlNxeTW+tMRUxrnQW/iEFx6DIGOik=";
+                };
+              };
+            })
+          ];
+          inherit system;
+        };
         overlayAttrs = config.legacyPackages;
         legacyPackages = {
           makeDarwinImage = pkgs.callPackage ./makeDarwinImage {

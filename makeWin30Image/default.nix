@@ -16,14 +16,6 @@
 }:
 { ... }:
 let
-  dosbox-x-fix = dosbox-x.overrideAttrs {
-    src = fetchFromGitHub {
-      owner = "joncampbell123";
-      repo = "dosbox-x";
-      rev = "d2febc9ad28c7e3a4e4c3f52c8159d693078679b";
-      hash = "sha256-O+qpdkHOHSYG2BSlNxeTW+tMRUxrnQW/iEFx6DIGOik=";
-    };
-  };
   msDos622 = makeMsDos622Image {};
 
   win30 = fetchFromBittorrent {
@@ -110,7 +102,7 @@ let
 
 in
 runCommand "win30.img" {
-  buildInputs = [ unzip dosbox-x-fix xvfb-run x11vnc ];
+  buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
   passthru = rec {
     makeRunScript = callPackage ./run.nix;
     runScript = makeRunScript {};

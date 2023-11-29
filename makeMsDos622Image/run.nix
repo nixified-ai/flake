@@ -25,12 +25,14 @@ writeShellScriptBin "run-msdos622.sh" ''
     cp --no-preserve=mode ${diskImage} ./msdos622.img
   fi
 
-  ${dosbox-x}/bin/dosbox-x "''${args[@]}"
+  run_dosbox() {
+    ${dosbox-x}/bin/dosbox-x "''${args[@]}"
+  }
+
+  run_dosbox
 
   if [ $? -ne 0 ]; then
     echo "Dosbox crashed. Re-running with SDL_VIDEODRIVER=x11."
-
-    # Set the environment variable and rerun Dosbox
-    SDL_VIDEODRIVER=x11 ${dosbox-x}/bin/dosbox-x "''${args[@]}"
+    SDL_VIDEODRIVER=x11 run_dosbox
   fi
 ''

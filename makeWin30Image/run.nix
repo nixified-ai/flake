@@ -1,6 +1,5 @@
 { writeShellScriptBin
 , writeText
-, fetchFromGitHub
 , lib
 , dosbox-x
 , makeWin30Image
@@ -8,14 +7,6 @@
 , diskImage ? (makeWin30Image {})
 }:
 let
-  dosbox-x-fix = dosbox-x.overrideAttrs {
-    src = fetchFromGitHub {
-      owner = "joncampbell123";
-      repo = "dosbox-x";
-      rev = "d2febc9ad28c7e3a4e4c3f52c8159d693078679b";
-      hash = "sha256-O+qpdkHOHSYG2BSlNxeTW+tMRUxrnQW/iEFx6DIGOik=";
-    };
-  };
   dosboxConf = writeText "dosbox.conf" ''
     [autoexec]
     imgmount C win30.img -size 512,63,16,507 -t hdd -fs fat
@@ -35,7 +26,7 @@ writeShellScriptBin "run-win30.sh" ''
   fi
 
   run_dosbox() {
-    ${dosbox-x-fix}/bin/dosbox-x "''${args[@]}"
+    ${dosbox-x}/bin/dosbox-x "''${args[@]}"
   }
 
   run_dosbox

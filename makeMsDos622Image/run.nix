@@ -10,6 +10,8 @@ let
   dosboxConf = writeText "dosbox.conf" ''
     [autoexec]
     imgmount 2 msdos622.img -fs none
+    c:
+    echo win >> AUTOEXEC.BAT
     boot -l c
   '';
 in

@@ -10,6 +10,7 @@
 , writeScript
 , writeShellScript
 , writeText
+, callPackage
 }:
 { ... }:
 let
@@ -77,12 +78,15 @@ let
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';
-
-in
-runCommand "msdos622.img" { buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
+in runCommand "msdos622.img" {
+  buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
+  passthru = rec {
+    makeRunScript = callPackage ./run.nix;
+    runScript = makeRunScript {};
+  };
   # set __impure = true; for debugging
   # __impure = true;
-    } ''
+} ''
   echo ${msdos622}
   mkdir win
   mkdir msdos

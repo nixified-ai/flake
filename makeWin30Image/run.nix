@@ -10,6 +10,8 @@ let
   dosboxConf = writeText "dosbox.conf" ''
     [autoexec]
     imgmount c win30.img -size 512,63,16,507 -t hdd -fs fat
+    c:
+    echo win >> AUTOEXEC.BAT
     boot -l c
   '';
 in

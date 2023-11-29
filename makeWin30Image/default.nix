@@ -12,6 +12,7 @@
 , writeText
 , makeMsDos622Image
 , fetchFromGitHub
+, callPackage
 }:
 { ... }:
 let
@@ -108,7 +109,13 @@ let
   '';
 
 in
-runCommand "win30.img" { buildInputs = [ unzip dosbox-x-fix xvfb-run x11vnc ];
+runCommand "win30.img" {
+  buildInputs = [ unzip dosbox-x-fix xvfb-run x11vnc ];
+  passthru = rec {
+    makeRunScript = callPackage ./run.nix;
+    runScript = makeRunScript {};
+  };
+
   # set __impure = true; for debugging
   # __impure = true;
     } ''

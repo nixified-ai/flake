@@ -9,7 +9,7 @@
 let
   dosboxConf = writeText "dosbox.conf" ''
     [autoexec]
-    imgmount c win30.img -t hdd -fs fat
+    imgmount c win30.img -fs fat
     boot -l c
   '';
 in

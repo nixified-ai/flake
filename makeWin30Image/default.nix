@@ -134,9 +134,16 @@ runCommand "win30.img" {
   wait $!
   kill $dosboxPID
 
-  xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf-stage2}
-  dosboxPID=$!
-  wait $dosboxPID
+echo "EXECUTING STAGE 2"
+echo "EXECUTING STAGE 2"
+echo "EXECUTING STAGE 2"
+echo "EXECUTING STAGE 2"
+echo "EXECUTING STAGE 2"
+echo "EXECUTING STAGE 2"
+  dosbox-x -conf ${dosboxConf-stage2}
+echo "DONE WITH STAGE 2"
+echo "DONE WITH STAGE 2"
+echo "DONE WITH STAGE 2"
 
   mv msdos622.img $out
 ''

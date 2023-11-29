@@ -48,7 +48,7 @@
           };
           msdos622 = {
             type = "app";
-            program = config.packages.msdos622.runScript;
+            program = config.packages.msdos622-image.runScript;
           };
         };
         packages = rec {

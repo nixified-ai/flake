@@ -46,16 +46,20 @@
             type = "app";
             program = config.packages.macos-ventura-image.runScript;
           };
+          msdos622 = {
+            type = "app";
+            program = config.packages.msdos622.runScript;
+          };
         };
         packages = rec {
           macos-ventura-image = config.legacyPackages.makeDarwinImage {};
-          msDos622-image = config.legacyPackages.makeMsDos622Image {};
+          msdos622-image = config.legacyPackages.makeMsDos622Image {};
           win30-image = config.legacyPackages.makeWin30Image {};
           wfwg311-image = config.legacyPackages.makeWfwg311Image {};
           macos-repeatability-test = genOverridenDrvLinkFarm macos-ventura-image 10;
           wfwg311-repeatability-test = genOverridenDrvLinkFarm wfwg311-image 1000;
           win30-repeatability-test = genOverridenDrvLinkFarm win30-image 1000;
-          msDos622-repeatability-test = genOverridenDrvLinkFarm msDos622-image 1000;
+          msDos622-repeatability-test = genOverridenDrvLinkFarm msdos622-image 1000;
         };
         checks = {
           macos-ventura = pkgs.callPackage ./makeDarwinImage/vm-test.nix { nixosModule = inputs.self.nixosModules.macos-ventura; };

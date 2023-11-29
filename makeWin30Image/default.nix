@@ -40,7 +40,7 @@ let
     stop turbo on key = false
 
     [autoexec]
-    imgmount c msdos622.img -size 512,63,16,507 -t hdd -fs fat
+    imgmount C msdos622.img -size 512,63,16,507 -t hdd -fs fat
     c:
     echo win >> AUTOEXEC.BAT
     exit
@@ -135,6 +135,7 @@ runCommand "win30.img" {
   kill $dosboxPID
 
   xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf-stage2} || true &
+  wait $!
 
   mv msdos622.img $out
 ''

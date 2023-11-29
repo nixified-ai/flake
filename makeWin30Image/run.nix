@@ -9,11 +9,11 @@
 let
   dosboxConf = writeText "dosbox.conf" ''
     [autoexec]
-    imgmount c win30.img -size 512,63,255,101 -t hdd -fs fat
+    imgmount c win30.img -t hdd -fs fat
     boot -l c
   '';
 in
-writeShellScriptBin "run-msdos622.sh" ''
+writeShellScriptBin "run-win30.sh" ''
   args=(
     -conf ${dosboxConf}
     ${lib.concatStringsSep " " extraDosboxFlags}

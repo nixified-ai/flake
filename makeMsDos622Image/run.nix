@@ -25,7 +25,5 @@ writeShellScriptBin "run-msdos622.sh" ''
     cp --no-preserve=mode ${diskImage} ./msdos622.img
   fi
 
-  # Ew
-  unset LD_LIBRARY_PATH
   ${dosbox-x}/bin/dosbox-x "''${args[@]}"
 ''

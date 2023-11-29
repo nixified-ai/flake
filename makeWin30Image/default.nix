@@ -34,6 +34,18 @@ let
     boot -l C
   '';
 
+  dosboxConf-stage2 = writeText "dosbox.conf" ''
+    [cpu]
+    turbo=on
+    stop turbo on key = false
+
+    [autoexec]
+    imgmount c msdos622.img -size 512,63,16,507 -t hdd -fs fat
+    c:
+    echo win >> AUTOEXEC.BAT
+    exit
+  '';
+
   tesseractScript = writeShellScript "tesseractScript" ''
     export OMP_THREAD_LIMIT=1
     cd $(mktemp -d)
@@ -113,7 +125,6 @@ runCommand "win30.img" {
   echo ${win30}
   mkdir win30
   unzip '${win30}/Microsoft Windows 3.0 (3.5-720K).zip' -d win30
-#  dd if=/dev/zero of=disk.img count=8192 bs=31941
   cp --no-preserve=mode ${msDos622} ./msdos622.img
 
   xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
@@ -122,5 +133,8 @@ runCommand "win30.img" {
   ${expectScript} &
   wait $!
   kill $dosboxPID
+
+  dosbox-x -conf ${dosboxConf-stage2}
+
   mv msdos622.img $out
 ''

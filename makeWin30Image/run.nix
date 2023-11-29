@@ -10,8 +10,7 @@ let
   dosboxConf = writeText "dosbox.conf" ''
     [autoexec]
     imgmount C win30.img -size 512,63,16,507 -t hdd -fs fat
-    boot -l C
-    win
+    #boot -l C
   '';
 in
 writeShellScriptBin "run-win30.sh" ''

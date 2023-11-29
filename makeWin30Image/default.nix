@@ -130,9 +130,11 @@ runCommand "win30.img" {
   xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
   dosboxPID=$!
   DISPLAY=:99 XAUTHORITY=/tmp/xvfb.auth x11vnc -many -shared -display :99 >/dev/null 2>&1 &
+  vncPID=$!
   ${expectScript} &
   wait $!
   kill $dosboxPID
+  kill $vncPID
 
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
@@ -140,10 +142,10 @@ echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
-  SDL_VIDEODRIVER=x11 xvfb-run dosbox-x -conf ${dosboxConf-stage2} || true
+  SDL_VIDEODRIVER=x11 dosbox-x -conf ${dosboxConf-stage2}
 echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"
 
-  mv msdos622.img $out
+  cp msdos622.img $out
 ''

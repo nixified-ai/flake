@@ -115,14 +115,13 @@ runCommand "win30.img" {
     makeRunScript = callPackage ./run.nix;
     runScript = makeRunScript {};
   };
-
   # set __impure = true; for debugging
   # __impure = true;
     } ''
   echo ${win30}
   mkdir win30
   unzip '${win30}/Microsoft Windows 3.0 (3.5-720K).zip' -d win30
-  dd if=/dev/zero of=disk.img count=8192 bs=31941
+#  dd if=/dev/zero of=disk.img count=8192 bs=31941
   cp --no-preserve=mode ${msDos622} ./msdos622.img
 
   xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
@@ -131,5 +130,5 @@ runCommand "win30.img" {
   ${expectScript} &
   wait $!
   kill $dosboxPID
-  mv disk.img $out
+  mv msdos622.img $out
 ''

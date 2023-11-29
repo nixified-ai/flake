@@ -40,7 +40,7 @@ let
     stop turbo on key = false
 
     [autoexec]
-    imgmount C msdos622.img -size 512,63,16,507 -t hdd -fs fat
+    imgmount c msdos622.img -size 512,63,16,507 -t hdd -fs fat
     c:
     echo win >> AUTOEXEC.BAT
     exit
@@ -140,7 +140,7 @@ echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
-  SDL_VIDEODRIVER=dummy dosbox-x -conf ${dosboxConf-stage2}
+  SDL_VIDEODRIVER=x11 xvfb-run dosbox-x -conf ${dosboxConf-stage2}
 echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"

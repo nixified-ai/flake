@@ -136,6 +136,7 @@ runCommand "win30.img" {
   kill $dosboxPID
   kill $vncPID
 
+      sleep 10
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
@@ -147,6 +148,10 @@ echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"
 
-  sync
+      sync
+      ls -lah
+      ls -lah
+      ls -lah
+      ls -lah
   cp msdos622.img $out
 ''

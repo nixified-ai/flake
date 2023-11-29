@@ -147,5 +147,6 @@ echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"
 
+  sync
   cp msdos622.img $out
 ''

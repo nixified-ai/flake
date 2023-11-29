@@ -14,6 +14,8 @@ let
   '';
 in
 writeShellScriptBin "run-msdos622.sh" ''
+  # jack/pipewire, ugh..
+  unset LD_LIBRARY_PATH
   args=(
     -conf ${dosboxConf}
     ${lib.concatStringsSep " " extraDosboxFlags}

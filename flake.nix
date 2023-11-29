@@ -51,6 +51,10 @@
             type = "app";
             program = config.packages.msdos622-image.runScript;
           };
+          win30 = {
+            type = "app";
+            program = config.packages.win30-image.runScript;
+          };
         };
         packages = rec {
           macos-ventura-image = config.legacyPackages.makeDarwinImage {};

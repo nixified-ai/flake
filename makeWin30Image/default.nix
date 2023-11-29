@@ -140,7 +140,7 @@ echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
 echo "EXECUTING STAGE 2"
-  SDL_VIDEODRIVER=x11 xvfb-run dosbox-x -conf ${dosboxConf-stage2}
+  SDL_VIDEODRIVER=x11 xvfb-run dosbox-x -conf ${dosboxConf-stage2} || true
 echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"
 echo "DONE WITH STAGE 2"

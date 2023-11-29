@@ -133,8 +133,8 @@ runCommand "win30.img" {
   vncPID=$!
   ${expectScript} &
   wait $!
-  kill $dosboxPID
-  kill $vncPID
+  kill -9 $dosboxPID
+  kill -9 $vncPID
 
       sleep 10
 echo "EXECUTING STAGE 2"

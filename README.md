@@ -51,3 +51,18 @@ The WSL must be installed via the Windows Store. The script will make an attempt
 See the following documentation from Microsoft for the details on how to enable and use the WSL manually
 
 - https://learn.microsoft.com/en-us/windows/wsl/install
+
+## Enable binary cache
+
+To make the binary substitution work and save you some time building packages, you need to tell nix to trust nixified-ai's binary cache.
+On nixos you can do that by adding these 2 lines to `/etc/nixos/configuration.nix` and rebuilding your system:
+
+    nix.settings.trusted-substituters = ["https://ai.cachix.org"];
+    nix.settings.trusted-public-keys = ["ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="];
+
+If you are on another distro, just add these two lines to `/etc/nix/nix.conf`. In fact the line `trusted-public-keys = ...` should already be there and you only need to append the key for ai.cachix.org.
+
+    trusted-substituters = https://ai.cachix.org
+    trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc=
+
+

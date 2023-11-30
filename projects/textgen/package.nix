@@ -16,17 +16,11 @@ let
     mv ./prompts ./_prompts
     mv ./characters ./_characters
     mv ./presets ./_presets
+    mv ./instruction-templates ./_instruction-templates
     cd -
+
     substituteInPlace ./src/modules/presets.py \
-      --replace "Path('presets" "Path('$out/presets" \
-      --replace "Path('prompts" "Path('$out/prompts" \
-      --replace "Path(f'prompts" "Path(f'$out/prompts" \
-      --replace "Path('extensions" "Path('$out/extensions" \
-      --replace "Path(f'presets" "Path(f'$out/presets" \
-      --replace "Path('softprompts" "Path('$out/softprompts" \
-      --replace "Path(f'softprompts" "Path(f'$out/softprompts" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "Path('cache" "Path('$out/cache"
+      --replace "Path(f'presets" "Path(f'$out/presets"
     substituteInPlace ./src/download-model.py \
       --replace "=args.output" "='$out/models/'" \
       --replace "base_folder=None" "base_folder='$out/models/'"
@@ -37,36 +31,28 @@ let
     substituteInPlace ./src/modules/utils.py \
       --replace "Path('css" "Path('$out/css" \
       --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
+      --replace "rel_path = abs_path.relative_to(root_folder)" "" \
+      --replace "rel_path.parts[0] == '..'" "False"
     substituteInPlace ./src/modules/chat.py \
       --replace "folder = 'characters'" "folder = '$out/characters'" \
-      --replace "Path('characters" "Path('$out/characters" \
       --replace "characters/" "$out/characters/"
-    substituteInPlace ./src/server.py \
-      --replace "Path('presets" "Path('$out/presets" \
-      --replace "Path('prompts" "Path('$out/prompts" \
-      --replace "Path(f'prompts" "Path(f'$out/prompts" \
-      --replace "Path('extensions" "Path('$out/extensions" \
-      --replace "Path(f'presets" "Path(f'$out/presets" \
-      --replace "Path('softprompts" "Path('$out/softprompts" \
-      --replace "Path(f'softprompts" "Path(f'$out/softprompts" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "Path('cache" "Path('$out/cache"
-    substituteInPlace ./src/download-model.py \
-      --replace "=args.output" "='$out/models/'" \
-      --replace "base_folder=None" "base_folder='$out/models/'"
-    substituteInPlace ./src/modules/html_generator.py \
-      --replace "../css" "$out/css" \
-      --replace 'Path(__file__).resolve().parent / ' "" \
-      --replace "Path(f'css" "Path(f'$out/css"
-    substituteInPlace ./src/modules/utils.py \
-      --replace "Path('css" "Path('$out/css" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
-    substituteInPlace ./src/modules/chat.py \
-      --replace "folder = 'characters'" "folder = '$out/characters'" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
+
+    substituteInPlace \
+      ./src/modules/prompts.py \
+      ./src/modules/ui_chat.py \
+      ./src/modules/utils.py \
+      ./src/modules/chat.py \
+      --replace "instruction-templates" "$out/instruction-templates"
+
+    substituteInPlace \
+      ./src/modules/evaluate.py \
+      ./src/modules/training.py \
+      ./src/modules/chat.py \
+      --replace "Path('logs" "Path('$out/logs"
+    substituteInPlace \
+      ./src/modules/chat.py \
+      --replace "Path(f'logs" "Path(f'$out/logs"
+
     mv ./src $out
     ln -s ${tmpDir}/models/ $out/models
     ln -s ${tmpDir}/loras/ $out/loras
@@ -74,6 +60,8 @@ let
     ln -s ${tmpDir}/prompts/ $out/prompts
     ln -s ${tmpDir}/characters/ $out/characters
     ln -s ${tmpDir}/presets/ $out/presets
+    ln -s ${tmpDir}/instruction-templates $out/instruction-templates
+    ln -s ${tmpDir}/logs $out/logs
   '';
   textgenPython = python3Packages.python.withPackages (_: with python3Packages; [
     accelerate
@@ -121,16 +109,19 @@ in
   fi
   rm -rf ${tmpDir}
   mkdir -p ${tmpDir}
-  mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/prompts ${stateDir}/characters ${stateDir}/presets
+  mkdir -p ${stateDir}/{models,cache,loras,prompts,characters,presets,instruction-templates,logs}
   cp -r --no-preserve=mode ${patchedSrc}/_prompts/* ${stateDir}/prompts/
   cp -r --no-preserve=mode ${patchedSrc}/_characters/* ${stateDir}/characters/
   cp -r --no-preserve=mode ${patchedSrc}/_presets/* ${stateDir}/presets/
+  cp -r --no-preserve=mode ${patchedSrc}/_instruction-templates/* ${stateDir}/instruction-templates/
   ln -s ${stateDir}/models/ ${tmpDir}/models
   ln -s ${stateDir}/loras/ ${tmpDir}/loras
   ln -s ${stateDir}/cache/ ${tmpDir}/cache
   ln -s ${stateDir}/prompts/ ${tmpDir}/prompts
   ln -s ${stateDir}/characters/ ${tmpDir}/characters
   ln -s ${stateDir}/presets/ ${tmpDir}/presets
+  ln -s ${stateDir}/instruction-templates ${tmpDir}/instruction-templates
+  ln -s ${stateDir}/logs ${tmpDir}/logs
   ${lib.optionalString (python3Packages.torch.rocmSupport or false) rocmInit}
   export LD_LIBRARY_PATH=/run/opengl-driver/lib:${cudaPackages.cudatoolkit}/lib
   ${textgenPython}/bin/python ${patchedSrc}/server.py $@ \

@@ -1,4 +1,4 @@
-{ fetchFromBittorrent
+{ fetchtorrent
 , runCommand
 , unzip
 , dosbox-x
@@ -17,7 +17,7 @@
 { dosPostInstall ? "", ... }:
 let
   msdos622 = makeMsDos622Image {};
-  wfwg311-installer = fetchFromBittorrent {
+  wfwg311-installer = fetchtorrent {
     url = "https://archive.org/download/ms-wfw311-12mb-retail/ms-wfw311-12mb-retail_archive.torrent";
     hash = "sha256-7ZYP9DegRTUi4sRzkKO8t0kxxV1gVMnD9jVEQFp3TYc=";
   };

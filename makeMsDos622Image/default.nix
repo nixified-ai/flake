@@ -1,4 +1,4 @@
-{ fetchFromBittorrent
+{ fetchtorrent
 , runCommand
 , unzip
 , dosbox-x
@@ -14,7 +14,7 @@
 }:
 { dosPostInstall ? "", ... }:
 let
-  msdos622-installer = fetchFromBittorrent {
+  msdos622-installer = fetchtorrent {
     url = "https://archive.org/download/MS_DOS_6.22_MICROSOFT/MS_DOS_6.22_MICROSOFT_archive.torrent";
     hash = "sha256-B88pYYF9TzVscXqBwql2vSPyp2Yf2pxJ75ywFjUn1RY=";
   };

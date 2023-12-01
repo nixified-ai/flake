@@ -1,4 +1,4 @@
-{ fetchFromBittorrent
+{ fetchtorrent
 , runCommand
 , unzip
 , dosbox-x
@@ -17,7 +17,7 @@
 { dosPostInstall ? "", ... }:
 let
   msdos622 = makeMsDos622Image {};
-  win30-installer = fetchFromBittorrent {
+  win30-installer = fetchtorrent {
     url = "https://archive.org/download/windows-3.0-720-kb-disks/windows-3.0-720-kb-disks_archive.torrent";
     hash = "sha256-PJ+qM0lFSYy+DC08myJGrtDQGZOQHltc0JRjV+niNXA=";
   };

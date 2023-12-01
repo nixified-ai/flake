@@ -93,6 +93,65 @@ This flake exports a function `makeDarwinImage` which takes a `diskSizeBytes` ar
 }
 ```
 
+# Windows/DOS
+
+Each of the outputs in this flake have their own image builders and `runScript`.
+
+- `makeMsDos622Image`
+- `makeWin30Image`
+- `makeWfwg311Image`
+
+They can each be passed the `dosPostInstall` argument arbitrary **dos
+commands** to be ran after Windows has been installed, for example here's how
+you can use them to build an image that adds `win` to the `AUTOEXEC.BAT`
+
+##### Example
+
+```nix
+makeWin30Image {
+  dosPostInstall = ''
+    c:
+    echo win >> AUTOEXEC.BAT
+  '';
+}
+```
+
+The `runScript` is a method of the image builder, for example `makeWin30Image {}).runScript`. Additionally there is a `makeRunScript` method which can be passed arguments like `diskImage`.
+
+##### Example
+
+```nix
+(makeWin30Image {}).makeRunScript {
+  diskImage = makeWin30Image {
+    dosPostInstall = "echo foo";
+  };
+}
+```
+
+## MS Dos 6.22
+
+#### Launch MS Dos 6.22 with a single `nix` command
+
+`nix run github:matthewcroughan/NixThePlanet#msdos622`
+
+![msdos622](https://github.com/MatthewCroughan/NixThePlanet/assets/26458780/909e3953-5c9b-4eed-86ef-9183d13f0e0c)
+
+## Windows 3.0
+
+#### Launch Windows 3.0 with a single `nix` command
+
+`nix run github:matthewcroughan/NixThePlanet#win30`
+
+![win30](https://github.com/MatthewCroughan/NixThePlanet/assets/26458780/9a2b5638-190a-4fbc-b4e8-93f581776cd3)
+
+## Windows 3.11 (For Workgroups)
+
+#### Launch Windows For WorkGroups 3.11 with a single `nix` command
+
+`nix run github:matthewcroughan/NixThePlanet#wfwg311`
+
+![wfwg311](https://github.com/MatthewCroughan/NixThePlanet/assets/26458780/107dd737-64b1-4fa8-ba67-2cd979f84ac6)
+
 # TODO
 
 - Remove dependency on vncdo, use qemu framebuffer directly

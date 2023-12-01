@@ -80,7 +80,7 @@
           msdos622-image = config.legacyPackages.makeMsDos622Image {};
           win30-image = config.legacyPackages.makeWin30Image {};
           wfwg311-image = config.legacyPackages.makeWfwg311Image {};
-          system7-image = config.legacyPackages.makeSystem7Image {};
+          #system7-image = config.legacyPackages.makeSystem7Image {};
           macos-repeatability-test = genOverridenDrvLinkFarm macos-ventura-image 10;
           wfwg311-repeatability-test = genOverridenDrvLinkFarm wfwg311-image 1000;
           win30-repeatability-test = genOverridenDrvLinkFarm win30-image 1000;

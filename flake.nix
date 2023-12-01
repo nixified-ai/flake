@@ -10,8 +10,10 @@
       ];
       systems = [
         "x86_64-linux"
-        "aarch64-linux" ];
+        "aarch64-linux"
+      ];
       flake = {
+        packages.aarch64-linux.macos-ventura-image = throw "QEMU TCG doesn't emulate certain CPU features needed for MacOS x86 to boot, unsupported";
         nixosModules = {
           macos-ventura = { ... }: {
             imports = [ ./makeDarwinImage/module.nix ];
@@ -81,10 +83,10 @@
           win30-image = config.legacyPackages.makeWin30Image {};
           wfwg311-image = config.legacyPackages.makeWfwg311Image {};
           #system7-image = config.legacyPackages.makeSystem7Image {};
-          macos-repeatability-test = genOverridenDrvLinkFarm macos-ventura-image 10;
-          wfwg311-repeatability-test = genOverridenDrvLinkFarm wfwg311-image 1000;
-          win30-repeatability-test = genOverridenDrvLinkFarm win30-image 1000;
-          msDos622-repeatability-test = genOverridenDrvLinkFarm msdos622-image 1000;
+          #macos-repeatability-test = genOverridenDrvLinkFarm macos-ventura-image 10;
+          #wfwg311-repeatability-test = genOverridenDrvLinkFarm wfwg311-image 1000;
+          #win30-repeatability-test = genOverridenDrvLinkFarm win30-image 1000;
+          #msDos622-repeatability-test = genOverridenDrvLinkFarm msdos622-image 1000;
         };
         checks = {
           macos-ventura = pkgs.callPackage ./makeDarwinImage/vm-test.nix { nixosModule = inputs.self.nixosModules.macos-ventura; };

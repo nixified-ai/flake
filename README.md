@@ -96,6 +96,8 @@ This flake exports a function `makeDarwinImage` which takes a `diskSizeBytes` ar
 # TODO
 
 - Remove dependency on vncdo, use qemu framebuffer directly
+- Create nixosModules and VM Tests for win30, wfwg311, msdos622
+- Create derivation based checks/tests for win30, wfwg311, msdos622 using telnet
 - Find a more reproducible way of fetching macOS BaseSystems, currently the
   board identifier determines what is fetched, and Apple changes what OS is
   compatible with which board identifier routinely

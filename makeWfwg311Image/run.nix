@@ -13,6 +13,9 @@
 }:
 let
   dosboxConf = writeText "dosbox.conf" ''
+    [sdl]
+    autolock = true
+
     [autoexec]
     imgmount C wfwg311.img
     boot -l C

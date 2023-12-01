@@ -8,6 +8,9 @@
 }:
 let
   dosboxConf = writeText "dosbox.conf" ''
+    [sdl]
+    autolock = true
+
     [autoexec]
     imgmount 2 msdos622.img -fs none
     boot -l c

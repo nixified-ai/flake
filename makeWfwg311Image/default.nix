@@ -54,7 +54,7 @@ let
   in writeScript "expect.sh"
   ''
     #!${expect}/bin/expect -f
-    set debug
+    set debug 5
     set timeout -1
     spawn ${tesseractScript}
     expect "CiN"

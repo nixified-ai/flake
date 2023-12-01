@@ -97,6 +97,10 @@ let
     # set __impure = true; for debugging
     # __impure = true;
     buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
+    passthru = rec {
+      makeRunScript = callPackage ./run.nix;
+      runScript = makeRunScript {};
+    };
   } ''
     echo "wfwg311-installer src: ${wfwg311-installer}"
     mkdir wfwg311

@@ -12,13 +12,12 @@
 , writeText
 , callPackage
 }:
-{ ... }:
+{ dosPostInstall ? "", ... }:
 let
-  msdos622 = fetchFromBittorrent {
+  msdos622-installer = fetchFromBittorrent {
     url = "https://archive.org/download/MS_DOS_6.22_MICROSOFT/MS_DOS_6.22_MICROSOFT_archive.torrent";
     hash = "sha256-B88pYYF9TzVscXqBwql2vSPyp2Yf2pxJ75ywFjUn1RY=";
   };
-
   dosboxConf = writeText "dosbox.conf" ''
     [cpu]
     turbo=on
@@ -28,7 +27,6 @@ let
     imgmount 2 disk.img -size 512,63,16,507 -fs none
     boot "msdos/MS DOS 6.22/Disk 1.img" "msdos/MS DOS 6.22/Disk 2.img" "msdos/MS DOS 6.22/Disk 3.img"
   '';
-
   tesseractScript = writeShellScript "tesseractScript" ''
     export OMP_THREAD_LIMIT=1
     cd $(mktemp -d)
@@ -44,7 +42,6 @@ let
       fi
     done
   '';
-
   expectScript = let
     vncdoWrapper = writeScript "vncdoWrapper" ''
       sleep 3
@@ -78,25 +75,45 @@ let
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';
-in runCommand "msdos622.img" {
-  buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
-  passthru = rec {
-    makeRunScript = callPackage ./run.nix;
-    runScript = makeRunScript {};
-  };
-  # set __impure = true; for debugging
-  # __impure = true;
-} ''
-  echo ${msdos622}
-  mkdir win
-  mkdir msdos
-  unzip '${msdos622}/MS DOS 6.22.zip' -d msdos
-  dd if=/dev/zero of=disk.img count=8192 bs=31941
-  xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
-  dosboxPID=$!
-  DISPLAY=:99 XAUTHORITY=/tmp/xvfb.auth x11vnc -many -shared -display :99 >/dev/null 2>&1 &
-  ${expectScript} &
-  wait $!
-  kill $dosboxPID
-  mv disk.img $out
-''
+  installedImage = runCommand "msdos622.img" {
+    # set __impure = true; for debugging
+    # __impure = true;
+    buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
+    passthru = rec {
+      makeRunScript = callPackage ./run.nix;
+      runScript = makeRunScript {};
+    };
+  } ''
+    echo "msdos622-installer src: ${msdos622-installer}"
+    mkdir msdos
+    unzip '${msdos622-installer}/MS DOS 6.22.zip' -d msdos
+    ls -lah msdos
+    dd if=/dev/zero of=disk.img count=8192 bs=31941
+    xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
+    dosboxPID=$!
+    DISPLAY=:99 XAUTHORITY=/tmp/xvfb.auth x11vnc -many -shared -display :99 >/dev/null 2>&1 &
+    ${expectScript} &
+    wait $!
+    kill $dosboxPID
+    mv disk.img $out
+  '';
+  postInstalledImage = let
+    dosboxConf-postInstall = writeText "dosbox.conf" ''
+      [cpu]
+      turbo=on
+      stop turbo on key = false
+
+      [autoexec]
+      imgmount C disk.img -size 512,63,16,507 -t hdd -fs fat
+      ${dosPostInstall}
+      exit
+    '';
+  in runCommand "msdos622.img" {
+    buildInputs = [ dosbox-x ];
+    inherit (installedImage) passthru;
+  } ''
+    cp --no-preserve=mode ${installedImage} ./disk.img
+    SDL_VIDEODRIVER=dummy dosbox-x -conf ${dosboxConf-postInstall}
+    mv disk.img $out
+  '';
+in if (dosPostInstall != "") then postInstalledImage else installedImage

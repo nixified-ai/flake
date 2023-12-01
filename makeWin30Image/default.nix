@@ -14,38 +14,23 @@
 , fetchFromGitHub
 , callPackage
 }:
-{ ... }:
+{ dosPostInstall ? "", ... }:
 let
-  msDos622 = makeMsDos622Image {};
-
-  win30 = fetchFromBittorrent {
+  msdos622 = makeMsDos622Image {};
+  win30-installer = fetchFromBittorrent {
     url = "https://archive.org/download/windows-3.0-720-kb-disks/windows-3.0-720-kb-disks_archive.torrent";
     hash = "sha256-PJ+qM0lFSYy+DC08myJGrtDQGZOQHltc0JRjV+niNXA=";
   };
-
   dosboxConf = writeText "dosbox.conf" ''
     [cpu]
     turbo=on
     stop turbo on key = false
 
     [autoexec]
-    imgmount C msdos622.img -size 512,63,16,507 -t hdd -fs fat
+    imgmount C msdos622.img
     imgmount A win30/DISK01.IMG win30/DISK02.IMG win30/DISK03.IMG win30/DISK04.IMG win30/DISK05.IMG win30/DISK06.IMG win30/DISK07.IMG -t floppy -fs fat
     boot -l C
   '';
-
-  dosboxConf-stage2 = writeText "dosbox.conf" ''
-    [cpu]
-    turbo=on
-    stop turbo on key = false
-
-    [autoexec]
-    imgmount c msdos622.img -size 512,63,16,507 -t hdd -fs fat
-    c:
-    echo win >> AUTOEXEC.BAT
-    exit
-  '';
-
   tesseractScript = writeShellScript "tesseractScript" ''
     export OMP_THREAD_LIMIT=1
     cd $(mktemp -d)
@@ -61,7 +46,6 @@ let
       fi
     done
   '';
-
   expectScript = let
     vncdoWrapper = writeScript "vncdoWrapper" ''
       sleep 3
@@ -109,49 +93,47 @@ let
     exec ${vncdoWrapper} key enter
     expect "CiN"
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
-    exit 0
+    exit 0 '';
+  installedImage = runCommand "win30.img" {
+    # set __impure = true; for debugging
+    # __impure = true;
+    buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
+    passthru = rec {
+      makeRunScript = callPackage ./run.nix;
+      runScript = makeRunScript {};
+    };
+  } ''
+    echo "win30-installer src: ${win30-installer}"
+    mkdir win30
+    unzip '${win30-installer}/Microsoft Windows 3.0 (3.5-720K).zip' -d win30
+    ls -lah win30
+    cp --no-preserve=mode ${msdos622} ./msdos622.img
+    xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
+    dosboxPID=$!
+    DISPLAY=:99 XAUTHORITY=/tmp/xvfb.auth x11vnc -many -shared -display :99 >/dev/null 2>&1 &
+    vncPID=$!
+    ${expectScript} &
+    wait $!
+    kill $dosboxPID
+    cp msdos622.img $out
   '';
+  postInstalledImage = let
+    dosboxConf-postInstall = writeText "dosbox.conf" ''
+      [cpu]
+      turbo=on
+      stop turbo on key = false
 
-in
-runCommand "win30.img" {
-  buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
-  passthru = rec {
-    makeRunScript = callPackage ./run.nix;
-    runScript = makeRunScript {};
-  };
-  # set __impure = true; for debugging
-  # __impure = true;
-    } ''
-  echo ${win30}
-  mkdir win30
-  unzip '${win30}/Microsoft Windows 3.0 (3.5-720K).zip' -d win30
-  cp --no-preserve=mode ${msDos622} ./msdos622.img
-
-  xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
-  dosboxPID=$!
-  DISPLAY=:99 XAUTHORITY=/tmp/xvfb.auth x11vnc -many -shared -display :99 >/dev/null 2>&1 &
-  vncPID=$!
-  ${expectScript} &
-  wait $!
-  kill -9 $dosboxPID
-  kill -9 $vncPID
-
-      sleep 10
-echo "EXECUTING STAGE 2"
-echo "EXECUTING STAGE 2"
-echo "EXECUTING STAGE 2"
-echo "EXECUTING STAGE 2"
-echo "EXECUTING STAGE 2"
-echo "EXECUTING STAGE 2"
-  SDL_VIDEODRIVER=dummy dosbox-x -conf ${dosboxConf-stage2}
-echo "DONE WITH STAGE 2"
-echo "DONE WITH STAGE 2"
-echo "DONE WITH STAGE 2"
-
-      sync
-      ls -lah
-      ls -lah
-      ls -lah
-      ls -lah
-  cp msdos622.img $out
-''
+      [autoexec]
+      imgmount C win30.img
+      ${dosPostInstall}
+      exit
+    '';
+  in runCommand "win30.img" {
+    buildInputs = [ dosbox-x ];
+    inherit (installedImage) passthru;
+  } ''
+    cp --no-preserve=mode ${installedImage} ./win30.img
+    SDL_VIDEODRIVER=dummy dosbox-x -conf ${dosboxConf-postInstall}
+    mv win30.img $out
+  '';
+in if (dosPostInstall != "") then postInstalledImage else installedImage

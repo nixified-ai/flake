@@ -104,7 +104,7 @@ This flake exports a function `makeDarwinImage` which takes a `diskSizeBytes` ar
 - Find a way of getting serial access for Dosbox so we can make `runInWin311`
   and similar functions
 - Implement `runInDarwinVM` using the `makeDarwinImage` primitive
-- Remove dependency on OSX-KVM that is currently being cargo-culted into the
+- Remove dependency on OSX-KVM that is currently being copied into the
   repository without a git submodule
 - Reproduce OpenCore qcow2 image ourselves
 - Put screen captures into `$out` for the image builders using `vncdo`, would
@@ -115,6 +115,18 @@ This flake exports a function `makeDarwinImage` which takes a `diskSizeBytes` ar
 - Make some installation options configurable, such as initial username/pass for
   all image builders
 - Create a watchdog to retry if failure/hanging is encountered
+- Create `runInDos` primitive using telnet and dosbox-x serial, would look
+  something like:
+  ```
+  runInDos ''
+    c:
+    echo hello world > file
+  ''
+  ```
+- Make the Windows < 3.11 installers less dependent on source floppy disk count,
+  perhaps by making a single 10MB FAT16/FAT12 HDD/FLOPPY with all the files in,
+  so DOSBox only has to mount a single disk, or maybe we can just make a Windows
+  rootfs ourselves from scratch
 
 # Known Issues
 

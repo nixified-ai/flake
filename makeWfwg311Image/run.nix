@@ -2,9 +2,9 @@
 , writeText
 , lib
 , dosbox-x
-, makeWin30Image
+, makeWfwg311Image
 , extraDosboxFlags ? []
-, diskImage ? makeWin30Image {
+, diskImage ? makeWfwg311Image {
     dosPostInstall = ''
       c:
       echo win >> AUTOEXEC.BAT
@@ -14,20 +14,20 @@
 let
   dosboxConf = writeText "dosbox.conf" ''
     [autoexec]
-    imgmount C win30.img
+    imgmount C wfwg311.img
     boot -l C
   '';
 in
-writeShellScriptBin "run-win30.sh" ''
+writeShellScriptBin "run-wfwg311.sh" ''
   args=(
     -conf ${dosboxConf}
     ${lib.concatStringsSep " " extraDosboxFlags}
     "$@"
   )
 
-  if [ ! -f win30.img ]; then
-    echo "win30.img not found, making disk image ./win30.img"
-    cp --no-preserve=mode ${diskImage} ./win30.img
+  if [ ! -f wfwg311.img ]; then
+    echo "wfwg311.img not found, making disk image ./wfwg311.img"
+    cp --no-preserve=mode ${diskImage} ./wfwg311.img
   fi
 
   run_dosbox() {

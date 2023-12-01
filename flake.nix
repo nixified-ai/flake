@@ -33,8 +33,8 @@
                 src = super.fetchFromGitHub {
                   owner = "joncampbell123";
                   repo = "dosbox-x";
-                  rev = "d2febc9ad28c7e3a4e4c3f52c8159d693078679b";
-                  hash = "sha256-O+qpdkHOHSYG2BSlNxeTW+tMRUxrnQW/iEFx6DIGOik=";
+                  rev = "f8e923696c29760aae974e9444229ed210d97cb9";
+                  hash = "sha256-3VP0dTAntWPzrGOIxI22/Y6ienq9rYUf7wMlHd6flu4=";
                 };
               };
             })

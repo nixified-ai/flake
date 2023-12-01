@@ -12,28 +12,25 @@
 , writeText
 , makeMsDos622Image
 , fetchFromGitHub
+, callPackage
 }:
-{ ... }:
+{ dosPostInstall ? "", ... }:
 let
-  msDos622 = makeMsDos622Image {};
-
-  wfwg311 = fetchFromBittorrent {
+  msdos622 = makeMsDos622Image {};
+  wfwg311-installer = fetchFromBittorrent {
     url = "https://archive.org/download/ms-wfw311-12mb-retail/ms-wfw311-12mb-retail_archive.torrent";
     hash = "sha256-7ZYP9DegRTUi4sRzkKO8t0kxxV1gVMnD9jVEQFp3TYc=";
   };
-
   dosboxConf = writeText "dosbox.conf" ''
     [cpu]
     turbo=on
     stop turbo on key = false
 
     [autoexec]
-    imgmount C msdos622.img -size 512,63,16,507 -t hdd -fs fat
+    imgmount C msdos622.img
     imgmount A -t floppy wfwg311/DISK01.IMG wfwg311/DISK02.IMG wfwg311/DISK03.IMG wfwg311/DISK04.IMG wfwg311/DISK05.IMG wfwg311/DISK06.IMG wfwg311/DISK07.IMG wfwg311/DISK08.IMG wfwg311/DISK09.IMG wfwg311/DISK10.IMG
-
     boot -l C
   '';
-
   tesseractScript = writeShellScript "tesseractScript" ''
     export OMP_THREAD_LIMIT=1
     cd $(mktemp -d)
@@ -49,7 +46,6 @@ let
       fi
     done
   '';
-
   expectScript = let
     vncdoWrapper = writeScript "vncdoWrapper" ''
       sleep 3
@@ -58,7 +54,7 @@ let
   in writeScript "expect.sh"
   ''
     #!${expect}/bin/expect -f
-    set debug 5
+    set debug
     set timeout -1
     spawn ${tesseractScript}
     expect "CiN"
@@ -97,24 +93,41 @@ let
     send_user "\n### OMG DID IT WORK???!!!! ###\n"
     exit 0
   '';
+  installedImage = runCommand "wfwg311.img" {
+    # set __impure = true; for debugging
+    # __impure = true;
+    buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
+  } ''
+    echo "wfwg311-installer src: ${wfwg311-installer}"
+    mkdir wfwg311
+    cp -r --no-preserve=mode ${wfwg311-installer}/*.IMG wfwg311
+    ls -lah wfwg311
+    cp --no-preserve=mode ${msdos622} ./msdos622.img
+    xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
+    dosboxPID=$!
+    DISPLAY=:99 XAUTHORITY=/tmp/xvfb.auth x11vnc -many -shared -display :99 >/dev/null 2>&1 &
+    ${expectScript} &
+    wait $!
+    kill $dosboxPID
+    cp ./msdos622.img $out
+  '';
+  postInstalledImage = let
+    dosboxConf-postInstall = writeText "dosbox.conf" ''
+      [cpu]
+      turbo=on
+      stop turbo on key = false
 
-in
-runCommand "wfwg311.img" { buildInputs = [ unzip dosbox-x xvfb-run x11vnc ];
-  # set __impure = true; for debugging
-  # __impure = true;
-    } ''
-  echo ${wfwg311}
-  mkdir wfwg311
-  cp -r --no-preserve=mode ${wfwg311}/*.IMG wfwg311
-  ls -lah wfwg311
-#  dd if=/dev/zero of=disk.img count=8192 bs=31941
-  cp --no-preserve=mode ${msDos622} ./msdos622.img
-
-  xvfb-run -l -s ":99 -auth /tmp/xvfb.auth -ac -screen 0 800x600x24" dosbox-x -conf ${dosboxConf} || true &
-  dosboxPID=$!
-  DISPLAY=:99 XAUTHORITY=/tmp/xvfb.auth x11vnc -many -shared -display :99 >/dev/null 2>&1 &
-  ${expectScript} &
-  wait $!
-  kill $dosboxPID
-  mv ./msdos622.img $out
-''
+      [autoexec]
+      imgmount C wfwg311.img
+      ${dosPostInstall}
+      exit
+    '';
+  in runCommand "wfwg311.img" {
+    buildInputs = [ dosbox-x ];
+    inherit (installedImage) passthru;
+  } ''
+    cp --no-preserve=mode ${installedImage} ./wfwg311.img
+    SDL_VIDEODRIVER=dummy dosbox-x -conf ${dosboxConf-postInstall}
+    mv wfwg311.img $out
+  '';
+in if (dosPostInstall != "") then postInstalledImage else installedImage

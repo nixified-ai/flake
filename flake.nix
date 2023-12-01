@@ -70,6 +70,10 @@
             type = "app";
             program = config.packages.win30-image.runScript;
           };
+          wfwg311 = {
+            type = "app";
+            program = config.packages.wfwg311-image.runScript;
+          };
         };
         packages = rec {
           macos-ventura-image = config.legacyPackages.makeDarwinImage {};

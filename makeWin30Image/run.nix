@@ -13,6 +13,9 @@
 }:
 let
   dosboxConf = writeText "dosbox.conf" ''
+    [sdl]
+    autolock = true
+
     [autoexec]
     imgmount C win30.img
     boot -l C

@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    hercules-ci-effects.url = "github:hercules-ci/hercules-ci-effects";
   };
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -13,6 +14,56 @@
         "aarch64-linux"
       ];
       flake = {
+        herculesCI.ciSystems = [ "x86_64-linux" ];
+        effects = let
+          pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+          hci-effects = inputs.hercules-ci-effects.lib.withPkgs pkgs;
+        in { branch, rev, ... }: {
+          macos-repeatability-test = hci-effects.mkEffect {
+            secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
+            buildInputs = with pkgs; [ libwebp gnutar curl nix jq ];
+            effectScript = ''
+              readSecretString ipfsBasicAuth .basicauth > .basicauth
+
+              export NIX_CONFIG="experimental-features = nix-command flakes"
+              export TMPDIR="$(pwd)/nixtheplanet-tmpdir"
+              mkdir $TMPDIR nixtheplanet-test-logs
+
+              nix build --store $(pwd) github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed
+
+              max_iterations=1
+              iteration=0
+
+              while [ $iteration -lt $max_iterations ]; do
+                  if ! nix build --store $(pwd) --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed
+                then
+                  nix log --store $(pwd) github:matthewcroughan/nixtheplanet#macos-ventura-image > nixtheplanet-test-logs/log-$(date +%s)-$RANDOM.txt
+
+                  for i in $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
+                  do
+                    ( cwebp -q 10 $i -o $i.webp; rm $i ) &
+                  done
+                  wait
+
+                  tar --zstd -cf nixtheplanet-macos-debug.tar.zst $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*
+
+                  set -x
+                  export RESPONSE=$(curl -H @.basicauth -F file=@nixtheplanet-macos-debug.tar.zst https://ipfs-api.croughan.sh/api/v0/add)
+                  export CID=$(echo "$RESPONSE" | jq -r .Hash)
+                  set +x
+                  export ADDRESS="https://ipfs.croughan.sh/ipfs/$CID"
+
+                  echo NixThePlanet: iteration "$iteration" failed
+                  echo NixThePlanet: Failure screen capture is available at: "$ADDRESS"
+                  exit 1
+                fi
+
+                echo NixThePlanet: iteration "$iteration" succeeded
+                ((iteration++))
+              done
+            '';
+          };
+        };
         packages.aarch64-linux.macos-ventura-image = throw "QEMU TCG doesn't emulate certain CPU features needed for MacOS x86 to boot, unsupported";
         nixosModules = {
           macos-ventura = { ... }: {
@@ -77,7 +128,7 @@
             program = config.packages.wfwg311-image.runScript;
           };
         };
-        packages = rec {
+        packages = {
           macos-ventura-image = config.legacyPackages.makeDarwinImage {};
           msdos622-image = config.legacyPackages.makeMsDos622Image {};
           win30-image = config.legacyPackages.makeWin30Image {};

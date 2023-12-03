@@ -23,6 +23,9 @@
             secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
             buildInputs = with pkgs; [ libwebp gnutar curl nix jq ];
             effectScript = ''
+              mkdir -m 0755 /etc/nix
+              echo "build-users-group =" > /etc/nix/nix.conf
+
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
               export NIX_CONFIG="experimental-features = nix-command flakes"

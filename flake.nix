@@ -33,6 +33,7 @@
               iteration=0
 
               function upload_failure {
+                set +e
                 nix log github:matthewcroughan/nixtheplanet#macos-ventura-image > nixtheplanet-test-logs/log-$(date +%s)-$RANDOM.txt
                 for i in $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
                 do
@@ -53,6 +54,7 @@
 
               while [ $iteration -lt $max_iterations ]
               do
+                set +e
                 if ! nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed
                 then
                   upload_failure
@@ -61,6 +63,7 @@
                 then
                   upload_failure
                 fi
+                set -e
                 echo NixThePlanet: iteration "$iteration" succeeded
                 ((iteration++))
               done

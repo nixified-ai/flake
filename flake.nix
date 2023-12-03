@@ -34,15 +34,11 @@
               export NIX_STATE_DIR=$ROOT/var/nix
               export NIX_CONF_DIR=$ROOT/etc
 
-              export TMPDIR="$(pwd)"
-              mkdir $TMPDIR nixtheplanet-test-logs
-
               max_iterations=1
               iteration=0
 
               function upload_failure {
                 set +e
-                nix log github:matthewcroughan/nixtheplanet#macos-ventura-image > nixtheplanet-test-logs/log-$(date +%s)-$RANDOM.txt
                 for i in $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
                 do
                   ( cwebp -q 10 $i -o $i.webp; rm $i ) &

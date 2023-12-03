@@ -19,15 +19,20 @@
           pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
           hci-effects = inputs.hercules-ci-effects.lib.withPkgs pkgs;
         in { branch, rev, ... }: {
-          macos-repeatability-test = hci-effects.mkEffect {
+          macos-repeatability-test = let
+            closure = pkgs.closureInfo {
+              rootPaths = [ inputs.self.packages.x86_64-linux.macos-ventura-image ];
+            };
+          in hci-effects.mkEffect {
             secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
             buildInputs = with pkgs; [ libwebp gnutar curl nix jq ];
             effectScript = ''
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
-              export NIX_CONFIG="experimental-features = nix-command flakes read-only-local-store"
+              export NIX_CONFIG="experimental-features = nix-command flakes"
               export TMPDIR="$(pwd)/nixtheplanet-tmpdir"
               mkdir $TMPDIR nixtheplanet-test-logs
+              nix-store --load-db < ${closure}/registration
 
               max_iterations=1
               iteration=0

@@ -55,15 +55,14 @@
               do
                 set +e
                 echo 'Running Nix'
-                if ! nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
+                if ! nix build --store $TMPDIR github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
                 then
-                  ls -lah /tmp
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed
                   exit 1
                 fi
                 echo 'Running Nix'
-                if ! nix build --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed -L
+                if ! nix build --store $TMPDIR --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed

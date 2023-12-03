@@ -54,6 +54,7 @@
               while [ $iteration -lt $max_iterations ]
               do
                 set +e
+                ls -lah /tmp
                 echo 'Running Nix'
                 if ! nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
                 then

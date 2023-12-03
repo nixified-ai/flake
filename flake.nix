@@ -26,7 +26,7 @@
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
               export NIX_CONFIG="experimental-features = nix-command flakes"
-              export TMPDIR="$(mktemp -d)/nixtheplanet-tmpdir"
+              export TMPDIR="$(pwd)"
               mkdir $TMPDIR nixtheplanet-test-logs
 
               max_iterations=1

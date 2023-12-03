@@ -47,7 +47,6 @@
                 set +x
                 export ADDRESS="https://ipfs.croughan.sh/ipfs/$CID"
 
-                echo NixThePlanet: iteration "$iteration" failed
                 echo NixThePlanet: Failure screen capture is available at: "$ADDRESS"
                 exit 254
               }
@@ -58,11 +57,13 @@
                 if ! nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed
                 then
                   upload_failure
+                  echo NixThePlanet: iteration "$iteration" failed
                   exit 1
                 fi
                 if ! nix build --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed
                 then
                   upload_failure
+                  echo NixThePlanet: iteration "$iteration" failed
                   exit 1
                 fi
                 set -e

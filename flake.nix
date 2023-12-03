@@ -58,10 +58,12 @@
                 if ! nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed
                 then
                   upload_failure
+                  exit 1
                 fi
                 if ! nix build --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed
                 then
                   upload_failure
+                  exit 1
                 fi
                 set -e
                 echo NixThePlanet: iteration "$iteration" succeeded

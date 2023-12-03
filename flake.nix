@@ -29,35 +29,38 @@
               export TMPDIR="/tmp"
               mkdir $TMPDIR nixtheplanet-test-logs
 
-              nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed
-
               max_iterations=1
               iteration=0
 
-              while [ $iteration -lt $max_iterations ]; do
-                  if ! nix build --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed
+              function upload_failure {
+                nix log github:matthewcroughan/nixtheplanet#macos-ventura-image > nixtheplanet-test-logs/log-$(date +%s)-$RANDOM.txt
+                for i in $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
+                do
+                  ( cwebp -q 10 $i -o $i.webp; rm $i ) &
+                done
+                wait
+                tar --zstd -cf nixtheplanet-macos-debug.tar.zst $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*
+                set -x
+                export RESPONSE=$(curl -H @.basicauth -F file=@nixtheplanet-macos-debug.tar.zst https://ipfs-api.croughan.sh/api/v0/add)
+                export CID=$(echo "$RESPONSE" | jq -r .Hash)
+                set +x
+                export ADDRESS="https://ipfs.croughan.sh/ipfs/$CID"
+
+                echo NixThePlanet: iteration "$iteration" failed
+                echo NixThePlanet: Failure screen capture is available at: "$ADDRESS"
+                exit 254
+              }
+
+              while [ $iteration -lt $max_iterations ]
+              do
+                if ! nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed
                 then
-                  nix log github:matthewcroughan/nixtheplanet#macos-ventura-image > nixtheplanet-test-logs/log-$(date +%s)-$RANDOM.txt
-
-                  for i in $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
-                  do
-                    ( cwebp -q 10 $i -o $i.webp; rm $i ) &
-                  done
-                  wait
-
-                  tar --zstd -cf nixtheplanet-macos-debug.tar.zst $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*
-
-                  set -x
-                  export RESPONSE=$(curl -H @.basicauth -F file=@nixtheplanet-macos-debug.tar.zst https://ipfs-api.croughan.sh/api/v0/add)
-                  export CID=$(echo "$RESPONSE" | jq -r .Hash)
-                  set +x
-                  export ADDRESS="https://ipfs.croughan.sh/ipfs/$CID"
-
-                  echo NixThePlanet: iteration "$iteration" failed
-                  echo NixThePlanet: Failure screen capture is available at: "$ADDRESS"
-                  exit 1
+                  upload_failure
                 fi
-
+                if ! nix build --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed
+                then
+                  upload_failure
+                fi
                 echo NixThePlanet: iteration "$iteration" succeeded
                 ((iteration++))
               done

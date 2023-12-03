@@ -29,15 +29,15 @@
               export TMPDIR="$(pwd)/nixtheplanet-tmpdir"
               mkdir $TMPDIR nixtheplanet-test-logs
 
-              nix build --store $(pwd) github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed
+              nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed
 
               max_iterations=1
               iteration=0
 
               while [ $iteration -lt $max_iterations ]; do
-                  if ! nix build --store $(pwd) --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed
+                  if ! nix build --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed
                 then
-                  nix log --store $(pwd) github:matthewcroughan/nixtheplanet#macos-ventura-image > nixtheplanet-test-logs/log-$(date +%s)-$RANDOM.txt
+                  nix log github:matthewcroughan/nixtheplanet#macos-ventura-image > nixtheplanet-test-logs/log-$(date +%s)-$RANDOM.txt
 
                   for i in $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
                   do

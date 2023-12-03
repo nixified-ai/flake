@@ -26,7 +26,7 @@
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
               export NIX_CONFIG="experimental-features = nix-command flakes"
-              export TMPDIR="$(pwd)/nixtheplanet-tmpdir"
+              export TMPDIR="/tmp"
               mkdir $TMPDIR nixtheplanet-test-logs
 
               nix build github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed

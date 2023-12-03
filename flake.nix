@@ -25,7 +25,15 @@
             effectScript = ''
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
+              export HOME=$TMP
+              export ROOT=$TMP
               export NIX_CONFIG="experimental-features = nix-command flakes"
+              export NIX_STATE_DIR=$ROOT/var/nix
+              export NIX_LOCALSTATE_DIR=$ROOT/var
+              export NIX_LOG_DIR=$ROOT/var/log/nix
+              export NIX_STATE_DIR=$ROOT/var/nix
+              export NIX_CONF_DIR=$ROOT/etc
+
               export TMPDIR="$(pwd)"
               mkdir $TMPDIR nixtheplanet-test-logs
 

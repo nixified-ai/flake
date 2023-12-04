@@ -62,14 +62,14 @@
               do
                 set +e
                 echo 'Running Nix'
-                if ! nix build --option build-users-group "" --option substituters daemon --store "$ROOT" --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
+                if ! nix build --option build-users-group "" --option substituters daemon --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed
                   exit 1
                 fi
                 echo 'Running Nix'
-                if ! nix build --option build-users-group "" --store "$ROOT" --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed -L
+                if ! nix build --option build-users-group "" --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed

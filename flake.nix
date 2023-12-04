@@ -72,6 +72,12 @@
 
               echo 'Running Nix for the first time'
               nix_output=$(build)
+              echo $nix_output
+              echo $nix_output
+              echo $nix_output
+              echo $nix_output
+              echo $nix_output
+              echo $nix_output
               if [[ "$nix_output" == *"/tmp"* ]]
               then
                 upload_failure $nix_output

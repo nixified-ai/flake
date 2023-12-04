@@ -35,7 +35,7 @@
               export NIX_REMOTE=local?root=$(pwd)/nixstore
               unset NIX_STORE
 
-              nix-store --load-db < ${closure}/registration
+#              nix-store --load-db < ${closure}/registration
 
               max_iterations=1
               iteration=0

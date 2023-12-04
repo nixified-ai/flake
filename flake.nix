@@ -61,6 +61,7 @@
               do
                 set +e
                 echo 'Running Nix'
+                nix show-config | grep trusted
                 if ! nix build --option trusted-users root --option build-users-group "" --option substituters daemon --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
                 then
                   upload_failure

@@ -56,12 +56,12 @@
 
               function upload_failure {
                 set +e
-                for i in $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
+                for i in $TMPDIR/$(basename $1)/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
                 do
                   ( cwebp -q 10 $i -o $i.webp; rm $i ) &
                 done
                 wait
-                tar --zstd -cf nixtheplanet-macos-debug.tar.zst $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*
+                tar --zstd -cf nixtheplanet-macos-debug.tar.zst $TMPDIR/$(basename $1)/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*
                 set -x
                 export RESPONSE=$(curl -H @.basicauth -F file=@nixtheplanet-macos-debug.tar.zst https://ipfs-api.croughan.sh/api/v0/add)
                 export CID=$(echo "$RESPONSE" | jq -r .Hash)
@@ -73,9 +73,10 @@
               }
 
               echo 'Running Nix for the first time'
-              if [[ $(build) == *"/tmp"* ]]
+              nix_output=$(build)
+              if [[ $nix_output == *"/tmp"* ]]
               then
-                upload_failure
+                upload_failure $nix_output
                 echo NixThePlanet: iteration "$iteration" failed
                 exit 1
               fi
@@ -83,10 +84,11 @@
               while [ $iteration -lt $max_iterations ]
               do
                 set +e
-                echo 'Running Nix iteration $iteration'
-                if [[ $(rebuild) == *"/tmp"* ]]
+                echo Running Nix iteration "$iteration"
+                nix_output=$(rebuild)
+                if [[ $(nix_output == *"/tmp"* ]]
                 then
-                  upload_failure
+                  upload_failure $nix_output
                   echo NixThePlanet: iteration "$iteration" failed
                   exit 1
                 fi

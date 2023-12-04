@@ -29,6 +29,7 @@
             effectScript = ''
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
+              export HOME=$TMP
               export NIX_CONFIG="experimental-features = nix-command flakes"
               export TMPDIR="$(pwd)"
               export NIX_REMOTE=local?root=$(pwd)/nixstore

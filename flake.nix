@@ -48,10 +48,10 @@
               iteration=0
 
               function build {
-                { set -o pipefail; nix build ${inputs.self}#macos-ventura-image --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+                { set -e; nix build ${inputs.self}#macos-ventura-image --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
               }
               function rebuild {
-                { set -o pipefail; nix build ${inputs.self}#macos-ventura-image --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+                { set -e pipefail; nix build ${inputs.self}#macos-ventura-image --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
                 }
 
               function upload_failure {
@@ -85,7 +85,7 @@
               while [ $iteration -lt $max_iterations ]
               do
                 echo Running Nix iteration "$iteration"
-                nix_output=$(set +e; rebuild)
+                nix_output=$(rebuild)
                 if [[ "$nix_output" == *"/tmp"* ]]
                 then
                   echo OMG NIX OUTPUT IS $nix_output

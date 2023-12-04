@@ -40,8 +40,8 @@
     export NIX_STATE_DIR=$ROOT/var/nix
     export NIX_CONF_DIR=$ROOT/etc
     export NIX_REMOTE="local"
-    export NIX_STORE="$(pwd)/foo"
 
+              unset NIX_STORE
 #              mkdir $TMPDIR nixtheplanet-test-logs
               nix-store --load-db < ${closure}/registration
 

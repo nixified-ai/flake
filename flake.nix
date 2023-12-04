@@ -30,7 +30,7 @@
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
               export NIX_CONFIG="experimental-features = nix-command flakes"
-              export TMPDIR="$(pwd)/nixtheplanet-tmpdir"
+#              export TMPDIR="$TMP"
 
     export HOME=$TMP
     export ROOT=$TMP
@@ -40,7 +40,7 @@
     export NIX_STATE_DIR=$ROOT/var/nix
     export NIX_CONF_DIR=$ROOT/etc
 
-              mkdir $TMPDIR nixtheplanet-test-logs
+#              mkdir $TMPDIR nixtheplanet-test-logs
               nix-store --load-db < ${closure}/registration
 
               max_iterations=1

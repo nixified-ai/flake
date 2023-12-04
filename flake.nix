@@ -31,7 +31,7 @@
 
               export NIX_CONFIG="experimental-features = nix-command flakes"
               export TMPDIR="$(pwd)"
-              export NIX_REMOTE=local?root=$(pwd)
+              export NIX_REMOTE=local?root=$(pwd)/nixstore
               unset NIX_STORE
 
               nix-store --load-db < ${closure}/registration
@@ -62,7 +62,7 @@
                 set +e
                 echo 'Running Nix'
                 nix show-config | grep trusted
-                if ! nix build --option build-users-group "" --timeout 5000 ${inputs.self}#macos-ventura-image --keep-failed -L
+                if ! nix build --timeout 5000 ${inputs.self}#macos-ventura-image --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed

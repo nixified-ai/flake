@@ -30,7 +30,14 @@
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
               export HOME=$TMP
-              export NIX_CONFIG="experimental-features = nix-command flakes"
+              export NIX_CONFIG="${''
+                experimental-features = nix-command flakes
+                build-users-group =
+                trusted-substituters = daemon
+                trusted-users = root 0
+              ''}"
+
+              id
               export NIX_REMOTE=local?root=$(pwd)/nixstore
               unset NIX_STORE
 

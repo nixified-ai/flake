@@ -84,6 +84,7 @@
 
               while [ $iteration -lt $max_iterations ]
               do
+                set +e
                 echo Running Nix iteration "$iteration"
                 nix_output=$(rebuild)
                 if [[ "$nix_output" == *"/tmp"* ]]

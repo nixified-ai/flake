@@ -74,6 +74,9 @@
               nix_output=$(build)
               if [[ "$nix_output" == *"/tmp"* ]]
               then
+                echo OMG NIX OUTPUT IS $nix_output
+                echo OMG NIX OUTPUT IS $nix_output
+                echo OMG NIX OUTPUT IS $nix_output
                 upload_failure $nix_output
                 echo NixThePlanet: iteration "$iteration" failed
                 exit 1
@@ -85,6 +88,9 @@
                 nix_output=$(rebuild)
                 if [[ "$nix_output" == *"/tmp"* ]]
                 then
+                  echo OMG NIX OUTPUT IS $nix_output
+                  echo OMG NIX OUTPUT IS $nix_output
+                  echo OMG NIX OUTPUT IS $nix_output
                   upload_failure $nix_output
                   echo NixThePlanet: iteration "$iteration" failed
                   exit 1

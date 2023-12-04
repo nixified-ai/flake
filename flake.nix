@@ -29,17 +29,18 @@
             effectScript = ''
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
-              export HOME=$TMP
-              export NIX_CONFIG="${''
-                experimental-features = nix-command flakes
-                build-users-group =
-                trusted-substituters = daemon
-                trusted-users = root 0
-              ''}"
+              #export HOME=$TMP
+              #export NIX_CONFIG="${''
+              #  experimental-features = nix-command flakes
+              #  build-users-group =
+              #  trusted-substituters = daemon
+              #  trusted-users = root 0
+              #''}"
+              export NIX_CONFIG="experimental-features = nix-command flakes"
 
-              id
-              export NIX_REMOTE=local?root=$(pwd)/nixstore
-              unset NIX_STORE
+              export TMPDIR="/hostTmp"
+              #export NIX_REMOTE=local?root=$(pwd)/nixstore
+              #unset NIX_STORE
 
 #              nix-store --load-db < ${closure}/registration
 
@@ -69,14 +70,14 @@
                 set +e
                 echo 'Running Nix'
                 nix show-config | grep trusted
-                if ! nix build --no-require-sigs --option trusted-substituters daemon --option substituters daemon --option build-users-group "" --timeout 5000 ${inputs.self}#macos-ventura-image --keep-failed -L
+                if ! nix build --timeout 5000 ${inputs.self}#macos-ventura-image --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed
                   exit 1
                 fi
                 echo 'Running Nix'
-                if ! nix build --option build-users-group "" --timeout 5000 ${inputs.self}#macos-ventura-image --rebuild --keep-failed -L
+                if ! nix build --timeout 5000 ${inputs.self}#macos-ventura-image --rebuild --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed

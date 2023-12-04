@@ -29,6 +29,8 @@
             effectScript = ''
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
+              env | grep NIX
+
               export NIX_CONFIG="experimental-features = nix-command flakes"
 #              export TMPDIR="$TMP"
 
@@ -38,12 +40,10 @@
     export NIX_LOCALSTATE_DIR=$ROOT/var
     export NIX_LOG_DIR=$ROOT/var/log/nix
     export NIX_STATE_DIR=$ROOT/var/nix
-    export NIX_CONF_DIR=$ROOT/etc
-    export NIX_STORE=$ROOT/store
 
               unset NIX_REMOTE
 #              mkdir $TMPDIR nixtheplanet-test-logs
-              #nix-store --load-db < ${closure}/registration
+              nix-store --load-db < ${closure}/registration
 
               max_iterations=1
               iteration=0

@@ -43,7 +43,7 @@
 
               unset NIX_REMOTE
 #              mkdir $TMPDIR nixtheplanet-test-logs
-              nix-store --load-db < ${closure}/registration
+              #nix-store --load-db < ${closure}/registration
 
               max_iterations=1
               iteration=0

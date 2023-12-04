@@ -47,6 +47,13 @@
               max_iterations=1
               iteration=0
 
+              function build {
+                { nix build ${inputs.self}#macos-ventura-image --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+              }
+              function rebuild {
+                { nix build ${inputs.self}#macos-ventura-image --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+                }
+
               function upload_failure {
                 set +e
                 for i in $TMPDIR/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
@@ -65,19 +72,19 @@
                 exit 254
               }
 
+              echo 'Running Nix for the first time'
+              if [[ $(build) == *"/tmp"* ]]
+              then
+                upload_failure
+                echo NixThePlanet: iteration "$iteration" failed
+                exit 1
+              fi
+
               while [ $iteration -lt $max_iterations ]
               do
                 set +e
-                echo 'Running Nix'
-                nix show-config | grep trusted
-                if ! nix build --timeout 5000 ${inputs.self}#macos-ventura-image --keep-failed -L
-                then
-                  upload_failure
-                  echo NixThePlanet: iteration "$iteration" failed
-                  exit 1
-                fi
-                echo 'Running Nix'
-                if ! nix build --timeout 5000 ${inputs.self}#macos-ventura-image --rebuild --keep-failed -L
+                echo 'Running Nix iteration $iteration'
+                if [[ $(rebuild) == *"/tmp"* ]]
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed

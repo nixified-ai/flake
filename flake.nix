@@ -74,7 +74,7 @@
 
               echo 'Running Nix for the first time'
               nix_output=$(build)
-              if [[ $nix_output == *"/tmp"* ]]
+              if [[ "$nix_output" == *"/tmp"* ]]
               then
                 upload_failure $nix_output
                 echo NixThePlanet: iteration "$iteration" failed
@@ -86,7 +86,7 @@
                 set +e
                 echo Running Nix iteration "$iteration"
                 nix_output=$(rebuild)
-                if [[ $(nix_output == *"/tmp"* ]]
+                if [[ "nix_output" == *"/tmp"* ]]
                 then
                   upload_failure $nix_output
                   echo NixThePlanet: iteration "$iteration" failed

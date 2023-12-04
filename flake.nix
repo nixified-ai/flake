@@ -48,10 +48,10 @@
               iteration=0
 
               function build {
-                { set -e; nix build ${inputs.self}#macos-ventura-image --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+                { set +e; nix build ${inputs.self}#macos-ventura-image --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
               }
               function rebuild {
-                { set -e pipefail; nix build ${inputs.self}#macos-ventura-image --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+                { set +e; nix build ${inputs.self}#macos-ventura-image --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
                 }
 
               function upload_failure {

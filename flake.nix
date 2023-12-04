@@ -41,7 +41,6 @@
     export NIX_CONF_DIR=$ROOT/etc
 
               unset NIX_REMOTE
-              unset NIX_STORE
 #              mkdir $TMPDIR nixtheplanet-test-logs
               nix-store --load-db < ${closure}/registration
 

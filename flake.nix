@@ -63,7 +63,7 @@
                 set +e
                 echo 'Running Nix'
                 nix show-config | grep trusted
-                if ! nix build --timeout 5000 ${inputs.self}#macos-ventura-image --keep-failed -L
+                if ! nix build --option build-users-group "" --timeout 5000 ${inputs.self}#macos-ventura-image --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed

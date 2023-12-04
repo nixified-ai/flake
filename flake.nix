@@ -31,6 +31,15 @@
 
               export NIX_CONFIG="experimental-features = nix-command flakes"
               export TMPDIR="$(pwd)/nixtheplanet-tmpdir"
+
+    export HOME=$TMP
+    export ROOT=$TMP
+    export NIX_STATE_DIR=$ROOT/var/nix
+    export NIX_LOCALSTATE_DIR=$ROOT/var
+    export NIX_LOG_DIR=$ROOT/var/log/nix
+    export NIX_STATE_DIR=$ROOT/var/nix
+    export NIX_CONF_DIR=$ROOT/etc
+
               mkdir $TMPDIR nixtheplanet-test-logs
               nix-store --load-db < ${closure}/registration
 
@@ -60,14 +69,14 @@
               do
                 set +e
                 echo 'Running Nix'
-                if ! nix build --option build-users-group "" --store 'local?read-only=true' --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
+                if ! nix build --option build-users-group "" --store ./foo --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed
                   exit 1
                 fi
                 echo 'Running Nix'
-                if ! nix build --option build-users-group "" --store 'local?read-only=true' --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed -L
+                if ! nix build --option build-users-group "" --store ./foo --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --rebuild --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed
@@ -144,13 +153,13 @@
             program = config.packages.wfwg311-image.runScript;
           };
         };
-        packages = {
+        packages = rec {
           macos-ventura-image = config.legacyPackages.makeDarwinImage {};
           msdos622-image = config.legacyPackages.makeMsDos622Image {};
           win30-image = config.legacyPackages.makeWin30Image {};
           wfwg311-image = config.legacyPackages.makeWfwg311Image {};
           #system7-image = config.legacyPackages.makeSystem7Image {};
-          #macos-repeatability-test = genOverridenDrvLinkFarm macos-ventura-image 10;
+          #macos-repeatability-test = genOverridenDrvLinkFarm (macos-ventura-image.overrideAttrs { repeatabilityTest = true; }) 3;
           #wfwg311-repeatability-test = genOverridenDrvLinkFarm wfwg311-image 1000;
           #win30-repeatability-test = genOverridenDrvLinkFarm win30-image 1000;
           #msDos622-repeatability-test = genOverridenDrvLinkFarm msdos622-image 1000;

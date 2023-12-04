@@ -30,17 +30,9 @@
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
               export NIX_CONFIG="experimental-features = nix-command flakes"
-#              export TMPDIR="$TMP"
+              export TMPDIR="$(pwd)"
+              export NIX_REMOTE=local?root=$(pwd)
 
-    export HOME=$TMP
-    export ROOT=$TMP
-    export NIX_STATE_DIR=$ROOT/var/nix
-    export NIX_LOCALSTATE_DIR=$ROOT/var
-    export NIX_LOG_DIR=$ROOT/var/log/nix
-    export NIX_STATE_DIR=$ROOT/var/nix
-    export NIX_REMOTE=local?root=$TMPDIR
-
-#              mkdir $TMPDIR nixtheplanet-test-logs
               nix-store --load-db < ${closure}/registration
 
               max_iterations=1
@@ -69,7 +61,7 @@
               do
                 set +e
                 echo 'Running Nix'
-                if ! nix build --option build-users-group "" --store "$ROOT" --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
+                if ! nix build --option build-users-group "" --option substituters daemon --store "$ROOT" --timeout 5000 github:matthewcroughan/nixtheplanet#macos-ventura-image --keep-failed -L
                 then
                   upload_failure
                   echo NixThePlanet: iteration "$iteration" failed

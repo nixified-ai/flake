@@ -57,12 +57,18 @@
                 set -x
                 export TMPDIR="/hostTmp"
                 export DRVNAME=$(basename $1)
+                export IMAGESPATH="$TMPDIR/$DRVNAME"
                 mkdir images
-                ls -lah $TMPDIR/$DRVNAME
-                ls -lah $TMPDIR/$DRVNAME
-                ls -lah $TMPDIR/$DRVNAME
-                ls -lah $TMPDIR/$DRVNAME
-                ls -lah $TMPDIR/$DRVNAME
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$TMPDIR/#DRVNAME"/tmp*
                 for i in $TMPDIR/$DRVNAME/tmp*/*.png
                 do
                   echo "$i"

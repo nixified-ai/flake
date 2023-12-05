@@ -10,7 +10,13 @@
         secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
         buildInputs = with pkgs; [ libwebp gnutar curl nix jq coreutils-full ];
         effectScript = ''
-          putStateFile macos-repeatability-test-outpath <(echo "$out")
+          if [[ "$(getStateFile macos-repeatability-test-outpath -)" == "$out" ]]
+          then
+            echo "Effect outpath: $out"
+            echo "Effect inputs are the same as the last successful run, skipping"
+            exit 0
+          fi
+
           readSecretString ipfsBasicAuth .basicauth > .basicauth
           export NIX_CONFIG="experimental-features = nix-command flakes"
 
@@ -71,6 +77,7 @@
             echo NixThePlanet: iteration "$iteration" succeeded
             ((iteration++))
           done
+          putStateFile macos-repeatability-test-outpath <(echo "$out")
         '';
       };
     };

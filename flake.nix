@@ -19,30 +19,14 @@
           pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
           hci-effects = inputs.hercules-ci-effects.lib.withPkgs pkgs;
         in { branch, rev, ... }: {
-          macos-repeatability-test = let
-            closure = pkgs.closureInfo {
-              rootPaths = [ inputs.self.packages.x86_64-linux.macos-ventura-image ];
-            };
-          in hci-effects.mkEffect {
+          macos-repeatability-test = hci-effects.mkEffect {
             secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
             buildInputs = with pkgs; [ libwebp gnutar curl nix jq coreutils-full ];
             effectScript = ''
               readSecretString ipfsBasicAuth .basicauth > .basicauth
-
-              #export HOME=$TMP
-              #export NIX_CONFIG="${''
-              #  experimental-features = nix-command flakes
-              #  build-users-group =
-              #  trusted-substituters = daemon
-              #  trusted-users = root 0
-              #''}"
               export NIX_CONFIG="experimental-features = nix-command flakes"
 
-              #export NIX_REMOTE=local?root=$(pwd)/nixstore
-              #unset NIX_STORE
-
-#              nix-store --load-db < ${closure}/registration
-
+              # How many times to build macOS
               max_iterations=1
               iteration=0
 
@@ -51,10 +35,9 @@
               }
               function rebuild {
                 { nix build ${inputs.self}#macos-ventura-image --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
-                }
+              }
 
               function upload_failure {
-                set -x
                 export TMPDIR="/hostTmp"
                 export DRVNAME=$(basename $1)
                 export IMAGESPATH="$TMPDIR/$DRVNAME"

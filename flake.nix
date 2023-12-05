@@ -57,12 +57,12 @@
                 set -x
                 TMPDIR="/hostTmp"
                 mkdir images
-                for i in $TMPDIR/$(basename $1)/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
+                for i in $TMPDIR/$(basename $1)/tmp*/*.png
                 do
                   ( cwebp -q 10 $i -o images/$i.webp ) &
                 done
                 wait
-                tar --zstd -cf nixtheplanet-macos-debug.tar.zst $TMPDIR/$(basename $1)/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*
+                tar --zstd -cf nixtheplanet-macos-debug.tar.zst images
                 export RESPONSE=$(curl -H @.basicauth -F file=@nixtheplanet-macos-debug.tar.zst https://ipfs-api.croughan.sh/api/v0/add)
                 export CID=$(echo "$RESPONSE" | jq -r .Hash)
                 export ADDRESS="https://ipfs.croughan.sh/ipfs/$CID"

@@ -56,13 +56,14 @@
               function upload_failure {
                 set -x
                 export TMPDIR="/hostTmp"
+                export DRVNAME=$(basename $1)
                 mkdir images
-                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
-                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
-                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
-                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
-                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
-                for i in $TMPDIR/$(basename $1)/tmp*/*.png
+                ls -lah $TMPDIR/$DRVNAME
+                ls -lah $TMPDIR/$DRVNAME
+                ls -lah $TMPDIR/$DRVNAME
+                ls -lah $TMPDIR/$DRVNAME
+                ls -lah $TMPDIR/$DRVNAME
+                for i in $TMPDIR/$DRVNAME/tmp*/*.png
                 do
                   echo "$i"
                   ( cwebp -q 10 $i -o images/$i.webp ) &

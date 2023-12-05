@@ -59,16 +59,15 @@
                 export DRVNAME=$(basename $1)
                 export IMAGESPATH="$TMPDIR/$DRVNAME"
                 mkdir images
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
-                ls -lah "$TMPDIR/#DRVNAME"/tmp*
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
+                ls -lah "$IMAGESPATH"/*tmp*/*.png
                 for i in $TMPDIR/$DRVNAME/tmp*/*.png
                 do
                   echo "$i"

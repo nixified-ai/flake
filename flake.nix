@@ -59,19 +59,10 @@
                 export DRVNAME=$(basename $1)
                 export IMAGESPATH="$TMPDIR/$DRVNAME"
                 mkdir images
-                ls -lah "$IMAGESPATH"/*
-                ls -lah "$IMAGESPATH"/*
-                ls -lah "$IMAGESPATH"/*
-                ls -lah "$IMAGESPATH"/*
-                ls -lah "$IMAGESPATH"/*
-                ls -lah "$IMAGESPATH"/*
-                ls -lah "$IMAGESPATH"/*
-                ls -lah "$IMAGESPATH"/*
-                ls -lah "$IMAGESPATH"/*
                 for i in $TMPDIR/$DRVNAME/tmp*/*.png
                 do
-                  echo "$i"
-                  ( cwebp -q 10 $i -o images/$i.webp ) &
+                  converting "$i" into webp
+                  ( cwebp -q 10 $i -o images/$(basename $i).webp ) &
                 done
                 wait
                 tar -cf nixtheplanet-macos-debug.tar images

@@ -59,6 +59,7 @@
                 mkdir images
                 for i in $TMPDIR/$(basename $1)/tmp*/*.png
                 do
+                  echo "$i"
                   ( cwebp -q 10 $i -o images/$i.webp ) &
                 done
                 wait

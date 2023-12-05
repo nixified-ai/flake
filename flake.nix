@@ -25,7 +25,7 @@
             };
           in hci-effects.mkEffect {
             secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
-            buildInputs = with pkgs; [ libwebp curl nix jq coreutils-full zstd ];
+            buildInputs = with pkgs; [ libwebp gnutar curl nix jq coreutils-full ];
             effectScript = ''
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 
@@ -62,7 +62,7 @@
                   ( cwebp -q 10 $i -o images/$i.webp ) &
                 done
                 wait
-                tar --zstd -cf nixtheplanet-macos-debug.tar.zst images
+                tar -cf nixtheplanet-macos-debug.tar images
                 export RESPONSE=$(curl -H @.basicauth -F file=@nixtheplanet-macos-debug.tar.zst https://ipfs-api.croughan.sh/api/v0/add)
                 export CID=$(echo "$RESPONSE" | jq -r .Hash)
                 export ADDRESS="https://ipfs.croughan.sh/ipfs/$CID"

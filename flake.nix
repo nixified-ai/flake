@@ -92,9 +92,6 @@
                 set -e
                 if [[ "$nix_output" == *"/tmp"* ]]
                 then
-                  echo OMG NIX OUTPUT IS $nix_output
-                  echo OMG NIX OUTPUT IS $nix_output
-                  echo OMG NIX OUTPUT IS $nix_output
                   upload_failure $nix_output
                   echo NixThePlanet: iteration "$iteration" failed
                   exit 1

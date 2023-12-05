@@ -23,7 +23,6 @@
           echo $out
           echo $out
           echo $out
-          echo $out
           readSecretString ipfsBasicAuth .basicauth > .basicauth
           export NIX_CONFIG="experimental-features = nix-command flakes"
 
@@ -85,7 +84,6 @@
             ((iteration++))
           done
 
-          putStateFile macos-repeatability-test-drvhash <(echo "${macos-ventur")
         '';
       };
     };

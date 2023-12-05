@@ -63,7 +63,7 @@
                 done
                 wait
                 tar -cf nixtheplanet-macos-debug.tar images
-                export RESPONSE=$(curl -H @.basicauth -F file=@nixtheplanet-macos-debug.tar.zst https://ipfs-api.croughan.sh/api/v0/add)
+                export RESPONSE=$(curl -H @.basicauth -F file=@nixtheplanet-macos-debug.tar https://ipfs-api.croughan.sh/api/v0/add)
                 export CID=$(echo "$RESPONSE" | jq -r .Hash)
                 export ADDRESS="https://ipfs.croughan.sh/ipfs/$CID"
 

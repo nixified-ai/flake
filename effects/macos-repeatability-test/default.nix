@@ -75,7 +75,6 @@
             ((iteration++))
           done
 
-          putStateFile macos-repeatability-test-drvhash <(echo "${macos-ventur")
         '';
       };
     };

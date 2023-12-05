@@ -25,7 +25,7 @@
             };
           in hci-effects.mkEffect {
             secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
-            buildInputs = with pkgs; [ libwebp gnutar curl nix jq toybox ];
+            buildInputs = with pkgs; [ libwebp gnutar curl nix jq coreutils-full ];
             effectScript = ''
               readSecretString ipfsBasicAuth .basicauth > .basicauth
 

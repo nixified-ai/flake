@@ -8,19 +8,10 @@
     in { branch, rev, ... }: {
       macos-repeatability-test = hci-effects.mkEffect {
         secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
-        buildInputs = with pkgs; [ libwebp gnutar curl nix jq coreutils-full mosquitto ];
+        buildInputs = with pkgs; [ libwebp gnutar curl nix jq coreutils-full ];
         effectScript = ''
           echo $out
-          echo $out
-          echo $out
-          echo $out
-          echo $out
-          echo $out
-          echo $out
-          echo $out
-          echo $out
-          echo $out
-          echo $out
+          echo hello
           echo $out
           echo $out
           readSecretString ipfsBasicAuth .basicauth > .basicauth
@@ -84,6 +75,7 @@
             ((iteration++))
           done
 
+          putStateFile macos-repeatability-test-drvhash <(echo "${macos-ventur")
         '';
       };
     };

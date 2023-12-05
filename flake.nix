@@ -38,7 +38,6 @@
               #''}"
               export NIX_CONFIG="experimental-features = nix-command flakes"
 
-              export TMPDIR="/hostTmp"
               #export NIX_REMOTE=local?root=$(pwd)/nixstore
               #unset NIX_STORE
 
@@ -56,6 +55,7 @@
 
               function upload_failure {
                 set -x
+                TMPDIR="/hostTmp"
                 for i in $TMPDIR/$(basename $1)/nix-build-mac_hdd_ng.qcow2.drv-*/tmp*/*.png
                 do
                   ( cwebp -q 10 $i -o $i.webp; rm $i ) &

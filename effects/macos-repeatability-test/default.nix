@@ -12,7 +12,6 @@
         effectScript = ''
           echo $out
           echo hello
-          echo hello again
           echo $out
           echo $out
           readSecretString ipfsBasicAuth .basicauth > .basicauth

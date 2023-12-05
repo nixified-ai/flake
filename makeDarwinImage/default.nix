@@ -1,5 +1,6 @@
-{ fetchurl, writeScript, writeShellScript, runCommand, vncdo, dmg2img, cdrkit, qemu_kvm, python311, tesseract, expect, socat, ruby, xorriso, callPackage, sshpass, openssh }:
+{ fetchurl, writeScript, writeShellScript, runCommand, vncdo, dmg2img, cdrkit, qemu_kvm, python311, tesseract, expect, socat, ruby, xorriso, callPackage, sshpass, openssh, lib }:
 { diskSizeBytes ? 50000000000
+, repeatabilityTest ? false
 }:
 let
   diskSize = if diskSizeBytes < 50000000000 then throw "diskSizeBytes ${toString diskSizeBytes} too small for macOS" else diskSizeBytes;
@@ -30,6 +31,7 @@ let
   tesseractScript = writeShellScript "tesseractScript" ''
     export OMP_THREAD_LIMIT=1
     cd $(mktemp -d)
+    chmod -R 0755 $(pwd)
     TEXT=""
     while true
     do
@@ -268,6 +270,7 @@ let
     ${powerOffWrapper}
     wait $openCoreBootPID
 
+    ${lib.optionalString repeatabilityTest "echo makeDarwinImage succeeded > $out; exit 0"}
     mv mac_hdd_ng.qcow2 $out
   '';
 in runInVm

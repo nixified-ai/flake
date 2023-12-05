@@ -49,7 +49,7 @@ args=(
   -drive id=run_offline,snapshot=on,file="$REPO_PATH/run_offline.iso",format=raw
   -drive id=InstallMedia,snapshot=on,file="$REPO_PATH/BaseSystem.qcow2",format=qcow2
   -drive id=OpenCoreBoot,if=virtio,snapshot=on,format=qcow2,file="$REPO_PATH/OpenCore/OpenCore.qcow2"
-  -drive id=MacHDD,if=virtio,file="$REPO_PATH/mac_hdd_ng.qcow2",format=qcow2
+  -drive id=MacHDD,if=virtio,file="$REPO_PATH/mac_hdd_ng.qcow2",format=qcow2,throttling.bps-total=10000000,throttling.iops-total=1000
   # -netdev tap,id=net0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
   -netdev user,id=net0,hostfwd=tcp::2222-:22,restrict=yes -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
   # -netdev user,id=net0 -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27  # Note: Use this line for High Sierra

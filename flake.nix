@@ -55,7 +55,7 @@
 
               function upload_failure {
                 set -x
-                TMPDIR="/hostTmp"
+                export TMPDIR="/hostTmp"
                 mkdir images
                 ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
                 ls -lah $TMPDIR/$(basename $1)/tmp*/*.png

@@ -57,6 +57,11 @@
                 set -x
                 TMPDIR="/hostTmp"
                 mkdir images
+                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
+                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
+                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
+                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
+                ls -lah $TMPDIR/$(basename $1)/tmp*/*.png
                 for i in $TMPDIR/$(basename $1)/tmp*/*.png
                 do
                   echo "$i"

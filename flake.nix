@@ -61,7 +61,7 @@
                 mkdir images
                 for i in $TMPDIR/$DRVNAME/tmp*/*.png
                 do
-                  converting "$i" into webp
+                  echo converting "$i" into webp
                   ( cwebp -q 10 $i -o images/$(basename $i).webp ) &
                 done
                 wait

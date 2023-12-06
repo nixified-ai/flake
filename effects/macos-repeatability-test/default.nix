@@ -4,7 +4,6 @@
     herculesCI.ciSystems = [ "x86_64-linux" ];
     effects = let
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-      diskImage = inputs.self.legacyPackages.x86_64-linux.makeDarwinImage { diskSizeBytes = 40000000000; repeatabilityTest = true; };
       hci-effects = inputs.hercules-ci-effects.lib.withPkgs pkgs;
     in { branch, rev, ... }: {
       macos-repeatability-test = hci-effects.mkEffect {
@@ -27,10 +26,10 @@
           iteration=0
 
           function build {
-            { nix build '${diskImage.drvPath}^*' --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+            { nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
           }
           function rebuild {
-            { nix build '${diskImage.drvPath}^*' --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+            { nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
           }
 
           function upload_failure {
@@ -60,7 +59,7 @@
           if [[ "$nix_output" == *"/tmp"* ]]
           then
             upload_failure $nix_output
-            echo NixThePlanet: initial nix build failed
+            echo NixThePlanet: first nix build failed, but this should have been cached!? Something weird is going on.
             exit 1
           fi
 

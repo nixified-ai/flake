@@ -15,6 +15,8 @@ and some old. Some other candidate names for this flake were:
 - `Windows 12`
 - `menagerie`
 
+Inspired by the great [Astro](https://github.com/astro) and his [WFVM flake for building Windows VM images](https://git.m-labs.hk/M-Labs/wfvm)
+
 # Thanks
 
 Massive thanks to the following for various help and with the repository!

@@ -10,7 +10,8 @@
         secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
         buildInputs = with pkgs; [ libwebp gnutar curl nix jq coreutils-full ];
         effectScript = ''
-          if [[ "$(getStateFile macos-repeatability-test-outpath -)" == "$out" ]]
+          getStateFile macos-repeatability-test-outpath previousOutpath
+          if [[ "$(cat previousOutpath)" == "$out" ]]
           then
             echo "Effect outpath: $out"
             echo "Effect inputs are the same as the last successful run, skipping"
@@ -25,10 +26,10 @@
           iteration=0
 
           function build {
-            { nix build ${inputs.self}#macos-ventura-image --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+            { nix build ${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^* --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
           }
           function rebuild {
-            { nix build ${inputs.self}#macos-ventura-image --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+            { nix build ${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^* --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
           }
 
           function upload_failure {

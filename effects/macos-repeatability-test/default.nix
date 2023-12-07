@@ -26,10 +26,10 @@
           iteration=0
 
           function build {
-            { nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+            { nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --timeout 20000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
           }
           function rebuild {
-            { nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --rebuild --timeout 5000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+            { nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --rebuild --timeout 20000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
           }
 
           function upload_failure {
@@ -40,7 +40,7 @@
             for i in $TMPDIR/$DRVNAME/tmp*/*.png
             do
               echo converting "$i" into webp
-              ( cwebp -q 10 $i -o images/$(basename $i).webp ) &
+              ( cwebp -quiet -q 10 $i -o images/$(basename $i).webp ) &
             done
             wait
             tar -cf nixtheplanet-macos-debug.tar images

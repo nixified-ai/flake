@@ -26,10 +26,10 @@
           iteration=0
 
           function build {
-            { nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --timeout 20000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+            nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --timeout 20000 --keep-failed -L 2>&1 | tee /dev/stderr
           }
           function rebuild {
-            { nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --rebuild --timeout 20000 --keep-failed -L 2>&1 >&3 | tee >(grep -oP "keeping build directory '.*?'" | awk -F"'" '{print $2}') >&2; } 3>&1
+            nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --timeout 20000 --keep-failed --rebuild -L 2>&1 | tee /dev/stderr
           }
 
           function upload_failure {
@@ -53,12 +53,11 @@
           }
           set -x
           echo 'Running Nix for the first time'
-          set +e
           nix_output=$(build)
-          set -e
+          build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
           if [[ "$nix_output" == *"/tmp"* && "$nix_output" != *"deterministic"* ]]
           then
-            upload_failure $nix_output
+            upload_failure $build_dir
             echo NixThePlanet: first nix build failed, but this should have been cached!? Something weird is going on.
             exit 1
           fi
@@ -66,12 +65,11 @@
           while [ $iteration -lt $max_iterations ]
           do
             echo Running Nix iteration "$iteration"
-            set +e
             nix_output=$(rebuild)
-            set -e
+            build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
             if [[ "$nix_output" == *"/tmp"* && "$nix_output" != *"deterministic"* ]]
             then
-              upload_failure $nix_output
+              upload_failure $build_dir
               echo NixThePlanet: iteration "$iteration" failed
               exit 1
             fi

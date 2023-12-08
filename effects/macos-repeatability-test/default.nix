@@ -59,7 +59,6 @@
           nix_output=$(build)
           build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
           set -e
-          build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
           if [[ "$nix_output" == *"/tmp"* && "$nix_output" != *"deterministic"* ]]
           then
             upload_failure $build_dir

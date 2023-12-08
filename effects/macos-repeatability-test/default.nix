@@ -53,7 +53,6 @@
             echo NixThePlanet: Failure screen capture is available at: "$ADDRESS"
             exit 254
           }
-          set -x
           echo 'Running Nix for the first time'
           set +e
           nix_output=$(build)

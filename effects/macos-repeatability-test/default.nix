@@ -56,7 +56,7 @@
           set +e
           nix_output=$(build)
           set -e
-          if [[ "$nix_output" == *"/tmp"* ]]
+          if [[ "$nix_output" == *"/tmp"* && "$nix_output" != *"deterministic"* ]]
           then
             upload_failure $nix_output
             echo NixThePlanet: first nix build failed, but this should have been cached!? Something weird is going on.
@@ -69,7 +69,7 @@
             set +e
             nix_output=$(rebuild)
             set -e
-            if [[ "$nix_output" == *"/tmp"* ]]
+            if [[ "$nix_output" == *"/tmp"* && "$nix_output" != *"deterministic"* ]]
             then
               upload_failure $nix_output
               echo NixThePlanet: iteration "$iteration" failed

@@ -80,7 +80,7 @@
               exit 1
             fi
             echo NixThePlanet: iteration "$iteration" succeeded
-            ((iteration++))
+            ((++iteration))
           done
           putStateFile macos-repeatability-test-outpath <(echo "$out")
         '';

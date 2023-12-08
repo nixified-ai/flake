@@ -53,8 +53,8 @@
           }
           set -x
           echo 'Running Nix for the first time'
-          nix_output=$(build)
           set +e
+          nix_output=$(build)
           build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
           set -e
           build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
@@ -68,8 +68,8 @@
           while [ $iteration -lt $max_iterations ]
           do
             echo Running Nix iteration "$iteration"
-            nix_output=$(rebuild)
             set +e
+            nix_output=$(rebuild)
             build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
             set -e
             if [[ "$nix_output" == *"/tmp"* && "$nix_output" != *"deterministic"* ]]

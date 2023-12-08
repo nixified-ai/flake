@@ -26,9 +26,11 @@
           iteration=0
 
           function build {
+            set +e
             nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --timeout 20000 --keep-failed -L 2>&1 | tee /dev/stderr
           }
           function rebuild {
+            set +e
             nix build '${inputs.self.packages.x86_64-linux.macos-ventura-image.drvPath}^*' --timeout 20000 --keep-failed --rebuild -L 2>&1 | tee /dev/stderr
           }
 

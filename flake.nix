@@ -32,16 +32,6 @@
         _module.args.pkgs = import inputs.nixpkgs {
           overlays = [
             inputs.self.overlays.default
-            (self: super: {
-              dosbox-x = super.dosbox-x.overrideAttrs {
-                src = super.fetchFromGitHub {
-                  owner = "joncampbell123";
-                  repo = "dosbox-x";
-                  rev = "f8e923696c29760aae974e9444229ed210d97cb9";
-                  hash = "sha256-3VP0dTAntWPzrGOIxI22/Y6ienq9rYUf7wMlHd6flu4=";
-                };
-              };
-            })
           ];
           inherit system;
         };

@@ -54,6 +54,9 @@
           set -x
           echo 'Running Nix for the first time'
           nix_output=$(build)
+          set +e
+          build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
+          set -e
           build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
           if [[ "$nix_output" == *"/tmp"* && "$nix_output" != *"deterministic"* ]]
           then
@@ -66,7 +69,9 @@
           do
             echo Running Nix iteration "$iteration"
             nix_output=$(rebuild)
+            set +e
             build_dir=$(grep -oP "keeping build directory '.*?'" <<< "$nix_output" | awk -F"'" '{print $2}')
+            set -e
             if [[ "$nix_output" == *"/tmp"* && "$nix_output" != *"deterministic"* ]]
             then
               upload_failure $build_dir

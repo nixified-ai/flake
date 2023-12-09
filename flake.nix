@@ -88,9 +88,9 @@
           wfwg311-image = config.legacyPackages.makeWfwg311Image {};
           #system7-image = config.legacyPackages.makeSystem7Image {};
           #macos-repeatability-test = genOverridenDrvLinkFarm (macos-ventura-image.overrideAttrs { repeatabilityTest = true; }) 3;
-          #wfwg311-repeatability-test = genOverridenDrvLinkFarm wfwg311-image 1000;
-          #win30-repeatability-test = genOverridenDrvLinkFarm win30-image 1000;
-          #msDos622-repeatability-test = genOverridenDrvLinkFarm msdos622-image 1000;
+          wfwg311-repeatability-test = genOverridenDrvLinkFarm wfwg311-image 100;
+          win30-repeatability-test = genOverridenDrvLinkFarm win30-image 100;
+          msDos622-repeatability-test = genOverridenDrvLinkFarm msdos622-image 100;
         };
         checks = {
           macos-ventura = pkgs.callPackage ./makeDarwinImage/vm-test.nix { nixosModule = inputs.self.nixosModules.macos-ventura; };

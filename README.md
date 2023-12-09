@@ -1,6 +1,6 @@
 <p align="center">
 <br/>
-<a href="https://github.com/ursi">
+<a href="Hack The Planet!">
   <img src="https://user-images.githubusercontent.com/26458780/278759718-c3b59702-6bb4-4fbf-8a1d-fff04e933dd2.png" height=250 title="NixThePlanet"/>
 </a>
 </p>
@@ -16,6 +16,8 @@ and some old. Some other candidate names for this flake were:
 - `menagerie`
 
 Inspired by the great [Astro](https://github.com/astro) and his [WFVM flake for building Windows VM images](https://git.m-labs.hk/M-Labs/wfvm)
+
+It took at least a painstaking month to make this project. If you use this project and enjoy it, it would mean a lot if you could [sponsor me via GitHub Sponsors](https://github.com/sponsors/MatthewCroughan), and whilst you're at it, why not [sponsor Hercules CI too](https://github.com/sponsors/hercules-ci) for making the CI in this repo so incredible.
 
 # Thanks
 
@@ -156,6 +158,8 @@ The `runScript` is a method of the image builder, for example `makeWin30Image {}
 
 # TODO
 
+- Install Nix into the Darwin VM as part of the installation via SSH by using `${pkgs.nix.outPath}/scripts/install.in`
+- Support installing/initialising a [nix-darwin](https://github.com/LnL7/nix-darwin) configuration as part of the installation
 - Remove dependency on vncdo, use qemu framebuffer directly
 - Create nixosModules and VM Tests for win30, wfwg311, msdos622
 - Create derivation based checks/tests for win30, wfwg311, msdos622 using telnet

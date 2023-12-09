@@ -1,7 +1,7 @@
 <p align="center">
 <br/>
-<a href="Hack The Planet!">
-  <img src="https://user-images.githubusercontent.com/26458780/278759718-c3b59702-6bb4-4fbf-8a1d-fff04e933dd2.png" height=250 title="NixThePlanet"/>
+<a href="https://www.youtube.com/watch?v=u3CKgkyc7Qo">
+  <img src="https://user-images.githubusercontent.com/26458780/278759718-c3b59702-6bb4-4fbf-8a1d-fff04e933dd2.png" height=250 title="Hack the Planet!"/>
 </a>
 </p>
 

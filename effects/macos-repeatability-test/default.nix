@@ -22,7 +22,7 @@
           export NIX_CONFIG="experimental-features = nix-command flakes"
 
           # How many times to build macOS
-          max_iterations=1
+          max_iterations=10
           iteration=0
 
           function build {

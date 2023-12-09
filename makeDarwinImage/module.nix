@@ -7,8 +7,8 @@ in
     enable = lib.mkEnableOption "macos-ventura";
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.macOS-ventura-image;
-      defaultText = "pkgs.macOS-ventura-image";
+      default = pkgs.macos-ventura-image;
+      defaultText = "pkgs.macos-ventura-image";
       description = ''
         Which macOS-ventura-image derivation to use.
       '';

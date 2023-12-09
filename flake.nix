@@ -19,7 +19,19 @@
         nixosModules = {
           macos-ventura = { ... }: {
             imports = [ ./makeDarwinImage/module.nix ];
-            nixpkgs.overlays = [ inputs.self.overlays.default ];
+            nixpkgs.overlays = [
+              inputs.self.overlays.default
+              (self: super: {
+                python311 = super.python311.override {
+                  packageOverrides = pyself: pysuper: {
+                    vncdo = pysuper.vncdo.overrideAttrs (_: {
+                      setuptoolsCheckPhase = "true";
+                      doCheck = false;
+                    });
+                  };
+                };
+              })
+            ];
           };
         };
       };

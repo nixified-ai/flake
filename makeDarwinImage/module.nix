@@ -92,7 +92,7 @@ in
     };
   };
   config = let
-    run-macos = (pkgs.makeDarwinImage {}).makeRunScript {
+    run-macos = cfg.package.makeRunScript {
       extraQemuFlags = [ "-vnc ${cfg.vncListenAddr}:${toString cfg.vncDisplayNumber}" ] ++ cfg.extraQemuFlags;
       inherit (cfg) threads cores sockets mem;
     };

@@ -28,7 +28,12 @@ Massive thanks to the following for various help and with the repository!
 - [Max Headroom](https://github.com/max-privatevoid) For figuring out why fetching was non deterministic when using `fetch-macOS-v2.py`
 - [cleverca22](https://github.com/cleverca22/) For helping me sift through the QEMU source code
 
-To bootstrap the project, I have vendored the [OSX-KVM repo](https://github.com/kholia/OSX-KVM) into this one, it contains some qcow2 files that I don't know how to reproduce yet, as noted below in the TODOs. Without work such as OSX-KVM by Kholia, and [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM) by Foxlet, a repo like mine could not possibly exist.
+### Prior Art
+
+To bootstrap the project, I use some of the [OSX-KVM repo](https://github.com/kholia/OSX-KVM) as a Flake input. It contains some qcow2 files that I don't know how to reproduce yet, as noted below in the TODOs. Without work such as OSX-KVM by Kholia, and [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM) by Foxlet, a repo like mine could not possibly exist.
+
+As [pointed out to me on Twitter](https://twitter.com/cirrus_labs/status/1727415699034062869), Cirrus Labs had made a [Hashicorp Packer template](https://github.com/cirruslabs/macos-image-templates) to do similar automation by using VNC and Sleeps. The major difference between this and what I am doing, is that I use TCL Expect and Tesseract OCR to more reliably get the same result, without relying as much on sleeps/waits. Additionally, the CI for this repo runs the macOS installer 10 times whenever anything changes, to validate that nothing is broken, and that the function `makeDarwinImage` works reliably. There is also a NixOS test that boots the VM, in a VM, and tests that the macOS VM is able to be SSH'd into on port 22.
+
 
 ## macOS
 
@@ -223,3 +228,10 @@ improve performance and disk usage during installation phase
 I am also changing `scripts/run_offline.sh` to automatically partition the Disk,
 and not embedding it into the InstallAssistant, to allow for reconfiguration of
 the run_offline script in a separate derivation.
+
+# Reviews
+
+###### Chris McDonough
+
+In this review, Chris McDonough appears very excited. Apparently, NixThePlanet has the power to make grown men giggle.
+- www.youtube.com/watch?v=fFIDf8ZWX2w

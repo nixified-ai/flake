@@ -107,11 +107,28 @@
         "type": "github"
       }
     },
+    "osx-kvm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701316418,
+        "narHash": "sha256-Sk8LYhFovoMX1ln7DWYArJQphW2a4h8Xg7/ZEZXwZv4=",
+        "owner": "kholia",
+        "repo": "OSX-KVM",
+        "rev": "09daff670a7eb9ff616073df329586c5995623a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kholia",
+        "repo": "OSX-KVM",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "hercules-ci-effects": "hercules-ci-effects",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "osx-kvm": "osx-kvm"
       }
     }
   },

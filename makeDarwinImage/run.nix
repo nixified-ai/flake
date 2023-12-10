@@ -2,9 +2,10 @@
 , makeDarwinImage
 , qemu_kvm
 , nix
-, OVMF_CODE ? ./OSX-KVM/OVMF_CODE.fd
-, OVMF_VARS ? ./OSX-KVM/OVMF_VARS-1920x1080.fd
-, OpenCoreBoot ? ./OSX-KVM/OpenCore/OpenCore.qcow2
+, osx-kvm
+, OVMF_CODE ? "${osx-kvm}/OVMF_CODE.fd"
+, OVMF_VARS ? "${osx-kvm}/OVMF_VARS-1920x1080.fd"
+, OpenCoreBoot ? "${osx-kvm}/OpenCore/OpenCore.qcow2"
 , threads ? 4
 , cores ? 2
 , sockets ? 1

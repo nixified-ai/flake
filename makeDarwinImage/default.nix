@@ -1,4 +1,4 @@
-{ fetchurl, writeScript, writeShellScript, runCommand, vncdo, dmg2img, cdrkit, qemu_kvm, python311, tesseract, expect, socat, ruby, xorriso, callPackage, sshpass, openssh, lib }:
+{ fetchurl, writeScript, writeShellScript, runCommand, vncdo, dmg2img, cdrkit, qemu_kvm, python311, tesseract, expect, socat, ruby, xorriso, callPackage, sshpass, openssh, lib, osx-kvm }:
 { diskSizeBytes ? 50000000000
 , repeatabilityTest ? false
 }:
@@ -20,10 +20,9 @@ let
     outputHash = "sha256-Qy9Whu8pqHo+m6wHnCIqURAR53LYQKc0r87g9eHgnS4=";
     outputHashMode = "recursive";
   } ''
-    cp --no-preserve=mode ${./OSX-KVM}/fetch-macOS-v2.py .
+    cp --no-preserve=mode ${osx-kvm}/fetch-macOS-v2.py .
     chmod +x ./fetch-macOS-v2.py
     patchShebangs ./fetch-macOS-v2.py
-    substituteInPlace ./fetch-macOS-v2.py --replace 'Mac-7BA5B2D9E42DDD94' 'Mac-BE088AF8C5EB4FA2'
     ./fetch-macOS-v2.py --shortname ventura
     dmg2img -i BaseSystem.dmg $out
   '';
@@ -241,8 +240,9 @@ let
     # __impure = true; # set __impure = true; if debugging and want to connect via VNC during the build
   } ''
     set -x
-    cp -r --no-preserve=mode ${./OSX-KVM} ./OSX-KVM
-    cd ./OSX-KVM
+    cp -r --no-preserve=mode ${osx-kvm} ./osx-kvm
+    cp -r --no-preserve=mode ${./osx-kvm-additions}/* ./osx-kvm
+    cd ./osx-kvm
 
     substituteInPlace scripts/run_offline.sh --replace '50000000000' "${toString diskSizeBytes}"
 

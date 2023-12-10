@@ -3,8 +3,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     hercules-ci-effects.url = "github:hercules-ci/hercules-ci-effects";
+    osx-kvm = {
+      url = "github:kholia/OSX-KVM";
+      flake = false;
+    };
   };
-  outputs = inputs@{ flake-parts, ... }:
+  outputs = inputs@{ flake-parts, osx-kvm, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         flake-parts.flakeModules.easyOverlay
@@ -42,6 +46,7 @@
         };
         overlayAttrs = config.legacyPackages;
         legacyPackages = {
+          inherit osx-kvm;
           makeDarwinImage = pkgs.callPackage ./makeDarwinImage {
             # substitute relative input with absolute input
             qemu_kvm = pkgs.qemu_kvm.overrideAttrs {
@@ -54,7 +59,7 @@
           makeMsDos622Image = pkgs.callPackage ./makeMsDos622Image {};
           makeWin30Image = pkgs.callPackage ./makeWin30Image {};
           makeWfwg311Image = pkgs.callPackage ./makeWfwg311Image {};
-          makeSystem7Image = pkgs.callPackage ./makeSystem7Image {};
+#          makeSystem7Image = pkgs.callPackage ./makeSystem7Image {};
         };
         apps = {
           macos-ventura = {

@@ -28,6 +28,8 @@ Massive thanks to the following for various help and with the repository!
 - [Max Headroom](https://github.com/max-privatevoid) For figuring out why fetching was non deterministic when using `fetch-macOS-v2.py`
 - [cleverca22](https://github.com/cleverca22/) For helping me sift through the QEMU source code
 
+To bootstrap the project, I have vendored the [OSX-KVM repo](https://github.com/kholia/OSX-KVM) into this one, it contains some qcow2 files that I don't know how to reproduce yet, as noted below in the TODOs. Without work such as OSX-KVM by Kholia, and [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM) by Foxlet, a repo like mine could not possibly exist.
+
 ## macOS
 
 Currently, only macOS Ventura is supported, building will take ***at least 40-50 minutes** as the official 11GiB macOS installer is downloaded and used in the Nix sandbox. **No user interaction is required**. Be patient and sit tight.

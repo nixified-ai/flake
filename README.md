@@ -30,7 +30,7 @@ Massive thanks to the following for various help and with the repository!
 
 ### Prior Art
 
-To bootstrap the project, I use some of the [OSX-KVM repo](https://github.com/kholia/OSX-KVM) as a Flake input. It contains some qcow2 files that I don't know how to reproduce yet, as noted below in the TODOs. Without work such as OSX-KVM by Kholia, and [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM) by Foxlet, a repo like mine could not possibly exist.
+Without work such as [OSX-KVM by Kholia](https://github.com/kholia/OSX-KVM), and [macOS-Simple-KVM](https://github.com/foxlet/macOS-Simple-KVM) by Foxlet, a repo like mine could not possibly exist. To bootstrap the project, I use some of the OSX-KVM repo as a Flake input. It contains some qcow2 files that I don't know how to reproduce yet, as noted below in the TODOs.
 
 As [pointed out to me on Twitter](https://twitter.com/cirrus_labs/status/1727415699034062869), Cirrus Labs had made a [Hashicorp Packer template](https://github.com/cirruslabs/macos-image-templates) to do similar automation by using VNC and Sleeps. The major difference between this and what I am doing, is that I use TCL Expect and Tesseract OCR to more reliably get the same result, without relying as much on sleeps/waits. Additionally, the CI for this repo runs the macOS installer 10 times whenever anything changes, to validate that nothing is broken, and that the function `makeDarwinImage` works reliably. There is also a NixOS test that boots the VM, in a VM, and tests that the macOS VM is able to be SSH'd into on port 22.
 

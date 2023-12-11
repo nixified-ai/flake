@@ -19,6 +19,8 @@ Inspired by the great [Astro](https://github.com/astro) and his [WFVM flake for 
 
 It took at least a painstaking month to make this project. If you use this project and enjoy it, it would mean a lot if you could [sponsor me via GitHub Sponsors](https://github.com/sponsors/MatthewCroughan), and whilst you're at it, why not [sponsor Hercules CI too](https://github.com/sponsors/hercules-ci) for making the CI in this repo so incredible.
 
+This code was made whilst listening to [Ｗｉｎｄｏｗｓ９６](https://www.youtube.com/watch?v=MLpcfuotLmM)
+
 # Thanks
 
 Massive thanks to the following for various help and with the repository!

@@ -27,7 +27,7 @@ Massive thanks to the following for various help and with the repository!
 
 - [Michael Hoang](https://github.com/enzime) - Getting started with the idea and nerd sniping me at Nix.Camp
 - [Robert Hensing](https://github.com/roberth) - Putting up with endless questions about determinism
-- [Max Headroom](https://github.com/max-privatevoid) - Figuring out why fetching was non deterministic when using `fetch-macOS-v2.py`, tl;dr [it's the Board ID](https://github.com/kholia/OSX-KVM/commit/aae332207fde2aaab209a63c3467ec94c3b32090)
+- [Max Headroom](https://github.com/max-privatevoid) - Figuring out non deterministic fetching in `fetch-macOS-v2.py`, tl;dr [it's the Board ID](https://github.com/kholia/OSX-KVM/commit/aae332207fde2aaab209a63c3467ec94c3b32090)
 - [cleverca22](https://github.com/cleverca22/) - Helping me sift through the QEMU source code
 - [pkharvey](https://github.com/pkharvey) - Unmatched DOS/Amiga expertise and talking for countless hours about how to do this
 - [Raito Bezarius](https://github.com/RaitoBezarius/) - Explaining theory about VMs, Kernels, IO and deadlines to me in a way I could understand

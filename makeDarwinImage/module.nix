@@ -94,7 +94,7 @@ in
   config = let
     run-macos = cfg.package.makeRunScript {
       extraQemuFlags = [ "-vnc ${cfg.vncListenAddr}:${toString cfg.vncDisplayNumber}" ] ++ cfg.extraQemuFlags;
-      inherit (cfg) threads cores sockets mem;
+      inherit (cfg) threads cores sockets mem sshPort;
     };
   in lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.optionals cfg.openFirewall [ (5900 + cfg.vncDisplayNumber) cfg.sshPort ];

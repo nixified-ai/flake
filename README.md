@@ -172,6 +172,9 @@ The `runScript` is a method of the image builder, for example `makeWin30Image {}
 
 # TODO
 
+- Allow diskSizeBytes to be grown by a second layer, sshing into the base image
+  and performing the necessary operations to grow the disk, instead of
+  reinstalling each time
 - Install Nix into the Darwin VM as part of the installation via SSH by using `${pkgs.nix.outPath}/scripts/install.in`
 - Support installing/initialising a [nix-darwin](https://github.com/LnL7/nix-darwin) configuration as part of the installation
 - Remove dependency on vncdo, use qemu framebuffer directly

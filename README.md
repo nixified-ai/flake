@@ -111,6 +111,18 @@ This flake exports a function `makeDarwinImage` which takes a `diskSizeBytes` ar
 }
 ```
 
+Using the `makeDarwinImage` function directly, you could increase the size of the macOS image used by `services.macos-ventura.enable = true` in your NixOS config as follows:
+
+```nix
+{ pkgs, ... }:
+{
+  services.macos-ventura = {
+    enable = true;
+    package = pkgs.makeDarwinImage { diskSizeBytes = 60000000000; };
+  };
+}
+```
+
 # Windows/DOS
 
 Each of the outputs in this flake have their own image builders and `runScript`.

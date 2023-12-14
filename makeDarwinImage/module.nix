@@ -93,6 +93,7 @@ in
   };
   config = let
     run-macos = cfg.package.makeRunScript {
+      diskImage = cfg.package;
       extraQemuFlags = [ "-vnc ${cfg.vncListenAddr}:${toString cfg.vncDisplayNumber}" ] ++ cfg.extraQemuFlags;
       inherit (cfg) threads cores sockets mem sshPort;
     };

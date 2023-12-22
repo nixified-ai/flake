@@ -55,7 +55,10 @@ in
   flake.nixosModules = let
     packageModule = pkgAttrName: { pkgs, ... }: {
       services.textgen.package = withSystem pkgs.system (
-        { config, ... }: lib.mkOptionDefault config.packages.${pkgAttrName}
+        { config, ... }:
+        lib.mkOptionDefault (config.packages.${pkgAttrName}.override {
+          stateDir = "/var/lib/textgen";
+        })
       );
     };
   in {

@@ -2,7 +2,7 @@ if (Get-AppxPackage -Name MicrosoftCorporationII.WindowsSubsystemForLinux) {
   Write-Host "---"
   Write-Host "Installing NixOS-WSL"
   Write-Host "---"
-  Invoke-WebRequest -Uri "https://github.com/nix-community/NixOS-WSL/releases/download/23.5.5.2/nixos-wsl.tar.gz" -OutFile "nixos-wsl-installer.tar.gz"
+  Invoke-WebRequest -Uri "https://github.com/nix-community/NixOS-WSL/releases/download/2311.5.3/nixos-wsl.tar.gz" -OutFile "nixos-wsl-installer.tar.gz"
   wsl.exe --import NixOS-nixified-ai $HOME\.NixOS-nixified-ai nixos-wsl-installer.tar.gz --version 2
   rm nixos-wsl-installer.tar.gz
   sleep 5

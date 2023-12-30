@@ -183,6 +183,14 @@ The `runScript` is a method of the image builder, for example `makeWin30Image {}
 
 ![wfwg311](https://github.com/MatthewCroughan/NixThePlanet/assets/26458780/107dd737-64b1-4fa8-ba67-2cd979f84ac6)
 
+## Windows 98
+
+#### Launch Windows 98 with a single `nix` command
+
+`nix run github:matthewcroughan/NixThePlanet#win98`
+
+![win98](https://github.com/MatthewCroughan/NixThePlanet/assets/26458780/5f4ef28d-e38e-474c-a166-d931359c3022)
+
 # TODO
 
 - Allow diskSizeBytes to be grown by a second layer, sshing into the base image

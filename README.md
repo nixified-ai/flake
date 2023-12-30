@@ -130,6 +130,7 @@ Each of the outputs in this flake have their own image builders and `runScript`.
 - `makeMsDos622Image`
 - `makeWin30Image`
 - `makeWfwg311Image`
+- `makeWin98Image`
 
 They can each be passed the `dosPostInstall` argument arbitrary **dos
 commands** to be ran after Windows has been installed, for example here's how

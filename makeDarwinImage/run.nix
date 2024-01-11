@@ -10,7 +10,7 @@
 , cores ? 2
 , sockets ? 1
 , sshPort ? 2222
-, mem ? "4G"
+, mem ? "6G"
 , diskImage ? (makeDarwinImage {})
 , extraQemuFlags ? []
 , lib
@@ -52,6 +52,7 @@ writeShellScriptBin "run-macOS.sh" ''
 
   # Sometimes plugins like JACK will not be compatible with QEMU from this
   # flake, so unset LD_LIBRARY_PATH
+  set -x
   unset LD_LIBRARY_PATH
   ${qemu_kvm}/bin/qemu-system-x86_64 "''${args[@]}"
 ''

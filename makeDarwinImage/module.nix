@@ -32,6 +32,13 @@ in
         VNC will run on port 5901
       '';
     };
+    sshListenAddr = lib.mkOption {
+      type = lib.types.str;
+      default = "127.0.0.1";
+      description = lib.mdDoc ''
+        Address on which to listen for forwarding the VM port 22 to the host
+      '';
+    };
     sshPort = lib.mkOption {
       type = lib.types.port;
       default = 2222;
@@ -95,7 +102,7 @@ in
     run-macos = cfg.package.makeRunScript {
       diskImage = cfg.package;
       extraQemuFlags = [ "-vnc ${cfg.vncListenAddr}:${toString cfg.vncDisplayNumber}" ] ++ cfg.extraQemuFlags;
-      inherit (cfg) threads cores sockets mem sshPort;
+      inherit (cfg) threads cores sockets mem sshListenAddr sshPort;
     };
   in lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.optionals cfg.openFirewall [ (5900 + cfg.vncDisplayNumber) cfg.sshPort ];

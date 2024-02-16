@@ -9,6 +9,7 @@
 , threads ? 4
 , cores ? 2
 , sockets ? 1
+, sshListenAddr ? "127.0.0.1"
 , sshPort ? 2222
 , mem ? "6G"
 , diskImage ? (makeDarwinImage {})
@@ -37,7 +38,7 @@ writeShellScriptBin "run-macOS.sh" ''
     -device ich9-intel-hda -device hda-duplex
     -drive id=OpenCoreBoot,if=virtio,snapshot=on,readonly=on,format=qcow2,file="${OpenCoreBoot}"
     -drive id=MacHDD,if=virtio,file="macos-ventura.qcow2",format=qcow2
-    -netdev user,id=net0,hostfwd=tcp::${toString sshPort}-:22 -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
+    -netdev user,id=net0,hostfwd=tcp:${sshListenAddr}:${toString sshPort}-:22 -device virtio-net-pci,netdev=net0,id=net0,mac=52:54:00:c9:18:27
     #-monitor stdio
     -device virtio-vga
     ${lib.concatStringsSep " " extraQemuFlags}

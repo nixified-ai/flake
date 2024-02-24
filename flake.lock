@@ -40,6 +40,22 @@
         "type": "indirect"
       }
     },
+    "fooocus-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1707661227,
+        "narHash": "sha256-sjTe6MNVaozARVPb4sQSC9VhGxrOcm2W98UxW/LLXgw=",
+        "owner": "lllyasviel",
+        "repo": "Fooocus",
+        "rev": "1c999be8c8134fe01a75723ea933858435856950",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lllyasviel",
+        "repo": "Fooocus",
+        "type": "github"
+      }
+    },
     "hercules-ci-effects": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -97,6 +113,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "fooocus-src": "fooocus-src",
         "hercules-ci-effects": "hercules-ci-effects",
         "invokeai-src": "invokeai-src",
         "nixpkgs": "nixpkgs",

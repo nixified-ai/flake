@@ -10,6 +10,10 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
+    fooocus-src = {
+      url = "github:lllyasviel/Fooocus";
+      flake = false;
+    };
     invokeai-src = {
       url = "github:invoke-ai/InvokeAI/v3.3.0post3";
       flake = false;
@@ -51,6 +55,7 @@
         hercules-ci-effects.flakeModule
 #        ./modules/nixpkgs-config
         ./overlays
+        ./projects/fooocus
         ./projects/invokeai
         ./projects/textgen
         ./website

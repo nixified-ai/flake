@@ -1,0 +1,12 @@
+diff --git a/launch.py b/launch.py
+index db174f5..cbe2183 100644
+--- a/launch.py
++++ b/launch.py
+@@ -74,7 +74,6 @@ def ini_args():
+     return args
+ 
+ 
+-prepare_environment()
+ build_launcher()
+ args = ini_args()
+ 

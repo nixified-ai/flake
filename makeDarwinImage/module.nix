@@ -97,6 +97,13 @@ in
         Whether to open the sshPort and vncDisplayNumber on the networking.firewall
       '';
     };
+    autoStart = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = lib.mdDoc ''
+        Whether to automatically start the VM after booting the host machine.
+      '';
+    };
   };
   config = let
     run-macos = cfg.package.makeRunScript {
@@ -112,7 +119,7 @@ in
           rm -f *.qcow2
         '';
         description = "macOS Ventura";
-        wantedBy = [ "multi-user.target" ];
+        wantedBy = lib.optionals cfg.autoStart [ "multi-user.target" ];
         serviceConfig = {
           Type = "simple";
           ExecStart = "${lib.getExe run-macos}";

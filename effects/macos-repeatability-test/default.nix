@@ -7,6 +7,9 @@
       hci-effects = inputs.hercules-ci-effects.lib.withPkgs pkgs;
     in { branch, rev, ... }: {
       macos-repeatability-test = hci-effects.mkEffect {
+        __hci_effect_mounts = builtins.toJSON {
+          "/hostTmp" = "hostTmp";
+        };
         secretsMap."ipfsBasicAuth" = "ipfsBasicAuth";
         buildInputs = with pkgs; [ libwebp gnutar curl nix jq coreutils-full ];
         effectScript = ''

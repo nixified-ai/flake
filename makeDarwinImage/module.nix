@@ -113,6 +113,14 @@ in
     };
   in lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = lib.optionals cfg.openFirewall [ (5900 + cfg.vncDisplayNumber) cfg.sshPort ];
+
+    users.users.macos-ventura = {
+      isSystemUser = true;
+      group = "macos-ventura";
+    };
+    users.groups.macos-ventura = {};
+    nix.settings.allowed-users = [ "macos-ventura" ];
+
     systemd = {
       services.macos-ventura = {
         preStart = lib.optionalString cfg.stateless ''

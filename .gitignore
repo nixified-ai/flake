@@ -35,9 +35,10 @@ ci
 .direnv
 .envrc
 
-# Ignore flake.nix anywhere except for the root
+# Ignore flake.nix anywhere except for the root and templates
 flake.nix
 !/flake.nix
+!/templates/**/flake.nix
 
 # OS generated files
 .DS_Store

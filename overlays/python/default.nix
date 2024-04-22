@@ -45,20 +45,23 @@ lib: {
     opencv-python = final.opencv4;
   };
 
+  pythonFinal = final: prev: {
+    python = prev.python.override {
+      # gives us a `python` where `python3Packages.python.pkgs` is the same package set as our `python3Packages`
+      # with overrides applied
+      packageOverrides = _: _: final;
+    };
+  };
+
   torchRocm = final: prev: {
     torch = prev.torch.override {
-      magma = prev.pkgs.magma-hip;
       cudaSupport = false;
       rocmSupport = true;
     };
-    torchvision = prev.torchvision.overridePythonAttrs (old: {
-      patches = (old.patches or []) ++ [ ./torchvision/fix-rocm-build.patch ];
-    });
   };
 
   torchCuda = final: prev: {
     torch = prev.torch.override {
-      magma = prev.pkgs.magma-cuda-static;
       cudaSupport = true;
       rocmSupport = false;
     };

@@ -8,7 +8,7 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:NixOS/nixpkgs/2fd19c8be2551a61c1ddc3d9f86d748f4db94f00";
     };
     invokeai-src = {
       url = "github:invoke-ai/InvokeAI/v3.3.0post3";
@@ -29,8 +29,13 @@
   };
   outputs = { flake-parts, invokeai-src, hercules-ci-effects, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      perSystem = { system, ... }: {
-        _module.args.pkgs = import inputs.nixpkgs { config.allowUnfree = true; inherit system; };
+      perSystem = { system, ... }: let
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in {
+        _module.args = { inherit pkgs; };
         legacyPackages = {
           koboldai = builtins.throw ''
 
@@ -42,6 +47,13 @@
                    nix run github:nixified.ai/flake/0c58f8cba3fb42c54f2a7bf9bd45ee4cbc9f2477#koboldai
           '';
         };
+        formatter = pkgs.alejandra;
+      };
+      flake.templates = {
+        comfyui = {
+          path = ./templates/comfyui;
+          description = "A basic ComfyUI configuration to get you started";
+        };
       };
       systems = [
         "x86_64-linux"
@@ -51,6 +63,7 @@
         hercules-ci-effects.flakeModule
 #        ./modules/nixpkgs-config
         ./overlays
+        ./projects/comfyui
         ./projects/invokeai
         ./projects/textgen
         ./website

@@ -16,6 +16,8 @@ let
     mv ./prompts ./_prompts
     mv ./characters ./_characters
     mv ./presets ./_presets
+    mv ./training ./_training
+    mv ./instruction-templates ./_instruction-templates
     cd -
     substituteInPlace ./src/modules/presets.py \
       --replace "Path('presets" "Path('$out/presets" \
@@ -34,14 +36,12 @@ let
       --replace "../css" "$out/css" \
       --replace 'Path(__file__).resolve().parent / ' "" \
       --replace "Path(f'css" "Path(f'$out/css"
-    substituteInPlace ./src/modules/utils.py \
-      --replace "Path('css" "Path('$out/css" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
     substituteInPlace ./src/modules/chat.py \
       --replace "folder = 'characters'" "folder = '$out/characters'" \
       --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
+      --replace "characters/" "$out/characters/" \
+      --replace "folder = 'instruction-templates'" "folder = '$out/instruction-templates'" \
+      --replace "Path(f'logs" "Path(f'${stateDir}/logs"
     substituteInPlace ./src/server.py \
       --replace "Path('presets" "Path('$out/presets" \
       --replace "Path('prompts" "Path('$out/prompts" \
@@ -52,9 +52,6 @@ let
       --replace "Path(f'softprompts" "Path(f'$out/softprompts" \
       --replace "Path('characters" "Path('$out/characters" \
       --replace "Path('cache" "Path('$out/cache"
-    substituteInPlace ./src/download-model.py \
-      --replace "=args.output" "='$out/models/'" \
-      --replace "base_folder=None" "base_folder='$out/models/'"
     substituteInPlace ./src/modules/html_generator.py \
       --replace "../css" "$out/css" \
       --replace 'Path(__file__).resolve().parent / ' "" \
@@ -62,20 +59,34 @@ let
     substituteInPlace ./src/modules/utils.py \
       --replace "Path('css" "Path('$out/css" \
       --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
-    substituteInPlace ./src/modules/chat.py \
-      --replace "folder = 'characters'" "folder = '$out/characters'" \
-      --replace "Path('characters" "Path('$out/characters" \
-      --replace "characters/" "$out/characters/"
+      --replace "characters/" "$out/characters/" \
+      --replace "Path('extensions" "Path('$out/extensions" \
+      --replace "x.parts[1]" "x.parts[-2]" \
+      --replace "path = \"instruction-templates\"" "path = \"$out/instruction-templates\"" \
+      --replace "Path('presets" "Path('$out/presets" \
+      --replace "Path(__file__).resolve().parent.parent" "Path('${stateDir}').resolve()" \
+      --replace "Path(path).glob" "(Path('$out') / path).glob" \
+      --replace "glob('txt')" "glob('*.txt')" \
+      --replace "abs_path = Path(fname).resolve()" "abs_path = (Path(fname).resolve()) if Path(fname).is_absolute() else (root_folder / Path(fname))"
+    substituteInPlace ./src/modules/prompts.py \
+      --replace "Path(f'instruction-templates/" "Path(f'$out/instruction-templates/"
+    substituteInPlace ./src/modules/training.py \
+      --replace "Path(base_path)" "(Path(\"$out\") / base_path)" \
+      --replace "'logs" "'${stateDir}/logs"
+    substituteInPlace ./src/extensions/openai/completions.py \
+      --replace "f\"instruction-templates" "f\"$out/instruction-templates"
     mv ./src $out
-    ln -s ${tmpDir}/models/ $out/models
-    ln -s ${tmpDir}/loras/ $out/loras
-    ln -s ${tmpDir}/cache/ $out/cache
-    ln -s ${tmpDir}/prompts/ $out/prompts
-    ln -s ${tmpDir}/characters/ $out/characters
-    ln -s ${tmpDir}/presets/ $out/presets
+    ln -s ${stateDir}/models/ $out/models
+    ln -s ${stateDir}/loras/ $out/loras
+    ln -s ${stateDir}/cache/ $out/cache
+    ln -s ${stateDir}/prompts/ $out/prompts
+    ln -s ${stateDir}/characters/ $out/characters
+    ln -s ${stateDir}/presets/ $out/presets
+    ln -s ${stateDir}/training/ $out/training
+    ln -s ${stateDir}/instruction-templates/ $out/instruction-templates
   '';
   textgenPython = python3Packages.python.withPackages (_: with python3Packages; [
+    # autogptq # can't build this..
     accelerate
     bitsandbytes
     colorama
@@ -84,20 +95,26 @@ let
     gradio
     llama-cpp-python
     markdown
+    multiprocess
+    nltk
     numpy
     pandas
     peft
     pillow
+    pyarrow
     pyyaml
     requests
     rwkv
     safetensors
+    scikit-learn
+    sentence-transformers
     sentencepiece
-    tqdm
-    transformers
-    #autogptq # can't build this..
+    speechrecognition
+    tiktoken
     torch
     torch-grammar
+    wandb
+    xxhash
   ]);
 
   # See note about consumer GPUs:
@@ -121,16 +138,20 @@ in
   fi
   rm -rf ${tmpDir}
   mkdir -p ${tmpDir}
-  mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/prompts ${stateDir}/characters ${stateDir}/presets
+  mkdir -p ${stateDir}/models ${stateDir}/cache ${stateDir}/loras ${stateDir}/prompts ${stateDir}/characters ${stateDir}/presets ${stateDir}/training ${stateDir}/instruction-templates
   cp -r --no-preserve=mode ${patchedSrc}/_prompts/* ${stateDir}/prompts/
   cp -r --no-preserve=mode ${patchedSrc}/_characters/* ${stateDir}/characters/
   cp -r --no-preserve=mode ${patchedSrc}/_presets/* ${stateDir}/presets/
+  cp -r --no-preserve=mode ${patchedSrc}/_training/* ${stateDir}/training/
+  cp -r --no-preserve=mode ${patchedSrc}/_instruction-templates/* ${stateDir}/instruction-templates/
   ln -s ${stateDir}/models/ ${tmpDir}/models
   ln -s ${stateDir}/loras/ ${tmpDir}/loras
   ln -s ${stateDir}/cache/ ${tmpDir}/cache
   ln -s ${stateDir}/prompts/ ${tmpDir}/prompts
   ln -s ${stateDir}/characters/ ${tmpDir}/characters
   ln -s ${stateDir}/presets/ ${tmpDir}/presets
+  ln -s ${stateDir}/training/ ${tmpDir}/training
+  ln -s ${stateDir}/instruction-templates/ ${tmpDir}/instruction-templates
   ${lib.optionalString (python3Packages.torch.rocmSupport or false) rocmInit}
   export LD_LIBRARY_PATH=/run/opengl-driver/lib:${cudaPackages.cudatoolkit}/lib
   ${textgenPython}/bin/python ${patchedSrc}/server.py $@ \

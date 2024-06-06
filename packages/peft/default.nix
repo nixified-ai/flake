@@ -9,18 +9,18 @@
 , torch
 , transformers
 , black
-, hf-doc-builder
+# , hf-doc-builder
 , ruff
 }:
 
 buildPythonPackage rec {
   pname = "peft";
-  version = "0.2.0";
+  version = "0.6.2";
   format = "pyproject";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-zjP0hMcDgZBwW2nk0iiSMMfBgZwQhHgUg6yOEY8Kca8=";
+    hash = "sha256-JE6pdo595J3EGwaNP5oyylCOMdQiNkBWZhZjO27RMx4=";
   };
 
   propagatedBuildInputs = [
@@ -36,11 +36,11 @@ buildPythonPackage rec {
   passthru.optional-dependencies = {
     dev = [
       black
-      hf-doc-builder
+      # hf-doc-builder
       ruff
     ];
     docs_specific = [
-      hf-doc-builder
+      # hf-doc-builder
     ];
     quality = [
       black

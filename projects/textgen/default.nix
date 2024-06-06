@@ -10,25 +10,32 @@ in
     commonOverlays = [
       overlays.python-fixPackages
       (l.overlays.callManyPackages [
+        ../../packages/accelerate
+        ../../packages/analytics-python
         ../../packages/apispec-webframeworks
-        ../../packages/torch-grammar
+        ../../packages/autogptq
+        # https://github.com/huggingface/datasets/issues/6352#issuecomment-1781073234
+        ../../packages/datasets
+        ../../packages/ffmpy
         ../../packages/flexgen
         ../../packages/gradio
         ../../packages/gradio-client
-        ../../packages/analytics-python
-        ../../packages/ffmpy
         ../../packages/llama-cpp-python
-        ../../packages/rwkv
-        ../../packages/autogptq
+        ../../packages/peft
         ../../packages/rouge
+        ../../packages/rwkv
+        ../../packages/sentence-transformers
+        ../../packages/speechrecognition
+        ../../packages/tokenizers
+        ../../packages/torch-grammar
       ])
     ];
 
     python3Variants = {
-      amd = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays ++ [
+      amd = l.overlays.applyOverlays pkgs.python310Packages (commonOverlays ++ [
         overlays.python-torchRocm
       ]);
-      nvidia = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays ++ [
+      nvidia = l.overlays.applyOverlays pkgs.python310Packages (commonOverlays ++ [
         overlays.python-torchCuda
         overlays.python-bitsAndBytesOldGpu
       ]);

@@ -46,9 +46,9 @@ writeShellScriptBin "run-macOS.sh" ''
   )
 
   if [ ! -f macos-ventura.qcow2 ]; then
-    echo "macos-ventura.qcow2 not found, making disk image ./macos-ventura.qcow2"
-    nix-store --realise ${diskImage} --add-root ./macos-ventura-base-image.qcow2
-    ${qemu_kvm}/bin/qemu-img create -b ${diskImage} -F qcow2 -f qcow2 ./macos-ventura.qcow2
+    echo 'The disk image macos-ventura.qcow2 was not found, creating it:'
+    nix-store --realise ${diskImage} --add-root macos-ventura-base-image.qcow2
+    ${qemu_kvm}/bin/qemu-img create -b macos-ventura-base-image.qcow2 -F qcow2 -f qcow2 macos-ventura.qcow2
   fi
 
   # Sometimes plugins like JACK will not be compatible with QEMU from this

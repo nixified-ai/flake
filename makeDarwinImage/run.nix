@@ -14,6 +14,7 @@
 , mem ? "6G"
 , diskImage ? (makeDarwinImage {})
 , extraQemuFlags ? []
+, createDiskImageIfNotExists ? true
 , lib
 }:
 writeShellScriptBin "run-macOS.sh" ''
@@ -45,9 +46,18 @@ writeShellScriptBin "run-macOS.sh" ''
     "$@"
   )
 
+  if [ ! -L macos-ventura-base-image.qcow2 ]; then
+  ${if createDiskImageIfNotExists then ''
+    echo 'The disk image macos-ventura-base-image.qcow2 was not found, creating it:'
+    nix-store --realise ${diskImage} --add-root macos-ventura-base-image.qcow2
+  '' else ''
+    echo 'The disk image macos-ventura-base-image.qcow2 was not found but we do not have the ability to create it. Please enable the services.macos-ventura.createDiskImageIfNotExists option and try again.'
+    exit 1
+  ''}
+  fi
+
   if [ ! -f macos-ventura.qcow2 ]; then
     echo 'The disk image macos-ventura.qcow2 was not found, creating it:'
-    nix-store --realise ${diskImage} --add-root macos-ventura-base-image.qcow2
     ${qemu_kvm}/bin/qemu-img create -b macos-ventura-base-image.qcow2 -F qcow2 -f qcow2 macos-ventura.qcow2
   fi
 

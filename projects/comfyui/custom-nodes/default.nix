@@ -425,24 +425,27 @@ in {
   # https://github.com/cubiq/ComfyUI_essentials
   essentials = mkComfyUICustomNodes {
     pname = "comfyui-essentials";
-    version = "unstable-2024-06-15";
+    version = "unstable-2024-08-18";
     src = fetchFromGitHub {
       owner = "cubiq";
       repo = "ComfyUI_essentials";
-      rev = "5f1fc52acb03196d683552ea780e5c5325396f18";
-      sha256 = "sha256-9Xb9Iqww46qXlEtkA0lbz4zQRPzuN71T1NJjO4B2Rl8=";
+      rev = "99a1423f7bfbd9180af801f6618054cb6c95a0fc";
+      sha256 = "sha256-6J91qiXCae/2R0btbu126RkVxO8XP10HdyFUxYeAkXw=";
     };
-    passthru.dependencies = {
-      pkgs = with python3Packages; [
-        numba
-        colour-science
-        jsonschema
-        pixeloe
-        pooch
-        pymatting
-        rembg
-      ];
-    };
+    passthru.dependencies =
+      lib.trivial.warn
+      "not all deps for custom node 'essentials' are satisfied (transparent-background) - some functionality will be unavailable" {
+        pkgs = with python3Packages; [
+          numba
+          colour-science
+          jsonschema
+          pixeloe
+          pooch
+          pymatting
+          rembg
+          # transparent-background
+        ];
+      };
   };
 
   # https://github.com/kijai/ComfyUI-KJNodes
@@ -457,7 +460,7 @@ in {
     };
     passthru.dependencies =
       lib.trivial.warn
-      "not all deps for custom node kjnodes are satisfied (color-matcher, librosa) - some functionality will be unavailable" {
+      "not all deps for custom node 'kjnodes' are satisfied (color-matcher, librosa) - some functionality will be unavailable" {
         pkgs = with python3Packages; [
           # color-matcher # doesn't exist
           # librosa # broken

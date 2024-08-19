@@ -29,11 +29,11 @@ in {
     ];
 
     python3Variants = {
-      amd = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays
+      amd = l.overlays.applyOverlays pkgs.python311Packages (commonOverlays
         ++ [
           overlays.python-torchRocm
         ]);
-      nvidia = l.overlays.applyOverlays pkgs.python3Packages (commonOverlays
+      nvidia = l.overlays.applyOverlays pkgs.python311Packages (commonOverlays
         ++ [
           # FIXME: temporary standin for practical purposes.
           # They're prebuilt and come with cuda support.

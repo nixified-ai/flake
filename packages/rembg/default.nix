@@ -22,7 +22,7 @@ in
       owner = "danielgatis";
       repo = "rembg";
       rev = "v${version}";
-      sha256 = "sha256-71A46escxE8sType/3XSE8plHXNA7tKJ/Ltb0BwNcrs=";
+      sha256 = "sha256-jEcTivoM4S7stwxotoZyafSwPyh/sEv9KPju965jOjs=";
     };
     pyproject = true;
     nativeBuildInputs = [

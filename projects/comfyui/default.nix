@@ -19,6 +19,7 @@ in {
       })
       (l.overlays.callManyPackages [
         ../../packages/mediapipe
+        ../../packages/gguf
         ../../packages/spandrel
         ../../packages/colour-science
         ../../packages/rembg

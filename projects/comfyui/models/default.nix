@@ -16,8 +16,8 @@ in {
   };
 
   # https://huggingface.co/city96/FLUX.1-schnell-gguf/resolve/main/flux1-schnell-Q4_K_S.gguf?download=true
-  flux1-schnell-gguf-q4_k_s = {
-    installPath = "unet/flux1-schnell-Q4_K_S.gguf";
+  flux1-schnell-q4_k_s-gguf = {
+    installPath = "diffusion_models/flux1-schnell-Q4_K_S.gguf";
     src = fetchFromHuggingFace {
       owner = "city96";
       repo = "FLUX.1-schnell-gguf";
@@ -27,9 +27,33 @@ in {
     type = checkpoint;
     base = flux1s;
   };
+  # https://huggingface.co/city96/FLUX.1-schnell-gguf/resolve/main/flux1-schnell-Q4_0.gguf?download=true
+  flux1-schnell-q4_0-gguf = {
+    installPath = "diffusion_models/flux1-schnell-Q4_0.gguf";
+    src = fetchFromHuggingFace {
+      owner = "city96";
+      repo = "FLUX.1-schnell-gguf";
+      resource = "flux1-schnell-Q4_0.gguf";
+      sha256 = "sha256-kKOT06RL7GkccHAD9DT93gYGS4cLs8IG63pPEJsl/04=";
+    };
+    type = checkpoint;
+    base = flux1s;
+  };
+  # https://huggingface.co/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q4_0.gguf?download=true
+  flux1-dev-Q4_0 = {
+    installPath = "diffusion_models/flux1-dev-Q4_0.gguf";
+    src = fetchFromHuggingFace {
+      owner = "city96";
+      repo = "FLUX.1-dev-gguf";
+      resource = "flux1-dev-Q4_0.gguf";
+      sha256 = "sha256-KGfpV1ZA2AzLy/ZQEGWaTQnmdqA0Y3vDfqx/JTHEbpA=";
+    };
+    type = checkpoint;
+    base = flux1d;
+  };
 
   flux-clip_l = {
-    installPath = "clip/flux-clip_l.safetensors";
+    installPath = "clip/clip_l.safetensors";
     src = fetchFromHuggingFace {
       owner = "comfyanonymous";
       repo = "flux_text_encoders";
@@ -37,7 +61,30 @@ in {
       sha256 = "sha256-ZgxvWxq66dxJisLSHhNH0qvbDPbAwMhXbNeWSR2abN0=";
     };
     type = clip;
-    base = flux1d;
+  };
+
+  # https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf/resolve/main/t5-v1_1-xxl-encoder-Q4_K_S.gguf?download=true
+  t5-v1_1-xxl-encoder-Q4_K_S = {
+    installPath = "clip/t5-v1_1-xxl-encoder-Q4_K_S.gguf";
+    src = fetchFromHuggingFace {
+      owner = "city96";
+      repo = "t5-v1_1-xxl-encoder-gguf";
+      resource = "t5-v1_1-xxl-encoder-Q4_K_S.gguf";
+      sha256 = "sha256-iLaWz64JjwO7B4zFlE7wOuwekewCCmsBa3I6DwUyVYw=";
+    };
+    type = checkpoint;
+  };
+
+  # https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf/resolve/main/t5-v1_1-xxl-encoder-Q5_K_M.gguf?download=true
+  t5-v1_1-xxl-encoder-Q5_K_M = {
+    installPath = "clip/t5-v1_1-xxl-encoder-Q5_K_M.gguf";
+    src = fetchFromHuggingFace {
+      owner = "city96";
+      repo = "t5-v1_1-xxl-encoder-gguf";
+      resource = "t5-v1_1-xxl-encoder-Q5_K_M.gguf";
+      sha256 = "sha256-tRy7ELGnqsbdHDti8O2Qi/0G4LQtLzV31D4GE2H1Ha4=";
+    };
+    type = checkpoint;
   };
 
   t5xxl_fp8_e4m3fn = {
@@ -49,9 +96,20 @@ in {
       sha256 = "sha256-fTMNpIFhV1QNa7eDi/Y6DwL1c/xIyk2N40uwy/1RTwk=";
     };
     type = text_encoder;
-    base = flux1d;
   };
 
+  t5xxl_fp16 = {
+    installPath = "clip/t5xxl_fp16.safetensors";
+    src = fetchFromHuggingFace {
+      owner = "comfyanonymous";
+      repo = "flux_text_encoders";
+      resource = "t5xxl_fp16.safetensors";
+      sha256 = "sha256-bkgLCfrgSactKoxfvMuNPpL+vrIzu+nf5yVpWKkWdjU=";
+    };
+    type = text_encoder;
+  };
+
+  # flux1d version requires authentication
   flux1s-vae = {
     installPath = "vae/flux1s-vae.safetensors";
     src = fetchFromHuggingFace {

@@ -61,6 +61,24 @@ in {
     };
   };
 
+  # https://github.com/city96/ComfyUI-GGUF
+  # GGUF Quantization support for native ComfyUI models
+  # Use the GGUF Unet loader found under the bootleg category. Install the .gguf models into diffusion_models/
+  comfyui-gguf = mkComfyUICustomNodes {
+    pname = "comfyui-gguf";
+    version = "unstable-2024-08-21";
+    pyproject = false;
+    passthru.dependencies.pkgs = with python3Packages; [
+      gguf
+    ];
+    src = fetchFromGitHub {
+      owner = "city96";
+      repo = "ComfyUI-GGUF";
+      rev = "8d1fbbc456d50fe340bbbd775cefea79a5ed8835";
+      hash = "sha256-a6Ip11/96dHcyP881EzeSEi503pNDcz+WiZpdLuBvO4=";
+    };
+  };
+
   # Generates masks for inpainting based on text prompts..
   # https://github.com/biegert/ComfyUI-CLIPSeg
   clipseg = mkComfyUICustomNodes {

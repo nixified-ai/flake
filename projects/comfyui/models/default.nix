@@ -12,7 +12,56 @@ in {
       sha256 = "sha256-6tQmJ4tJAw6dpd+GKZTyXOlKsu5N84tVbd3bPbCTv3I=";
     };
     type = checkpoint;
-    base = flux;
+    base = flux1s;
+  };
+
+  # https://huggingface.co/city96/FLUX.1-schnell-gguf/resolve/main/flux1-schnell-Q4_K_S.gguf?download=true
+  flux1-schnell-gguf-q4_k_s = {
+    installPath = "unet/flux1-schnell-Q4_K_S.gguf";
+    src = fetchFromHuggingFace {
+      owner = "city96";
+      repo = "FLUX.1-schnell-gguf";
+      resource = "flux1-schnell-Q4_K_S.gguf";
+      sha256 = "sha256-T9Fkd7OlKW0M9yLEuSqf1/MNCax0lYJuRGXY3pyf2XM=";
+    };
+    type = checkpoint;
+    base = flux1s;
+  };
+
+  flux-clip_l = {
+    installPath = "clip/flux-clip_l.safetensors";
+    src = fetchFromHuggingFace {
+      owner = "comfyanonymous";
+      repo = "flux_text_encoders";
+      resource = "clip_l.safetensors";
+      sha256 = "sha256-ZgxvWxq66dxJisLSHhNH0qvbDPbAwMhXbNeWSR2abN0=";
+    };
+    type = clip;
+    base = flux1d;
+  };
+
+  t5xxl_fp8_e4m3fn = {
+    installPath = "clip/t5xxl_fp8_e4m3fn.safetensors";
+    src = fetchFromHuggingFace {
+      owner = "comfyanonymous";
+      repo = "flux_text_encoders";
+      resource = "t5xxl_fp8_e4m3fn.safetensors";
+      sha256 = "sha256-fTMNpIFhV1QNa7eDi/Y6DwL1c/xIyk2N40uwy/1RTwk=";
+    };
+    type = text_encoder;
+    base = flux1d;
+  };
+
+  flux1s-vae = {
+    installPath = "vae/flux1s-vae.safetensors";
+    src = fetchFromHuggingFace {
+      owner = "black-forest-labs";
+      repo = "FLUX.1-schnell";
+      resource = "vae/diffusion_pytorch_model.safetensors";
+      sha256 = "sha256-9bWaJoUVUbZ64f5Y0y52SG4egS3vRpakvql/FmBNQKM=";
+    };
+    type = vae;
+    base = flux1s;
   };
 
   # https://huggingface.co/Acly/SD-Checkpoints/resolve/main/flat2DAnimerge_v45Sharp.safetensors

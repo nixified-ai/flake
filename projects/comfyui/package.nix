@@ -102,6 +102,7 @@ with builtins; let
       clip_vision = "${modelsDir}/clip_vision";
       configs = "${modelsDir}/configs";
       controlnet = "${modelsDir}/controlnet";
+      diffusion_models = "${modelsDir}/diffusion_models";
       embeddings = "${modelsDir}/embeddings";
       inpaint = "${modelsDir}/inpaint";
       ipadapter = "${modelsDir}/ipadapter";
@@ -149,13 +150,13 @@ with builtins; let
 in
   stdenv.mkDerivation {
     pname = "comfyui";
-    version = "v0.0.8";
+    version = "unstable-2024-08-21";
 
     src = fetchFromGitHub {
       owner = "comfyanonymous";
       repo = "ComfyUI";
-      rev = "v0.0.8";
-      hash = "sha256-QUf15Z2hiQo5T4SvsEhRF0mpuv0lb2VqLJTRGSmFrgU=";
+      rev = "5e806f555d1704d10ae02f4fafbc1b85713d389f";
+      hash = "sha256-+iqbnXdSkC6iFbh5F0sDbkGDtcsv+ScM3+UtnxtZT+I=";
     };
 
     installPhase = ''
@@ -168,7 +169,10 @@ in
       # No module named 'app'" when new directories get added (which has happened
       # at least once).  Investigate if we can just copy everything.
       cp -r $src/comfy $out/
+      cp -r $src/comfy_execution $out/
       cp -r $src/comfy_extras $out/
+      cp -r $src/model_filemanager $out/
+      cp -r $src/api_server $out/
       cp -r $src/app $out/
       cp -r $src/web $out/
       cp -r $src/*.py $out/

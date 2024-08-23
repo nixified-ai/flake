@@ -391,6 +391,20 @@ in {
     base = sdxl;
   };
 
+  # This is a LoRA for enhancing/diminishing detail while keeping the overall style/character; it works well with all kinds of base models (incl anime & realistic models)/style LoRA/character LoRA, etc.
+  # Apply your own weight; this LoRA can be utilized for any weight up/down to 2/-2!
+  # Note: use a negative weight to reduce details!
+  detail-tweaker-lora = {
+    installPath = "loras/detail-tweaker-lora.safetensors";
+    src = fetchFromUrl {
+      name = "detail-tweaker-lora.safetensors";
+      url = "https://civitai.com/api/download/models/62833?type=Model&format=SafeTensor";
+      sha256 = "sha256-R6qvDSlFypNxUdYTBJRt0imz8HIUC4VIS8k+OPKm4vc=";
+    };
+    base = sd15;
+    type = lora;
+  };
+
   # https://huggingface.co/lllyasviel/sd_control_collection
   sai_xl_canny_256lora = {
     installPath = "controlnet/sai_xl_canny_256lora.safetensors";

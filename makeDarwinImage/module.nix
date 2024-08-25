@@ -90,6 +90,15 @@ in
         start.
       '';
     };
+    createDiskImageIfNotExists = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = lib.mdDoc ''
+        After running macOS for the first time, you may disable this option.
+        This will avoid running the installer again and creating new copies of macOS in the Nix store when a dependency of NixThePlanet changes in Nixpkgs.
+        If `services.macos-ventura.stateless` is enabled, this option must also be enabled.
+      '';
+    };
     openFirewall = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -109,9 +118,14 @@ in
     run-macos = cfg.package.makeRunScript {
       diskImage = cfg.package;
       extraQemuFlags = [ "-vnc ${cfg.vncListenAddr}:${toString cfg.vncDisplayNumber}" ] ++ cfg.extraQemuFlags;
-      inherit (cfg) threads cores sockets mem sshListenAddr sshPort;
+      inherit (cfg) threads cores sockets mem sshListenAddr sshPort createDiskImageIfNotExists;
     };
   in lib.mkIf cfg.enable {
+    assertions = lib.singleton {
+      assertion = cfg.stateless -> cfg.createDiskImageIfNotExists;
+      message = "If `services.macos-ventura.stateless` is enabled, then `services.macos-ventura.createDiskImageIfNotExists` must also be enabled.";
+    };
+
     networking.firewall.allowedTCPPorts = lib.optionals cfg.openFirewall [ (5900 + cfg.vncDisplayNumber) cfg.sshPort ];
 
     users.users.macos-ventura = {

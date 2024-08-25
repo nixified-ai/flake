@@ -2,6 +2,18 @@
 with {inherit (import ./meta.nix) base-models model-types;}; let
   fetchFromUrl = import <nix/fetchurl.nix>;
 in {
+  # https://civitai.com/models/630820?modelVersionId=736086
+  flux1-fusion-ds-smooth-merge-4step-q4_0-v0-gguf = {
+    installPath = "diffusion_models/flux1-fusion-ds-smooth-merge-4step-q4_0-v0.gguf";
+    src = fetchFromUrl {
+      name = "flux-fusion-ds-smooth-merge-4step-q4_0-v0.gguf";
+      url = "https://civitai.com/api/download/models/736086?type=Model&format=Diffusers&size=full&fp=fp16";
+      sha256 = "sha256-Ed+NDV8KkNKUwL5pk7Idod/yAPhQKAWHzNp1quCY4ng=";
+    };
+    base = flux1d;
+    type = checkpoint;
+  };
+
   # https://huggingface.co/Comfy-Org/flux1-schnell/resolve/main/flux1-schnell-fp8.safetensors
   flux1-schnell-fp8 = {
     installPath = "checkpoints/flux1-schnell-fp8.safetensors";

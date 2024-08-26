@@ -61,8 +61,9 @@
       debug = true;
       imports = [
         hercules-ci-effects.flakeModule
-#        ./modules/nixpkgs-config
+        # ./modules/nixpkgs-config
         ./overlays
+        ./projects/air
         ./projects/comfyui
         ./projects/invokeai
         ./projects/textgen

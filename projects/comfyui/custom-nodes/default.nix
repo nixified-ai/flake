@@ -13,9 +13,7 @@
   fetchzip,
   writeText,
   fetchFromGitHub,
-  fetchFromHuggingFace,
   python3Packages,
-  models,
 }: let
   # Patches don't apply to $src, and as with many scripting languages that don't
   # have a build output per se, we just want the script source itself placed
@@ -41,6 +39,22 @@
         };
       }
       // args);
+
+  fetchFromUrl = import <nix/fetchurl.nix>;
+
+  reactorModels = let
+    reactorModel = file: sha256:
+      fetchFromUrl {
+        url = "https://huggingface.co/datasets/Gourieff/resolve/main/ReActor/models/${file}";
+        inherit sha256;
+      };
+  in {
+    "facerestore_models/GFPGANv1.3.pth" = reactorModel "facerestore_models/GFPGANv1.3.pth" "sha256-yVOojycnyFw9mucuK9SEa7r1n+aXKtlBMOI+cBdSSnA=";
+    "facerestore_models/GFPGANv1.4.pth" = reactorModel "facerestore_models/GFPGANv1.4.pth" "sha256-4s1HA6sU9NAf0Tg6iosmb5pYM9rO6OannTvyGhtr5a0=";
+    "facerestore_models/codeformer-v0.1.0.pth" = reactorModel "facerestore_models/codeformer-v0.1.0.pth" "sha256-EAnlN+DCoH1Mq85jVfU8tmdnzUtCl+x6SmTKS4pWhLc=";
+    "facerestore_models/GPEN-BFR-512.onnx" = reactorModel "facerestore_models/GPEN-BFR-512.onnx" "sha256-v4CsuOkbqIUuPwElBb4sO2zWs+7V7GBePbh4Y8TnTU4=";
+    "insightface/inswapper_128.onnx" = reactorModel "inswapper_128.onnx" "sha256-5KPwjHU8ty0E4Qqg99vj3uu/OVZ9Tq1tzgjpiqSeFq8=";
+  };
 in {
   # https://github.com/Extraltodeus/ComfyUI-AutomaticCFG
   # automatically adjusts CFG to avoid burns
@@ -311,8 +325,17 @@ in {
   # Nodes for providing ControlNet hint images.
   controlnet-aux = mkComfyUICustomNodes {
     pname = "comfyui-controlnet-aux";
-    version = "unstable-2024-06-21";
+    version = "unstable-2024-08-28";
     pyproject = true;
+
+    src = fetchFromGitHub {
+      owner = "Fannovel16";
+      repo = "comfyui_controlnet_aux";
+      rev = "6f1ba1c10df84af6d356119ccf4ebcf796a10e1c";
+      sha256 = "sha256-IapmOgCha9iYP1ngaP4yjAaWANXY6UNGBh7QiM2WFQ0=";
+      fetchSubmodules = true;
+    };
+
     passthru.dependencies.pkgs = with python3Packages; [
       addict
       albumentations
@@ -345,55 +368,49 @@ in {
     # as general model dependencies.
     # TODO: there are probably more models to add
     installPhase = let
-      yolox_l = fetchFromHuggingFace {
-        owner = "yzd-v";
-        repo = "DWPose";
-        resource = "yolox_l.onnx";
+      yolox_l = fetchFromUrl {
+        url = "https://huggingface.co/yzd-v/DWPose/resolve/main/yolox_l.onnx";
         sha256 = "sha256-eGCued5siaPB63KumidWwMz74Et3kbtYgK+r2XhVpBE=";
       };
-      yolo_nas_l_fp16 = fetchFromHuggingFace {
-        owner = "hr16";
-        repo = "yolo-nas-fp16";
-        resource = "yolo_nas_l_fp16.onnx";
+      yolo_nas_l_fp16 = fetchFromUrl {
+        url = "https://huggingface.co/hr16/yolo-nas-fp16/resolve/main/yolo_nas_l_fp16.onnx";
         sha256 = "sha256-wrdYscqpXXh3NoU5cdvJx2CDCA1oQUjFzRhbH9QON78=";
       };
-      dw-ll_ucoco_384 = fetchFromHuggingFace {
-        owner = "yzd-v";
-        repo = "DWPose";
-        resource = "dw-ll_ucoco_384.onnx";
+      dw-ll_ucoco_384 = fetchFromUrl {
+        url = "https://huggingface.co/yzd-v/DWPose/resolve/main/dw-ll_ucoco_384.onnx";
         sha256 = "sha256-ck9P8kOe1hr7hvuKGVHsOcYiBoKAO0qL1PWYzZE7GEM=";
       };
       # https://huggingface.co/spaces/LiheYoung/Depth-Anything/resolve/main/checkpoints/depth_anything_vitb14.pth
       depth_anything = filename:
-        import <nix/fetchurl.nix> {
+        fetchFromUrl {
           name = filename;
           # observed url when it tries to download on its own
           url = "https://cdn-lfs-us-1.huggingface.co/repos/b2/a8/b2a84b9a6ef705fba73e7ccec6a9728b3427d8b4c7f536eae186110f0cbd700f/64ae214ae4e27424b644c49464c0aa243016f6f753d95097c8eb9ad0b9cb2d9b?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27${filename}%3B+filename%3D%22${filename}%22%3B&Expires=1719406653&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcxOTQwNjY1M319LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy11cy0xLmh1Z2dpbmdmYWNlLmNvL3JlcG9zL2IyL2E4L2IyYTg0YjlhNmVmNzA1ZmJhNzNlN2NjZWM2YTk3MjhiMzQyN2Q4YjRjN2Y1MzZlYWUxODYxMTBmMGNiZDcwMGYvNjRhZTIxNGFlNGUyNzQyNGI2NDRjNDk0NjRjMGFhMjQzMDE2ZjZmNzUzZDk1MDk3YzhlYjlhZDBiOWNiMmQ5Yj9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPSoifV19&Signature=XDSvjG3AZZEL66gSsa4R5uE9bWFOA-wbiqkG7eX3t57nrZjdMmhVBjZxuXrB5TV-jjP0ZX52fDUlfIqbPjmsknxQql3aqFftJOhvbu7D467ng6HDw54yuVlIZ7ZQ7Z5kOuyAt3WSNyRQdgPVFQtb7~nvZmAbUheHdZWysg9ArCgYCRyKTPlR2hwyns9xTPlXkihkEcFK1vuVOENWXmOok~0-Ri6lgTiqBDA8OCoRasgSoxBHyApHi8CWfoJRj-MpmqBDC48lsM8xDU3perWtZ6LPfmrPmJz-KnOqZ~Ou~tFdfGOLyf66hBKN0~JH08L7Fr6c6A1Bty9mtZUQ4iuN9Q__&Key-Pair-Id=K2FPYV99P2N66Q";
           sha256 = "sha256-ZK4hSuTidCS2RMSUZMCqJDAW9vdT2VCXyOua0LnLLZs=";
         };
-      sk_model = fetchFromHuggingFace {
-        owner = "lllyasviel";
-        repo = "Annotators";
-        resource = "sk_model.pth";
+      table5_pidinet = fetchFromUrl {
+        url = "https://huggingface.co/lllyasviel/Annotators/resolve/main/table5_pidinet.pth";
+        sha256 = "sha256-gIYKwmcli18nSG4O8VKiEdCwgSD2KusYWgUKzDDaSGw=";
+      };
+      sk_model = fetchFromUrl {
+        url = "https://huggingface.co/lllyasviel/Annotators/resolve/main/sk_model.pth";
         sha256 = "sha256-xobO0qZmtIULS7bM8HSAMcPtqfgi3nOjS4l5lw2Q8MY=";
       };
-      sk_model2 = fetchFromHuggingFace {
-        owner = "lllyasviel";
-        repo = "Annotators";
-        resource = "sk_model2.pth";
+      sk_model2 = fetchFromUrl {
+        url = "https://huggingface.co/lllyasviel/Annotators/resolve/main/sk_model2.pth";
         sha256 = "sha256-MKU0eBBh806Du5QGtDNdpP8mFsldIqWFwSRaqDY+dOA=";
       };
-      anyline-mteed = fetchFromHuggingFace {
-        # https://huggingface.co/TheMistoAI/MistoLine/resolve/main/Anyline/MTEED.pth
-        owner = "TheMistoAI";
-        repo = "MistoLine";
-        resource = "Anyline/MTEED.pth";
+      anyline-mteed = fetchFromUrl {
+        url = "https://huggingface.co/TheMistoAI/MistoLine/resolve/main/Anyline/MTEED.pth";
         sha256 = "sha256-o8LYqM6UIlVceHFgvUY2LXYTJaVlMzwOP2pT4Lriq9s=";
       };
       depth_anything_vitb14 = depth_anything "depth_anything_vitb14.pth";
       depth_anything_vitl14 = depth_anything "depth_anything_vitl14.pth";
       depth_anything_vits14 = depth_anything "depth_anything_vits14.pth";
-      depth_anything_v2_vitb = models.depth_anything_v2_vitb.src;
+      depth_anything_v2_vitb = fetchFromUrl {
+        url = "https://huggingface.co/depth/Depth-Anything-V2-Base/resolve/main/depth_anything_v2_vitb.pth";
+        sha256 = "sha256-DStwAuYtOdZVVxw3EzM0C9iPZ6uVBQwDWRVVqgVkUyg=";
+      };
     in ''
       runHook preInstall
       mkdir -p $out/ckpts/yzd-v/DWPose
@@ -409,33 +426,26 @@ in {
       ln -s ${depth_anything_vitl14} $out/ckpts/LiheYoung/Depth-Anything/checkpoints/${depth_anything_vitl14.name}
       ln -s ${depth_anything_vits14} $out/ckpts/LiheYoung/Depth-Anything/checkpoints/${depth_anything_vits14.name}
       ln -s ${depth_anything_v2_vitb} $out/ckpts/depth-anything/Depth-Anything-V2-Base/${depth_anything_v2_vitb.name}
+      ln -s ${table5_pidinet} $out/ckpts/lllyasviel/Annotators/${table5_pidinet.name}
       ln -s ${sk_model} $out/ckpts/lllyasviel/Annotators/${sk_model.name}
       ln -s ${sk_model2} $out/ckpts/lllyasviel/Annotators/${sk_model2.name}
       ln -s ${anyline-mteed} $out/ckpts/TheMistoAI/MistoLine/Anyline/${anyline-mteed.name}
       ln -s ${yolo_nas_l_fp16} $out/ckpts/hr16/yolo-nas-fp16/${yolo_nas_l_fp16.name}
       runHook postInstall
     '';
-
-    src = fetchFromGitHub {
-      owner = "Fannovel16";
-      repo = "comfyui_controlnet_aux";
-      rev = "6f1ba1c10df84af6d356119ccf4ebcf796a10e1c";
-      sha256 = "sha256-IapmOgCha9iYP1ngaP4yjAaWANXY6UNGBh7QiM2WFQ0=";
-      fetchSubmodules = true;
-    };
   };
 
   # https://github.com/Acly/comfyui-inpaint-nodes
   # Provides nodes for doing better inpainting.
   inpaint-nodes = mkComfyUICustomNodes {
     pname = "comfyui-inpaint-nodes";
-    version = "unstable-2024-08-09";
+    version = "unstable-2024-08-24";
     pyproject = true;
     src = fetchFromGitHub {
       owner = "Acly";
       repo = "comfyui-inpaint-nodes";
-      rev = "69e5f2a0c2d475b83c3d4911f1786107d337bdcb";
-      sha256 = "sha256-bh52JG+Zee/5p/fHbn4Ajcofp1GqiNF8WlyurauaOZs=";
+      rev = "6ce66ff1b5ed4e5819b23ccf1feb976ef479528a";
+      sha256 = "sha256-D/I874z0dTKn9B75b8hNxYnHiRKS6ki5CVz6N115NOI=";
       fetchSubmodules = true;
     };
   };
@@ -506,10 +516,8 @@ in {
 
     installPhase = let
       # https://huggingface.co/briaai/RMBG-1.4/resolve/main/model.pth
-      briaai_rmbg = fetchFromHuggingFace {
-        owner = "briaai";
-        repo = "RMBG-1.4";
-        resource = "model.pth";
+      briaai_rmbg = fetchFromUrl {
+        url = "https://huggingface.co/briaai/RMBG-1.4/resolve/main/model.pth";
         sha256 = "sha256-iTwWw0Cx3a/JPnhFek2UGQ2ptxeRSfhXQoTIPK6/Xow=";
       };
     in ''
@@ -547,32 +555,17 @@ in {
         opencv-python
       ];
       models = {
-        ic-light_fbc = {
-          installPath = "diffusion_models/iclight_sd15_fbc.safetensors";
-          src = fetchFromHuggingFace {
-            owner = "lllyasviel";
-            repo = "ic-light";
-            resource = "iclight_sd15_fbc.safetensors";
-            sha256 = "sha256-u4zO2qSUSxbPqDVq/LwsIXTMTEr1feGRJK4M3dDZaUc=";
-          };
+        "diffusion_models/iclight_sd15_fbc.safetensors" = fetchFromUrl {
+          url = "https://huggingface.co/lllyasviel/ic-light/resolve/main/iclight_sd15_fbc.safetensors";
+          sha256 = "sha256-u4zO2qSUSxbPqDVq/LwsIXTMTEr1feGRJK4M3dDZaUc=";
         };
-        ic-light_fc = {
-          installPath = "diffusion_models/iclight_sd15_fc.safetensors";
-          src = fetchFromHuggingFace {
-            owner = "lllyasviel";
-            repo = "ic-light";
-            resource = "iclight_sd15_fc.safetensors";
-            sha256 = "sha256-oDP7qqLz94WfpqRHfuY+u/nBFr81adWBGFbSgH80aM0=";
-          };
+        "diffusion_models/iclight_sd15_fc.safetensors" = fetchFromUrl {
+          url = "https://huggingface.co/lllyasviel/ic-light/resolve/main/iclight_sd15_fc.safetensors";
+          sha256 = "sha256-oDP7qqLz94WfpqRHfuY+u/nBFr81adWBGFbSgH80aM0=";
         };
-        ic-light_fcon = {
-          installPath = "diffusion_models/iclight_sd15_fcon.safetensors";
-          src = fetchFromHuggingFace {
-            owner = "lllyasviel";
-            repo = "ic-light";
-            resource = "iclight_sd15_fcon.safetensors";
-            sha256 = "sha256-N2Uu8nAoyP25iCgwsWIeTmSNJuGcsgNaavjVLzptjYc=";
-          };
+        "diffusion_models/iclight_sd15_fcon.safetensors" = fetchFromUrl {
+          url = "https://huggingface.co/lllyasviel/ic-light/resolve/main/iclight_sd15_fcon.safetensors";
+          sha256 = "sha256-N2Uu8nAoyP25iCgwsWIeTmSNJuGcsgNaavjVLzptjYc=";
         };
       };
     };
@@ -594,32 +587,25 @@ in {
         insightface
         onnxruntime
       ];
-      models = {
-        instantid = {
-          installPath = "controlnet/instantid.safetensors";
-          src = fetchFromHuggingFace {
-            owner = "InstantX";
-            repo = "InstantID";
-            resource = "ControlNetModel/diffusion_pytorch_model.safetensors";
-            sha256 = "sha256-yBJ76fF0EB69r+6ZZNhWtJtjRDXPbao5bT9ZPPC7uwU=";
-          };
+      models = let
+        antelopev2 = fetchzip {
+          url = "https://huggingface.co/MonsterMMORPG/tools/resolve/main/antelopev2.zip";
+          sha256 = "sha256-pUEM9LcVmTUemvglPZxiIvJd18QSDjxTEwAjfIWZ93g=";
         };
-        instantid-ipadapter = {
-          installPath = "instantid/ip-adapter.bin";
-          src = fetchFromHuggingFace {
-            owner = "InstantX";
-            repo = "InstantID";
-            resource = "ip-adapter.bin";
-            sha256 = "sha256-ArNhjjbYA3hBZmYFIAmAiagTiOYak++AAqp5pbHFRuE=";
-          };
+      in {
+        "controlnet/instantid.safetensors" = fetchFromUrl {
+          url = "https://huggingface.co/InstantX/InstantID/resolve/main/ControlNetModel/diffusion_pytorch_model.safetensors";
+          sha256 = "sha256-yBJ76fF0EB69r+6ZZNhWtJtjRDXPbao5bT9ZPPC7uwU=";
         };
-        antelopev2 = {
-          installPath = "insightface/models/antelopev2";
-          src = fetchzip {
-            url = "https://huggingface.co/MonsterMMORPG/tools/resolve/main/antelopev2.zip";
-            sha256 = "sha256-pUEM9LcVmTUemvglPZxiIvJd18QSDjxTEwAjfIWZ93g=";
-          };
+        "instantid/ip-adapter.bin" = fetchFromUrl {
+          url = "https://huggingface.co/InstantX/InstantID/resolve/main/ip-adapter.bin";
+          sha256 = "sha256-ArNhjjbYA3hBZmYFIAmAiagTiOYak++AAqp5pbHFRuE=";
         };
+        "insightface/models/antelopev2/1k3d68.onnx" = "${antelopev2}/1k3d68.onnx";
+        "insightface/models/antelopev2/2d106det.onnx" = "${antelopev2}/2d106det.onnx";
+        "insightface/models/antelopev2/genderage.onnx" = "${antelopev2}/genderage.onnx";
+        "insightface/models/antelopev2/glintr100.onnx" = "${antelopev2}/glintr100.onnx";
+        "insightface/models/antelopev2/scrfd_10g_bnkps.onnx" = "${antelopev2}/scrfd_10g_bnkps.onnx";
       };
     };
   };
@@ -630,13 +616,13 @@ in {
   # (checkpoints?).
   ipadapter-plus = mkComfyUICustomNodes {
     pname = "comfyui-ipadapter-plus";
-    version = "unstable-2024-06-9";
+    version = "unstable-2024-08-28";
     pyproject = true;
     src = fetchFromGitHub {
       owner = "cubiq";
       repo = "ComfyUI_IPAdapter_plus";
-      rev = "7d8adaec730bff243cc3026eed5111695cc5ed4e";
-      sha256 = "sha256-F0mmJ2X+eEijsV24s9I+zP90wpNC9pu8IwdEzq0xj8M=";
+      rev = "88a71407c545e4eb0f223294f5b56302ef8696f3";
+      sha256 = "sha256-AxMUe1SLscPJhAdq7HrkdpF5WI4QhpbRLVvaYMdOvPI=";
       fetchSubmodules = true;
     };
 
@@ -645,16 +631,19 @@ in {
         insightface
         onnxruntime
       ];
-      models = {
-        inherit (models) inswapper_128;
-        buffalo_l = {
-          installPath = "insightface/models/buffalo_l";
-          src = fetchzip {
-            url = "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip";
-            sha256 = "sha256-ayiIkXXgg83aPhAFs2WXvDxHqKizpVuAKF2AjZyjct4=";
-            stripRoot = false;
-          };
+      models = let
+        buffalo_l = fetchzip {
+          url = "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip";
+          sha256 = "sha256-ayiIkXXgg83aPhAFs2WXvDxHqKizpVuAKF2AjZyjct4=";
+          stripRoot = false;
         };
+      in {
+        inherit (reactorModels) "insightface/inswapper_128.onnx";
+        "insightface/models/buffalo_l/1k3d68.onnx" = "${buffalo_l}/1k3d68.onnx";
+        "insightface/models/buffalo_l/2d106det.onnx" = "${buffalo_l}/2d106det.onnx";
+        "insightface/models/buffalo_l/det_10g.onnx" = "${buffalo_l}/det_10g.onnx";
+        "insightface/models/buffalo_l/genderage.onnx" = "${buffalo_l}/genderage.onnx";
+        "insightface/models/buffalo_l/w600k_r50.onnx" = "${buffalo_l}/w600k_r50.onnx";
       };
     };
   };
@@ -663,10 +652,17 @@ in {
   # Make ComfyUI more friendly towards API usage.
   tooling-nodes = mkComfyUICustomNodes {
     pname = "comfyui-tooling-nodes";
-    version = "unstable-2024-08-09";
+    version = "unstable-2024-08-26";
     pyproject = true;
+    src = fetchFromGitHub {
+      owner = "Acly";
+      repo = "comfyui-tooling-nodes";
+      rev = "e0d0c3cc2cbb1e055014d0b27851e61dd24748e4";
+      sha256 = "sha256-Yix8k3SVQW9jIzBYP5QAcijZm5T2IrwT8Bs6Nzd2A08=";
+      fetchSubmodules = true;
+    };
     installPhase = let
-      safety-checker = import <nix/fetchurl.nix> {
+      safety-checker = fetchFromUrl {
         name = "model.safetensors";
         url = "https://huggingface.co/CompVis/stable-diffusion-safety-checker/resolve/refs%2Fpr%2F41/model.safetensors";
         sha256 = "sha256-CJAvGbHP69fJifFS/AUHvvaJjHBqkdZmUJODEiMktRE=";
@@ -678,13 +674,6 @@ in {
       ln -s ${safety-checker} $out/safetychecker/${safety-checker.name}
       runHook postInstall
     '';
-    src = fetchFromGitHub {
-      owner = "Acly";
-      repo = "comfyui-tooling-nodes";
-      rev = "d1dcf12f1007f3067b3128361dd5729d244fb25f";
-      sha256 = "sha256-6FPv+UutUkI5IQpL+4FDKLq5G2/zsRXd/YtiDjK2/Pc=";
-      fetchSubmodules = true;
-    };
   };
 
   # Handle upscaling of smaller images into larger ones.  This is helpful to go
@@ -713,24 +702,14 @@ in {
         insightface
         onnxruntime
       ];
-      models = {
-        # expects these directories to exist:
-        #   models/reactor/faces
-        #   models/facerestore_models
-        #   models/ultralytics/bbox
-        #   models/ultralytics/segm
-        #   models/sams
-        # but it also seems to want arbitrary write-access to the models dir......
-
-        inherit
-          (models)
-          inswapper_128
-          "GFPGANv1.3"
-          "GFPGANv1.4"
-          "codeformer-v0.1.0"
-          GPEN-BFR-512
-          ;
-      };
+      # expects these directories to exist:
+      #   models/reactor/faces
+      #   models/facerestore_models
+      #   models/ultralytics/bbox
+      #   models/ultralytics/segm
+      #   models/sams
+      # but it also seems to want arbitrary write-access to the models dir......
+      models = reactorModels;
     };
 
     src = fetchFromGitHub {

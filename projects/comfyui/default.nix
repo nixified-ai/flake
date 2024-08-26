@@ -10,6 +10,7 @@ in {
     config,
     pkgs,
     lib,
+    self',
     ...
   }: let
     commonOverlays = [
@@ -48,74 +49,106 @@ in {
         ]);
     };
 
-    fetchFromHuggingFace = {
-      owner,
-      repo,
-      sha256,
-      rev ? "main",
-      resource ? "", # the file to retrieve
-    }:
-      import <nix/fetchurl.nix> {
-        inherit sha256;
-        url = "https://huggingface.co/${owner}/${repo}/resolve/${rev}/${resource}";
-      };
-    models = import ./models {inherit fetchFromHuggingFace;};
+    inherit (self'.legacyPackages.air) fetchair modelTypes ecosystemOf ecosystems baseModels;
+    inherit
+      (import ./model-installers.nix {
+        inherit lib fetchair ecosystemOf modelTypes;
+        inherit (pkgs) fetchurl;
+      })
+      installModels
+      typeFromInstallPath
+      ;
+    comfyuiTypes = import ./types.nix {inherit lib;};
+    kritaModelInstalls = import ./krita-models.nix {inherit installModels baseModels;};
 
-    # we require a python3 with an appropriately overriden package set depending on GPU
+    hospice = import ./hospice.nix {inherit lib typeFromInstallPath ecosystemOf baseModels;};
+
+    # we require a python3 with an appropriately overridden package set depending on GPU
     mkComfyUIVariant = python3: args:
-      pkgs.callPackage ./package.nix ({inherit python3;} // args);
+      pkgs.callPackage ./package.nix ({
+          inherit python3 comfyuiTypes;
+          inherit (hospice) mapCompatModelInstall;
+        }
+        // args);
 
-    # subset of `models` used by Krita plugin
-    kritaModels = import ./models/krita-ai-plugin.nix models;
-    # everything here needs to be parametrised over gpu vendor
-    legacyPkgs = vendor: rec {
-      customNodes = import ./custom-nodes {
-        inherit lib models fetchFromHuggingFace;
-        inherit (pkgs) stdenv fetchFromGitHub fetchzip writeText;
+    # gpu-dependent packages
+    pkgsFor = vendor:
+      rec {
+        # make available the python package set used so that user-defined custom nodes can depend on it
         python3Packages = python3Variants."${vendor}";
-      };
-      # subset of `customNodes` used by Krita plugin
-      kritaCustomNodes = import ./custom-nodes/krita-ai-plugin.nix customNodes;
-    };
-    amd = legacyPkgs "amd";
-    nvidia = legacyPkgs "nvidia";
+
+        comfyui = mkComfyUIVariant python3Packages.python {
+          customNodes = {};
+          models = {};
+        };
+        krita-server = comfyui.override {
+          models = kritaModelInstalls.default;
+          customNodes = kritaCustomNodes;
+        };
+        krita-server-full = krita-server.override {models = kritaModelInstalls.full;};
+        krita-server-minimal = krita-server.override {models = kritaModelInstalls.required;};
+
+        customNodes = import ./custom-nodes {
+          inherit lib python3Packages;
+          inherit (pkgs) stdenv fetchFromGitHub fetchzip writeText;
+        };
+        # subset of `customNodes` used by Krita plugin
+        kritaCustomNodes = {
+          inherit
+            (customNodes)
+            controlnet-aux
+            inpaint-nodes
+            ipadapter-plus
+            tooling-nodes
+            ultimate-sd-upscale
+            ;
+        };
+      }
+      # include all other packages as well to make it more convenient
+      // builtins.removeAttrs self'.legacyPackages.comfyui ["amd" "nvidia"];
+    amd = pkgsFor "amd";
+    nvidia = pkgsFor "nvidia";
   in {
     legacyPackages.comfyui = {
-      inherit amd nvidia;
-      inherit fetchFromHuggingFace;
-      inherit (import ./models/meta.nix) base-models model-types;
-      inherit models kritaModels;
+      inherit
+        amd
+        nvidia
+        installModels
+        kritaModelInstalls
+        modelTypes
+        ecosystems
+        baseModels
+        ;
+      types = comfyuiTypes;
+      inherit
+        (comfyuiTypes)
+        isModel
+        isCustomNode
+        ;
+
+      inherit (hospice) fetchFromHuggingFace; # deprecated
+      models = throw ''
+        This flake no longer provides a library of models beyond those needed for the Krita plugin;
+        instead it provides the convenient `installModels` function which makes it super easy to install models you add yourself.
+        Use `installModels` on your model set; see the flake-provided template for examples.
+        (If you relied on a model you liked from the library, copy its url and hash and add it to your own set. You can find the old library here:
+        https://github.com/lboklin/nixified-ai/blob/54afce4505ef64fd3c4b993f1807fbb6dff14391/projects/comfyui/models/default.nix.)
+      '';
+      kritaModels = throw ''
+        These model sets are now available in `kritaModelInstalls`, but they are now indexed by their install path, so any explicit inherits will need to be updated.
+      '';
     };
 
-    packages = rec {
-      comfyui-amd = mkComfyUIVariant python3Variants.amd.python {
-        customNodes = {};
-        models = {};
-      };
-      comfyui-nvidia = mkComfyUIVariant python3Variants.nvidia.python {
-        customNodes = {};
-        models = {};
-      };
-      krita-comfyui-server-amd = with amd;
-        comfyui-amd.override {
-          models = kritaModels.full;
-          customNodes = kritaCustomNodes;
-        };
-      krita-comfyui-server-amd-minimal = with amd;
-        comfyui-amd.override {
-          models = kritaModels.required;
-          customNodes = kritaCustomNodes;
-        };
-      krita-comfyui-server-nvidia = with nvidia;
-        comfyui-nvidia.override {
-          models = kritaModels.full;
-          customNodes = kritaCustomNodes;
-        };
-      krita-comfyui-server-nvidia-minimal = with nvidia;
-        comfyui-nvidia.override {
-          models = kritaModels.required;
-          customNodes = kritaCustomNodes;
-        };
+    packages = {
+      comfyui-amd = amd.comfyui;
+      comfyui-nvidia = nvidia.comfyui;
+
+      krita-comfyui-server-amd = amd.krita-server;
+      krita-comfyui-server-amd-full = amd.krita-server-full;
+      krita-comfyui-server-amd-minimal = amd.krita-server-minimal;
+      krita-comfyui-server-nvidia = nvidia.krita-server;
+      krita-comfyui-server-nvidia-full = nvidia.krita-server-full;
+      krita-comfyui-server-nvidia-minimal = nvidia.krita-server-minimal;
     };
   };
 }

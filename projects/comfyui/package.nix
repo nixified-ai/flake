@@ -1,8 +1,9 @@
 {
   lib,
+  mapCompatModelInstall,
+  comfyuiTypes,
   python3,
   linkFarm,
-  symlinkJoin,
   writers,
   writeTextFile,
   fetchFromGitHub,
@@ -15,102 +16,55 @@
   tempPath ? "${basePath}/temp",
   userPath ? "${basePath}/user",
   extraArgs ? [],
-}:
-with builtins; let
-  t = lib.types;
-  expectType = ty: name: x:
-    if ty.check x
-    then x
-    else let
-      xtra =
-        if lib.isAttrs x
-        then "\ninstead it has attributes {${lib.concatStringsSep ", " (attrNames x)}}"
-        else "";
-    in
-      throw "${name} (of type ${x._type or (builtins.typeOf x)}) was expected to be of type ${ty.description}${xtra}";
-
-  expectModel = expectType (lib.mkOptionType {
-    name = "comfyui-model";
-    description = "ComfyUI model";
-    check = m:
-      lib.isAttrs m
-      && (hasAttr "installPath" m && t.singleLineStr.check m.installPath)
-      && (hasAttr "src" m && (t.package.check m.src || t.pathInStore.check m.src));
-  });
+}: let
+  t = lib.types // comfyuiTypes;
 
   # aggregate all custom nodes' dependencies
-  dependencies = lib.pipe customNodes [
-    attrValues
-    (map (v: v.dependencies))
-    (foldl'
-      ({
-        pkgs,
-        models,
-      }: x: {
-        pkgs = pkgs ++ (x.pkgs or []);
-        models = models // (x.models or {});
-      })
-      {
-        pkgs = [];
-        models = {};
-      })
-  ];
+  dependencies =
+    lib.foldlAttrs
+    ({
+      pkgs,
+      models,
+    }: _: x: {
+      pkgs = pkgs ++ (x.dependencies.pkgs or []);
+      models = models // (x.dependencies.models or {});
+    })
+    {
+      pkgs = [];
+      models = {};
+    }
+    customNodes;
+
   # create a derivation for our custom nodes
   customNodesDrv =
-    expectType (t.attrsOf t.package)
-    "customNodes" (linkFarm "comfyui-custom-nodes" customNodes);
+    linkFarm "comfyui-custom-nodes"
+    # check that all nodes are of the expected type
+    (lib.mapAttrs (name: t.expectType t.customNode "custom node \"${name}\"") customNodes);
+
   # create a derivation for our models
+  includedModels = models // dependencies.models;
   modelsDrv = let
-    mkComfyUIModel = name: {
-      src,
-      installPath,
-      type ? null,
-      base ? null,
-    }:
-      stdenv.mkDerivation {
-        inherit src;
-        name = src.name;
-        phases = ["buildPhase"];
-        buildPhase = ''
-          dir=${builtins.dirOf (expectType t.singleLineStr "'installPath' attribute in argument to mkComfyUIModel" installPath)}
-          mkdir -p $out/$dir
-          ln -s $src $out/${installPath}
-        '';
-        meta = {
-          model-type = type;
-          base-model = base;
-        };
-      };
+    modelEntryF = mapCompatModelInstall (attrName: model: {
+      name = t.expectType t.installPath "attribute name of model" attrName;
+      path = t.expectType t.model "model resource for \"${attrName}\"" model;
+    });
   in
-    # WARN: this *replaces* existing paths when symlinking
-    symlinkJoin {
-      name = "comfyui-models";
-      paths =
-        lib.mapAttrsToList
-        (name: m: mkComfyUIModel name (expectModel name m))
-        (models // dependencies.models);
-      postBuild = "echo links added";
-    };
+    linkFarm "comfyui-models"
+    (lib.mapAttrsToList modelEntryF
+      (lib.warnIf (includedModels == {})
+        "No models to install - the potential enjoyment you may derive from this ComfyUI setup will be limited"
+        includedModels));
 
   config-data = {
     comfyui = let
       modelsDir = "${modelsDrv}";
-    in {
-      base_path = basePath;
-      checkpoints = "${modelsDir}/checkpoints";
-      clip = "${modelsDir}/clip";
-      clip_vision = "${modelsDir}/clip_vision";
-      configs = "${modelsDir}/configs";
-      controlnet = "${modelsDir}/controlnet";
-      diffusion_models = "${modelsDir}/diffusion_models";
-      embeddings = "${modelsDir}/embeddings";
-      inpaint = "${modelsDir}/inpaint";
-      ipadapter = "${modelsDir}/ipadapter";
-      loras = "${modelsDir}/loras";
-      upscale_models = "${modelsDir}/upscale_models";
-      vae = "${modelsDir}/vae";
-      vae_approx = "${modelsDir}/vae_approx";
-    };
+      pathMap = path: rec {
+        name = builtins.head (lib.splitString "/" path);
+        value = "${modelsDir}/${name}";
+      };
+      subdirs = builtins.map pathMap (builtins.attrNames includedModels);
+    in
+      builtins.listToAttrs subdirs;
   };
 
   modelPathsFile = writeTextFile {
@@ -150,13 +104,13 @@ with builtins; let
 in
   stdenv.mkDerivation {
     pname = "comfyui";
-    version = "unstable-2024-08-21";
+    version = "v0.2.2";
 
     src = fetchFromGitHub {
       owner = "comfyanonymous";
       repo = "ComfyUI";
-      rev = "5e806f555d1704d10ae02f4fafbc1b85713d389f";
-      hash = "sha256-+iqbnXdSkC6iFbh5F0sDbkGDtcsv+ScM3+UtnxtZT+I=";
+      rev = "38c22e631ad090a4841e4a0f015a30c565a9f7fc";
+      hash = "sha256-ZC56Lf1IxLMwFMu6aQLT92jLDJOaAAZbDl4Hr8jLiHA=";
     };
 
     installPhase = ''

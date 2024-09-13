@@ -250,6 +250,18 @@
       ecosystem = ecosystems.flux1;
     };
 
+    "vae/vae-ft-mse-840000-ema-pruned.safetensors" = {
+      url = "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors";
+      sha256 = "735e4c3a447a3255760d7f86845f09f937809baa529c17370d83e4c3758f3c75";
+      base = baseModels.sd15;
+    };
+
+    "vae/sdxl_vae.safetensors" = {
+      url = "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors";
+      sha256 = "63aeecb90ff7bc1c115395962d3e803571385b61938377bc7089b36e81e92e2e";
+      base = baseModels.sd15;
+    };
+
     "vae/ae.safetensors" = {
       url = "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors";
       sha256 = "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38";

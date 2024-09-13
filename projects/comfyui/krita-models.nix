@@ -2,6 +2,7 @@
 # model urls: https://github.com/Acly/krita-ai-diffusion/blob/main/ai_diffusion/resources.py
 {
   installModels,
+  ecosystems,
   baseModels,
 }: let
   required = installModels {
@@ -229,6 +230,47 @@
       url = "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15_lora.safetensors?download=true";
       sha256 = "sha256-ir/4ehWgSfPgGGwugsHI53eDuvLPtj80xBJlYFLrV7A=";
       base = baseModels.sd15;
+    };
+
+    "controlnet/mistoline_flux.dev_v1.safetensors" = {
+      url = "https://huggingface.co/TheMistoAI/MistoLine_Flux.dev/resolve/main/mistoline_flux.dev_v1.safetensors";
+      sha256 = "sha256-QAkoVU+hTbpBrDy9kGuihYrCSSjxVGCCztHgxNDYIEY=";
+      base = baseModels.flux1-d;
+    };
+
+    "controlnet/flux-canny-controlnet-v3.safetensors" = {
+      url = "https://huggingface.co/XLabs-AI/flux-controlnet-collections/resolve/main/flux-canny-controlnet-v3.safetensors";
+      sha256 = "sha256-ZUbykEl5YQGmNw2wpD0mcdApQofDaytOh5LPnmjw6vA=";
+      ecosystem = ecosystems.flux1;
+    };
+
+    "controlnet/flux-depth-controlnet-v3.safetensors" = {
+      url = "https://huggingface.co/XLabs-AI/flux-controlnet-collections/resolve/main/flux-depth-controlnet-v3.safetensors";
+      sha256 = "sha256-1S7q+Act6J1yse55473Hm115XtCmiBoCm74T2DPffl8=";
+      ecosystem = ecosystems.flux1;
+    };
+
+    "vae/ae.safetensors" = {
+      url = "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors";
+      sha256 = "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38";
+      base = baseModels.flux1-s;
+    };
+
+    "clip/clip_l.safetensors" = {
+      air = "urn:air:flux1:lora:huggingface:comfyanonymous/flux_text_encoders@clip_l.safetensors";
+      sha256 = "sha256-ZgxvWxq66dxJisLSHhNH0qvbDPbAwMhXbNeWSR2abN0=";
+    };
+
+    "clip/t5-v1_1-xxl-encoder-Q5_K_M.gguf" = {
+      url = "https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf/resolve/main/t5-v1_1-xxl-encoder-Q5_K_M.gguf";
+      sha256 = "b51cbb10b1a7aac6dd1c3b62f0ed908bfd06e0b42d2f3577d43e061361f51dae";
+      ecosystem = ecosystems.flux1;
+    };
+
+    "diffusion_models/flux1-schnell-Q4_0.gguf" = {
+      url = "https://huggingface.co/city96/FLUX.1-schnell-gguf/resolve/main/flux1-schnell-Q4_0.gguf?download=true";
+      sha256 = "sha256-kKOT06RL7GkccHAD9DT93gYGS4cLs8IG63pPEJsl/04=";
+      base = baseModels.flux1-s;
     };
   };
 in {

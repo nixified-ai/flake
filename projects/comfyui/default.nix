@@ -59,7 +59,7 @@ in {
       typeFromInstallPath
       ;
     comfyuiTypes = import ./types.nix {inherit lib;};
-    kritaModelInstalls = import ./krita-models.nix {inherit installModels baseModels;};
+    kritaModelInstalls = import ./krita-models.nix {inherit installModels ecosystems baseModels;};
 
     hospice = import ./hospice.nix {inherit lib typeFromInstallPath ecosystemOf baseModels;};
 
@@ -96,6 +96,7 @@ in {
         kritaCustomNodes = {
           inherit
             (customNodes)
+            comfyui-gguf
             controlnet-aux
             inpaint-nodes
             ipadapter-plus

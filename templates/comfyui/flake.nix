@@ -30,7 +30,7 @@
         vendor = "nvidia";
         comfyPkgs = inputs'.nixified-ai.legacyPackages.comfyui."${vendor}";
         models = import ./models.nix {
-          inherit (comfyPkgs) installModels kritaModelInstalls modelTypes baseModels;
+          inherit (comfyPkgs) installModels kritaModelInstalls modelTypes ecosystems baseModels;
           localResources = {
             # inherit (inputs) my-lora;
           };

@@ -35,7 +35,7 @@ The main outputs of the `flake.nix` at the moment are as follows:
 
 ## [ComfyUI](https://github.com/comfyanonymous/ComfyUI) ( A modular, node-based Stable Diffusion WebUI )
 
-If you want to quickly get up and running, you have the option of using the packages meant to serve the [Krita AI plugin](https://github.com/Acly/krita-ai-diffusion) (currently supporting v1.23.0), but the flake also provides ways to customise your setup.
+If you want to quickly get up and running, you have the option of using the packages meant to serve the [Krita AI plugin](https://github.com/Acly/krita-ai-diffusion) (currently supporting v1.24.0), but the flake also provides ways to customise your setup.
 
 `export vendor=amd` or `export vendor=nvidia` depending on your GPU.
 

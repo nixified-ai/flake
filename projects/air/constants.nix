@@ -7,6 +7,7 @@ in rec {
     (lib.throw "modelTypeFromName: more than one modelType with the name ${name}")
     (builtins.attrValues modelTypes);
   # following Civitai's idea of model type taxonomy
+  # why is there no text encoder type?
   modelTypes = {
     ag = {
       name = "Aesthetic Gradient";

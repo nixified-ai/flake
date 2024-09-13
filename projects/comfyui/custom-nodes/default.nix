@@ -80,7 +80,7 @@ in {
   # Use the GGUF Unet loader found under the bootleg category. Install the .gguf models into diffusion_models/
   comfyui-gguf = mkComfyUICustomNodes {
     pname = "comfyui-gguf";
-    version = "unstable-2024-08-21";
+    version = "unstable-2024-09-09";
     pyproject = false;
     passthru.dependencies.pkgs = with python3Packages; [
       gguf
@@ -88,8 +88,8 @@ in {
     src = fetchFromGitHub {
       owner = "city96";
       repo = "ComfyUI-GGUF";
-      rev = "8d1fbbc456d50fe340bbbd775cefea79a5ed8835";
-      hash = "sha256-a6Ip11/96dHcyP881EzeSEi503pNDcz+WiZpdLuBvO4=";
+      rev = "454955ead3336322215a206edbd7191eb130bba0";
+      hash = "sha256-a0dEfgSHI/3GNNXgcAKqpM00JhzfAG9BlTV0v5elkqs=";
     };
   };
 

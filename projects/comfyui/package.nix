@@ -104,13 +104,13 @@
 in
   stdenv.mkDerivation {
     pname = "comfyui";
-    version = "v0.2.2";
+    version = "unstable-2024-09-09";
 
     src = fetchFromGitHub {
       owner = "comfyanonymous";
       repo = "ComfyUI";
-      rev = "38c22e631ad090a4841e4a0f015a30c565a9f7fc";
-      hash = "sha256-ZC56Lf1IxLMwFMu6aQLT92jLDJOaAAZbDl4Hr8jLiHA=";
+      rev = "cd4955367e4170b88ba839efccb6d2ed0dd963ad";
+      hash = "sha256-oEjsPznZxfTxT+m7Uvbsn+/ZiNAROfeUQMHNgYOAkvU=";
     };
 
     installPhase = ''

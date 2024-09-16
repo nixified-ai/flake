@@ -45,7 +45,7 @@
   reactorModels = let
     reactorModel = file: sha256:
       fetchFromUrl {
-        url = "https://huggingface.co/datasets/Gourieff/resolve/main/ReActor/models/${file}";
+        url = "https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/${file}";
         inherit sha256;
       };
   in {

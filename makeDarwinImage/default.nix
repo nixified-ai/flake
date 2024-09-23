@@ -1,4 +1,4 @@
-{ fetchurl, writeScript, writeShellScript, runCommand, vncdo, dmg2img, cdrkit, qemu_kvm, python311, tesseract, expect, socat, ruby, xorriso, callPackage, sshpass, openssh, lib, osx-kvm }:
+{ writeScript, writeShellScript, runCommand, vncdo, dmg2img, cdrkit, qemu_kvm, python311, tesseract, expect, socat, ruby, xorriso, callPackage, sshpass, openssh, lib, osx-kvm }:
 { diskSizeBytes ? 50000000000
 , repeatabilityTest ? false
 }:
@@ -6,8 +6,8 @@ let
   diskSize = if diskSizeBytes < 40000000000 then throw "diskSizeBytes ${toString diskSizeBytes} too small for macOS" else diskSizeBytes;
 
   installAssistant-fetched = import <nix/fetchurl.nix> {
-    url = "https://swcdn.apple.com/content/downloads/46/31/052-96247-A_MLN9N00Y8W/dmml3up52hrsb01krjtczmdhexiruv1b5m/InstallAssistant.pkg";
-    sha256 = "sha256-WDogR5P4GNRj6XgkG8HW6L655msVWMHcXCMYQcaE7BE=";
+    url = "https://swcdn.apple.com/content/downloads/05/02/062-78643-A_T7YK72IEUB/f6jf452yv3xah9gljv28yxjs5x5bm7p1fr/InstallAssistant.pkg";
+    sha256 = "sha256-ws8DcTvDD2+m5bo4Yk9xKsDl4ONEiInTFH3YhA9sBME=";
   };
 
   installAssistant-iso = runCommand "InstallAssistant.iso" { buildInputs = [ cdrkit ]; } ''

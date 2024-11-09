@@ -20,24 +20,30 @@ nixosTest {
     };
   };
   testScript = { nodes, ... }: let
-    sshProductVersion = writeShellScript "foo" ''
+    expectedProductVersion = "13.7";
+    getProductVersion = writeShellScript "getProductVersion.sh" ''
+      # Should return stdout like "ProductVersion:            13.6"
+      sshpass -p admin ssh -o StrictHostKeyChecking=no -p ${toString nodes.machine.config.services.macos-ventura.sshPort} admin@127.0.0.1 sw_vers | grep ProductVersion | awk '{print $2}'
+    '';
+    waitForSSH = writeShellScript "waitForSSH.sh" ''
       # Wait until a successful ssh-keyscan
       while ! ssh-keyscan -p ${toString nodes.machine.config.services.macos-ventura.sshPort} 127.0.0.1; do
           sleep 3
           echo "SSH not ready" >&2
       done
       echo "SSH ready!" >&2
-
-      # Should return stdout like "ProductVersion:            13.6"
-      sshpass -p admin ssh -o StrictHostKeyChecking=no -p ${toString nodes.machine.config.services.macos-ventura.sshPort} admin@127.0.0.1 sw_vers | grep ProductVersion | awk '{print $2}'
     '';
   in ''
     start_all()
     machine.wait_for_unit("multi-user.target")
     machine.wait_for_unit("macos-ventura.service")
     machine.wait_for_open_port(${toString nodes.machine.config.services.macos-ventura.sshPort})
-    with subtest("Check that the macOS Ventura machine returns ProductVersion 13.6 via SSH"):
-        assert "13.6" in machine.succeed("${sshProductVersion}")
+    machine.succeed("${waitForSSH}")
+    with subtest("Check that the macOS Ventura machine returns ProductVersion ${expectedProductVersion} via SSH"):
+        received_version = machine.succeed("${getProductVersion}")
+        print(f"Received ProductVersion: {received_version}")
+        assert "${expectedProductVersion}" in received_version, \
+          f"Expected '${expectedProductVersion}', but got '{received_version}'"
   '';
 }
 

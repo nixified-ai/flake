@@ -107,26 +107,6 @@ let
     expect "80x24"
     exec ${qemuSendKeys} "sh /Volumes/run_offline/run_offline.sh<kp_enter>"
 
-    ${sendUser "Welcome to macOS"}
-    expect "Continue"
-    exec ${qemuSendMouse} 995 720
-
-    ${sendUser "Agree to EULA"}
-    expect "Disagree"
-    exec ${qemuSendMouse} 995 720
-
-    ${sendUser "Really Agree to EULA"}
-    expect "have read and agree to the"
-    exec ${qemuSendMouse} 1000 525
-
-    ${sendUser "Select macOS as install disk"}
-    expect "Select the disk where you want to install macOS"
-    exec ${qemuSendMouse} 780 550
-
-    ${sendUser "Continue"}
-    expect "Continue"
-    exec ${qemuSendMouse} 1000 710
-
     ${sendUser "Select Your Country or Region"}
     expect "Select Your Country or Region"
     exec ${qemuSendKeys} "united states<delay><shift-tab><delay><spc>"

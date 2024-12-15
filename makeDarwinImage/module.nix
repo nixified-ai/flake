@@ -121,10 +121,16 @@ in
       inherit (cfg) threads cores sockets mem sshListenAddr sshPort createDiskImageIfNotExists;
     };
   in lib.mkIf cfg.enable {
-    assertions = lib.singleton {
-      assertion = cfg.stateless -> cfg.createDiskImageIfNotExists;
-      message = "If `services.macos-ventura.stateless` is enabled, then `services.macos-ventura.createDiskImageIfNotExists` must also be enabled.";
-    };
+    assertions = [
+      {
+        assertion = lib.any (x: x == "*" || x == "macos-ventura") config.nix.settings.allowed-users;
+        message = ''If setting `nix.settings.allowed-users` in your configuration, then `"macos-ventura"` or `"*"` must be in the list'';
+      }
+      {
+        assertion = cfg.stateless -> cfg.createDiskImageIfNotExists;
+        message = "If `services.macos-ventura.stateless` is enabled, then `services.macos-ventura.createDiskImageIfNotExists` must also be enabled.";
+      }
+    ];
 
     networking.firewall.allowedTCPPorts = lib.optionals cfg.openFirewall [ (5900 + cfg.vncDisplayNumber) cfg.sshPort ];
 
@@ -133,7 +139,6 @@ in
       group = "macos-ventura";
     };
     users.groups.macos-ventura = {};
-    nix.settings.allowed-users = [ "macos-ventura" ];
 
     systemd = {
       services.macos-ventura = {

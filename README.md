@@ -7,50 +7,60 @@
 
 ---
 
-#### Discussion
+## Discussion
 
 Anyone interested in discussing nixified.ai in realtime can join our matrix channel
 
 - In a Matrix client you can type `/join #nixified.ai:matrix.org`
 - Via the web you can join via https://matrix.to/#/#nixified.ai:matrix.org
 
-#### The Goal
+## The Goal
 
 The goal of nixified.ai is to simplify and make available a large repository of
 AI executable code that would otherwise be impractical to run yourself, due to
 package management and complexity issues.
 
-The outputs run primarily on Linux, but can also run on Windows via [NixOS-WSL](https://github.com/nix-community/NixOS-WSL). It is able to utilize the GPU of the Windows host automatically, as our wrapper script sets `LD_LIBRARY_PATH` to make use of the host drivers.
+The outputs run primarily on NixOS and-or Linux, but can also run on Windows via [NixOS-WSL](https://github.com/nix-community/NixOS-WSL). It is able to utilize the GPU of the Windows host automatically, as our wrapper script sets `LD_LIBRARY_PATH` to make use of the host drivers.
+
+You can explore all this flake has to offer through the nix repl (tab-completion is your friend):
+```
+$ nix repl
+nix-repl> :lf github:nixified-ai/flake
+Added 26 variables.
+
+nix-repl>
+```
 
 The main outputs of the `flake.nix` at the moment are as follows:
 
-#### [InvokeAI](https://github.com/invoke-ai/InvokeAI) ( A Stable Diffusion WebUI )
+## [ComfyUI](https://github.com/comfyanonymous/ComfyUI) ( A modular, node-based Stable Diffusion WebUI )
 
-- `nix run .#invokeai-amd`
-- `nix run .#invokeai-nvidia`
+(warning: this will give you an empty comfyui without custom_nodes or models, see [flake-modules/projects/comfyui/README.md](./flake-modules/projects/comfyui) for information on how to configure and use comfyui)
+- `nix run github:nixified-ai/flake/2aeb76f52f72c7a242f20e9bc47cfaa2ed65915d#invokeai-nvidia`
+- `nix run github:nixified-ai/flake/2aeb76f52f72c7a242f20e9bc47cfaa2ed65915d#invokeai-amd` (Broken due to lack of Nixpkgs ROCm support)
+
+![ComfyUI Screenshot](https://github.com/user-attachments/assets/7ccaf2c1-9b72-41ae-9a89-5688c94b7abe)
+
+<details>
+<summary>Deprecated Packages (Due to lack of funding)</summary>
+
+## [InvokeAI](https://github.com/invoke-ai/InvokeAI) ( A Stable Diffusion WebUI )
+
+(warning: unmaintained - you have to use the last working commit in order to use it)
+- `nix run github:nixified-ai/flake/2aeb76f52f72c7a242f20e9bc47cfaa2ed65915d#invokeai-amd`
+- `nix run github:nixified-ai/flake/2aeb76f52f72c7a242f20e9bc47cfaa2ed65915d#invokeai-nvidia`
 
 ![invokeai](https://raw.githubusercontent.com/nixified-ai/flake/images/invokeai.webp)
 
-#### [textgen](https://github.com/oobabooga/text-generation-webui) ( Also called text-generation-webui: A WebUI for LLMs and LoRA training )
+## [textgen](https://github.com/oobabooga/text-generation-webui) ( Also called text-generation-webui: A WebUI for LLMs and LoRA training )
 
-- `nix run .#textgen-amd`
-- `nix run .#textgen-nvidia`
+(warning: unmaintained - you have to use the last working commit in order to use it)
+- `github:nixified-ai/flake/2aeb76f52f72c7a242f20e9bc47cfaa2ed65915d .#textgen-amd`
+- `github:nixified-ai/flake/2aeb76f52f72c7a242f20e9bc47cfaa2ed65915d .#textgen-nvidia`
 
 ![textgen](https://raw.githubusercontent.com/nixified-ai/flake/images/textgen.webp)
 
-## Install NixOS-WSL in Windows
-
-If you're interested in running nixified.ai in the Windows Subsystem for Linux, you'll need to enable the WSL and then install NixOS-WSL via it. We provide a script that will do everything for you.
-
-1. Execute the following in Powershell
-
-   `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/nixified-ai/flake/master/install.ps1'))`
-
-The WSL must be installed via the Windows Store. The script will make an attempt to enable it automatically, but this only works on a fresh system, not one that has been modified manually.
-
-See the following documentation from Microsoft for the details on how to enable and use the WSL manually
-
-- https://learn.microsoft.com/en-us/windows/wsl/install
+</details>
 
 ## Enable binary cache
 

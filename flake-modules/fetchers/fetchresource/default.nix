@@ -28,6 +28,8 @@
       echo "Authorization: Bearer $HF_TOKEN" > /build/ACTIVE_TOKEN
     elif [[ '${url}' == *civitai* ]]; then
       echo "Authorization: Bearer $CIVITAI_API_TOKEN" > /build/ACTIVE_TOKEN
+    else
+      > /build/ACTIVE_TOKEN
     fi
   '';
   inherit url hash sha256;

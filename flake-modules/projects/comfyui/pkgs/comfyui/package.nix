@@ -62,7 +62,7 @@ symlinkJoin {
       DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}/comfyui"
       mkdir -p "$DATA_HOME"
       cp -rT ${comfyuiPackages.comfyui-unwrapped.src} "$DATA_HOME"
-      chmod -R +w "$DATA_HOME"
+      chmod -R +w "$DATA_HOME" || true
     '';
   in ''
     rm $out/bin/comfyui

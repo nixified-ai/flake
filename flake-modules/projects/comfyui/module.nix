@@ -197,7 +197,7 @@ in
           Type = "exec";
           DynamicUser = true;
           ExecStart = lib.concatStringsSep " " [
-            "${lib.getExe comfyuiPackage} --listen ${cfg.host} --port ${cfg.port} ${lib.optionalString (cfg.acceleration == false) "--cpu"}"
+            "${lib.getExe comfyuiPackage} --listen ${cfg.host} --port ${toString cfg.port} ${lib.optionalString (cfg.acceleration == false) "--cpu"}"
             (lib.escapeShellArgs cfg.extraFlags)
           ];
           WorkingDirectory = cfg.home;

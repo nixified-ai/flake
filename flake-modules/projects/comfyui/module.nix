@@ -94,9 +94,9 @@ in
       host = lib.mkOption {
         type = types.str;
         default = "127.0.0.1";
-        example = "[::]";
+        example = "::,0.0.0.0";
         description = ''
-          The host address which the comfyui server HTTP interface listens to.
+          The host address(es) which the comfyui server HTTP interface listens to. Comma separated if requiring more than one interface, or ipv6 and ipv4 simultaneously
         '';
       };
 
@@ -197,7 +197,7 @@ in
           Type = "exec";
           DynamicUser = true;
           ExecStart = lib.concatStringsSep " " [
-            "${lib.getExe comfyuiPackage} --listen ${cfg.host} ${lib.optionalString (cfg.acceleration == false) "--cpu"}"
+            "${lib.getExe comfyuiPackage} --listen ${cfg.host} --port ${toString cfg.port} ${lib.optionalString (cfg.acceleration == false) "--cpu"}"
             (lib.escapeShellArgs cfg.extraFlags)
           ];
           WorkingDirectory = cfg.home;

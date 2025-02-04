@@ -1,9 +1,4 @@
 { nixosTest, nixosModule, lib, python3, writeShellScript, nixified-ai }:
-let
-  apiTest = writeShellScript "" ''
-    ${lib.getExe python3} ${./api.py} ${./photo-of-a-cat.json}
-  '';
-in
 nixosTest {
   name = "comfyui";
   machine = { pkgs, ... }: {
@@ -17,7 +12,8 @@ nixosTest {
     };
     services.comfyui = {
       enable = true;
-      host = "0.0.0.0";
+      host = "::,0.0.0.0";
+      port = 8189;
       extraFlags = [
         "--deterministic"
         "--fast"
@@ -34,11 +30,14 @@ nixosTest {
   };
   testScript = { nodes, ... }: let
     imagePath = "${nodes.machine.services.comfyui.home}/.local/share/comfyui/output/ComfyUI_00001_.png";
+    apiTest = writeShellScript "" ''
+      ${lib.getExe python3} ${./api.py} ${./photo-of-a-cat.json} --port ${toString nodes.machine.services.comfyui.port}
+    '';
   in ''
     start_all()
     machine.wait_for_unit("multi-user.target")
     machine.wait_for_unit("comfyui.service")
-    machine.wait_for_open_port(8188)
+    machine.wait_for_open_port(${toString nodes.machine.services.comfyui.port})
     machine.succeed("${apiTest}")
     machine.wait_for_file("${imagePath}")
     machine.copy_from_vm("${imagePath}")

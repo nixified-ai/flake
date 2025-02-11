@@ -6,7 +6,7 @@ let
   diskSize = if diskSizeBytes < 40000000000 then throw "diskSizeBytes ${toString diskSizeBytes} too small for macOS" else diskSizeBytes;
 
   installAssistant-fetched = import <nix/fetchurl.nix> {
-    url = "https://swcdn.apple.com/content/downloads/05/02/062-78643-A_T7YK72IEUB/f6jf452yv3xah9gljv28yxjs5x5bm7p1fr/InstallAssistant.pkg";
+    url = "https://archive.org/download/macOS-22H123-InstallAssistant/InstallAssistant.pkg";
     sha256 = "sha256-ws8DcTvDD2+m5bo4Yk9xKsDl4ONEiInTFH3YhA9sBME=";
   };
 

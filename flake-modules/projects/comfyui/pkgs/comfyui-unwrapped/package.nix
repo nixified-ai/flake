@@ -2,37 +2,52 @@
 , fetchFromGitHub
 , python3Packages
 , python3
+, fetchzip
 }:
 let
-  spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix {};
+  spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix { };
+  comfyui-workflow-templates = python3Packages.callPackage ../../../../packages/comfyui-workflow-templates/default.nix { };
+
+  frontendVersion = "1.16.7"; # For some reason 1.16.8 was missing a release
+
+  frontend = fetchzip {
+    url = "https://github.com/Comfy-Org/ComfyUI_frontend/releases/download/v${frontendVersion}/dist.zip";
+    hash = "sha256-5BPpa9lhNUTfseq4ySjZKsEKcTAPYRfuQyROnOHXdvg=";
+    stripRoot = false;
+  };
 in
 python3Packages.buildPythonApplication rec {
   pname = "comfyui";
-  version = "0.3.9";
+  version = "0.3.29";
 
   src = fetchFromGitHub {
     owner = "comfyanonymous";
     repo = "ComfyUI";
     rev = "v${version}";
-    hash = "sha256-3D3Xk7yDesAjHIgBBCHOQFGt1HsGVBSXUi6zsW1dgcs=";
+    hash = "sha256-tOZlpILmNsQXUDwti6j0q0xptmY42dcTL43RwdYgrMA=";
   };
 
   dependencies = with python3Packages; [
+    comfyui-workflow-templates
     torch
     torchsde
     torchvision
     torchaudio
+    numpy
     einops
     transformers
     tokenizers
     sentencepiece
     safetensors
     aiohttp
+    yarl
+    aiohttp
     pyyaml
     pillow
     scipy
     tqdm
     psutil
+    av
 
     # optional dependencies
     kornia
@@ -58,6 +73,9 @@ python3Packages.buildPythonApplication rec {
 #       --replace-fail "os.path.dirname(os.path.realpath(__file__))" "os.getenv('COMFYUI_BASE_PATH')"
 #     substituteInPlace folder_paths.py \
 #       --replace-fail "os.path.dirname(os.path.realpath(__file__))" "os.getcwd()"
+
+      substituteInPlace app/frontend_management.py \
+        --replace-fail "return cls.init_frontend_unsafe(version_string)" "return \"${frontend}\""
   '';
 
   nativeBuildInputs = [ python3 ];

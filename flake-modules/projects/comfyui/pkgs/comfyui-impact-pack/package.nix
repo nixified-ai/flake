@@ -1,32 +1,35 @@
-{ comfyuiPackages,
-  python3Packages,
-  fetchFromGitHub
+{ comfyuiPackages
+, python3Packages
+, fetchFromGitHub
 }:
 let
-  segment-anything = python3Packages.callPackage ../../../../packages/segment-anything {};
+  segment-anything = python3Packages.callPackage ../../../../packages/segment-anything { };
 in
-comfyuiPackages.comfyui.mkComfyUICustomNode {
+comfyuiPackages.comfyui.mkComfyUICustomNode rec {
   pname = "comfyui-impact-pack";
-  version = "unstable-2024-09-09";
+  version = "8.11";
   pyproject = false;
-  propagatedBuildInputs = with python3Packages; [
+
+  dependencies = with python3Packages; [
     segment-anything
     scikit-image
     piexif
     transformers
     opencv4
     scipy
-    numpy
+    numpy_1
     dill
     matplotlib
   ];
-  #passthru.dependencies.pkgs = with python3Packages; [
+
+  # passthru.dependencies.pkgs = with python3Packages; [
   #  gguf
-  #];
+  # ];
+
   src = fetchFromGitHub {
     owner = "ltdrdata";
     repo = "ComfyUI-Impact-Pack";
-    rev = "21eecb0c03223c7823cb19b318011fba3143da92";
-    hash = "sha256-JJUDRQRvC9+z/UEJz5NChANQq2WsI6dzzarttGWjKxk=";
+    rev = version;
+    hash = "sha256-fQazzEA+7M/CtmKDKsPW3XfuCyLs4ui8msoJUeauE/Q=";
   };
 }

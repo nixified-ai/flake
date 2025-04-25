@@ -8,23 +8,23 @@ let
   spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix { };
   comfyui-workflow-templates = python3Packages.callPackage ../../../../packages/comfyui-workflow-templates/default.nix { };
 
-  frontendVersion = "1.16.7"; # For some reason 1.16.8 was missing a release
+  frontendVersion = "1.17.11";
 
   frontend = fetchzip {
     url = "https://github.com/Comfy-Org/ComfyUI_frontend/releases/download/v${frontendVersion}/dist.zip";
-    hash = "sha256-5BPpa9lhNUTfseq4ySjZKsEKcTAPYRfuQyROnOHXdvg=";
+    hash = "sha256-dX6+rsn+gIuv7KO2dy7+ISt9QEIRudJkW7JGlppTQtM=";
     stripRoot = false;
   };
 in
 python3Packages.buildPythonApplication rec {
   pname = "comfyui";
-  version = "0.3.29";
+  version = "0.3.30";
 
   src = fetchFromGitHub {
     owner = "comfyanonymous";
     repo = "ComfyUI";
     rev = "v${version}";
-    hash = "sha256-tOZlpILmNsQXUDwti6j0q0xptmY42dcTL43RwdYgrMA=";
+    hash = "sha256-DcXgoQpczZXj2iUGXdzHZW8uwBGmo8OkO1RLmHhwLZw=";
   };
 
   dependencies = with python3Packages; [
@@ -48,6 +48,7 @@ python3Packages.buildPythonApplication rec {
     tqdm
     psutil
     av
+    pydantic
 
     # optional dependencies
     kornia

@@ -30,6 +30,6 @@ comfyuiPackages.comfyui.mkComfyUICustomNode rec {
     owner = "ltdrdata";
     repo = "ComfyUI-Impact-Pack";
     rev = version;
-    hash = "sha256-rHN9ZpWVSO0lQY+8uLW2b/Wo46l5g35a2ok7QB0WQjw=";
+    hash = "sha256-NW5D0KMLsc7d9LALP/i2ZU558YWc9JEF5Hvk/m+dWNA=";
   };
 }

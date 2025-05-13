@@ -7,6 +7,9 @@
   curlOpts = "-H @/build/ACTIVE_TOKEN";
   netrcImpureEnvVars = [ "HF_TOKEN" "CIVITAI_API_TOKEN" ];
   netrcPhase = ''
+    # Workaround for newer curl versions to prevent crashing due to non-existent netrc file
+    touch /build/netrc
+
     # Warn if HF_TOKEN or CIVITAI_API_TOKEN are not set or didn't work, in
     # the case of failure to fetch
     warnEmptyTokensHook() {

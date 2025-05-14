@@ -25,9 +25,9 @@ let
     # [ { name = "hello-test"; path = pkgs.hello; } ]
     linkFarmEntries = builtins.concatMap (modelDrv:
       map (installPath: let
-        name = "${python3Packages.python.sitePackages}/models/${installPath}/${modelDrv.name}";
+        name = "${python3Packages.python.sitePackages}/models/${installPath}/${modelDrv.passthru.name}";
         traceMessage = ''
-          installPath "${installPath}" for "${modelDrv.name}" does not occur in the models folder upstream, so may be unused comfyui at runtime
+          installPath "${installPath}" for "${modelDrv.passthru.name}" does not occur in the models folder upstream, so may be unused comfyui at runtime
         '';
         checkedName = lib.warnIfNot (lib.elem installPath supportedFolders) traceMessage name;
       in {

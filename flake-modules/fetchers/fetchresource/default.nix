@@ -1,9 +1,9 @@
-{ fetchurl }:
+{ fetchurl, lib }:
 { url, name, hash ? "", sha256 ? "", ... }@args: fetchurl (args // {
-  name = "model";
+  name = "model-${lib.strings.sanitizeDerivationName name}";
   passthru = ({
     inherit name;
-  } // args.passthru);
+  } // (if args ? passthru then args.passthru else {}));
   curlOpts = "-H @/build/ACTIVE_TOKEN";
   netrcImpureEnvVars = [ "HF_TOKEN" "CIVITAI_API_TOKEN" ];
   netrcPhase = ''

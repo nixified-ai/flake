@@ -64,7 +64,13 @@ in
         in "https://${parsed.source}.co/${owner}/${repo}/resolve/main/${resource}?download=true"
       else lib.throw "support for constructing URL from AIR with ${parsed.source} as source has not been added yet";
 
-    fetchArgs = ({ name = "model"; passthru.name = name; inherit url sha256;} // (if args ? passthru then { inherit (args) passthru; } else {}));
+    fetchArgs = ({
+      inherit url sha256;
+      name = lib.strings.sanitizeDerivationName air;
+      passthru = ({
+        inherit name;
+      } // (if args ? passthru then args.passthru else {}));
+    });
     metaAttr = {
       meta =
         {

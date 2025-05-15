@@ -1,6 +1,6 @@
-{ fetchurl, lib }:
+{ fetchurl }:
 { url, name, hash ? "", sha256 ? "", ... }@args: fetchurl (args // {
-  name = "model-${lib.strings.sanitizeDerivationName name}";
+  name = "model";
   passthru = ({
     inherit name;
   } // (if args ? passthru then args.passthru else {}));

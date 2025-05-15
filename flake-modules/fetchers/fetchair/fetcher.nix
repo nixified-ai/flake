@@ -66,7 +66,7 @@ in
 
     fetchArgs = ({
       inherit url sha256;
-      name = lib.strings.sanitizeDerivationName air;
+      name = "model";
       passthru = ({
         inherit name;
       } // (if args ? passthru then args.passthru else {}));

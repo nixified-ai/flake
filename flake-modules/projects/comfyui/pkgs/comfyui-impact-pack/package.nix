@@ -16,6 +16,7 @@ comfyuiPackages.comfyui.mkComfyUICustomNode rec {
     piexif
     transformers
     opencv4
+    opencv-python-headless
     scipy
     numpy
     dill

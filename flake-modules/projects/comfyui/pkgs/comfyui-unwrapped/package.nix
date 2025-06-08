@@ -7,28 +7,30 @@
 let
   spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix { };
   comfyui-workflow-templates = python3Packages.callPackage ../../../../packages/comfyui-workflow-templates/default.nix { };
+  comfyui-embedded-docs = python3Packages.callPackage ../../../../packages/comfyui-embedded-docs/default.nix { };
 
-  frontendVersion = "1.17.11";
+  frontendVersion = "1.21.7";
 
   frontend = fetchzip {
     url = "https://github.com/Comfy-Org/ComfyUI_frontend/releases/download/v${frontendVersion}/dist.zip";
-    hash = "sha256-dX6+rsn+gIuv7KO2dy7+ISt9QEIRudJkW7JGlppTQtM=";
+    hash = "sha256-B+4FsolrGUMq9vF8WNc3NnYKGsDGKZyCkkz2O4xLLVg=";
     stripRoot = false;
   };
 in
 python3Packages.buildPythonApplication rec {
   pname = "comfyui";
-  version = "0.3.30";
+  version = "0.3.40";
 
   src = fetchFromGitHub {
     owner = "comfyanonymous";
     repo = "ComfyUI";
     rev = "v${version}";
-    hash = "sha256-DcXgoQpczZXj2iUGXdzHZW8uwBGmo8OkO1RLmHhwLZw=";
+    hash = "sha256-mi+evE0gf6MfpYKVaZIze5NDagkaukGGpjcOhem1vU4=";
   };
 
   dependencies = with python3Packages; [
     comfyui-workflow-templates
+    comfyui-embedded-docs
     torch
     torchsde
     torchvision

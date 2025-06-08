@@ -7,7 +7,7 @@ let
 in
 comfyuiPackages.comfyui.mkComfyUICustomNode rec {
   pname = "comfyui-impact-pack";
-  version = "8.14";
+  version = "8.15.3";
   pyproject = false;
 
   dependencies = with python3Packages; [
@@ -17,7 +17,7 @@ comfyuiPackages.comfyui.mkComfyUICustomNode rec {
     transformers
     opencv4
     scipy
-    numpy_1
+    numpy
     dill
     matplotlib
   ];
@@ -30,6 +30,6 @@ comfyuiPackages.comfyui.mkComfyUICustomNode rec {
     owner = "ltdrdata";
     repo = "ComfyUI-Impact-Pack";
     rev = version;
-    hash = "sha256-NW5D0KMLsc7d9LALP/i2ZU558YWc9JEF5Hvk/m+dWNA=";
+    hash = "sha256-nhfgs/XqT3Ziwz24Ke+atfCSmq6TuU/91ufcmWO1w+Q=";
   };
 }

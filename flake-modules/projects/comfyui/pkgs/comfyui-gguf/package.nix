@@ -1,18 +1,26 @@
-{ comfyuiPackages,
-  python3Packages,
-  fetchFromGitHub
+{ comfyuiPackages
+, python3Packages
+, fetchFromGitHub
 }:
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-gguf";
-  version = "unstable-2024-09-09";
-  pyproject = false;
+  version = "unstable-2025-05-09";
+  pyproject = true;
+
   propagatedBuildInputs = with python3Packages; [
     gguf
   ];
+
+  dependencies = with python3Packages; [
+    sentencepiece
+    protobuf
+    torch
+  ];
+
   src = fetchFromGitHub {
     owner = "city96";
     repo = "ComfyUI-GGUF";
-    rev = "65a7c895bb0ac9547ba2f89d55fbdb609aa2bfe7";
-    hash = "sha256-+ohRZam4xFh2ZYVHdwQ5cf1l49SIl6Gm2ECLucRO7UI=";
+    rev = "a2b75978fd50c0227a58316619b79d525b88e570";
+    hash = "sha256-nsAnkzapDWUFtuNnroHqcX4PR5fUWkXXIH+zn5K3aqo=";
   };
 }

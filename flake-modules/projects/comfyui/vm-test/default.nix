@@ -1,7 +1,7 @@
 { nixosTest, nixosModule, lib, python3, writeShellScript, nixified-ai }:
 nixosTest {
   name = "comfyui";
-  machine = { pkgs, ... }: {
+  nodes.machine = { pkgs, ... }: {
     imports = [ nixosModule ];
     virtualisation.memorySize = 9216;
     virtualisation.cores = 1;

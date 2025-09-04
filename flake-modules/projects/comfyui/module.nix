@@ -1,12 +1,10 @@
 # Inspiration from https://github.com/NixOS/nixpkgs/blob/nixos-24.11/nixos/modules/services/misc/ollama.nix
-{ overlays }:
-{
+{overlays}: {
   config,
   lib,
   pkgs,
   ...
-}@args:
-let
+} @ args: let
   inherit (lib) literalExpression types;
 
   cfg = config.services.comfyui;
@@ -16,18 +14,32 @@ let
   };
 
   accelerationPkgs = let
-    nvidiaPkgs = (import pkgs.path { system = pkgs.hostPlatform.system; config.cudaSupport = true; config.allowUnfree = true; overlays = overlays; });
-    rocmPkgs = (import pkgs.path { system = pkgs.hostPlatform.system; config.rocmSupport = true; config.allowUnfree = true; overlays = overlays; });
-  in if (cfg.acceleration == "cuda") then nvidiaPkgs else if (cfg.acceleration == "rocm") then rocmPkgs else pkgs;
+    nvidiaPkgs = import pkgs.path {
+      system = pkgs.hostPlatform.system;
+      config.cudaSupport = true;
+      config.allowUnfree = true;
+      overlays = overlays;
+    };
+    rocmPkgs = import pkgs.path {
+      system = pkgs.hostPlatform.system;
+      config.rocmSupport = true;
+      config.allowUnfree = true;
+      overlays = overlays;
+    };
+  in
+    if (cfg.acceleration == "cuda")
+    then nvidiaPkgs
+    else if (cfg.acceleration == "rocm")
+    then rocmPkgs
+    else pkgs;
 
   staticUser = cfg.user != null && cfg.group != null;
-in
-{
+in {
   options = {
     services.comfyui = {
       enable = lib.mkEnableOption "comfyui server for diffusion models";
 
-      package = lib.mkPackageOption accelerationPkgs "comfyui" { };
+      package = lib.mkPackageOption accelerationPkgs "comfyui" {};
 
       user = lib.mkOption {
         type = with types; nullOr str;
@@ -65,7 +77,7 @@ in
       extraFlags = lib.mkOption {
         type = types.listOf types.str;
         default = [];
-        example = [ "--fast" "--deterministic" ];
+        example = ["--fast" "--deterministic"];
         description = ''
           A list of extra string arguments to pass to comfyui
         '';
@@ -148,7 +160,7 @@ in
 
       environmentVariables = lib.mkOption {
         type = types.attrsOf types.str;
-        default = { };
+        default = {};
         example = {
           HIP_VISIBLE_DEVICES = "0,1";
         };
@@ -180,14 +192,14 @@ in
         isSystemUser = true;
         group = cfg.group;
       };
-      groups.${cfg.group} = { };
+      groups.${cfg.group} = {};
     };
 
     systemd.services.comfyui = {
       description = "comfyui";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      environment = cfg.environmentVariables // { HOME = cfg.home; };
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      environment = cfg.environmentVariables // {HOME = cfg.home;};
       serviceConfig =
         lib.optionalAttrs staticUser {
           User = cfg.user;
@@ -197,16 +209,16 @@ in
           Type = "exec";
           DynamicUser = true;
           ExecStart = lib.concatStringsSep " " [
-            "${lib.getExe comfyuiPackage} --listen ${cfg.host} --port ${toString cfg.port} ${lib.optionalString (cfg.acceleration == false) "--cpu"}"
+            "${lib.getExe comfyuiPackage} --listen ${cfg.host} --port ${toString cfg.port} --database-url sqlite:///${cfg.home}/comfyui.db ${lib.optionalString (cfg.acceleration == false) "--cpu"}"
             (lib.escapeShellArgs cfg.extraFlags)
           ];
           WorkingDirectory = cfg.home;
-          StateDirectory = [ "comfyui" ];
+          StateDirectory = ["comfyui"];
           ReadWritePaths = [
             cfg.home
           ];
 
-          CapabilityBoundingSet = [ "" ];
+          CapabilityBoundingSet = [""];
           DeviceAllow = [
             # CUDA
             # https://docs.nvidia.com/dgx/pdf/dgx-os-5-user-guide.pdf
@@ -244,7 +256,7 @@ in
             "AF_INET6"
             "AF_UNIX"
           ];
-          SupplementaryGroups = [ "render" ]; # for rocm to access /dev/dri/renderD* devices
+          SupplementaryGroups = ["render"]; # for rocm to access /dev/dri/renderD* devices
           SystemCallArchitectures = "native";
           SystemCallFilter = [
             "@system-service @resources"
@@ -262,10 +274,9 @@ in
           #  RuntimeError: could not create a primitive
 
           # MemoryDenyWriteExecute = true;
-
         };
     };
 
-    networking.firewall = lib.mkIf cfg.openFirewall { allowedTCPPorts = [ cfg.port ]; };
+    networking.firewall = lib.mkIf cfg.openFirewall {allowedTCPPorts = [cfg.port];};
   };
 }

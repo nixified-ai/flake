@@ -53,6 +53,16 @@ in
         '';
       };
 
+      cacheGroup = lib.mkOption {
+        type = with types; nullOr str;
+        default = "comfyui-cache";
+        defaultText = "comfyui-cache";
+        example = "comfyui-cache";
+        description = ''
+          Group used for cache dir which can be used to store executable code.
+        '';
+      };
+
       home = lib.mkOption {
         type = types.str;
         default = "/var/lib/comfyui";
@@ -178,19 +188,20 @@ in
     # (on which StateDirectory is mounted)
     execCacheDir = "/var/cache/comfyui";
   in lib.mkIf cfg.enable {
-    users =  {
-      users = lib.mkIf staticUser {
-        "${cfg.user}" = {
-          inherit (cfg) home;
-          isSystemUser = true;
-        };
+    users.users = lib.mkIf staticUser {
+      "${cfg.user}" = {
+        inherit (cfg) home;
+        isSystemUser = true;
       };
-      groups = lib.mkIf (cfg.group != null) { ${cfg.group} = { }; };
     };
+    users.groups =
+      (if staticUser then { "${cfg.group}" = {}; } else {}) //
+      { "${cfg.cacheGroup}" = lib.mkIf (cfg.cacheGroup != null) {}; }
+    ;
 
-    systemd.tmpfiles.rules = lib.mkIf (cfg.group != null) [
+    systemd.tmpfiles.rules = lib.mkIf (cfg.cacheGroup != null) [
       # The '2' in '2705' sets the 'setgid' bit, so new files inherit the group owner.
-      "d ${execCacheDir} 2770 root ${cfg.group} -"
+      "d ${execCacheDir} 2770 root ${cfg.cacheGroup} -"
     ];
 
     systemd.services.comfyui = {
@@ -258,7 +269,7 @@ in
           ];
           SupplementaryGroups =
             [ "render" ] # for rocm to access /dev/dri/renderD* devices
-            ++ (lib.optional (cfg.group != null) cfg.group)
+            ++ (lib.optional (cfg.cacheGroup != null) cfg.cacheGroup)
           ;
           SystemCallArchitectures = "native";
           SystemCallFilter = [

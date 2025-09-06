@@ -43,8 +43,8 @@ in
 
       group = lib.mkOption {
         type = with types; nullOr str;
-        default = cfg.user;
-        defaultText = literalExpression "config.services.comfyui.user";
+        default = "comfyui";
+        defaultText = "comfyui";
         example = "comfyui";
         description = ''
           Group under which to run comfyui. Only used when `services.comfyui.user` is set.
@@ -173,15 +173,23 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = let
+    # Used for triton compile cache, which can't live on noexec mount
+    # (on which StateDirectory is mounted)
+    execCacheDir = "/var/cache/comfyui";
+  in lib.mkIf cfg.enable {
     users = lib.mkIf staticUser {
       users.${cfg.user} = {
         inherit (cfg) home;
         isSystemUser = true;
-        group = cfg.group;
       };
-      groups.${cfg.group} = { };
     };
+    groups = lib.mkIf (cfg.group != null) { ${cfg.group} = { }; };
+
+    systemd.tmpfiles.rules = lib.mkIf (cfg.group != null) [
+      # The '2' in '2705' sets the 'setgid' bit, so new files inherit the group owner.
+      "d ${execCacheDir} 2770 root ${cfg.group} -"
+    ];
 
     systemd.services.comfyui = {
       description = "comfyui";
@@ -205,6 +213,8 @@ in
           ReadWritePaths = [
             cfg.home
           ];
+
+          BindPaths = [ execCacheDir ];
 
           CapabilityBoundingSet = [ "" ];
           DeviceAllow = [
@@ -244,7 +254,10 @@ in
             "AF_INET6"
             "AF_UNIX"
           ];
-          SupplementaryGroups = [ "render" ]; # for rocm to access /dev/dri/renderD* devices
+          SupplementaryGroups =
+            [ "render" ] # for rocm to access /dev/dri/renderD* devices
+            ++ (lib.optional staticUser cfg.group)
+          ;
           SystemCallArchitectures = "native";
           SystemCallFilter = [
             "@system-service @resources"

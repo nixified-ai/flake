@@ -178,13 +178,15 @@ in
     # (on which StateDirectory is mounted)
     execCacheDir = "/var/cache/comfyui";
   in lib.mkIf cfg.enable {
-    users = lib.mkIf staticUser {
-      users.${cfg.user} = {
-        inherit (cfg) home;
-        isSystemUser = true;
+    users =  {
+      users = lib.mkIf staticUser {
+        "${cfg.user}" = {
+          inherit (cfg) home;
+          isSystemUser = true;
+        };
       };
+      groups = lib.mkIf (cfg.group != null) { ${cfg.group} = { }; };
     };
-    groups = lib.mkIf (cfg.group != null) { ${cfg.group} = { }; };
 
     systemd.tmpfiles.rules = lib.mkIf (cfg.group != null) [
       # The '2' in '2705' sets the 'setgid' bit, so new files inherit the group owner.
@@ -256,7 +258,7 @@ in
           ];
           SupplementaryGroups =
             [ "render" ] # for rocm to access /dev/dri/renderD* devices
-            ++ (lib.optional staticUser cfg.group)
+            ++ (lib.optional (cfg.group != null) cfg.group)
           ;
           SystemCallArchitectures = "native";
           SystemCallFilter = [

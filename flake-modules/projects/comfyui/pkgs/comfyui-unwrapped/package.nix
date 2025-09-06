@@ -4,18 +4,24 @@
 , python3
 }:
 let
+  av = python3Packages.callPackage ../../../../packages/av/default.nix {};
   spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix {};
+  comfyui-frontend-package = python3Packages.callPackage ../../../../packages/comfyui-frontend-package/default.nix {};
 in
 python3Packages.buildPythonApplication rec {
   pname = "comfyui";
-  version = "0.3.9";
+  version = "unstable-2025-09-06";
 
   src = fetchFromGitHub {
     owner = "comfyanonymous";
     repo = "ComfyUI";
-    rev = "v${version}";
-    hash = "sha256-3D3Xk7yDesAjHIgBBCHOQFGt1HsGVBSXUi6zsW1dgcs=";
+    rev = "ea6cdd2631fbca6ed81b95796150c32c9a029f0d";
+    hash = "sha256-DEM+6NCvUVwBkD2Jtb7WVEVVc3tyCaUc383DXPLN9Mg=";
   };
+
+  patches = [
+    ./follow-symlinks-in-extensions.patch
+  ];
 
   dependencies = with python3Packages; [
     torch
@@ -33,12 +39,21 @@ python3Packages.buildPythonApplication rec {
     scipy
     tqdm
     psutil
+    alembic
+    sqlalchemy
+
+    yarl
+    av
+    numpy
+    comfyui-frontend-package
 
     # optional dependencies
     kornia
     spandrel
 #    spandrel_extra_arches
     soundfile
+    pydantic
+    pydantic-settings
   ];
 
   format = "other";

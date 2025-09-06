@@ -187,7 +187,7 @@ in
       description = "comfyui";
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
-      environment = cfg.environmentVariables // { HOME = cfg.home; };
+      environment = cfg.environmentVariables // { HOME = cfg.home; CC = "${pkgs.gccStdenv.cc}/bin/gcc"; };
       serviceConfig =
         lib.optionalAttrs staticUser {
           User = cfg.user;

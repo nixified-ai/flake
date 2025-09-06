@@ -1,13 +1,14 @@
 {
   buildPythonPackage,
   fetchFromGitHub,
+  hatchling,
   imageio,
   numpy,
   poetry-core,
   scipy,
   typing-extensions,
 }: let
-  version = "0.4.4";
+  version = "0.4.6";
 in
   buildPythonPackage rec {
     pname = "colour-science";
@@ -17,9 +18,10 @@ in
       owner = "colour-science";
       repo = "colour";
       rev = "v${version}";
-      sha256 = "sha256-o+hSC64vMR41PCXYbi5p/G9jhQZ1+zCINNeCfrhQKrg=";
+      sha256 = "sha256-kjJc6D4jhvAJh6rIVvKO2bw++K3XlfjD4Djav6778lk=";
     };
     nativeBuildInputs = [
+      hatchling
       imageio
       numpy
       poetry-core

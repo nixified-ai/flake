@@ -5,7 +5,7 @@
 buildPythonPackage rec {
   pname = "pilgram";
   version = "1.2.1";
-  format = "pyproject";
+  format = "setuptools";
 
   src = fetchPypi {
     inherit pname version;

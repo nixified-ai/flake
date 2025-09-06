@@ -65,4 +65,5 @@ in
         SenseVoice-python
         swarm
       ]
+    ;
   }

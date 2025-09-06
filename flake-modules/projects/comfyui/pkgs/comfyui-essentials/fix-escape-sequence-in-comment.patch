@@ -1,0 +1,15 @@
+diff --git a/conditioning.py b/conditioning.py
+index dad5a41..bc6eba3 100644
+--- a/conditioning.py
++++ b/conditioning.py
+@@ -231,8 +231,8 @@ class FluxBlocksBuster:
+         """
+         Also compatible with the following format:
+
+-        double_blocks\.0\.(img|txt)_(mod|attn|mlp)\.(lin|qkv|proj|0|2)\.(weight|bias)=1.1
+-        single_blocks\.0\.(linear[12]|modulation\.lin)\.(weight|bias)=1.1
++        double_blocks\\.0\\.(img|txt)_(mod|attn|mlp)\\.(lin|qkv|proj|0|2)\\.(weight|bias)=1.1
++        single_blocks\\.0\\.(linear[12]|modulation\\.lin)\\.(weight|bias)=1.1
+
+         The regex is used to match the block names
+         """

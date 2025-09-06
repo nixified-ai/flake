@@ -1,14 +1,16 @@
-{ comfyuiPackages,
+{
+  comfyuiPackages,
   python3Packages,
-  fetchFromGitHub
+  fetchFromGitHub,
 }:
 let
-  segment-anything = python3Packages.callPackage ../../../../packages/segment-anything {};
+  segment-anything = python3Packages.callPackage ../../../../packages/segment-anything { };
 in
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-impact-pack";
-  version = "unstable-2024-09-09";
+  version = "unstable-2025-03-23";
   pyproject = false;
+  dontUseNinjaBuild = true;
   propagatedBuildInputs = with python3Packages; [
     segment-anything
     scikit-image
@@ -26,7 +28,7 @@ comfyuiPackages.comfyui.mkComfyUICustomNode {
   src = fetchFromGitHub {
     owner = "ltdrdata";
     repo = "ComfyUI-Impact-Pack";
-    rev = "21eecb0c03223c7823cb19b318011fba3143da92";
-    hash = "sha256-JJUDRQRvC9+z/UEJz5NChANQq2WsI6dzzarttGWjKxk=";
+    rev = "0b1ac0f1c5a395e17065821e4fd47aba3bf23900";
+    hash = "sha256-GoRtQus50OsAD57rH7tCwAaIkM/wJaBx75/5aVnCFOo=";
   };
 }

@@ -10,6 +10,7 @@
   writeShellScript,
   withCustomNodes ? [],
   withModels ? [],
+  gccStdenv,
 }:
 let
   customNodes = withCustomNodes;
@@ -51,6 +52,7 @@ symlinkJoin {
    (createModelsDir models)
   ] ++ customNodes;
   propagatedBuildInputs = [
+    gccStdenv.cc
   ] ++ customNodes;
   nativeBuildInputs = [
     makeWrapper

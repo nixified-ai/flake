@@ -1,0 +1,14 @@
+diff --git a/server.py b/server.py
+index 0553a0dd..b81c11ec 100644
+--- a/server.py
++++ b/server.py
+@@ -782,7 +782,8 @@ class PromptServer():
+ 
+         # Add routes from web extensions.
+         for name, dir in nodes.EXTENSION_WEB_DIRS.items():
+-            self.app.add_routes([web.static('/extensions/' + name, dir)])
++            logging.info(f"Adding /extensions/ rounts, for: {name}, dir: {dir}")
++            self.app.add_routes([web.static('/extensions/' + name, dir, show_index=True, follow_symlinks=True)])
+ 
+         workflow_templates_path = FrontendManager.templates_path()
+         if workflow_templates_path:

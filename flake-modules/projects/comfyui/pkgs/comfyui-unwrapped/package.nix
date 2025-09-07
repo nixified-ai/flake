@@ -21,6 +21,7 @@ python3Packages.buildPythonApplication rec {
 
   patches = [
     ./follow-symlinks-in-extensions.patch
+    ./dont_use_cudnn_backend.patch
   ];
 
   dependencies = with python3Packages; [

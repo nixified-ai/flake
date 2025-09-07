@@ -4,8 +4,7 @@
   fetchFromGitHub,
   ...
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "automatic-cfg";
   version = "2e39531";
 

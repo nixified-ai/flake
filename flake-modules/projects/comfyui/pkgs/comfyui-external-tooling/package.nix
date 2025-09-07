@@ -3,8 +3,7 @@
   fetchFromGitHub,
   ...
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-tooling-nodes";
   version = "5ef2fdd";
 

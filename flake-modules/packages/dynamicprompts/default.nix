@@ -1,14 +1,15 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, hatchling
-, jinja2
-, pyparsing
-, pytest
-, pytest-cov
-, pytest-lazy-fixture
-, requests
-, transformers
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  hatchling,
+  jinja2,
+  pyparsing,
+  pytest,
+  pytest-cov,
+  pytest-lazy-fixture,
+  requests,
+  transformers,
 }:
 
 buildPythonPackage rec {

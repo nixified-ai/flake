@@ -1,21 +1,22 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, git-python
-, gql
-, nbformat
-, packaging
-, pyyaml
-, requests
-, tqdm
-, black
-, flake8
-, isort
-, pytest
-, pytest-xdist
-, tokenizers
-, torch
-, transformers
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  git-python,
+  gql,
+  nbformat,
+  packaging,
+  pyyaml,
+  requests,
+  tqdm,
+  black,
+  flake8,
+  isort,
+  pytest,
+  pytest-xdist,
+  tokenizers,
+  torch,
+  transformers,
 }:
 
 buildPythonPackage rec {

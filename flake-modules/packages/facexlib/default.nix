@@ -2,8 +2,21 @@
 # If you run pynixify again, the file will be either overwritten or
 # deleted, and you will lose the changes you made to it.
 
-{ buildPythonPackage, cython, fetchPypi, filterpy, lib, numba, numpy
-, opencv-python, pillow, scipy, torch, torchvision, tqdm }:
+{
+  buildPythonPackage,
+  cython,
+  fetchPypi,
+  filterpy,
+  lib,
+  numba,
+  numpy,
+  opencv-python,
+  pillow,
+  scipy,
+  torch,
+  torchvision,
+  tqdm,
+}:
 
 buildPythonPackage rec {
   pname = "facexlib";
@@ -15,7 +28,10 @@ buildPythonPackage rec {
   };
 
   patches = [ ./root_dir.patch ];
-  buildInputs = [ cython numpy ];
+  buildInputs = [
+    cython
+    numpy
+  ];
   propagatedBuildInputs = [
     filterpy
     numba

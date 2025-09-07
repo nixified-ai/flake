@@ -2,7 +2,11 @@
 # If you run pynixify again, the file will be either overwritten or
 # deleted, and you will lose the changes you made to it.
 
-{ buildPythonPackage, fetchPypi, lib }:
+{
+  buildPythonPackage,
+  fetchPypi,
+  lib,
+}:
 
 buildPythonPackage rec {
   pname = "pydeprecate";

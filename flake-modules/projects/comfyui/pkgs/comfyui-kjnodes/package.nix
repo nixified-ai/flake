@@ -4,7 +4,7 @@
   fetchFromGitHub,
 }:
 let
-  color-matcher = python3Packages.callPackage ../../../../packages/color-matcher/default.nix {};
+  color-matcher = python3Packages.callPackage ../../../../packages/color-matcher/default.nix { };
 in
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-kjnodes";

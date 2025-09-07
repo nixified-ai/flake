@@ -3,8 +3,7 @@
   fetchFromGitHub,
   python3Packages,
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-gallery";
   version = "unstable-2025-07-10";
 

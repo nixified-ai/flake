@@ -1,4 +1,13 @@
-{ buildPythonPackage, fetchPypi, lib, setuptools, transformers, diffusers, pyparsing, torch }:
+{
+  buildPythonPackage,
+  fetchPypi,
+  lib,
+  setuptools,
+  transformers,
+  diffusers,
+  pyparsing,
+  torch,
+}:
 
 buildPythonPackage rec {
   pname = "compel";
@@ -18,7 +27,7 @@ buildPythonPackage rec {
     torch
   ];
 
-#  # TODO FIXME
+  #  # TODO FIXME
   doCheck = false;
 
   meta = {

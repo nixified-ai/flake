@@ -3,8 +3,7 @@
   fetchFromGitHub,
   ...
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-kolors-mz";
   version = "43ec270";
 

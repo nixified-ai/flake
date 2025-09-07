@@ -4,9 +4,11 @@
   fetchFromGitHub,
 }:
 let
-  pixeloe = python3Packages.callPackage ../../../../packages/pixeloe/default.nix {};
-  colour-science = python3Packages.callPackage ../../../../packages/colour-science/default.nix {};
-  transparent-background = python3Packages.callPackage ../../../../packages/transparent-background/default.nix {};
+  pixeloe = python3Packages.callPackage ../../../../packages/pixeloe/default.nix { };
+  colour-science = python3Packages.callPackage ../../../../packages/colour-science/default.nix { };
+  transparent-background =
+    python3Packages.callPackage ../../../../packages/transparent-background/default.nix
+      { };
 in
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-essentials";

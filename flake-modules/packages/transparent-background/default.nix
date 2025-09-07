@@ -29,7 +29,7 @@ buildPythonPackage rec {
     export HOME=$(mktemp -d)
   '';
 
-  buildInputs = [setuptools];
+  buildInputs = [ setuptools ];
 
   propagatedBuildInputs = [
     torch

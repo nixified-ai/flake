@@ -1,20 +1,21 @@
-{ lib
-, buildPythonPackage
-, fetchFromGitHub
-, safetensors
-, accelerate
-, rouge
-, peft
-, transformers
-, datasets
-, torch
-, cudaPackages
-, rocmPackages
-, symlinkJoin
-, which
-, ninja
-, pybind11
-, gcc11Stdenv
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  safetensors,
+  accelerate,
+  rouge,
+  peft,
+  transformers,
+  datasets,
+  torch,
+  cudaPackages,
+  rocmPackages,
+  symlinkJoin,
+  which,
+  ninja,
+  pybind11,
+  gcc11Stdenv,
 }:
 let
   cuda-native-redist = symlinkJoin {

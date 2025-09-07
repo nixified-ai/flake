@@ -1,16 +1,17 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, setuptools
-, wheel
-, filelock
-, huggingface-hub
-, opencv-python
-, torchvision
-, einops
-, scikit-image
-, timm
-, pythonRelaxDepsHook
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  setuptools,
+  wheel,
+  filelock,
+  huggingface-hub,
+  opencv-python,
+  torchvision,
+  einops,
+  scikit-image,
+  timm,
+  pythonRelaxDepsHook,
 }:
 
 buildPythonPackage rec {

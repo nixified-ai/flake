@@ -15,10 +15,31 @@ let
     withCustomNodes = cfg.customNodes;
   };
 
-  accelerationPkgs = let
-    nvidiaPkgs = (import pkgs.path { system = pkgs.hostPlatform.system; config.cudaSupport = true; config.allowUnfree = true; overlays = overlays; });
-    rocmPkgs = (import pkgs.path { system = pkgs.hostPlatform.system; config.rocmSupport = true; config.allowUnfree = true; overlays = overlays; });
-  in if (cfg.acceleration == "cuda") then nvidiaPkgs else if (cfg.acceleration == "rocm") then rocmPkgs else pkgs;
+  accelerationPkgs =
+    let
+      nvidiaPkgs = (
+        import pkgs.path {
+          system = pkgs.hostPlatform.system;
+          config.cudaSupport = true;
+          config.allowUnfree = true;
+          overlays = overlays;
+        }
+      );
+      rocmPkgs = (
+        import pkgs.path {
+          system = pkgs.hostPlatform.system;
+          config.rocmSupport = true;
+          config.allowUnfree = true;
+          overlays = overlays;
+        }
+      );
+    in
+    if (cfg.acceleration == "cuda") then
+      nvidiaPkgs
+    else if (cfg.acceleration == "rocm") then
+      rocmPkgs
+    else
+      pkgs;
 
   staticUser = cfg.user != null && cfg.group != null;
 in
@@ -84,8 +105,11 @@ in
 
       extraFlags = lib.mkOption {
         type = types.listOf types.str;
-        default = [];
-        example = [ "--fast" "--deterministic" ];
+        default = [ ];
+        example = [
+          "--fast"
+          "--deterministic"
+        ];
         description = ''
           A list of extra string arguments to pass to comfyui
         '';
@@ -93,9 +117,9 @@ in
 
       models = lib.mkOption {
         type = types.listOf types.attrs;
-        default = [];
-        defaultText = [];
-        example = [];
+        default = [ ];
+        defaultText = [ ];
+        example = [ ];
         description = ''
           A list of models to fetch and supply to comfyui
         '';
@@ -103,9 +127,9 @@ in
 
       customNodes = lib.mkOption {
         type = types.listOf types.attrs;
-        default = [];
-        defaultText = [];
-        example = [];
+        default = [ ];
+        defaultText = [ ];
+        example = [ ];
         description = ''
           A list of custom nodes to fetch and supply to comfyui in its custom_nodes folder
         '';
@@ -193,126 +217,129 @@ in
     };
   };
 
-  config = let
-    # Used for triton compile cache, which can't live on noexec mount
-    # (on which StateDirectory is mounted)
-    execCacheDir = "/var/cache/comfyui";
-  in lib.mkIf cfg.enable {
-    users.users = lib.mkIf staticUser {
-      "${cfg.user}" = {
-        inherit (cfg) home;
-        isSystemUser = true;
-      };
-    };
-    users.groups =
-      (if staticUser then { "${cfg.group}" = {}; } else {}) //
-      { "${cfg.cacheGroup}" = lib.mkIf (cfg.cacheGroup != null) {}; }
-    ;
-
-    systemd.tmpfiles.rules = lib.mkIf (cfg.cacheGroup != null) [
-      # The '2' in '2705' sets the 'setgid' bit, so new files inherit the group owner.
-      "d ${execCacheDir} 2770 root ${cfg.cacheGroup} -"
-    ];
-
-    systemd.services.comfyui = {
-      description = "comfyui";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      environment = cfg.environmentVariables // {
-        HOME = cfg.home;
-        # these are needed by sageattention\triton, which compile
-        # stuff on the fly
-        CC = "${pkgs.gccStdenv.cc}/bin/gcc";
-        TRITON_CACHE_DIR = "${execCacheDir}/triton";
-      };
-      serviceConfig =
-        lib.optionalAttrs staticUser {
-          User = cfg.user;
-          Group = cfg.group;
-        }
-        // {
-          Type = "exec";
-          DynamicUser = true;
-          ExecStart = let
-            allFlags = [
-              "--database-url=${cfg.databasePath}"
-              "--listen=${cfg.host}"
-              "--port=${toString cfg.port}"
-            ]
-            ++ (lib.optional (cfg.acceleration == false) "--cpu")
-            ++ cfg.extraFlags;
-          in "${lib.getExe comfyuiPackage} ${lib.escapeShellArgs allFlags}";
-          WorkingDirectory = cfg.home;
-          StateDirectory = [ "comfyui" ];
-          ReadWritePaths = [
-            cfg.home
-          ];
-
-          BindPaths = [ execCacheDir ];
-
-          CapabilityBoundingSet = [ "" ];
-          DeviceAllow = [
-            # CUDA
-            # https://docs.nvidia.com/dgx/pdf/dgx-os-5-user-guide.pdf
-            "char-nvidiactl"
-            "char-nvidia-caps"
-            "char-nvidia-frontend"
-            "char-nvidia-uvm"
-            # ROCm
-            "char-drm"
-            "char-kfd"
-          ];
-          DevicePolicy = "closed";
-          LockPersonality = true;
-
-          NoNewPrivileges = true;
-          PrivateDevices = false; # hides acceleration devices
-          PrivateTmp = true;
-          PrivateUsers = true;
-          ProcSubset = "all"; # /proc/meminfo
-          ProtectClock = true;
-          ProtectControlGroups = true;
-          ProtectHome = true;
-          ProtectHostname = true;
-          ProtectKernelLogs = true;
-          ProtectKernelModules = true;
-          ProtectKernelTunables = true;
-          ProtectProc = "invisible";
-          ProtectSystem = "strict";
-          RemoveIPC = true;
-          RestrictNamespaces = true;
-          RestrictRealtime = true;
-          RestrictSUIDSGID = true;
-          RestrictAddressFamilies = [
-            "AF_INET"
-            "AF_INET6"
-            "AF_UNIX"
-          ];
-          SupplementaryGroups =
-            [ "render" ] # for rocm to access /dev/dri/renderD* devices
-            ++ (lib.optional (cfg.cacheGroup != null) cfg.cacheGroup)
-          ;
-          SystemCallArchitectures = "native";
-          SystemCallFilter = [
-            "@system-service @resources"
-            "~@privileged"
-          ];
-          UMask = "0077";
-
-          # MemoryDenyWriteExecute would be nice, but pytorch doesn't work with
-          # this option set to true It throws the following, likely due to
-          # generating assembly at runtime and marking it as executable
-          #
-          #  File "/nix/store/4b0mw59pv52w2kvli1hraqcybww0yy0z-python3.12-torch-2.5.1/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 549, in _conv_forward
-          #    return F.conv2d(
-          #           ^^^^^^^^^
-          #  RuntimeError: could not create a primitive
-
-          # MemoryDenyWriteExecute = true;
-
+  config =
+    let
+      # Used for triton compile cache, which can't live on noexec mount
+      # (on which StateDirectory is mounted)
+      execCacheDir = "/var/cache/comfyui";
+    in
+    lib.mkIf cfg.enable {
+      users.users = lib.mkIf staticUser {
+        "${cfg.user}" = {
+          inherit (cfg) home;
+          isSystemUser = true;
         };
-    };
+      };
+      users.groups = (if staticUser then { "${cfg.group}" = { }; } else { }) // {
+        "${cfg.cacheGroup}" = lib.mkIf (cfg.cacheGroup != null) { };
+      };
 
-    networking.firewall = lib.mkIf cfg.openFirewall { allowedTCPPorts = [ cfg.port ]; };
-  };
+      systemd.tmpfiles.rules = lib.mkIf (cfg.cacheGroup != null) [
+        # The '2' in '2705' sets the 'setgid' bit, so new files inherit the group owner.
+        "d ${execCacheDir} 2770 root ${cfg.cacheGroup} -"
+      ];
+
+      systemd.services.comfyui = {
+        description = "comfyui";
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
+        environment = cfg.environmentVariables // {
+          HOME = cfg.home;
+          # these are needed by sageattention\triton, which compile
+          # stuff on the fly
+          CC = "${pkgs.gccStdenv.cc}/bin/gcc";
+          TRITON_CACHE_DIR = "${execCacheDir}/triton";
+        };
+        serviceConfig =
+          lib.optionalAttrs staticUser {
+            User = cfg.user;
+            Group = cfg.group;
+          }
+          // {
+            Type = "exec";
+            DynamicUser = true;
+            ExecStart =
+              let
+                allFlags = [
+                  "--database-url=${cfg.databasePath}"
+                  "--listen=${cfg.host}"
+                  "--port=${toString cfg.port}"
+                ]
+                ++ (lib.optional (cfg.acceleration == false) "--cpu")
+                ++ cfg.extraFlags;
+              in
+              "${lib.getExe comfyuiPackage} ${lib.escapeShellArgs allFlags}";
+            WorkingDirectory = cfg.home;
+            StateDirectory = [ "comfyui" ];
+            ReadWritePaths = [
+              cfg.home
+            ];
+
+            BindPaths = [ execCacheDir ];
+
+            CapabilityBoundingSet = [ "" ];
+            DeviceAllow = [
+              # CUDA
+              # https://docs.nvidia.com/dgx/pdf/dgx-os-5-user-guide.pdf
+              "char-nvidiactl"
+              "char-nvidia-caps"
+              "char-nvidia-frontend"
+              "char-nvidia-uvm"
+              # ROCm
+              "char-drm"
+              "char-kfd"
+            ];
+            DevicePolicy = "closed";
+            LockPersonality = true;
+
+            NoNewPrivileges = true;
+            PrivateDevices = false; # hides acceleration devices
+            PrivateTmp = true;
+            PrivateUsers = true;
+            ProcSubset = "all"; # /proc/meminfo
+            ProtectClock = true;
+            ProtectControlGroups = true;
+            ProtectHome = true;
+            ProtectHostname = true;
+            ProtectKernelLogs = true;
+            ProtectKernelModules = true;
+            ProtectKernelTunables = true;
+            ProtectProc = "invisible";
+            ProtectSystem = "strict";
+            RemoveIPC = true;
+            RestrictNamespaces = true;
+            RestrictRealtime = true;
+            RestrictSUIDSGID = true;
+            RestrictAddressFamilies = [
+              "AF_INET"
+              "AF_INET6"
+              "AF_UNIX"
+            ];
+            SupplementaryGroups = [
+              "render"
+            ] # for rocm to access /dev/dri/renderD* devices
+            ++ (lib.optional (cfg.cacheGroup != null) cfg.cacheGroup);
+            SystemCallArchitectures = "native";
+            SystemCallFilter = [
+              "@system-service @resources"
+              "~@privileged"
+            ];
+            UMask = "0077";
+
+            # MemoryDenyWriteExecute would be nice, but pytorch doesn't work with
+            # this option set to true It throws the following, likely due to
+            # generating assembly at runtime and marking it as executable
+            #
+            #  File "/nix/store/4b0mw59pv52w2kvli1hraqcybww0yy0z-python3.12-torch-2.5.1/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 549, in _conv_forward
+            #    return F.conv2d(
+            #           ^^^^^^^^^
+            #  RuntimeError: could not create a primitive
+
+            # MemoryDenyWriteExecute = true;
+
+          };
+      };
+
+      networking.firewall = lib.mkIf cfg.openFirewall { allowedTCPPorts = [ cfg.port ]; };
+    };
 }

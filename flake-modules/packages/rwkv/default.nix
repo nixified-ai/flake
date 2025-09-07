@@ -1,8 +1,9 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, setuptools
-, tokenizers
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  setuptools,
+  tokenizers,
 }:
 
 buildPythonPackage rec {

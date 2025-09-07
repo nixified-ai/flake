@@ -1,10 +1,11 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, poetry-core
-, sentencepiece
-, torch
-, transformers
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  poetry-core,
+  sentencepiece,
+  torch,
+  transformers,
 }:
 
 buildPythonPackage rec {

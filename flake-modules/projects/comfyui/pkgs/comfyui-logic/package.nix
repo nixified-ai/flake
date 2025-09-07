@@ -2,8 +2,7 @@
   comfyuiPackages,
   fetchFromGitHub,
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "ComfyUI-Logic";
   version = "214cfba";
 

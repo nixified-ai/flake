@@ -9,8 +9,7 @@
   torch,
   torchvision,
 }:
-buildPythonPackage
-rec {
+buildPythonPackage rec {
   pname = "simple-lama-inpainting";
   version = "0.1.2";
   format = "pyproject";

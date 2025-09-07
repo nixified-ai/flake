@@ -1,13 +1,18 @@
-{ lib
-, fetchFromGitHub
-, python3Packages
-, python3
+{
+  lib,
+  fetchFromGitHub,
+  python3Packages,
+  python3,
 }:
 let
-  av = python3Packages.callPackage ../../../../packages/av/default.nix {};
-  spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix {};
-  comfyui-frontend-package = python3Packages.callPackage ../../../../packages/comfyui-frontend-package/default.nix {};
-  comfyui-embedded-docs = python3Packages.callPackage ../../../../packages/comfyui-embedded-docs/default.nix {};
+  av = python3Packages.callPackage ../../../../packages/av/default.nix { };
+  spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix { };
+  comfyui-frontend-package =
+    python3Packages.callPackage ../../../../packages/comfyui-frontend-package/default.nix
+      { };
+  comfyui-embedded-docs =
+    python3Packages.callPackage ../../../../packages/comfyui-embedded-docs/default.nix
+      { };
 in
 python3Packages.buildPythonApplication rec {
   pname = "comfyui";
@@ -53,7 +58,7 @@ python3Packages.buildPythonApplication rec {
     # optional dependencies
     kornia
     spandrel
-#    spandrel_extra_arches
+    #    spandrel_extra_arches
     soundfile
     pydantic
     pydantic-settings
@@ -69,13 +74,13 @@ python3Packages.buildPythonApplication rec {
   '';
 
   postPatch = ''
-     substituteInPlace folder_paths.py \
-       --replace-fail "os.path.dirname(os.path.realpath(__file__))" 'os.path.join(os.getenv("XDG_DATA_HOME", os.path.join(os.path.expanduser("~"), ".local", "share")), "comfyui")'
+         substituteInPlace folder_paths.py \
+           --replace-fail "os.path.dirname(os.path.realpath(__file__))" 'os.path.join(os.getenv("XDG_DATA_HOME", os.path.join(os.path.expanduser("~"), ".local", "share")), "comfyui")'
 
-#     substituteInPlace folder_paths.py \
-#       --replace-fail "os.path.dirname(os.path.realpath(__file__))" "os.getenv('COMFYUI_BASE_PATH')"
-#     substituteInPlace folder_paths.py \
-#       --replace-fail "os.path.dirname(os.path.realpath(__file__))" "os.getcwd()"
+    #     substituteInPlace folder_paths.py \
+    #       --replace-fail "os.path.dirname(os.path.realpath(__file__))" "os.getenv('COMFYUI_BASE_PATH')"
+    #     substituteInPlace folder_paths.py \
+    #       --replace-fail "os.path.dirname(os.path.realpath(__file__))" "os.getcwd()"
   '';
 
   nativeBuildInputs = [ python3 ];

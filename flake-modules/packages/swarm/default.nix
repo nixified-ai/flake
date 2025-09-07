@@ -11,8 +11,7 @@
   pre-commit,
   instructor,
 }:
-buildPythonPackage
-rec {
+buildPythonPackage rec {
   pname = "swarm";
   version = "0c82d7d";
   format = "pyproject";

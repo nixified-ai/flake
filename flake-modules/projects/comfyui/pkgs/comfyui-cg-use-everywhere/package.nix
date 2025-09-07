@@ -3,8 +3,7 @@
   fetchFromGitHub,
   ...
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-cg-use-everywhere";
   version = "unstable-2025-09-01";
 

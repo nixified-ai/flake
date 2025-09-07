@@ -1,11 +1,12 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, setuptools
-, wheel
-, fastapi
-, python-socketio
-, pytest
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  setuptools,
+  wheel,
+  fastapi,
+  python-socketio,
+  pytest,
 }:
 
 buildPythonPackage rec {

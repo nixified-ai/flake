@@ -1,6 +1,7 @@
-{ comfyuiPackages,
+{
+  comfyuiPackages,
   python3Packages,
-  fetchFromGitHub
+  fetchFromGitHub,
 }:
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-gguf";
@@ -17,4 +18,3 @@ comfyuiPackages.comfyui.mkComfyUICustomNode {
     hash = "sha256-DdCZnRtx9svz9aNxS+HJORNYsDoWVI9DWLcMocRT268=";
   };
 }
-

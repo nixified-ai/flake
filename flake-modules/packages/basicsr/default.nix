@@ -2,9 +2,27 @@
 # If you run pynixify again, the file will be either overwritten or
 # deleted, and you will lose the changes you made to it.
 
-{ addict, buildPythonPackage, cython, fetchPypi, future, lib, lmdb, numpy
-, opencv-python, pillow, pyyaml, requests, scikit-image, scipy, torch
-, torchvision, tqdm, yapf, tensorboard }:
+{
+  addict,
+  buildPythonPackage,
+  cython,
+  fetchPypi,
+  future,
+  lib,
+  lmdb,
+  numpy,
+  opencv-python,
+  pillow,
+  pyyaml,
+  requests,
+  scikit-image,
+  scipy,
+  torch,
+  torchvision,
+  tqdm,
+  yapf,
+  tensorboard,
+}:
 
 buildPythonPackage rec {
   pname = "basicsr";
@@ -15,7 +33,11 @@ buildPythonPackage rec {
     sha256 = "11qy60qqxdxp1k0w0xsmjr65bdnxh29xkd0kk7d4r5pghxd5k6xq";
   };
 
-  buildInputs = [ cython numpy torch ];
+  buildInputs = [
+    cython
+    numpy
+    torch
+  ];
   propagatedBuildInputs = [
     addict
     future

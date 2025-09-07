@@ -1,12 +1,13 @@
-{ lib
-, fetchurl
-, buildPythonPackage
-, protobuf
-, numpy
-, opencv4
-, attrs
-, matplotlib
-, autoPatchelfHook
+{
+  lib,
+  fetchurl,
+  buildPythonPackage,
+  protobuf,
+  numpy,
+  opencv4,
+  attrs,
+  matplotlib,
+  autoPatchelfHook,
 }:
 
 buildPythonPackage {
@@ -19,7 +20,13 @@ buildPythonPackage {
     sha256 = "sha256-K5u5w895+ISdtDwRk7XmIAp0BsjLVsBtyf8w2LCztbs=";
   };
 
-  propagatedBuildInputs = [ protobuf numpy opencv4 matplotlib attrs ];
+  propagatedBuildInputs = [
+    protobuf
+    numpy
+    opencv4
+    matplotlib
+    attrs
+  ];
 
   nativeBuildInputs = [ autoPatchelfHook ];
 

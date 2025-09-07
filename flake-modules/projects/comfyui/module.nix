@@ -208,7 +208,13 @@ in
       description = "comfyui";
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
-      environment = cfg.environmentVariables // { HOME = cfg.home; CC = "${pkgs.gccStdenv.cc}/bin/gcc"; };
+      environment = cfg.environmentVariables // {
+        HOME = cfg.home;
+        # these are needed by sageattention\triton, which compile
+        # stuff on the fly
+        CC = "${pkgs.gccStdenv.cc}/bin/gcc";
+        TRITON_CACHE_DIR = "${execCacheDir}/triton";
+      };
       serviceConfig =
         lib.optionalAttrs staticUser {
           User = cfg.user;

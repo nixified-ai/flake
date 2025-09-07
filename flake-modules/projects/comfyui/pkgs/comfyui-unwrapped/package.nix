@@ -7,6 +7,7 @@ let
   av = python3Packages.callPackage ../../../../packages/av/default.nix {};
   spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix {};
   comfyui-frontend-package = python3Packages.callPackage ../../../../packages/comfyui-frontend-package/default.nix {};
+  comfyui-embedded-docs = python3Packages.callPackage ../../../../packages/comfyui-embedded-docs/default.nix {};
 in
 python3Packages.buildPythonApplication rec {
   pname = "comfyui";
@@ -47,6 +48,7 @@ python3Packages.buildPythonApplication rec {
     av
     numpy
     comfyui-frontend-package
+    comfyui-embedded-docs
 
     # optional dependencies
     kornia

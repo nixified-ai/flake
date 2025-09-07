@@ -72,6 +72,16 @@ in
         '';
       };
 
+      databasePath = lib.mkOption {
+        type = types.str;
+        default = "/${cfg.home}/comfyui.db";
+        example = "/var/lib/comfyui/comfyui.db";
+        description = ''
+          SQL database URL. Passed as --database-url cli flag to comfyui. If it does not start with sqlite:/// it will be prepended automatically.
+        '';
+        apply = x: if (lib.hasPrefix "sqlite:///" x) then x else "sqlite:///${x}";
+      };
+
       extraFlags = lib.mkOption {
         type = types.listOf types.str;
         default = [];
@@ -223,10 +233,15 @@ in
         // {
           Type = "exec";
           DynamicUser = true;
-          ExecStart = lib.concatStringsSep " " [
-            "${lib.getExe comfyuiPackage} --listen ${cfg.host} --port ${toString cfg.port} ${lib.optionalString (cfg.acceleration == false) "--cpu"}"
-            (lib.escapeShellArgs cfg.extraFlags)
-          ];
+          ExecStart = let
+            allFlags = [
+              "--database-url=${cfg.databasePath}"
+              "--listen=${cfg.host}"
+              "--port=${toString cfg.port}"
+            ]
+            ++ (lib.optional (cfg.acceleration == false) "--cpu")
+            ++ cfg.extraFlags;
+          in "${lib.getExe comfyuiPackage} ${lib.escapeShellArgs allFlags}";
           WorkingDirectory = cfg.home;
           StateDirectory = [ "comfyui" ];
           ReadWritePaths = [

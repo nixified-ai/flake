@@ -28,7 +28,7 @@
     packages = {
       comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui;
       # ROCm support in nixpkgs is pretty bad right now
-      # comfyui-amd = rocmPkgs.comfyuiPackages.comfyui;
+      comfyui-amd = rocmPkgs.comfyuiPackages.comfyui;
     };
   };
 }

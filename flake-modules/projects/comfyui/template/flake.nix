@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixified-ai.url = "github:nixified-ai/flake/comfyui-unwrapped";
+    nixified-ai.url = "github:adrian-gierakowski/nixified-ai-flake/update-and-add-custom-nodes";
 
     # to avoid duplication of inputs
     flake-parts.follows = "nixified-ai/flake-parts";
@@ -23,30 +23,43 @@
             inputs.nixified-ai.overlays.comfyui   # adds comfyuiPackages
             inputs.nixified-ai.overlays.models    # adds nixified-ai.models
             inputs.nixified-ai.overlays.fetchers  # adds fetchResource and fetchair
+            (_final: prev: {
+              rocmPackages = prev.rocmPackages.overrideScope (
+                _final: prev: {
+                  hipblaslt = (prev.hipblaslt.override {
+                    gpuTargets = [ "gfx1100" ];
+                  }).overrideAttrs (prev: {
+                    patches = (prev.patches or []) ++ [];
+                    gpuTargets = [ "gfx1100" ];
+                  });
+                }
+              );
+            })
           ];
           config = {
             allowUnfree = true;
-            cudaSupport = true; # change to rocmSupport for amd, but unlikely
+            rocmSupport = true; # change to rocmSupport for amd, but unlikely
                                 # to work due to lack of nixpkgs maintenance
           };
         });
         packages.default = pkgs.comfyuiPackages.comfyui.override {
           # You can use pkgs.nixified-ai.models to get access to pre-packaged and configured models
           withModels = with pkgs.nixified-ai.models; [
-            flux1-dev-q4_0
-            flux-ae
-            flux-text-encoder-1
-            t5-v1_1-xxl-encoder
-
-            # or define your own fetches discretely
-            (pkgs.fetchResource {
-              name = "ultrarealistic.safetensors";
-              url = "https://civitai.com/api/download/models/1026423?type=Model&format=SafeTensor";
-              sha256 = "B1C4DDF95671E6B51817B4F3802865E544040C232C467E76B1CB0C251BD6B634";
-              passthru = {
-                comfyui.installPaths = [ "loras" ];
-              };
-            })
+            #flux1-dev-q4_0
+            #flux-ae
+            #flux-text-encoder-1
+            #t5-v1_1-xxl-encoder
+            hyper-sd15-1step-lora
+            stable-diffusion-v1-5
+            ## or define your own fetches discretely
+            #(pkgs.fetchResource {
+            #  name = "ultrarealistic.safetensors";
+            #  url = "https://civitai.com/api/download/models/1026423?type=Model&format=SafeTensor";
+            #  sha256 = "B1C4DDF95671E6B51817B4F3802865E544040C232C467E76B1CB0C251BD6B634";
+            #  passthru = {
+            #    comfyui.installPaths = [ "loras" ];
+            #  };
+            #})
           ];
           # or import from a list inside of ./models.nix
           # withModels = (builtins.attrValues (pkgs.callPackages ./models.nix {}));

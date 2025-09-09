@@ -47,7 +47,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
       perSystem =
-        { system, ... }:
+        { system, pkgs, ... }:
         let
           common = {
             overlays = [
@@ -82,6 +82,7 @@
             }
             // common
           );
+          formatter = pkgs.nixfmt-tree;
         };
       imports = [
         ./flake-modules

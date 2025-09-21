@@ -469,4 +469,14 @@
       comfyui.installPaths = ["checkpoints"];
     };
   };
+
+  sdxl-lightning-2step-lora = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/ByteDance/SDXL-Lightning/resolve/main/sdxl_lightning_2step_lora.safetensors";
+    sha256 = "sha256-BPr8d4OFskFESYqCR0mK5Pt6afcC6gVmvc4oRaMfzEM=";
+    passthru = {
+      comfyui.installPaths = ["loras"];
+    };
+  };
+
 }

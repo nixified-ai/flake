@@ -470,6 +470,15 @@
     };
   };
 
+  sdxl-lightning-1step-x0 = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/ByteDance/SDXL-Lightning/resolve/main/sdxl_lightning_1step_x0.safetensors";
+    sha256 = "180rmrhyg994apq1kdywsr36y6pasimphdc12y4bxnqw6hmlr3fx";
+    passthru = {
+      comfyui.installPaths = ["checkpoints"];
+    };
+  };
+
   sdxl-lightning-2step-lora = fetchResource rec {
     name = baseNameOf url;
     url = "https://huggingface.co/ByteDance/SDXL-Lightning/resolve/main/sdxl_lightning_2step_lora.safetensors";

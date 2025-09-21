@@ -460,4 +460,13 @@
       comfyui.installPaths = ["checkpoints"];
     };
   };
+
+  svdq-int4_r32-sdxl = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/nunchaku-tech/nunchaku-sdxl/resolve/main/svdq-int4_r32-sdxl.safetensors";
+    hash = "sha256-90rlmelfPBvQ3eJ4QvCdDEbY0XWO/j1/sh6HC6s2SIQ=";
+    passthru = {
+      comfyui.installPaths = ["checkpoints"];
+    };
+  };
 }

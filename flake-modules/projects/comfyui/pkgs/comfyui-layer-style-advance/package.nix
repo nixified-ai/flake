@@ -14,7 +14,7 @@
 in
   comfyuiPackages.comfyui.mkComfyUICustomNode
   {
-    pname = "ComfyUI_LayerStyle_Advance";
+    pname = "comfyui-layer-style-advance";
     version = "0f91841";
 
     dontBuild = true;

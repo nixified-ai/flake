@@ -8,7 +8,7 @@
 in
   comfyuiPackages.comfyui.mkComfyUICustomNode
   {
-    pname = "ComfyUI_LayerStyle";
+    pname = "comfyui-layer-style";
     version = "a46b1e6";
 
     dontBuild = true;

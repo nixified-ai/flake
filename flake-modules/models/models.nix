@@ -497,4 +497,21 @@
     };
   };
 
+  face-yolov8m = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/xingren23/comfyflow-models/resolve/976de8449674de379b02c144d0b3cfa2b61482f2/ultralytics/bbox/face_yolov8m.pt";
+    sha256 = "17sc5spp5bbxx11ipzpy1hg7qxnvji040xfcnqv73461qn93m2g3";
+    passthru = {
+      comfyui.installPaths = ["ultralytics_bbox"];
+    };
+  };
+
+  hand-yolov8s = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/xingren23/comfyflow-models/resolve/976de8449674de379b02c144d0b3cfa2b61482f2/ultralytics/bbox/hand_yolov8s.pt";
+    sha256 = "30878cea9870964d4a238339e9dcff002078bbbaa1a058b07e11c167f67eca1c";
+    passthru = {
+      comfyui.installPaths = ["ultralytics_bbox"];
+    };
+  };
 }

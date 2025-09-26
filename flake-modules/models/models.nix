@@ -254,6 +254,15 @@
     };
   };
 
+  control-lora-rank128-v11p-sd15-canny-fp16 = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_lora_rank128_v11p_sd15_canny_fp16.safetensors";
+    sha256 = "0srwfsvidbxqia4chpiag0g4485k13y3h51hmmcqavf338s3s1a5";
+    passthru = {
+      comfyui.installPaths = [ "controlnet" ];
+    };
+  };
+
   depth_anything_v2_metric_hypersim_vitl_fp32 = fetchResource {
     name = "depth_anything_v2_metric_hypersim_vitl_fp32.safetensors";
     url = "https://huggingface.co/Kijai/DepthAnythingV2-safetensors/resolve/main/depth_anything_v2_metric_hypersim_vitl_fp32.safetensors";

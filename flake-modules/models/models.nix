@@ -228,7 +228,7 @@
   };
 
   clip_vision_vit_h-upscaler = fetchResource {
-    name = "clip-vision_vit-h.safetensors";
+    name = "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors";
     url = "https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors";
     hash = "sha256-bKlmfaHKngsPdeRrsDD34BH0T4bL+41aNlkPzXUHsDA=";
     passthru = {

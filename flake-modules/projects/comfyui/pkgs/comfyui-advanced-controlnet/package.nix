@@ -3,15 +3,14 @@
   fetchFromGitHub,
   ...
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
-  pname = "Advanced-ControlNet";
-  version = "da254b7";
+comfyuiPackages.comfyui.mkComfyUICustomNode {
+  pname = "advanced-controlnet";
+  version = "2025-08-06";
 
   src = fetchFromGitHub {
     owner = "Kosinkadink";
     repo = "ComfyUI-Advanced-ControlNet";
-    rev = "da254b700db562a22e03358b933c85a9a3392540";
-    hash = "sha256-3xNaBOGULhJS4qZICUJ1HLUr71IIaDLFBjd4sM9ytAs=";
+    rev = "2bde95a468ce5fd3959f646258606ae221fa1e17";
+    hash = "sha256-AinLlpYlMNd+gVGyuf0cV7K6B6dwPbFqmkoFLBBMc/k=";
   };
 }

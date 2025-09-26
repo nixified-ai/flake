@@ -407,6 +407,15 @@
     };
   };
 
+  ip-adapter-plus-sd15 = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/h94/IP-Adapter/resolve/018e402774aeeddd60609b4ecdb7e298259dc729/models/ip-adapter-plus_sd15.safetensors";
+    sha256 = "a1c250be40455cc61a43da1201ec3f1edaea71214865fb47f57927e06cbe4996";
+    passthru = {
+      comfyui.installPaths = ["ipadapter"];
+    };
+  };
+
   juggernautxl-version6rundiffusion-checkpoints = fetchResource rec {
     name = baseNameOf url;
     url = "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/juggernautXL_version6Rundiffusion.safetensors";

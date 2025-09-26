@@ -8,7 +8,7 @@ let
 in
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-impact-pack";
-  version = "unstable-2025-03-23";
+  version = "unstable-2025-09-25";
   pyproject = false;
   dontUseNinjaBuild = true;
   propagatedBuildInputs = with python3Packages; [
@@ -28,7 +28,7 @@ comfyuiPackages.comfyui.mkComfyUICustomNode {
   src = fetchFromGitHub {
     owner = "ltdrdata";
     repo = "ComfyUI-Impact-Pack";
-    rev = "0b1ac0f1c5a395e17065821e4fd47aba3bf23900";
-    hash = "sha256-GoRtQus50OsAD57rH7tCwAaIkM/wJaBx75/5aVnCFOo=";
+    rev = "cb0655f9a11ad771b4f6a846f08be29b5b66f0eb";
+    hash = "sha256-Sxbr0v3Mc/odBW0Io5KJX/y29prEKpfI9O9zvPzRyvk=";
   };
 }

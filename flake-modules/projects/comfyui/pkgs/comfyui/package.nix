@@ -38,18 +38,20 @@ let
     ) models;
   in linkFarm "comfyui-models" linkFarmEntries;
 
+  modelsDir = createModelsDir models;
+
   modelPathsFile = let
-    modelsDir = "${createModelsDir models}/${python3Packages.python.sitePackages}";
+    modelsDirPath = "${modelsDir}/${python3Packages.python.sitePackages}";
   in writeTextFile {
     name = "extra_model_paths.yaml";
-    text = lib.generators.toYAML {} ({ comfyui = ((lib.genAttrs (supportedFolders ++ unsupportedFolders) (nodeName: "${modelsDir}/models/${nodeName}")) // { custom_nodes = "@CUSTOM_NODES@"; }); });
+    text = lib.generators.toYAML {} ({ comfyui = ((lib.genAttrs (supportedFolders ++ unsupportedFolders) (nodeName: "${modelsDirPath}/models/${nodeName}")) // { custom_nodes = "@CUSTOM_NODES@"; }); });
   };
 in
 symlinkJoin {
   name = "comfyui-wrapped";
   paths = [
     comfyuiPackages.comfyui-unwrapped
-   (createModelsDir models)
+   (modelsDir)
   ] ++ customNodes;
   propagatedBuildInputs = [
     gccStdenv.cc
@@ -82,6 +84,10 @@ symlinkJoin {
     mainProgram = "comfyui";
   };
   passthru = {
+    inherit
+      modelsDir
+      modelPathsFile
+      ;
     # TODO: Make this exist and be composable. Multiple applications like
     # (x.withCustomNodes (n: [])).withModels (m: []) doesn't work.
     #

@@ -1,39 +1,40 @@
-{ lib
-, buildPythonPackage
-, pkg-config
-, fetchPypi
-, stdenv
-, fetchzip
-, setuptools
-, writeText
-, isPy27
-, pytestCheckHook
-, pytest-mpl
-, numpy
-, scipy
-, scikit-learn
-, pandas
-, transformers
-, opencv4
-, lightgbm
-, catboost
-, pyspark
-, sentencepiece
-, tqdm
-, slicer
-, numba
-, matplotlib
-, nose
-, lime
-, cloudpickle
-, ipython
-, packaging
-, pillow
-, requests
-, regex
-, importlib-metadata
-, huggingface-hub
-, symlinkJoin
+{
+  lib,
+  buildPythonPackage,
+  pkg-config,
+  fetchPypi,
+  stdenv,
+  fetchzip,
+  setuptools,
+  writeText,
+  isPy27,
+  pytestCheckHook,
+  pytest-mpl,
+  numpy,
+  scipy,
+  scikit-learn,
+  pandas,
+  transformers,
+  opencv4,
+  lightgbm,
+  catboost,
+  pyspark,
+  sentencepiece,
+  tqdm,
+  slicer,
+  numba,
+  matplotlib,
+  nose,
+  lime,
+  cloudpickle,
+  ipython,
+  packaging,
+  pillow,
+  requests,
+  regex,
+  importlib-metadata,
+  huggingface-hub,
+  symlinkJoin,
 }:
 
 let
@@ -47,7 +48,7 @@ let
   };
   libpatchmatch = stdenv.mkDerivation {
     name = "libpatchmatch";
-    sourceRoot = ["source/patchmatch"];
+    sourceRoot = [ "source/patchmatch" ];
     nativeBuildInputs = [
       pkg-config
       opencv4Fixed
@@ -62,7 +63,8 @@ let
       cp libpatchmatch.so $out/lib/
     '';
   };
-in buildPythonPackage {
+in
+buildPythonPackage {
   pname = "pypatchmatch";
   version = "129863937a8ab37f6bbcec327c994c0f932abdbc";
 

@@ -2,8 +2,7 @@
   buildPythonPackage,
   fetchFromGitHub,
 }:
-buildPythonPackage
-rec {
+buildPythonPackage rec {
   pname = "SenseVoice-python";
   version = "43f6cf1";
   format = "pyproject";

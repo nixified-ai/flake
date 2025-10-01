@@ -1,13 +1,14 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, setuptools
-, attrs
-, numpy
-, pulp
-, torch
-, tqdm
-, transformers
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  setuptools,
+  attrs,
+  numpy,
+  pulp,
+  torch,
+  tqdm,
+  transformers,
 }:
 
 buildPythonPackage rec {

@@ -3,8 +3,7 @@
   fetchFromGitHub,
   python3Packages,
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "ComfyUI-VideoHelperSuite";
   version = "a7ce59e";
 

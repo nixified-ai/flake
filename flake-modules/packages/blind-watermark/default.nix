@@ -18,7 +18,11 @@ buildPythonPackage rec {
     hash = "sha256-fp/TWBc4biYll84ZiUsJ3RImHp0NXahibJmE65nafk0=";
   };
 
-  buildInputs = [setuptools];
+  buildInputs = [ setuptools ];
 
-  propagatedBuildInputs = [numpy opencv4 pywavelets];
+  propagatedBuildInputs = [
+    numpy
+    opencv4
+    pywavelets
+  ];
 }

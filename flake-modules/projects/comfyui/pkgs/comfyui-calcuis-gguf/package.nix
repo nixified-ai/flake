@@ -1,6 +1,7 @@
-{ comfyuiPackages,
+{
+  comfyuiPackages,
   python3Packages,
-  fetchFromGitHub
+  fetchFromGitHub,
 }:
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-calcuis-gguf";

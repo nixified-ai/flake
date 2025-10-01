@@ -3,8 +3,7 @@
   fetchFromGitHub,
   ...
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-tiled-diffusion";
   version = "unstable-2025-05-18";
   src = fetchFromGitHub {

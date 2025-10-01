@@ -34,7 +34,6 @@ buildPythonPackage rec {
     hash = "sha256-19fhfXANHv3Mzy4q+1ISUaTOBq7Q9A8im01ILiui8Ho=";
   };
 
-
   propagatedBuildInputs = [
     torch
     triton

@@ -6,8 +6,7 @@
   httpx,
   httpx-sse,
 }:
-buildPythonPackage
-rec {
+buildPythonPackage rec {
   pname = "fal-client";
   version = "0.7.0";
   format = "pyproject";

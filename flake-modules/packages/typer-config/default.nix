@@ -13,7 +13,7 @@ buildPythonPackage rec {
     hash = "sha256-ad/8DgYJW1d1S/6fs+TK8oq5wsQw2t5kM7DKEoUQ9gA=";
   };
 
-  propagatedBuildInputs = [typer];
+  propagatedBuildInputs = [ typer ];
 
-  buildInputs = [poetry-core];
+  buildInputs = [ poetry-core ];
 }

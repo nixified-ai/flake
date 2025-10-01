@@ -46,31 +46,44 @@
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
-      perSystem = { system, ... }: let
-        common = {
-          overlays = [
-            inputs.self.overlays.comfyui
-            inputs.self.overlays.models
-            inputs.self.overlays.fetchers
-          ];
-          inherit system;
+      perSystem =
+        { system, pkgs, ... }:
+        let
+          common = {
+            overlays = [
+              inputs.self.overlays.comfyui
+              inputs.self.overlays.models
+              inputs.self.overlays.fetchers
+            ];
+            inherit system;
+          };
+        in
+        {
+          _module.args.rocmPkgs = import inputs.nixpkgs (
+            {
+              config = {
+                rocmSupport = true;
+                allowUnfree = true;
+              };
+            }
+            // common
+          );
+          _module.args.nvidiaPkgs = import inputs.nixpkgs (
+            {
+              config = {
+                cudaSupport = true;
+                allowUnfree = true;
+              };
+            }
+            // common
+          );
+          _module.args.pkgs = import inputs.nixpkgs (
+            {
+            }
+            // common
+          );
+          formatter = pkgs.nixfmt-tree;
         };
-      in {
-        _module.args.rocmPkgs = import inputs.nixpkgs ({
-          config = {
-            rocmSupport = true;
-            allowUnfree = true;
-          };
-        } // common);
-        _module.args.nvidiaPkgs = import inputs.nixpkgs ({
-          config = {
-            cudaSupport = true;
-            allowUnfree = true;
-          };
-        } // common);
-        _module.args.pkgs = import inputs.nixpkgs ({
-        } // common);
-      };
       imports = [
         ./flake-modules
         hercules-ci-effects.flakeModule

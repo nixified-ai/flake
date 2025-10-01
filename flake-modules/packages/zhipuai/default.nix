@@ -23,7 +23,7 @@ buildPythonPackage rec {
         --replace 'pyjwt = "~=2.8.0"' 'pyjwt = "*"'
   '';
 
-  buildInputs = [poetry-core];
+  buildInputs = [ poetry-core ];
 
   propagatedBuildInputs = [
     httpx

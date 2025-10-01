@@ -5,8 +5,8 @@
   gccStdenv,
 }:
 let
-  pyloudnorm = python3Packages.callPackage ../../../../packages/pyloudnorm/default.nix {};
-  sageattention = python3Packages.callPackage ../../../../packages/sageattention/default.nix {};
+  pyloudnorm = python3Packages.callPackage ../../../../packages/pyloudnorm/default.nix { };
+  sageattention = python3Packages.callPackage ../../../../packages/sageattention/default.nix { };
 in
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-kijai-wan-video-wrapper";

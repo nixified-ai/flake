@@ -2,8 +2,7 @@
   comfyuiPackages,
   fetchFromGitHub,
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-ip-adapter-plus";
   version = "a0f451a";
 

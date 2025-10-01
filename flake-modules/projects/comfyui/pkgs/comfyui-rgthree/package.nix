@@ -2,8 +2,7 @@
   comfyuiPackages,
   fetchFromGitHub,
 }:
-comfyuiPackages.comfyui.mkComfyUICustomNode
-{
+comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "rgthree";
   version = "84a146f";
 

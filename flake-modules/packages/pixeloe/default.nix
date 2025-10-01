@@ -22,9 +22,9 @@ in
       opencv4
       pillow
     ];
-    propagatedBuildInputs = [
-      setuptools
-    ];
+
+    pyproject = false;
+    build-system = [ setuptools ];
 
     doCheck = false;
   }

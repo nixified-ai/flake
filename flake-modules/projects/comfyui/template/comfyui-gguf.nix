@@ -4,16 +4,17 @@
 }:
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-gguf";
-  version = "unstable-2024-09-09";
-  pyproject = false;
+  version = "unstable-2025-06-15";
   propagatedBuildInputs = with python3Packages; [
     gguf
+    sentencepiece
+    protobuf
   ];
   src = fetchFromGitHub {
     owner = "city96";
     repo = "ComfyUI-GGUF";
-    rev = "65a7c895bb0ac9547ba2f89d55fbdb609aa2bfe7";
-    hash = "sha256-+ohRZam4xFh2ZYVHdwQ5cf1l49SIl6Gm2ECLucRO7UI=";
+    rev = "b3ec875a68d94b758914fd48d30571d953bb7a54";
+    hash = "sha256-DdCZnRtx9svz9aNxS+HJORNYsDoWVI9DWLcMocRT268=";
   };
 }
 

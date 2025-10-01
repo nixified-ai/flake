@@ -27,11 +27,14 @@
     failureHooks+=(warnEmptyTokensHook)
 
     # echo is a bash internal and doesn't create a process in /proc/*/cmdline
-    if [[ '${url}' == *huggingface* ]]; then
+    if [[ '${url}' == *huggingface* ]] && [[ -n "$HF_TOKEN" ]];  then
+      echo "adding Authorization: Bearer HF_TOKEN"
       echo "Authorization: Bearer $HF_TOKEN" > /build/ACTIVE_TOKEN
-    elif [[ '${url}' == *civitai* ]]; then
+    elif [[ '${url}' == *civitai* ]] && [[ -n "$CIVITAI_API_TOKEN" ]];  then
+      echo "adding Authorization: Bearer CIVITAI_API_TOKEN"
       echo "Authorization: Bearer $CIVITAI_API_TOKEN" > /build/ACTIVE_TOKEN
     else
+      echo "No Authorization token to add!"
       > /build/ACTIVE_TOKEN
     fi
   '';

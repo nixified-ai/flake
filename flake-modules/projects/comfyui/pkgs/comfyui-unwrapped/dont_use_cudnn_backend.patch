@@ -1,0 +1,17 @@
+diff --git a/comfy/ops.py b/comfy/ops.py
+index 55e958ad..b434d961 100644
+--- a/comfy/ops.py
++++ b/comfy/ops.py
+@@ -40,7 +40,11 @@ try:
+                 SDPBackend.MATH,
+             ]
+ 
+-            SDPA_BACKEND_PRIORITY.insert(0, SDPBackend.CUDNN_ATTENTION)
++            # This leads to a crash since we are lacking some dep in nixpkgs
++            # however, according to Connor from CUDA team, this would only be useful
++            # to people with data center GPUs so we're not loosing anything by commenting
++            # it out.
++            # SDPA_BACKEND_PRIORITY.insert(0, SDPBackend.CUDNN_ATTENTION)
+ 
+             def scaled_dot_product_attention(q, k, v, *args, **kwargs):
+                 with sdpa_kernel(SDPA_BACKEND_PRIORITY, set_priority=True):

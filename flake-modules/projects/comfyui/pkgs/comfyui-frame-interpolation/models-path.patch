@@ -1,0 +1,13 @@
+diff --git a/vfi_utils.py b/vfi_utils.py
+index 7504637..9db364c 100644
+--- a/vfi_utils.py
++++ b/vfi_utils.py
+@@ -60,7 +60,7 @@ class MakeInterpolationStateList:
+         
+         
+ def get_ckpt_container_path(model_type):
+-    return os.path.abspath(os.path.join(os.path.dirname(__file__), config["ckpts_path"], model_type))
++    return os.path.abspath(os.path.join("/var/lib/comfyui/.local/share/comfyui/models/frame-interpolation", model_type))
+ 
+ def load_file_from_url(url, model_dir=None, progress=True, file_name=None):
+     """Load file form http url, will download models if necessary.

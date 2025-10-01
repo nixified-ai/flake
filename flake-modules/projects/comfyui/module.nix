@@ -43,13 +43,23 @@ in
 
       group = lib.mkOption {
         type = with types; nullOr str;
-        default = cfg.user;
-        defaultText = literalExpression "config.services.comfyui.user";
+        default = "comfyui";
+        defaultText = "comfyui";
         example = "comfyui";
         description = ''
           Group under which to run comfyui. Only used when `services.comfyui.user` is set.
 
           The group will automatically be created, if this option is set to a non-null value.
+        '';
+      };
+
+      cacheGroup = lib.mkOption {
+        type = with types; nullOr str;
+        default = "comfyui-cache";
+        defaultText = "comfyui-cache";
+        example = "comfyui-cache";
+        description = ''
+          Group used for cache dir which can be used to store executable code.
         '';
       };
 
@@ -60,6 +70,16 @@ in
         description = ''
           The home directory that the comfyui service is started in.
         '';
+      };
+
+      databasePath = lib.mkOption {
+        type = types.str;
+        default = "/${cfg.home}/comfyui.db";
+        example = "/var/lib/comfyui/comfyui.db";
+        description = ''
+          SQL database URL. Passed as --database-url cli flag to comfyui. If it does not start with sqlite:/// it will be prepended automatically.
+        '';
+        apply = x: if (lib.hasPrefix "sqlite:///" x) then x else "sqlite:///${x}";
       };
 
       extraFlags = lib.mkOption {
@@ -173,21 +193,38 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    users = lib.mkIf staticUser {
-      users.${cfg.user} = {
+  config = let
+    # Used for triton compile cache, which can't live on noexec mount
+    # (on which StateDirectory is mounted)
+    execCacheDir = "/var/cache/comfyui";
+  in lib.mkIf cfg.enable {
+    users.users = lib.mkIf staticUser {
+      "${cfg.user}" = {
         inherit (cfg) home;
         isSystemUser = true;
-        group = cfg.group;
       };
-      groups.${cfg.group} = { };
     };
+    users.groups =
+      (if staticUser then { "${cfg.group}" = {}; } else {}) //
+      { "${cfg.cacheGroup}" = lib.mkIf (cfg.cacheGroup != null) {}; }
+    ;
+
+    systemd.tmpfiles.rules = lib.mkIf (cfg.cacheGroup != null) [
+      # The '2' in '2705' sets the 'setgid' bit, so new files inherit the group owner.
+      "d ${execCacheDir} 2770 root ${cfg.cacheGroup} -"
+    ];
 
     systemd.services.comfyui = {
       description = "comfyui";
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
-      environment = cfg.environmentVariables // { HOME = cfg.home; };
+      environment = cfg.environmentVariables // {
+        HOME = cfg.home;
+        # these are needed by sageattention\triton, which compile
+        # stuff on the fly
+        CC = "${pkgs.gccStdenv.cc}/bin/gcc";
+        TRITON_CACHE_DIR = "${execCacheDir}/triton";
+      };
       serviceConfig =
         lib.optionalAttrs staticUser {
           User = cfg.user;
@@ -196,15 +233,22 @@ in
         // {
           Type = "exec";
           DynamicUser = true;
-          ExecStart = lib.concatStringsSep " " [
-            "${lib.getExe comfyuiPackage} --listen ${cfg.host} --port ${toString cfg.port} ${lib.optionalString (cfg.acceleration == false) "--cpu"}"
-            (lib.escapeShellArgs cfg.extraFlags)
-          ];
+          ExecStart = let
+            allFlags = [
+              "--database-url=${cfg.databasePath}"
+              "--listen=${cfg.host}"
+              "--port=${toString cfg.port}"
+            ]
+            ++ (lib.optional (cfg.acceleration == false) "--cpu")
+            ++ cfg.extraFlags;
+          in "${lib.getExe comfyuiPackage} ${lib.escapeShellArgs allFlags}";
           WorkingDirectory = cfg.home;
           StateDirectory = [ "comfyui" ];
           ReadWritePaths = [
             cfg.home
           ];
+
+          BindPaths = [ execCacheDir ];
 
           CapabilityBoundingSet = [ "" ];
           DeviceAllow = [
@@ -244,7 +288,10 @@ in
             "AF_INET6"
             "AF_UNIX"
           ];
-          SupplementaryGroups = [ "render" ]; # for rocm to access /dev/dri/renderD* devices
+          SupplementaryGroups =
+            [ "render" ] # for rocm to access /dev/dri/renderD* devices
+            ++ (lib.optional (cfg.cacheGroup != null) cfg.cacheGroup)
+          ;
           SystemCallArchitectures = "native";
           SystemCallFilter = [
             "@system-service @resources"

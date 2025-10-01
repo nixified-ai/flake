@@ -1,0 +1,32 @@
+diff --git a/app/custom_node_manager.py b/app/custom_node_manager.py
+index 281febca..f64e2fe1 100644
+--- a/app/custom_node_manager.py
++++ b/app/custom_node_manager.py
+@@ -131,10 +131,12 @@ class CustomNodeManager:
+                             "Found example workflow folder '%s' for custom node '%s', consider renaming it to 'example_workflows'",
+                             folder_name, module_name)
+ 
++                    logging.debug(f"Adding /workflow_templates/ routes, for: {module_name}, dir: {workflows_dir}")
++
+                     webapp.add_routes(
+                         [
+                             web.static(
+-                                "/api/workflow_templates/" + module_name, workflows_dir
++                                "/api/workflow_templates/" + module_name, workflows_dir, follow_symlinks=True
+                             )
+                         ]
+                     )
+diff --git a/server.py b/server.py
+index 43816a8c..5547c90f 100644
+--- a/server.py
++++ b/server.py
+@@ -804,7 +804,8 @@ class PromptServer():
+ 
+         # Add routes from web extensions.
+         for name, dir in nodes.EXTENSION_WEB_DIRS.items():
+-            self.app.add_routes([web.static('/extensions/' + name, dir)])
++            logging.debug(f"Adding /extensions/ routes, for: {name}, dir: {dir}")
++            self.app.add_routes([web.static('/extensions/' + name, dir, show_index=True, follow_symlinks=True)])
+ 
+         workflow_templates_path = FrontendManager.templates_path()
+         if workflow_templates_path:

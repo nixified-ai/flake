@@ -16,13 +16,13 @@ let
 in
 python3Packages.buildPythonApplication rec {
   pname = "comfyui";
-  version = "unstable-2025-09-06";
+  version = "0.3.62";
 
   src = fetchFromGitHub {
     owner = "comfyanonymous";
     repo = "ComfyUI";
-    rev = "ea6cdd2631fbca6ed81b95796150c32c9a029f0d";
-    hash = "sha256-DEM+6NCvUVwBkD2Jtb7WVEVVc3tyCaUc383DXPLN9Mg=";
+    rev = "bab8ba20bf47d985d6b1d73627c2add76bd4e716";
+    hash = "sha256-X2lvOJR6GMhUME/ADhNRMpGAo7EtG60h+Q1imC10LBM=";
   };
 
   patches = [

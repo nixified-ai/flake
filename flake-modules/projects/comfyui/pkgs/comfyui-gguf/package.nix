@@ -5,7 +5,7 @@
 }:
 comfyuiPackages.comfyui.mkComfyUICustomNode {
   pname = "comfyui-gguf";
-  version = "unstable-2025-06-15";
+  version = "unstable-2025-09-14";
   propagatedBuildInputs = with python3Packages; [
     gguf
     sentencepiece
@@ -14,7 +14,7 @@ comfyuiPackages.comfyui.mkComfyUICustomNode {
   src = fetchFromGitHub {
     owner = "city96";
     repo = "ComfyUI-GGUF";
-    rev = "b3ec875a68d94b758914fd48d30571d953bb7a54";
-    hash = "sha256-DdCZnRtx9svz9aNxS+HJORNYsDoWVI9DWLcMocRT268=";
+    rev = "be2a08330d7ec232d684e50ab938870d7529471e";
+    hash = "sha256-NtpoLwlcMXeVCffZmQeHKDl9hM6gCBprdnhHblrWQ20=";
   };
 }

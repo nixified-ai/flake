@@ -83,6 +83,15 @@
             // common
           );
           formatter = pkgs.nixfmt-tree;
+          devShells.default = pkgs.mkShell {
+            packages = [
+              # adds treefmt which can be used to format entire tree
+              pkgs.nixfmt-tree
+              # format individual file or stdin (useful for piping from nix eval)
+              pkgs.nixfmt
+              pkgs.npins
+            ];
+          };
         };
       imports = [
         ./flake-modules

@@ -25,7 +25,8 @@ in
     scikit-image
     scikit-learn
     opencv4
-    pymatting
+    # Tests for this package fail with cudaSupport=true
+    (pymatting.override { cudaSupport = false; })
     timm
     blend-modes
     transformers

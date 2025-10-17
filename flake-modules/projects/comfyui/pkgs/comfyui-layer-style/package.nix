@@ -19,7 +19,8 @@ in
     scikit-image
     scikit-learn
     opencv4 # opencv-contrib-python
-    pymatting
+    # Tests for this package fail with cudaSupport=true
+    (pymatting.override { cudaSupport = false; })
     timm
     colour-science
     blend-modes

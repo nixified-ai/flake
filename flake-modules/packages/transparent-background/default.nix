@@ -44,6 +44,7 @@ buildPythonPackage rec {
     pyyaml
     albumentations
     albucore
-    pymatting
+    # Tests for this package fail with cudaSupport=true
+    (pymatting.override { cudaSupport = false; })
   ];
 }

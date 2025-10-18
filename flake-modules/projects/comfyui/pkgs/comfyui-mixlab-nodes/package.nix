@@ -1,6 +1,4 @@
 {
-  comfyuiPackages,
-  fetchFromGitHub,
   python3Packages,
 }:
 let
@@ -17,16 +15,8 @@ let
       { };
   swarm = python3Packages.callPackage ../../../../packages/swarm/default.nix { };
 in
-comfyuiPackages.comfyui.mkComfyUICustomNode {
+{
   pname = "comfyui-mixlab-nodes";
-  version = "b2bb187";
-
-  src = fetchFromGitHub {
-    owner = "MixLabPro";
-    repo = "comfyui-mixlab-nodes";
-    rev = "b2bb1876def6330fccf1e03cc69d2166cae7bedb";
-    hash = "sha256-22DlP8uOH9C3P4tzIelI6VGlsJjUOooYI2tPFPKJgMI=";
-  };
 
   dontBuild = true;
   doCheck = false;

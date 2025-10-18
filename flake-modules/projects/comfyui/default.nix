@@ -6,12 +6,47 @@
       description = "Comfyui non-nixos template. Non-nixos is not officially supported, but acts as good documentation";
     };
     overlays.comfyui = (
-      self: super: {
+      self: super:
+      let
+        inherit (self) lib comfyuiLib customCustomNodesPins;
+        comfyuiCustomNodes = lib.mapAttrs (
+          name: pin:
+          let
+            inherit (self) callPackage;
+            packageBase = callPackage (
+              { stdenv }: stdenv.mkDerivation (comfyuiLib.nodePropsFromNpinSource pin)
+            ) { };
+            overridesFile = ./customNodes/${name}/package.nix;
+            packageWithOverrides =
+              if lib.pathExists overridesFile then
+                let
+                  overridePayload =
+                    lib.removeAttrs (callPackage overridesFile { })
+                      # these cuses issues down the line when building the package
+                      # TODO: is there a way to get callPackage style dependency
+                      # injection without these being added?
+                      [
+                        "override"
+                        "overrideDerivation"
+                      ];
+                in
+                packageBase.overrideAttrs overridePayload
+              else
+                packageBase;
+          in
+          comfyuiLib.mkComfyUICustomNode packageWithOverrides
+        ) customCustomNodesPins;
+      in
+      {
+        customCustomNodesPins = (builtins.fromJSON (lib.readFile ./customNodes-npins/sources.json)).pins;
+        inherit comfyuiCustomNodes;
         comfyuiLib = self.callPackage ./lib.nix { };
-        comfyuiPackages = self.lib.packagesFromDirectoryRecursive {
-          inherit (self) callPackage;
-          directory = ./pkgs;
-        };
+        comfyuiPackages =
+          (self.lib.packagesFromDirectoryRecursive {
+            inherit (self) callPackage;
+            directory = ./pkgs;
+          })
+          // comfyuiCustomNodes;
         comfyui = self.comfyuiPackages.comfyui;
       }
     );

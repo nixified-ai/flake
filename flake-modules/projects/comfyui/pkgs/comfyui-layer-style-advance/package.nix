@@ -1,6 +1,4 @@
 {
-  comfyuiPackages,
-  fetchFromGitHub,
   python3Packages,
 }:
 let
@@ -17,18 +15,10 @@ let
   blind-watermark = python3Packages.callPackage ../../../../packages/blind-watermark/default.nix { };
   zhipuai = python3Packages.callPackage ../../../../packages/zhipuai/default.nix { };
 in
-comfyuiPackages.comfyui.mkComfyUICustomNode {
+{
   pname = "comfyui-layer-style-advance";
-  version = "0f91841";
 
   dontBuild = true;
-
-  src = fetchFromGitHub {
-    owner = "chflame163";
-    repo = "ComfyUI_LayerStyle_Advance";
-    rev = "0f9184100e626e3202568a7cf890b3b92685a168";
-    hash = "sha256-tFFjmD3ohAi/+nC8CIpwO77S/QYA1hcFIospCYzuB6M=";
-  };
 
   propagatedBuildInputs = with python3Packages; [
     matplotlib

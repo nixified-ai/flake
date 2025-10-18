@@ -1,7 +1,5 @@
 {
-  comfyuiPackages,
   python3Packages,
-  fetchFromGitHub,
 }:
 let
   custom-scripts-autocomplete-text = (
@@ -11,15 +9,8 @@ let
     }
   );
 in
-comfyuiPackages.comfyui.mkComfyUICustomNode {
+{
   pname = "comfyui-pythongosssss-custom-scripts";
-  version = "unstable-2025-04-30";
-  src = fetchFromGitHub {
-    owner = "pythongosssss";
-    repo = "ComfyUI-Custom-Scripts";
-    rev = "aac13aa7ce35b07d43633c3bbe654a38c00d74f5";
-    hash = "sha256-Qgx+/SrXrkHNI1rH+9O2CmN7NwrQi7CvPAFTdacZ2C0=";
-  };
   patches = [ ./skip-install-js.patch ];
 
   preInstall = ''

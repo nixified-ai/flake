@@ -1,25 +1,15 @@
 {
-  comfyuiPackages,
-  fetchFromGitHub,
   python3Packages,
   ffmpeg,
 }:
 let
   pilgram = python3Packages.callPackage ../../../../packages/pilgram/default.nix { };
 in
-comfyuiPackages.comfyui.mkComfyUICustomNode rec {
+finalAttrs: previousAttrs: {
   pname = "was-node-suite-comfyui";
-  version = "f864477";
 
   dontConfigure = true;
   dontBuild = true;
-
-  src = fetchFromGitHub {
-    owner = "ltdrdata";
-    repo = "was-node-suite-comfyui";
-    rev = "f86447721c18758d7b3b6ae5769f52344a3d764a";
-    hash = "sha256-2dKPon6D7RyjOzd/FCO/KGE4Zw8DwLBbH4TwIKdaK0M=";
-  };
 
   was_suite_config = builtins.toJSON {
     "run_requirements" = true;
@@ -39,12 +29,13 @@ comfyuiPackages.comfyui.mkComfyUICustomNode rec {
       "avc1" = ".mp4";
       "h264" = ".mkv";
     };
-    "wildcards_path" = "$out/${python3Packages.python.sitePackages}/custom_nodes/${pname}/wildcards";
+    "wildcards_path" =
+      "$out/${python3Packages.python.sitePackages}/custom_nodes/${finalAttrs.pname}/wildcards";
     "wildcard_api" = true;
   };
 
   postInstall = ''
-    echo $was_suite_config > $out/${python3Packages.python.sitePackages}/custom_nodes/${pname}/was_suite_config.json
+    echo $was_suite_config > $out/${python3Packages.python.sitePackages}/custom_nodes/${finalAttrs.pname}/was_suite_config.json
   '';
 
   propagatedBuildInputs = with python3Packages; [

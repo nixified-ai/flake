@@ -49,6 +49,14 @@
           })
           // comfyuiCustomNodes;
         comfyui = self.comfyuiPackages.comfyui;
+        python3Packages = super.python3Packages.overrideScope (
+          pyfinal: pyprev: {
+            # TODO: delete once merged upstream: https://github.com/NixOS/nixpkgs/pull/453306/files
+            pymatting = pyprev.pymatting.overridePythonAttrs {
+              disabledTestPaths = self.lib.optional self.config.cudaSupport "tests/test_foreground.py";
+            };
+          }
+        );
       }
     );
     nixosModules.comfyui =

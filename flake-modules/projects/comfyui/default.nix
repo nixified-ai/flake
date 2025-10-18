@@ -39,6 +39,7 @@
       in
       {
         customCustomNodesPins = (builtins.fromJSON (lib.readFile ./customNodes-npins/sources.json)).pins;
+        comfyuiNpins = (builtins.fromJSON (lib.readFile ./npins/sources.json)).pins;
         inherit comfyuiCustomNodes;
         comfyuiLib = self.callPackage ./lib.nix { };
         comfyuiPackages =
@@ -76,7 +77,16 @@
     {
       checks.comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
       packages = {
-        comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui;
+        comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui // {
+          passthru = nvidiaPkgs.comfyuiPackages.comfyui.passthru // {
+            inherit (nvidiaPkgs)
+              customCustomNodesPins
+              comfyuiCustomNodes
+              comfyuiLib
+              comfyuiPackages
+              ;
+          };
+        };
         # ROCm support in nixpkgs is pretty bad right now
         # comfyui-amd = rocmPkgs.comfyuiPackages.comfyui;
       };

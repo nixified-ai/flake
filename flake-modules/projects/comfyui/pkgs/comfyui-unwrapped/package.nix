@@ -1,68 +1,64 @@
 {
   lib,
-  fetchFromGitHub,
   python3Packages,
   python3,
+  comfyuiPackages,
+  comfyuiNpins,
+  comfyuiLib,
 }:
 let
+  propsFromNpin = comfyuiLib.nodePropsFromNpinSource comfyuiNpins.comfyui;
   av = python3Packages.callPackage ../../../../packages/av/default.nix { };
   spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix { };
-  comfyui-frontend-package =
-    python3Packages.callPackage ../../../../packages/comfyui-frontend-package/default.nix
-      { };
-  comfyui-embedded-docs =
-    python3Packages.callPackage ../../../../packages/comfyui-embedded-docs/default.nix
-      { };
 in
-python3Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication {
   pname = "comfyui";
-  version = "0.3.62";
 
-  src = fetchFromGitHub {
-    owner = "comfyanonymous";
-    repo = "ComfyUI";
-    rev = "bab8ba20bf47d985d6b1d73627c2add76bd4e716";
-    hash = "sha256-X2lvOJR6GMhUME/ADhNRMpGAo7EtG60h+Q1imC10LBM=";
-  };
+  inherit (propsFromNpin) version src;
 
   patches = [
     ./follow-symlinks-in-extensions.patch
     ./dont_use_cudnn_backend.patch
   ];
 
-  dependencies = with python3Packages; [
-    torch
-    torchsde
-    torchvision
-    torchaudio
-    einops
-    transformers
-    tokenizers
-    sentencepiece
-    safetensors
-    aiohttp
-    pyyaml
-    pillow
-    scipy
-    tqdm
-    psutil
-    alembic
-    sqlalchemy
+  dependencies =
+    with python3Packages;
+    [
+      torch
+      torchsde
+      torchvision
+      torchaudio
+      einops
+      transformers
+      tokenizers
+      sentencepiece
+      safetensors
+      aiohttp
+      pyyaml
+      pillow
+      scipy
+      tqdm
+      psutil
+      alembic
+      sqlalchemy
 
-    yarl
-    av
-    numpy
-    comfyui-frontend-package
-    comfyui-embedded-docs
+      yarl
+      av
+      numpy
 
-    # optional dependencies
-    kornia
-    spandrel
-    #    spandrel_extra_arches
-    soundfile
-    pydantic
-    pydantic-settings
-  ];
+      # optional dependencies
+      kornia
+      spandrel
+      #    spandrel_extra_arches
+      soundfile
+      pydantic
+      pydantic-settings
+    ]
+    ++ (with comfyuiPackages; [
+      comfyui-frontend-package
+      comfyui-workflow-templates
+      comfyui-embedded-docs
+    ]);
 
   format = "other";
 

@@ -9,15 +9,15 @@
       self: super:
       let
         inherit (self) lib comfyuiLib customCustomNodesPins;
-        comfyuiCustomNodes = lib.mapAttrs (
+        customNodes = lib.mapAttrs (
           name: pin:
           let
             inherit (self) callPackage;
-            packageBase = callPackage (
+            basePackage = callPackage (
               { stdenv }: stdenv.mkDerivation (comfyuiLib.nodePropsFromNpinSource pin)
             ) { };
             overridesFile = ./customNodes/${name}/package.nix;
-            packageWithOverrides =
+            withOverrides =
               if lib.pathExists overridesFile then
                 let
                   overridePayload =
@@ -30,24 +30,28 @@
                         "overrideDerivation"
                       ];
                 in
-                packageBase.overrideAttrs overridePayload
+                basePackage.overrideAttrs overridePayload
               else
-                packageBase;
+                basePackage;
           in
-          comfyuiLib.mkComfyUICustomNode packageWithOverrides
+          comfyuiLib.mkComfyUICustomNode withOverrides
         ) customCustomNodesPins;
       in
       {
         customCustomNodesPins = (builtins.fromJSON (lib.readFile ./customNodes-npins/sources.json)).pins;
-        comfyuiNpins = (builtins.fromJSON (lib.readFile ./npins/sources.json)).pins;
-        inherit comfyuiCustomNodes;
-        comfyuiLib = self.callPackage ./lib.nix { };
+        comfyuiCustomNodes = customNodes;
+        comfyuiLib = (self.callPackage ./lib.nix { }) // (self.callPackage ./scripts.nix { });
         comfyuiPackages =
           (self.lib.packagesFromDirectoryRecursive {
             inherit (self) callPackage;
             directory = ./pkgs;
           })
-          // comfyuiCustomNodes;
+          // customNodes
+          // {
+            add-all-sources = comfyuiLib.make-add-github-sources self.comfyuiPackages;
+            make-custom-nodes = comfyuiLib.makeCustomNodesDirTree customNodes;
+            packagesNoOwner = comfyuiLib.packagesNoOwner (lib.attrValues self.comfyuiPackages);
+          };
         comfyui = self.comfyuiPackages.comfyui;
       }
     );

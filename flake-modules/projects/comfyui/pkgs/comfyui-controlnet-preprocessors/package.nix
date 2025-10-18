@@ -1,8 +1,6 @@
 {
   fetchurl,
-  comfyuiPackages,
   python3Packages,
-  fetchFromGitHub,
   ...
 }:
 let
@@ -15,16 +13,8 @@ let
     hash = "sha256-p+oZ+g7ZkkTme2JMcrhYC36VUwQyRZBb5YeWpgjrk0U=";
   };
 in
-comfyuiPackages.comfyui.mkComfyUICustomNode rec {
+finalAttrs: previousAttrs: {
   pname = "comfyui_controlnet_aux";
-  version = "7c4f6fb";
-
-  src = fetchFromGitHub {
-    owner = "Fannovel16";
-    repo = "comfyui_controlnet_aux";
-    rev = "7c4f6fb6ff18aa6dbfd4f77c2e8ad46119b5d84d";
-    hash = "sha256-iU1qkhV4DTlsSuL2tFovnkiDSIVeVCISPtwPnnz6pOM=";
-  };
 
   pyproject = false;
   propagatedBuildInputs = with python3Packages; [
@@ -34,11 +24,11 @@ comfyuiPackages.comfyui.mkComfyUICustomNode rec {
   ];
 
   postInstall = ''
-    mkdir -p $out/${python3Packages.python.sitePackages}/custom_nodes/${pname}/ckpts/depth-anything/Depth-Anything-V2-Small
-    ln -fs  ${depth_anything_v2_vits} $out/${python3Packages.python.sitePackages}/custom_nodes/${pname}/ckpts/depth-anything/Depth-Anything-V2-Small/depth_anything_v2_vits.pth
+    mkdir -p $out/${python3Packages.python.sitePackages}/custom_nodes/${finalAttrs.pname}/ckpts/depth-anything/Depth-Anything-V2-Small
+    ln -fs  ${depth_anything_v2_vits} $out/${python3Packages.python.sitePackages}/custom_nodes/${finalAttrs.pname}/ckpts/depth-anything/Depth-Anything-V2-Small/depth_anything_v2_vits.pth
 
-    mkdir -p $out/${python3Packages.python.sitePackages}/custom_nodes/${pname}/ckpts/depth-anything/Depth-Anything-V2-Large
-    ln -fs ${depth_anything_v2_vitl} $out/${python3Packages.python.sitePackages}/custom_nodes/${pname}/ckpts/depth-anything/Depth-Anything-V2-Large/depth_anything_v2_vitl.pth
+    mkdir -p $out/${python3Packages.python.sitePackages}/custom_nodes/${finalAttrs.pname}/ckpts/depth-anything/Depth-Anything-V2-Large
+    ln -fs ${depth_anything_v2_vitl} $out/${python3Packages.python.sitePackages}/custom_nodes/${finalAttrs.pname}/ckpts/depth-anything/Depth-Anything-V2-Large/depth_anything_v2_vitl.pth
   '';
 
   # propagatedBuildInputs = with pkgs.python3Packages; [

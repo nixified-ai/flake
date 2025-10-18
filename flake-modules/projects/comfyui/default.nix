@@ -7,6 +7,7 @@
     };
     overlays.comfyui = (
       self: super: {
+        comfyuiLib = self.callPackage ./lib.nix { };
         comfyuiPackages = self.lib.packagesFromDirectoryRecursive {
           inherit (self) callPackage;
           directory = ./pkgs;

@@ -11,6 +11,7 @@
   withCustomNodes ? [ ],
   withModels ? [ ],
   gccStdenv,
+  comfyuiLib,
 }:
 let
   customNodes = withCustomNodes;
@@ -112,6 +113,7 @@ symlinkJoin {
     inherit
       modelsDir
       modelPathsFile
+      comfyuiLib
       ;
     # TODO: Make this exist and be composable. Multiple applications like
     # (x.withCustomNodes (n: [])).withModels (m: []) doesn't work.
@@ -123,26 +125,6 @@ symlinkJoin {
     #   comfyuiModels = function comfyuiPackages;
     # };
     pkgs = comfyuiPackages;
-    mkComfyUICustomNode =
-      let
-        install = name: ''
-          mkdir -p $out/${python3Packages.python.sitePackages}/custom_nodes/${name}
-          shopt -s dotglob
-          shopt -s extglob
-          cp -r ./!($out|$src) $out/${python3Packages.python.sitePackages}/custom_nodes/${name}
-        '';
-      in
-      args:
-      stdenv.mkDerivation (
-        {
-          installPhase = ''
-            runHook preInstall
-            mkdir -p $out/
-            ${install args.name or args.pname}
-            runHook postInstall
-          '';
-        }
-        // args
-      );
+    mkComfyUICustomNode = comfyuiLib.mkComfyUICustomNode;
   };
 }

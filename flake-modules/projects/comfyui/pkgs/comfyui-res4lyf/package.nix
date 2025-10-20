@@ -15,6 +15,8 @@ comfyuiPackages.comfyui.mkComfyUICustomNode rec {
     hash = "sha256-ZVTXEP7TGXat+JmaJCVd/LS+F+Dx9WUo2m0FoJ4WRO0=";
   };
 
+  patches = [ ./config.patch ];
+
   # pyproject = false;
   propagatedBuildInputs = with python3Packages; [
     opencv-python

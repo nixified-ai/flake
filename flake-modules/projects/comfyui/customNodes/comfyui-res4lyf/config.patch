@@ -1,0 +1,30 @@
+diff --git a/res4lyf.py b/res4lyf.py
+index 7344611..69dfde1 100644
+--- a/res4lyf.py
++++ b/res4lyf.py
+@@ -12,6 +12,7 @@ import comfy.samplers
+ from aiohttp import web
+ from server import PromptServer
+ from tqdm import tqdm
++import folder_paths
+ 
+ 
+ CONFIG_FILE_NAME = "res4lyf.config.json"
+@@ -168,7 +169,7 @@ def RESplain(*args, debug='info'):
+         print(f"({name} {type}) {message}")
+ 
+ def get_ext_dir(subpath=None, mkdir=False):
+-    dir = os.path.dirname(__file__)
++    dir = folder_paths.get_user_directory()
+     if subpath is not None:
+         dir = os.path.join(dir, subpath)
+ 
+@@ -192,7 +193,7 @@ def get_extension_config(reload=False):
+         return config
+ 
+     config_path = get_ext_dir(CONFIG_FILE_NAME)
+-    default_config_path = get_ext_dir(DEFAULT_CONFIG_FILE_NAME)
++    default_config_path = os.path.join(os.path.dirname(__file__), DEFAULT_CONFIG_FILE_NAME)
+     
+     if os.path.exists(default_config_path):
+         with open(default_config_path, "r") as f:

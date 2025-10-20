@@ -13,4 +13,6 @@
     pywavelets
     numpy
   ];
+
+  patches = [ ./config.patch ];
 }

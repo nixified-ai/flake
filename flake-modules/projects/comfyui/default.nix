@@ -90,12 +90,31 @@
   perSystem =
     {
       config,
+      lib,
       pkgs,
       nvidiaPkgs,
       rocmPkgs,
       system,
       ...
     }:
+    let
+      scripts =
+        lib.removeAttrs
+          (lib.packagesFromDirectoryRecursive {
+            inherit (pkgs) callPackage;
+            newScope = pkgs.newScope;
+            directory = ./scripts;
+          })
+          # Price we pay for scripts being able to depend on
+          # one another. Or is there a better way?
+          [
+            "callPackage"
+            "newScope"
+            "overrideScope"
+            "packages"
+            "recurseForDerivations"
+          ];
+    in
     {
       checks.comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
       packages = {
@@ -111,6 +130,7 @@
         };
         # ROCm support in nixpkgs is pretty bad right now
         # comfyui-amd = rocmPkgs.comfyuiPackages.comfyui;
-      };
+      }
+      // scripts;
     };
 }

@@ -2,7 +2,7 @@
   fetchFromGitHub,
   buildPythonPackage,
   numpy,
-  opencv4,
+  opencv-python,
   pywavelets,
   setuptools,
 }:
@@ -22,7 +22,7 @@ buildPythonPackage rec {
 
   propagatedBuildInputs = [
     numpy
-    opencv4
+    opencv-python
     pywavelets
   ];
 }

@@ -28,27 +28,7 @@ nixosTest {
           "--fast"
         ];
         acceleration = false;
-        customNodes = with pkgs.comfyuiPackages; [
-          comfyui-adv-clip-emb
-          comfyui-advanced-controlnet
-          comfyui-controlnet-preprocessors
-          comfyui-easy-use
-          comfyui-essentials
-          comfyui-impact-pack
-          comfyui-impact-subpack
-          comfyui-inpaint
-          comfyui-ip-adapter
-          comfyui-kjnodes
-          comfyui-last-frame-extractor
-          comfyui-layer-style
-          comfyui-mxtoolkit
-          comfyui-pythongosssss-custom-scripts
-          comfyui-rgthree
-          comfyui-sdxl-prompt-styler
-          comfyui-tiled-diffusion
-          comfyui-unload-model
-          comfyui-was-node-suite
-        ];
+        customNodes = lib.attrValues pkgs.comfyuiCustomNodes;
         models = with nixified-ai.models; [
           clip_vision_vit_h-upscaler
           control-lora-rank128-v11p-sd15-canny-fp16

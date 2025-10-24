@@ -1,6 +1,7 @@
 {
   python3Packages,
   gccStdenv,
+  config,
 }:
 let
   pyloudnorm = python3Packages.callPackage ../../../../packages/pyloudnorm/default.nix { };
@@ -9,18 +10,20 @@ in
 {
   pname = "comfyui-kijai-wan-video-wrapper";
   pyproject = false;
-  propagatedBuildInputs = with python3Packages; [
-    ftfy
-    accelerate
-    einops
-    diffusers
-    peft
-    sentencepiece
-    protobuf
-    pyloudnorm
-    gguf
-    sageattention
-    gccStdenv.cc
-  ];
+  propagatedBuildInputs =
+    with python3Packages;
+    [
+      ftfy
+      accelerate
+      einops
+      diffusers
+      peft
+      sentencepiece
+      protobuf
+      pyloudnorm
+      gguf
+      gccStdenv.cc
+    ]
+    ++ lib.optional config.cudaSupport sageattention;
   dontUseNinjaBuild = true;
 }

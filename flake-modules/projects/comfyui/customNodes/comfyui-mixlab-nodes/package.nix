@@ -1,5 +1,6 @@
 {
   python3Packages,
+  config,
 }:
 let
   clip-interrogator =
@@ -23,41 +24,43 @@ in
 
   pytestCheckPhase = "true";
 
-  propagatedBuildInputs = with python3Packages; [
-    numpy
-    pyopenssl
-    watchdog
-    opencv4
-    matplotlib
-    openai
-    torchaudio
+  propagatedBuildInputs =
+    with python3Packages;
+    [
+      numpy
+      pyopenssl
+      watchdog
+      opencv4
+      matplotlib
+      openai
+      torchaudio
 
-    transformers
-    lark
-    imageio-ffmpeg
-    rembg
-    omegaconf
-    pillow
-    einops
-    trimesh
-    huggingface-hub
-    scikit-image
-    soundfile
-    json-repair
+      transformers
+      lark
+      imageio-ffmpeg
+      rembg
+      omegaconf
+      pillow
+      einops
+      trimesh
+      huggingface-hub
+      scikit-image
+      soundfile
+      json-repair
 
-    bitsandbytes
-    accelerate
-    scenedetect
+      accelerate
+      scenedetect
 
-    hydra-core
-    natsort
+      hydra-core
+      natsort
 
-    faster-whisper
-    clip-interrogator
-    fal-client
-    loralib
-    simple-lama-inpainting
-    SenseVoice-python
-    swarm
-  ];
+      faster-whisper
+      clip-interrogator
+      fal-client
+      loralib
+      simple-lama-inpainting
+      SenseVoice-python
+      swarm
+    ]
+    ++ lib.optional (config.cudaSupport || config.rocmSupport) bitsandbytes;
 }

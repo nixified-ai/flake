@@ -2,20 +2,6 @@
   python3Packages,
   config,
 }:
-let
-  blend-modes = python3Packages.callPackage ../../../../packages/blend-modes/default.nix { };
-  colour-science = python3Packages.callPackage ../../../../packages/colour-science/default.nix { };
-  segment-anything =
-    python3Packages.callPackage ../../../../packages/segment-anything/default.nix
-      { };
-  mediapipe = python3Packages.callPackage ../../../../packages/mediapipe/default.nix { };
-  typer-config = python3Packages.callPackage ../../../../packages/typer-config/default.nix { };
-  transparent-background =
-    python3Packages.callPackage ../../../../packages/transparent-background/default.nix
-      { };
-  blind-watermark = python3Packages.callPackage ../../../../packages/blind-watermark/default.nix { };
-  zhipuai = python3Packages.callPackage ../../../../packages/zhipuai/default.nix { };
-in
 {
   pname = "comfyui-layer-style-advance";
 

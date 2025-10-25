@@ -1,13 +1,6 @@
 {
   python3Packages,
 }:
-let
-  pixeloe = python3Packages.callPackage ../../../../packages/pixeloe/default.nix { };
-  colour-science = python3Packages.callPackage ../../../../packages/colour-science/default.nix { };
-  transparent-background =
-    python3Packages.callPackage ../../../../packages/transparent-background/default.nix
-      { };
-in
 {
   pname = "comfyui-essentials";
   pyproject = false;

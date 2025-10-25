@@ -3,10 +3,6 @@
   gccStdenv,
   config,
 }:
-let
-  pyloudnorm = python3Packages.callPackage ../../../../packages/pyloudnorm/default.nix { };
-  sageattention = python3Packages.callPackage ../../../../packages/sageattention/default.nix { };
-in
 {
   pname = "comfyui-kijai-wan-video-wrapper";
   pyproject = false;

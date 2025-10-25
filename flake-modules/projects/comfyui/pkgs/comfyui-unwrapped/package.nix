@@ -8,8 +8,6 @@
 }:
 let
   propsFromNpin = comfyuiLib.nodePropsFromNpinSource comfyuiNpins.comfyui;
-  av = python3Packages.callPackage ../../../../packages/av/default.nix { };
-  spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix { };
 in
 python3Packages.buildPythonApplication {
   pname = "comfyui";

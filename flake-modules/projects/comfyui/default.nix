@@ -50,12 +50,26 @@
           // comfyuiCustomNodes;
         comfyui = self.comfyuiPackages.comfyui;
         python3Packages = super.python3Packages.overrideScope (
-          pyfinal: pyprev: {
+          pyfinal: pyprev:
+          let
+            extraPackages = self.lib.packagesFromDirectoryRecursive {
+              inherit (pyfinal) callPackage;
+              directory = ./../../packages;
+            };
+            names = lib.attrNames extraPackages;
+            extraPackagesAlreadyInPrev = lib.filter (name: pyprev ? ${name}) names;
+            warningMessage = "Some local python packages are already present in upstream: ${lib.concatStringsSep ", " extraPackagesAlreadyInPrev}";
+            extraPackagesWithWarning = lib.warnIfNot (
+              [ ] == extraPackagesAlreadyInPrev
+            ) warningMessage extraPackages;
+          in
+          {
             # TODO: delete once merged upstream: https://github.com/NixOS/nixpkgs/pull/453306/files
             pymatting = pyprev.pymatting.overridePythonAttrs {
               disabledTestPaths = self.lib.optional self.config.cudaSupport "tests/test_foreground.py";
             };
           }
+          // extraPackagesWithWarning
         );
       }
     );

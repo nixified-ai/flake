@@ -2,9 +2,6 @@
   python3Packages,
   ffmpeg,
 }:
-let
-  pilgram = python3Packages.callPackage ../../../../packages/pilgram/default.nix { };
-in
 finalAttrs: previousAttrs: {
   pname = "was-node-suite-comfyui";
 

@@ -1,10 +1,6 @@
 {
   python3Packages,
 }:
-let
-  colour-science = python3Packages.callPackage ../../../../packages/colour-science/default.nix { };
-  blend-modes = python3Packages.callPackage ../../../../packages/blend-modes/default.nix { };
-in
 {
   pname = "comfyui-layer-style";
 

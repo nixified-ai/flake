@@ -3,12 +3,6 @@
   python3Packages,
   ...
 }:
-let
-  clip-interrogator =
-    python3Packages.callPackage ../../../../packages/clip-interrogator/default.nix
-      { };
-  spandrel = python3Packages.callPackage ../../../../packages/spandrel/default.nix { };
-in
 {
   pname = "comfyui-easy-use";
 

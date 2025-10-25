@@ -83,11 +83,9 @@
             }
             // common
           );
-          _module.args.pkgs = import inputs.nixpkgs (
-            {
-            }
-            // common
-          );
+          _module.args.pkgs = import inputs.nixpkgs ({
+            inherit system;
+          });
           formatter = pkgs.nixfmt-tree;
           devShells.default = pkgs.mkShell {
             packages = [

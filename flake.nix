@@ -47,7 +47,13 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
       perSystem =
-        { system, pkgs, ... }:
+        {
+          system,
+          pkgs,
+          self',
+          lib,
+          ...
+        }:
         let
           common = {
             overlays = [
@@ -90,7 +96,9 @@
               # format individual file or stdin (useful for piping from nix eval)
               pkgs.nixfmt
               pkgs.npins
-            ];
+
+            ]
+            ++ (lib.attrValues self'.legacyPackages.nixified-ai.internal);
           };
         };
       imports = [

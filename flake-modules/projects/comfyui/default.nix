@@ -116,7 +116,7 @@
         };
         # ROCm support in nixpkgs is pretty bad right now
         # comfyui-amd = rocmPkgs.comfyuiPackages.comfyui;
-      }
-      // scripts;
+      };
+      legacyPackages.nixified-ai.internal = scripts;
     };
 }

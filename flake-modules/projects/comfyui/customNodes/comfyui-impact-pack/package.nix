@@ -3,6 +3,7 @@
 }:
 let
   segment-anything = python3Packages.callPackage ../../../../packages/segment-anything { };
+  sam2 = python3Packages.callPackage ../../../../packages/sam2 { };
 in
 {
   pname = "comfyui-impact-pack";
@@ -18,6 +19,7 @@ in
     numpy
     dill
     matplotlib
+    sam2
   ];
   #passthru.dependencies.pkgs = with python3Packages; [
   #  gguf

@@ -4,7 +4,6 @@
   lib,
   python3,
   writeShellScript,
-  nixified-ai,
 }:
 nixosTest {
   name = "comfyui";
@@ -29,7 +28,7 @@ nixosTest {
         ];
         acceleration = false;
         customNodes = lib.attrValues pkgs.comfyuiCustomNodes;
-        models = with nixified-ai.models; [
+        models = with pkgs.nixified-ai.models; [
           clip_vision_vit_h-upscaler
           control-lora-rank128-v11p-sd15-canny-fp16
           face-yolov8m

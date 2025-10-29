@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.3.65",
-      "revision": "51696e3fdcdfad657cb15854345fbcbbe70eef8d",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/v0.3.65",
-      "hash": "1ksaj3mfy9zb399rjn3lp1cqikrdawnjgs67sckhkpq175hkm4zp"
+      "version": "v0.3.67",
+      "revision": "f2bb3230b796f6a486894fc3b597db2c0b9538c9",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/v0.3.67",
+      "hash": "157avxzvkdvamh3xj77hlvjv74gmrlrq033fjhdhp9m1gblfqdzz"
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
@@ -28,17 +28,17 @@
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.30.0",
-      "url": "https://files.pythonhosted.org/packages/15/c1/78982b01efc21795f0037f76148f3919cbad8923da30280d057082017c65/comfyui_frontend_package-1.30.0.tar.gz",
-      "hash": "c5f061827b9a0832864d79cbd0c5fcbfabb7e111b4a81a8dc7bb044293c90ba7"
+      "version": "1.31.1",
+      "url": "https://files.pythonhosted.org/packages/9f/cf/97fed892511db444d0fbf01d0a259c45892c7b52a9c3161dde609d544525/comfyui_frontend_package-1.31.1.tar.gz",
+      "hash": "7bc9bfbd145fe0162e20c303055190e5de9acb374ced28c78a3f837cd3785910"
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates",
       "version_upper_bound": null,
-      "version": "0.1.96",
-      "url": "https://files.pythonhosted.org/packages/1f/94/8ca91d3498f20265b201227739b9b65b719ea7da5583c3630b62a720b939/comfyui_workflow_templates-0.1.96.tar.gz",
-      "hash": "666be5b2d3df6679060a418f17d85760c90ade1a3d8357f7f0f38c8f798e382c"
+      "version": "0.2.4",
+      "url": "https://files.pythonhosted.org/packages/61/0b/07ab273dc359006ba9f3b986d492fa7ab9a703e90c721d695bda3afc95cd/comfyui_workflow_templates-0.2.4.tar.gz",
+      "hash": "6008cc1eded957ed1145caf493973ed3afa934a2cd63aa95aa2ab351305ce922"
     }
   },
   "version": 5

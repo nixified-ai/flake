@@ -3,7 +3,7 @@ toplevel@{ inputs, withSystem, ... }:
   herculesCI =
     { config, lib, ... }:
     {
-      onPush = withSystem toplevel.config.defaultEffectSystem (
+      onSchedule = withSystem toplevel.config.defaultEffectSystem (
         { pkgs, self', ... }:
         let
           hci-effects = inputs.hercules-ci-effects.lib.withPkgs pkgs;
@@ -37,7 +37,7 @@ toplevel@{ inputs, withSystem, ... }:
         {
           comfyui-update = {
             # Daily at 3am
-            # when.hour = 3;
+            when.hour = 3;
             outputs.effects.comfyui-update = mkComfyuiUpdateEffect {
               package = self'.legacyPackages.nixified-ai.internal.comfyui-update;
               description = "update base packages";
@@ -45,7 +45,7 @@ toplevel@{ inputs, withSystem, ... }:
           };
           comfyui-nodes-update = {
             # Daily at 4pm
-            # when.hour = 16;
+            when.hour = 16;
             outputs.effects.comfyui-update = mkComfyuiUpdateEffect {
               package = self'.legacyPackages.nixified-ai.internal.comfyui-nodes-update;
               description = "update node packages";

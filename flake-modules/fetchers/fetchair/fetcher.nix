@@ -71,9 +71,8 @@ let
 
   fetchArgs = (
     {
-      name = "model";
+      inherit name url sha256;
       passthru.name = name;
-      inherit url sha256;
     }
     // (if args ? passthru then { inherit (args) passthru; } else { })
   );

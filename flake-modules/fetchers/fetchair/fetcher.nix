@@ -69,14 +69,14 @@ let
     else
       lib.throw "support for constructing URL from AIR with ${parsed.source} as source has not been added yet";
 
-  fetchArgs = (
-    {
-      name = "model";
-      passthru.name = name;
-      inherit url sha256;
+  fetchArgs = {
+    name = "model";
+    passthru = {
+      inherit name;
     }
-    // (if args ? passthru then { inherit (args) passthru; } else { })
-  );
+    // (if args ? passthru then args.passthru else { });
+    inherit url sha256;
+  };
   metaAttr = {
     meta = {
       inherit air;

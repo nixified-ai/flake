@@ -1,0 +1,114 @@
+diff --git a/py/config.py b/py/config.py
+index a50c492..aab8481 100644
+--- a/py/config.py
++++ b/py/config.py
+@@ -51,8 +51,8 @@ def write_user_config():
+ 
+ 
+ THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+-DEFAULT_CONFIG_FILE = os.path.join(THIS_DIR, '..', 'rgthree_config.json.default')
+-USER_CONFIG_FILE = os.path.join(THIS_DIR, '..', 'rgthree_config.json')
++
++from .patches import DEFAULT_CONFIG_FILE, USER_CONFIG_FILE
+ 
+ DEFAULT_CONFIG = {}
+ USER_CONFIG = {}
+diff --git a/py/patches.py b/py/patches.py
+new file mode 100644
+index 0000000..c5a1e6b
+--- /dev/null
++++ b/py/patches.py
+@@ -0,0 +1,30 @@
++import os
++import shutil
++
++import folder_paths
++
++from .utils import file_exists
++
++THIS_DIR = os.path.dirname(os.path.abspath(__file__))
++CONFIG_DIR = os.path.expanduser("~/.config/rgthree")
++DEFAULT_FILE_NAME = "rgthree_config.json.default"
++DEFAULT_CONFIG_FILE = os.path.join(CONFIG_DIR, DEFAULT_FILE_NAME)
++USER_CONFIG_FILE = os.path.join(CONFIG_DIR, "rgthree_config.json")
++USERDATA = os.path.join(CONFIG_DIR, "userdata")
++
++os.makedirs(CONFIG_DIR, exist_ok=True)
++os.makedirs(USERDATA, exist_ok=True)
++
++if not os.path.exists(DEFAULT_CONFIG_FILE):
++    shutil.copy(os.path.join(THIS_DIR, "..", DEFAULT_FILE_NAME), CONFIG_DIR)
++
++
++def get_file_path_for_model(model_type, file):
++    """Get file path & symlink if it does not exist"""
++    file_path = os.path.join(CONFIG_DIR, model_type, file)
++    # Resolve symlink to avoid creating nested symlinks
++    src_file_path = os.path.realpath(folder_paths.get_full_path(model_type, file))
++    if not file_exists(file_path) and file_exists(src_file_path):
++        os.makedirs(os.path.dirname(file_path), exist_ok=True)
++        os.symlink(src_file_path, file_path)
++    return file_path
+diff --git a/py/server/routes_model_info.py b/py/server/routes_model_info.py
+index 61feb4d..0b3140b 100644
+--- a/py/server/routes_model_info.py
++++ b/py/server/routes_model_info.py
+@@ -10,6 +10,8 @@ from ..utils import abspath, path_exists
+ from .utils_server import get_param, is_param_falsy
+ from .utils_info import delete_model_info, get_model_info, set_model_info_partial, get_file_info
+ 
++from ..patches import get_file_path_for_model
++
+ routes = PromptServer.instance.routes
+ 
+ 
+@@ -157,9 +159,7 @@ async def api_get_models_info_img(request):
+ 
+   model_type = request.match_info['type']
+   file_param = get_param(request, 'file')
+-  file_path = folder_paths.get_full_path(model_type, file_param)
+-  if not path_exists(file_path):
+-    file_path = abspath(file_path)
++  file_path = get_file_path_for_model(model_type, file_param)
+   img_path = None
+   for ext in ['jpg', 'png', 'jpeg']:
+     try_path = f'{os.path.splitext(file_path)[0]}.{ext}'
+diff --git a/py/server/utils_info.py b/py/server/utils_info.py
+index 4723a66..6aaac33 100644
+--- a/py/server/utils_info.py
++++ b/py/server/utils_info.py
+@@ -12,6 +12,8 @@ import folder_paths
+ from ..utils import abspath, get_dict_value, load_json_file, file_exists, remove_path, save_json_file
+ from ..utils_userdata import read_userdata_json, save_userdata_json, delete_userdata_file
+ 
++from ..patches import get_file_path_for_model
++
+ 
+ def _get_info_cache_file(data_type: str, file_hash: str):
+   return f'info/{file_hash}.{data_type}.json'
+@@ -413,9 +415,7 @@ def _read_file_metadata_from_header(file_path: str) -> dict:
+ 
+ def get_folder_path(file: str, model_type) -> str | None:
+   """Gets the file path ensuring it exists."""
+-  file_path = folder_paths.get_full_path(model_type, file)
+-  if not file_exists(file_path):
+-    file_path = abspath(file_path)
++  file_path = get_file_path_for_model(model_type, file)
+   if not file_exists(file_path):
+     file_path = None
+   return file_path
+diff --git a/py/utils_userdata.py b/py/utils_userdata.py
+index b10b757..8864c60 100644
+--- a/py/utils_userdata.py
++++ b/py/utils_userdata.py
+@@ -1,9 +1,7 @@
+ import os
+ 
+ from .utils import load_json_file, path_exists, save_json_file
+-
+-THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+-USERDATA = os.path.join(THIS_DIR, '..', 'userdata')
++from .patches import USERDATA
+ 
+ 
+ def read_userdata_file(rel_path: str):

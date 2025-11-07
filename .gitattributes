@@ -1,0 +1,2 @@
+# Leave line endings untouched in patch files
+*.patch -text

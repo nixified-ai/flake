@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}:
+{ self, inputs, ... }:
 {
   imports = [ ./ci.nix ];
   flake = {

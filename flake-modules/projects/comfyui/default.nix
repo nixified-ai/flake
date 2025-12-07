@@ -63,8 +63,6 @@
                 directory = ./../../packages;
               }
               // self.lib.packagesFromDirectoryRecursive {
-                # So that Comfyui Packages can be called as propogated build inputs
-                # I.e. for comfyui-workflow-templates need comfyui-workflow-templates-core
                 inherit (pyfinal) callPackage;
                 directory = ./pkgs/python;
               };

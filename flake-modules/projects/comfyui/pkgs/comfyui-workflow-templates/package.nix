@@ -13,7 +13,6 @@ python3Packages.callPackage (
   }:
   buildPythonPackage rec {
     pname = "comfyui_workflow_templates";
-
     inherit (npin) version;
 
     src = fetchurl {
@@ -32,11 +31,9 @@ python3Packages.callPackage (
     ];
 
     meta = with lib; {
-      description = "ComfyUI workflow templates available via the Browse Templates feature.";
+      description = "ComfyUI workflow templates available in the app by clicking the Workflow button then the Browse Templates button.";
       homepage = "https://github.com/Comfy-Org/workflow_templates";
       license = licenses.gpl3;
-      maintainers = [ ];
-      platforms = platforms.all;
     };
   }
 ) { }

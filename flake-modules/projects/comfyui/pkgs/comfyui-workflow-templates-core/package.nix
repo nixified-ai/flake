@@ -3,7 +3,7 @@
   comfyuiNpins,
 }:
 let
-  npin = comfyuiNpins.comfyui-workflow-templates;
+  npin = comfyuiNpins.comfyui-workflow-templates-core;
 in
 python3Packages.callPackage (
   {
@@ -12,7 +12,7 @@ python3Packages.callPackage (
     fetchurl,
   }:
   buildPythonPackage rec {
-    pname = "comfyui_workflow_templates";
+    pname = "comfyui_workflow_templates_core";
 
     inherit (npin) version;
     src = fetchurl {
@@ -27,7 +27,7 @@ python3Packages.callPackage (
     ];
 
     meta = with lib; {
-      description = "ComfyUI workflow templates available in the app by clicking the Workflow button then the Browse Templates button.";
+      description = "Core module for ComfyUI workflow templates.";
       homepage = "https://github.com/Comfy-Org/workflow_templates";
       license = licenses.gpl3;
     };

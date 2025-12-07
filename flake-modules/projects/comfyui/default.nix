@@ -57,15 +57,10 @@
         python3Packages = super.python3Packages.overrideScope (
           pyfinal: pyprev:
           let
-            extraPackages =
-              self.lib.packagesFromDirectoryRecursive {
-                inherit (pyfinal) callPackage;
-                directory = ./../../packages;
-              }
-              // self.lib.packagesFromDirectoryRecursive {
-                inherit (pyfinal) callPackage;
-                directory = ./pkgs/python;
-              };
+            extraPackages = self.lib.packagesFromDirectoryRecursive {
+              inherit (pyfinal) callPackage;
+              directory = ./../../packages;
+            };
             names = lib.attrNames extraPackages;
             extraPackagesAlreadyInPrev = lib.filter (name: pyprev ? ${name}) names;
             warningMessage = "Some local python packages are already present in upstream: ${lib.concatStringsSep ", " extraPackagesAlreadyInPrev}";

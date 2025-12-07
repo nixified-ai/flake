@@ -20,7 +20,12 @@ python3Packages.callPackage (
       sha256 = npin.hash;
     };
 
-    format = "setuptools";
+    format = "pyproject";
+
+    nativeBuildInputs = with python3Packages; [
+      setuptools
+      wheel
+    ];
 
     pythonImportsCheck = [
       pname
@@ -28,7 +33,7 @@ python3Packages.callPackage (
 
     meta = with lib; {
       description = "Core module for ComfyUI workflow templates.";
-      homepage = "https://github.com/Comfy-Org/workflow_templates";
+      homepage = "nix";
       license = licenses.gpl3;
     };
   }

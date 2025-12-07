@@ -1,6 +1,7 @@
 {
   python3Packages,
   comfyuiNpins,
+  comfyuiPackages,
 }:
 let
   npin = comfyuiNpins.comfyui-workflow-templates;
@@ -21,6 +22,10 @@ python3Packages.callPackage (
     };
 
     format = "setuptools";
+
+    propagatedBuildInputs = [
+      comfyuiPackages.comfyui-workflow-templates-core
+    ];
 
     pythonImportsCheck = [
       pname

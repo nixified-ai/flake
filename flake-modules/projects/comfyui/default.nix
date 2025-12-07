@@ -1,5 +1,6 @@
 { self, inputs, ... }:
 {
+  imports = [ ./ci.nix ];
   flake = {
     templates.comfyui = {
       path = ./template;

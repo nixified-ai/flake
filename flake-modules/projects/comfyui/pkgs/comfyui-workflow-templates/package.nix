@@ -13,8 +13,8 @@ python3Packages.callPackage (
   }:
   buildPythonPackage rec {
     pname = "comfyui_workflow_templates";
-    inherit (npin) version;
 
+    inherit (npin) version;
     src = fetchurl {
       inherit (npin) url;
       sha256 = npin.hash;

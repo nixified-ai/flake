@@ -48,9 +48,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "a64ccbf6c694a46c181a444a1ac9d2d810607309",
-      "url": "https://github.com/calcuis/gguf/archive/a64ccbf6c694a46c181a444a1ac9d2d810607309.tar.gz",
-      "hash": "1v9wy42x8ai16knfzlfmbb98cqr4gs3z85jkkr1z9ahxvrnvlnj9"
+      "revision": "41c9d3f387958e3653336fb2974ac9a0a0f53bf4",
+      "url": "https://github.com/calcuis/gguf/archive/41c9d3f387958e3653336fb2974ac9a0a0f53bf4.tar.gz",
+      "hash": "0kcj77k1ig7p6f5ayx8rw605bhm7s76j0jnb9jwg7dk1hyq1shni"
     },
     "comfyui-cg-use-everywhere": {
       "type": "Git",
@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "1fc488f0488e7492fe8e62e06f2c97592a7fc8b0",
-      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/1fc488f0488e7492fe8e62e06f2c97592a7fc8b0.tar.gz",
-      "hash": "0annphrfywvqa2729msxjvadd6hylcyacsj796pbqg4hmf4cffrb"
+      "revision": "1e082fce6095092519ea0463cee13834a10295c2",
+      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/1e082fce6095092519ea0463cee13834a10295c2.tar.gz",
+      "hash": "0xsbkpyv2fa3kgwa56x26ck6v488fh14l644p9rb77dlb9ysr49h"
     },
     "comfyui-colors-mz": {
       "type": "Git",
@@ -113,9 +113,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "125b3a4905ac9367f7aae5c2df67e2282f0a3d37",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/125b3a4905ac9367f7aae5c2df67e2282f0a3d37.tar.gz",
-      "hash": "12gr085dvg59q03pzlra68cwn9h7qc69y95s5mmvribxfz1v2pnf"
+      "revision": "e900c2ca9c0d90b0896881910ca7f3f02d88ebd8",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/e900c2ca9c0d90b0896881910ca7f3f02d88ebd8.tar.gz",
+      "hash": "0ppjvj1fi2dij35d1zxzgf06lghmc54lmp5n5n0g8pvyr87nbzav"
     },
     "comfyui-essentials": {
       "type": "Git",
@@ -139,9 +139,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "a088a2dde2ca4a0db9193ac1c01ac77c8b31a70d",
-      "url": "https://github.com/Acly/comfyui-tooling-nodes/archive/a088a2dde2ca4a0db9193ac1c01ac77c8b31a70d.tar.gz",
-      "hash": "1b3m2wi5r40r87dw72ah3qmflr239f8yjbyi4c1r0ys4bbcg3n3p"
+      "revision": "02202529129dd33d0622dcc72d0550d10bf40d62",
+      "url": "https://github.com/Acly/comfyui-tooling-nodes/archive/02202529129dd33d0622dcc72d0550d10bf40d62.tar.gz",
+      "hash": "0wd52chixgpg6qi0ypv3lxh2s99kd598z3ibmbq1f18ap4ngsq65"
     },
     "comfyui-frame-interpolation": {
       "type": "Git",
@@ -165,9 +165,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "91b81eb3ad6a65fa19498a9b22603242b2f06487",
-      "url": "https://github.com/PanicTitan/ComfyUI-Gallery/archive/91b81eb3ad6a65fa19498a9b22603242b2f06487.tar.gz",
-      "hash": "0qpwbcfsrfws0sig2zpdhlpdqcwcbhkvcb14w4lq9rqhd44ppx7n"
+      "revision": "9e3b246970d4501796dee02bb21c288ac80c5b9a",
+      "url": "https://github.com/PanicTitan/ComfyUI-Gallery/archive/9e3b246970d4501796dee02bb21c288ac80c5b9a.tar.gz",
+      "hash": "0gf1cv6y0a8ds9azjxi7bqmda0z6ibx8pnxdxkx0wf9dh2k3xbmp"
     },
     "comfyui-gguf": {
       "type": "Git",
@@ -178,9 +178,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "be2a08330d7ec232d684e50ab938870d7529471e",
-      "url": "https://github.com/city96/ComfyUI-GGUF/archive/be2a08330d7ec232d684e50ab938870d7529471e.tar.gz",
-      "hash": "0va3srd6wivqfrmil250rs27sf98hw3rkngp16apfcaw14pninin"
+      "revision": "01f8845bf30d89fff293c7bd50187bc59d9d53ea",
+      "url": "https://github.com/city96/ComfyUI-GGUF/archive/01f8845bf30d89fff293c7bd50187bc59d9d53ea.tar.gz",
+      "hash": "0qp2g2fpacmag3969mayy914hzl31hkz3yki88kks2z348bnds18"
     },
     "comfyui-impact-pack": {
       "type": "Git",
@@ -191,9 +191,9 @@
       },
       "branch": "Main",
       "submodules": false,
-      "revision": "2804f7944f125b1c10bc9d1fbb5a997a25a62726",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/2804f7944f125b1c10bc9d1fbb5a997a25a62726.tar.gz",
-      "hash": "1lvs8b6hyxrqgfciqdzasw55mxrd3sz2q8f5r5b10rr5v89pjnk0"
+      "revision": "61bd8397a18e7e7668e6a24e95168967768c2bed",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/61bd8397a18e7e7668e6a24e95168967768c2bed.tar.gz",
+      "hash": "1lyzcr7d18bnz8abjxd3vv9f0xvx16qvbd7n22fg61i2v1a154jv"
     },
     "comfyui-impact-subpack": {
       "type": "Git",
@@ -243,9 +243,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "a64f115d35a3ac017bbd27458ef8a9c44eb385cc",
-      "url": "https://github.com/kijai/ComfyUI-WanVideoWrapper/archive/a64f115d35a3ac017bbd27458ef8a9c44eb385cc.tar.gz",
-      "hash": "1rqgqxkgp1k81bpqqphn4kwksc1g9zwxf2q396ljc25d31qi8ajg"
+      "revision": "123c9ca3124ffdeffaf9c36cd9e90ef80fcb486e",
+      "url": "https://github.com/kijai/ComfyUI-WanVideoWrapper/archive/123c9ca3124ffdeffaf9c36cd9e90ef80fcb486e.tar.gz",
+      "hash": "0n0743sx4p3zz3d7vmd47frjpqzwhaxdffcykxsdp49swbcw4lah"
     },
     "comfyui-kjnodes": {
       "type": "Git",
@@ -256,9 +256,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "5dacc975141b531ae37a673354902984283d6703",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/5dacc975141b531ae37a673354902984283d6703.tar.gz",
-      "hash": "1mbkcky5fjw1dca2qwrkxpnwmvh49nsbfpap5kjqfsfr3hkl9n0i"
+      "revision": "62a862db37d77a9a2e7611f638f9ff151a24fdec",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/62a862db37d77a9a2e7611f638f9ff151a24fdec.tar.gz",
+      "hash": "13z0mamciz314pndswpllgkcq8ziplknwx5cdlg60w901kw2a7ph"
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",
@@ -282,9 +282,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "89014d833d2ad0998d724090eff1456692692a1d",
-      "url": "https://github.com/chflame163/ComfyUI_LayerStyle/archive/89014d833d2ad0998d724090eff1456692692a1d.tar.gz",
-      "hash": "1pz3p91x5ifzgph1n7lgjfcv95xhsj8djdqvkhlp54palnc7dwxv"
+      "revision": "90f4bfb38aaf121292f429b20eff07c6c121697e",
+      "url": "https://github.com/chflame163/ComfyUI_LayerStyle/archive/90f4bfb38aaf121292f429b20eff07c6c121697e.tar.gz",
+      "hash": "0chwm1fz7w6kp6iwg0gr384hk1d9sl746j22ln46zhpkykbd6zr3"
     },
     "comfyui-layer-style-advance": {
       "type": "Git",
@@ -295,9 +295,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "64c8317ab33f0208f2e583070acf4f8ef6faca0a",
-      "url": "https://github.com/chflame163/ComfyUI_LayerStyle_Advance/archive/64c8317ab33f0208f2e583070acf4f8ef6faca0a.tar.gz",
-      "hash": "0hck0b8w6nim70pjahk3awv725zqn8ii7jhbg9l20y90fkmnfn9v"
+      "revision": "d79adcd6d25f8a1e7bfeeb5d69c21eea2168dc58",
+      "url": "https://github.com/chflame163/ComfyUI_LayerStyle_Advance/archive/d79adcd6d25f8a1e7bfeeb5d69c21eea2168dc58.tar.gz",
+      "hash": "0wa5f5fsy8f56whfisx28g986rdf5cmwydhxdxnx1ak0p1s4d3mp"
     },
     "comfyui-logic": {
       "type": "Git",
@@ -373,9 +373,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "2b9eb36d3e1741e88dbfccade0e08137f7fa2bfb",
-      "url": "https://github.com/rgthree/rgthree-comfy/archive/2b9eb36d3e1741e88dbfccade0e08137f7fa2bfb.tar.gz",
-      "hash": "1ljc46d1hbbrhcsbp492zbyvzch63m91vzrnln7md1f6l69ykp5n"
+      "revision": "e9d56181883d4e05c4236f09422582f49abdec86",
+      "url": "https://github.com/rgthree/rgthree-comfy/archive/e9d56181883d4e05c4236f09422582f49abdec86.tar.gz",
+      "hash": "0h7z0jxwb4975ghmk5338k90lf3rsd9m2a6i591j56w4i2rrs9z0"
     },
     "comfyui-sdxl-prompt-styler": {
       "type": "Git",
@@ -425,9 +425,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8550981384301e9bc5bfea83e5c2c75258102593",
-      "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/archive/8550981384301e9bc5bfea83e5c2c75258102593.tar.gz",
-      "hash": "0rcrjhxz6lrlqysnr1mn0x04apw8gjylzh3ar5zmn48shcmwfsyq"
+      "revision": "537f3a02269e14ab4b0350d4189a52034e9a3b12",
+      "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/archive/537f3a02269e14ab4b0350d4189a52034e9a3b12.tar.gz",
+      "hash": "1z1kb0fnrm31vcy4s1xxpgfrm928iq3mpl66ww9y2ihfd6yc4n99"
     },
     "comfyui-wan-block-swap": {
       "type": "Git",

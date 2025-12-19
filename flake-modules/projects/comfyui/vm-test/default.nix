@@ -1,11 +1,11 @@
 {
-  nixosTest,
+  testers,
   nixosModule,
   lib,
   python3,
   writeShellScript,
 }:
-nixosTest {
+testers.nixosTest {
   name = "comfyui";
   nodes.machine =
     { pkgs, ... }:

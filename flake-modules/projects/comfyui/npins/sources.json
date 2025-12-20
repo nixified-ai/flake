@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.3.77",
-      "revision": "59afc3984868289f808d02fa5cd180edfb2de240",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/v0.3.77",
-      "hash": "1fw2x0nd91c93n7dqadcvigw90wrdxi1cf6l5r8c3ph9k6zz2b0b"
+      "version": "v0.5.1",
+      "revision": "ba6080bbab070934ea6e870c5fc30dbf702eb445",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/v0.5.1",
+      "hash": "0x615z6k897v408137a5ah1f11xkhqvl5sv1bq3k9xhsm2kzr5wq"
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
@@ -28,25 +28,25 @@
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.34.6",
-      "url": "https://files.pythonhosted.org/packages/1c/81/2535152a3d32748be50c236fbea1d1b3971a5e07e523255e9056e16eb62f/comfyui_frontend_package-1.34.6.tar.gz",
-      "hash": "7ff25f6fbe4c8d86e7bebc037aad7beb6d1966d12bd508f0d331ceefba9d997c"
+      "version": "1.36.6",
+      "url": "https://files.pythonhosted.org/packages/ed/f3/c0c396cbe038dc97ddf11158541a3f9fb315301fa5aecbb95dcb91d9d000/comfyui_frontend_package-1.36.6.tar.gz",
+      "hash": "97cefb6c322a087c95cac583406b97eae226a10a43eee7f41473781699954a83"
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates",
       "version_upper_bound": null,
-      "version": "0.7.51",
-      "url": "https://files.pythonhosted.org/packages/07/50/e45f50f50eebdeeb2dbef8b4d28c3c08407cfb0ea4668d9fbe5fbbe64482/comfyui_workflow_templates-0.7.51.tar.gz",
-      "hash": "ba4a41c13dac428b1acdec05262bd544127ab0ae73f2dfa3f0671f3b50421919"
+      "version": "0.7.60",
+      "url": "https://files.pythonhosted.org/packages/a3/84/4b2e198078c7f4c7209422e5946096f63a2e10bd9ef233e74b981f528fbf/comfyui_workflow_templates-0.7.60.tar.gz",
+      "hash": "2c752d950c3eec81d9f03c4a79b1acb28616cc55ef61d86b80965c994a7d477b"
     },
     "comfyui-workflow-templates-core": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-core",
       "version_upper_bound": null,
-      "version": "0.3.23",
-      "url": "https://files.pythonhosted.org/packages/19/56/ea4a47ddd454d3c8ed80bc0140d5d1ffcb83b7e0b001562cefa358539041/comfyui_workflow_templates_core-0.3.23.tar.gz",
-      "hash": "8058f0635b557e0b0729fb9c4d781beeb78a9cc9b093bed30128f5d2212e56f0"
+      "version": "0.3.46",
+      "url": "https://files.pythonhosted.org/packages/da/d6/764e7f090a5ea560716ef8da195c7d96342b66043c2629fc581ac587c4c6/comfyui_workflow_templates_core-0.3.46.tar.gz",
+      "hash": "1629e938494173ddf72c921a0a8ae78058a55e61b186d5aa63e63c84d6795bfa"
     }
   },
   "version": 5

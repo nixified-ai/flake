@@ -94,7 +94,7 @@
               # format individual file or stdin (useful for piping from nix eval)
               pkgs.nixfmt
               pkgs.npins
-
+              pkgs.hci
             ]
             ++ (lib.attrValues self'.legacyPackages.nixified-ai.internal);
           };

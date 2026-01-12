@@ -23,7 +23,7 @@ toplevel@{ inputs, withSystem, ... }:
               git.checkout.forgeType = config.repo.forgeType;
               git.update.branch = "automation/comfyui-${lib.replaceString " " "-" description}";
               git.update.baseMerge.enable = true;
-              git.update.baseMerge.method = "rebase";
+              git.update.baseMerge.method = "reset";
               git.update.pullRequest.enable = true;
               git.update.pullRequest.title = title;
               git.update.pullRequest.body = "";

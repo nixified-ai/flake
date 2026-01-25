@@ -14,7 +14,7 @@
       "version": "v0.5.1",
       "revision": "ba6080bbab070934ea6e870c5fc30dbf702eb445",
       "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/v0.5.1",
-      "hash": "0x615z6k897v408137a5ah1f11xkhqvl5sv1bq3k9xhsm2kzr5wq"
+      "hash": "sha256-mJf8p6ga9jQHXmHrQjeGs4fgAlRFnREQIPskNM0vwXQ="
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
@@ -22,7 +22,7 @@
       "version_upper_bound": null,
       "version": "0.3.1",
       "url": "https://files.pythonhosted.org/packages/d3/fb/2a86a03b3c55178a29f940b2982b801feb8e7a89f66e10a809f8cbaf8caf/comfyui_embedded_docs-0.3.1.tar.gz",
-      "hash": "08e647f8528be2e4790cb4d994703ec1a2af28e6b1c287552e4aca0f721ed80d"
+      "hash": "sha256-COZH+FKL4uR5DLTZlHA+waKvKOaxwodVLkrKD3Ie2A0="
     },
     "comfyui-frontend-package": {
       "type": "PyPi",
@@ -30,7 +30,7 @@
       "version_upper_bound": null,
       "version": "1.36.6",
       "url": "https://files.pythonhosted.org/packages/ed/f3/c0c396cbe038dc97ddf11158541a3f9fb315301fa5aecbb95dcb91d9d000/comfyui_frontend_package-1.36.6.tar.gz",
-      "hash": "97cefb6c322a087c95cac583406b97eae226a10a43eee7f41473781699954a83"
+      "hash": "sha256-l877bDIqCHyVysWDQGuX6uImoQpD7uf0FHN4FpmVSoM="
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",
@@ -38,7 +38,7 @@
       "version_upper_bound": null,
       "version": "0.7.60",
       "url": "https://files.pythonhosted.org/packages/a3/84/4b2e198078c7f4c7209422e5946096f63a2e10bd9ef233e74b981f528fbf/comfyui_workflow_templates-0.7.60.tar.gz",
-      "hash": "2c752d950c3eec81d9f03c4a79b1acb28616cc55ef61d86b80965c994a7d477b"
+      "hash": "sha256-LHUtlQw+7IHZ8DxKebGssoYWzFXvYdhrgJZcmUp9R3s="
     },
     "comfyui-workflow-templates-core": {
       "type": "PyPi",
@@ -46,8 +46,8 @@
       "version_upper_bound": null,
       "version": "0.3.46",
       "url": "https://files.pythonhosted.org/packages/da/d6/764e7f090a5ea560716ef8da195c7d96342b66043c2629fc581ac587c4c6/comfyui_workflow_templates_core-0.3.46.tar.gz",
-      "hash": "1629e938494173ddf72c921a0a8ae78058a55e61b186d5aa63e63c84d6795bfa"
+      "hash": "sha256-FinpOElBc933LJIaCorngFilXmGxhtWqY+Y8hNZ5W/o="
     }
   },
-  "version": 5
+  "version": 7
 }

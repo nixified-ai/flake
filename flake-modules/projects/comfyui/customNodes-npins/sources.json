@@ -1,5 +1,21 @@
 {
   "pins": {
+    "comfyui-comfy-mtb": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "melMass",
+        "repo": "comfy_mtb"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.5.4",
+      "revision": "7fb27804e17fcdc01fde26ebb715f9e7b8b5f958",
+      "url": "https://api.github.com/repos/melMass/comfy_mtb/tarball/refs/tags/v0.5.4",
+      "hash": "sha256-rxWKc7Ckdctwtxo3hVWePVANL7laoDv8eRPq33C/Muo="
+    },
     "comfyui-adv-clip-emb": {
       "type": "Git",
       "repository": {

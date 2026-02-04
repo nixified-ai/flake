@@ -39,6 +39,7 @@
         ) customCustomNodesPins;
       in
       {
+        COMFY_CUDA_ARCHS = "8.6";
         customCustomNodesPins = (builtins.fromJSON (lib.readFile ./customNodes-npins/sources.json)).pins;
         comfyuiNpins = (builtins.fromJSON (lib.readFile ./npins/sources.json)).pins;
         inherit comfyuiCustomNodes;

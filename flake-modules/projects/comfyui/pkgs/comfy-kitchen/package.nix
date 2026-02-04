@@ -3,6 +3,7 @@
   comfyuiNpins,
   comfyuiLib,
   cudaPackages,
+  COMFY_CUDA_ARCHS,
 }:
 let
   npin = comfyuiLib.nodePropsFromNpinSource comfyuiNpins.comfy-kitchen;
@@ -37,8 +38,7 @@ python3Packages.callPackage (
       cudaPackages.libcublas
     ];
 
-    # Force CUDA architecture 8.6 (Ampere)
-    env.COMFY_CUDA_ARCHS = "86";
+    env.COMFY_CUDA_ARCHS = builtins.replaceStrings [ "." ] [ "" ] COMFY_CUDA_ARCHS;
 
     # Disable standard CMake configure phase as setup.py handles it
     dontUseCmakeConfigure = true;

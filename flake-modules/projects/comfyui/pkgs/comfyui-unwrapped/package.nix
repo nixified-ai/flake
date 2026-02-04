@@ -56,6 +56,8 @@ python3Packages.buildPythonApplication {
       comfyui-frontend-package
       comfyui-workflow-templates
       comfyui-embedded-docs
+      comfy-kitchen
+      comfy-aimdo
     ]);
 
   format = "other";

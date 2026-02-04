@@ -91,6 +91,19 @@
       "url": "https://github.com/MinusZoneAI/ComfyUI-Kolors-MZ/archive/43ec2701a1390259a17ef3bea6244a3134aa5153.tar.gz",
       "hash": "sha256-E992li2t1x2QLKlcr7WVa0m9oVwew9n+wrRt8oNyeMA="
     },
+    "comfyui-comfy-literals": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "M1kep",
+        "repo": "ComfyLiterals"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "bdddb08ca82d90d75d97b1d437a652e0284a32ac",
+      "url": "https://github.com/M1kep/ComfyLiterals/archive/bdddb08ca82d90d75d97b1d437a652e0284a32ac.tar.gz",
+      "hash": "sha256-4sP87Ntm5mrNcvKhbUjLVIsVtch/oMLAoGR1OCSfAaM="
+    },
     "comfyui-comfy-mtb": {
       "type": "GitRelease",
       "repository": {

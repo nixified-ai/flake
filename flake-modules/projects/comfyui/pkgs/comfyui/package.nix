@@ -12,6 +12,7 @@
   withModels ? [ ],
   gccStdenv,
   comfyuiLib,
+  comfyuiExtraValidModelDirs ? [ ],
 }:
 let
   customNodes = withCustomNodes;
@@ -38,7 +39,9 @@ let
             traceMessage = ''
               installPath "${installPath}" for "${modelDrv.name}" does not occur in the models folder upstream, so may be unused comfyui at runtime
             '';
-            checkedName = lib.warnIfNot (lib.elem installPath supportedFolders) traceMessage name;
+            checkedName = lib.warnIfNot (lib.elem installPath (
+              supportedFolders ++ comfyuiExtraValidModelDirs
+            )) traceMessage name;
           in
           {
             name = checkedName;

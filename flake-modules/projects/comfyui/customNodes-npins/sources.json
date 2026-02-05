@@ -458,6 +458,19 @@
       "url": "https://github.com/SeanScripts/ComfyUI-Unload-Model/archive/ac5ffb4ed05546545ce7cf38e7b69b5152714eed.tar.gz",
       "hash": "sha256-+9W5howotJGOepoXSPHP8rGhs+FvAUHtK3ZtPMQ6Y/4="
     },
+    "comfyui-vae-utils": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "spacepxl",
+        "repo": "ComfyUI-VAE-Utils"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "5d46194fe7547e6afd63023d52b4ad60a57d4e84",
+      "url": "https://github.com/spacepxl/ComfyUI-VAE-Utils/archive/5d46194fe7547e6afd63023d52b4ad60a57d4e84.tar.gz",
+      "hash": "sha256-vJDXv+bZcfhHR4jkfES8fApFv71F3i6R+NvLeUKYbvc="
+    },
     "comfyui-video-helper-suite": {
       "type": "Git",
       "repository": {

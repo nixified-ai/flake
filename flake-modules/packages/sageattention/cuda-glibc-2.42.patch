@@ -1,5 +1,5 @@
---- temp_patch/math_functions.h.orig	2026-02-03 21:20:33.669751646 +0100
-+++ temp_patch/math_functions.h	2026-02-03 21:20:33.690751672 +0100
+--- a/include/crt/math_functions.h	2026-02-03 21:53:19.330249683 +0100
++++ b/include/crt/math_functions.h	2026-02-03 21:53:19.350249667 +0100
 @@ -594,7 +594,7 @@
   *
   * \note_accuracy_double
@@ -132,8 +132,8 @@
  
  __func__(float erfinvf(float a));
  
---- temp_patch/math_functions.hpp.orig	2026-02-03 21:20:33.671751649 +0100
-+++ temp_patch/math_functions.hpp	2026-02-03 21:20:33.700751684 +0100
+--- a/include/crt/math_functions.hpp	2026-02-03 21:53:19.331249682 +0100
++++ b/include/crt/math_functions.hpp	2026-02-03 21:53:19.359249661 +0100
 @@ -760,7 +760,7 @@
    return exp10f(a);
  }

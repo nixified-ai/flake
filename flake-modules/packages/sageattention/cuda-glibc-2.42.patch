@@ -1,0 +1,166 @@
+--- temp_patch/math_functions.h.orig	2026-02-03 21:20:33.669751646 +0100
++++ temp_patch/math_functions.h	2026-02-03 21:20:33.690751672 +0100
+@@ -594,7 +594,7 @@
+  *
+  * \note_accuracy_double
+  */
+-extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 rsqrt(double x);
++extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 rsqrt(double x) noexcept (true);
+ 
+ /**
+  * \ingroup CUDA_MATH_SINGLE
+@@ -618,7 +618,7 @@
+  *
+  * \note_accuracy_single
+  */
+-extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  rsqrtf(float x);
++extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  rsqrtf(float x) noexcept (true);
+ 
+ #if defined(__QNX__) && !defined(_LIBCPP_VERSION)
+ namespace std {
+@@ -2553,7 +2553,7 @@
+  *
+  * \note_accuracy_double
+  */
+-extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 sinpi(double x);
++extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 sinpi(double x) noexcept (true);
+ /**
+  * \ingroup CUDA_MATH_SINGLE
+  * \brief Calculate the sine of the input argument 
+@@ -2576,7 +2576,7 @@
+  *
+  * \note_accuracy_single
+  */
+-extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  sinpif(float x);
++extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  sinpif(float x) noexcept (true);
+ /**
+  * \ingroup CUDA_MATH_DOUBLE
+  * \brief Calculate the cosine of the input argument 
+@@ -2598,7 +2598,7 @@
+  *
+  * \note_accuracy_double
+  */
+-extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 cospi(double x);
++extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ double                 cospi(double x) noexcept (true);
+ /**
+  * \ingroup CUDA_MATH_SINGLE
+  * \brief Calculate the cosine of the input argument 
+@@ -2620,7 +2620,7 @@
+  *
+  * \note_accuracy_single
+  */
+-extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  cospif(float x);
++extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ float                  cospif(float x) noexcept (true);
+ /**
+  * \ingroup CUDA_MATH_DOUBLE
+  * \brief  Calculate the sine and cosine of the first input argument 
+@@ -2633,7 +2633,7 @@
+  * \see ::sinpi() and ::cospi().
+  * \note_accuracy_double
+  */
+-extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ void                   sincospi(double x, double *sptr, double *cptr);
++extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ void                   sincospi(double x, double *sptr, double *cptr) noexcept (true);
+ /**
+  * \ingroup CUDA_MATH_SINGLE
+  * \brief  Calculate the sine and cosine of the first input argument 
+@@ -2646,7 +2646,7 @@
+  * \see ::sinpif() and ::cospif().
+  * \note_accuracy_single
+  */
+-extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ void                   sincospif(float x, float *sptr, float *cptr);
++extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ void                   sincospif(float x, float *sptr, float *cptr) noexcept (true);
+ 
+ #if defined(__QNX__) && !defined(_LIBCPP_VERSION)
+ namespace std {
+@@ -5643,15 +5643,15 @@
+ 
+ __MATH_FUNCTIONS_DECL__ float exp10(const float a);
+ 
+-__MATH_FUNCTIONS_DECL__ float rsqrt(const float a);
++__MATH_FUNCTIONS_DECL__ float rsqrt(const float a) noexcept (true);
+ 
+ __MATH_FUNCTIONS_DECL__ float rcbrt(const float a);
+ 
+-__MATH_FUNCTIONS_DECL__ float sinpi(const float a);
++__MATH_FUNCTIONS_DECL__ float sinpi(const float a) noexcept (true);
+ 
+-__MATH_FUNCTIONS_DECL__ float cospi(const float a);
++__MATH_FUNCTIONS_DECL__ float cospi(const float a) noexcept (true);
+ 
+-__MATH_FUNCTIONS_DECL__ void sincospi(const float a, float *const sptr, float *const cptr);
++__MATH_FUNCTIONS_DECL__ void sincospi(const float a, float *const sptr, float *const cptr) noexcept (true);
+ 
+ __MATH_FUNCTIONS_DECL__ void sincos(const float a, float *const sptr, float *const cptr);
+ 
+@@ -5983,15 +5983,15 @@
+ 
+ #endif /* _WIN32 */
+ 
+-__func__(double rsqrt(double a));
++__func__(double rsqrt(double a)) noexcept (true);
+ 
+ __func__(double rcbrt(double a));
+ 
+-__func__(double sinpi(double a));
++__func__(double sinpi(double a)) noexcept (true);
+ 
+-__func__(double cospi(double a));
++__func__(double cospi(double a)) noexcept (true);
+ 
+-__func__(void sincospi(double a, double *sptr, double *cptr));
++__func__(void sincospi(double a, double *sptr, double *cptr)) noexcept (true);
+ 
+ __func__(double erfinv(double a));
+ 
+@@ -6003,15 +6003,15 @@
+ 
+ __func__(double erfcx(double a));
+ 
+-__func__(float rsqrtf(float a));
++__func__(float rsqrtf(float a)) noexcept (true);
+ 
+ __func__(float rcbrtf(float a));
+ 
+-__func__(float sinpif(float a));
++__func__(float sinpif(float a)) noexcept (true);
+ 
+-__func__(float cospif(float a));
++__func__(float cospif(float a)) noexcept (true);
+ 
+-__func__(void sincospif(float a, float *sptr, float *cptr));
++__func__(void sincospif(float a, float *sptr, float *cptr)) noexcept (true);
+ 
+ __func__(float erfinvf(float a));
+ 
+--- temp_patch/math_functions.hpp.orig	2026-02-03 21:20:33.671751649 +0100
++++ temp_patch/math_functions.hpp	2026-02-03 21:20:33.700751684 +0100
+@@ -760,7 +760,7 @@
+   return exp10f(a);
+ }
+ 
+-__MATH_FUNCTIONS_DECL__ float rsqrt(const float a)
++__MATH_FUNCTIONS_DECL__ float rsqrt(const float a) noexcept (true)
+ {
+   return rsqrtf(a);
+ }
+@@ -770,17 +770,17 @@
+   return rcbrtf(a);
+ }
+ 
+-__MATH_FUNCTIONS_DECL__ float sinpi(const float a)
++__MATH_FUNCTIONS_DECL__ float sinpi(const float a) noexcept (true)
+ {
+   return sinpif(a);
+ }
+ 
+-__MATH_FUNCTIONS_DECL__ float cospi(const float a)
++__MATH_FUNCTIONS_DECL__ float cospi(const float a) noexcept (true)
+ {
+   return cospif(a);
+ }
+ 
+-__MATH_FUNCTIONS_DECL__ void sincospi(const float a, float *const sptr, float *const cptr)
++__MATH_FUNCTIONS_DECL__ void sincospi(const float a, float *const sptr, float *const cptr) noexcept (true)
+ {
+   sincospif(a, sptr, cptr);
+ }

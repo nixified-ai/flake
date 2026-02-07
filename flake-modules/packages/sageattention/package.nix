@@ -8,6 +8,7 @@
   cudaPackages,
   symlinkJoin,
   gnused,
+  gnupatch,
 }:
 let
   cuda-native-redist = symlinkJoin {
@@ -21,38 +22,18 @@ let
       header="$out/include/crt/math_functions.h"
       hpp="$out/include/crt/math_functions.hpp"
 
-      # Patch .h file
+      # Copy files to break symlinks so they can be patched
       if [ -e "$header" ]; then
-        echo "Patching $header..."
         cp --remove-destination "$(readlink -f "$header")" "$header"
         chmod +w "$header"
-        for func in sinpi sinpif cospi cospif rsqrt rsqrtf; do
-          ${gnused}/bin/sed -i "s/\($func(.\+)\);/\1 noexcept (true);/" "$header"
-        done
-        if ! grep -q "sinpi(double x) noexcept (true);" "$header"; then
-          echo "Failed to patch $header"
-          exit 1
-        fi
       fi
-
-      # Patch .hpp file to match .h exception specifications
       if [ -e "$hpp" ]; then
-        echo "Patching $hpp..."
         cp --remove-destination "$(readlink -f "$hpp")" "$hpp"
         chmod +w "$hpp"
-
-        # Add noexcept(true) to the C++ wrappers
-        # Matches: __MATH_FUNCTIONS_DECL__ float rsqrt(const float a)
-        ${gnused}/bin/sed -i 's/__MATH_FUNCTIONS_DECL__ float rsqrt(const float a)/__MATH_FUNCTIONS_DECL__ float rsqrt(const float a) noexcept (true)/' "$hpp"
-        ${gnused}/bin/sed -i 's/__MATH_FUNCTIONS_DECL__ float sinpi(const float a)/__MATH_FUNCTIONS_DECL__ float sinpi(const float a) noexcept (true)/' "$hpp"
-        ${gnused}/bin/sed -i 's/__MATH_FUNCTIONS_DECL__ float cospi(const float a)/__MATH_FUNCTIONS_DECL__ float cospi(const float a) noexcept (true)/' "$hpp"
-        ${gnused}/bin/sed -i 's/__MATH_FUNCTIONS_DECL__ void sincospi(const float a, float \*const sptr, float \*const cptr)/__MATH_FUNCTIONS_DECL__ void sincospi(const float a, float *const sptr, float *const cptr) noexcept (true)/' "$hpp"
-
-        if ! grep -q "rsqrt(const float a) noexcept (true)" "$hpp"; then
-           echo "Failed to patch $hpp"
-           exit 1
-        fi
       fi
+
+      # Apply patch
+      ${gnupatch}/bin/patch -d "$out/include/crt" -p1 < ${./cuda-glibc-2.42.patch}
     '';
   };
 in

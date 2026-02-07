@@ -76,3 +76,8 @@ If you are on another distro, just add these two lines to `/etc/nix/nix.conf`. I
     trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc=
 
 
+# Contributing
+
+## License
+
+Code in this repo was initially publish under AGPL license (apart from code in [flake-modules/packages](./flake-modules/packages), which was published under MIT), however on February 3rd 2026 a transition to MIT license has been initiated. Any contributions from that date shall be licensed under both AGPL (see [LICENCE](./LICENCE) file) and MIT (see [LICENCE-MIT](./LICENCE-MIT) file), until all significant past contributors agree to re-licensing their contributions as MIT, from which point all further contributions will be licensed exquisitely under MIT license.

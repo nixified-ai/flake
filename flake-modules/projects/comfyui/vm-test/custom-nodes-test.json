@@ -570,6 +570,7 @@
     "inputs": {
       "grow": 16,
       "blur": 20,
+      "blur_type": "gaussian",
       "mask": [
         "91:74",
         3

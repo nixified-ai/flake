@@ -8,33 +8,18 @@
   cudaPackages,
   symlinkJoin,
   gnused,
-  gnupatch,
 }:
 let
+  patched_cuda_nvcc = cudaPackages.cuda_nvcc.overrideAttrs (oldAttrs: {
+    patches = (oldAttrs.patches or [ ]) ++ [ ./cuda-glibc-2.42.patch ];
+  });
+
   cuda-native-redist = symlinkJoin {
     name = "cuda-redist";
     paths = with cudaPackages; [
       cuda_cudart # cuda_runtime.h
-      cuda_nvcc
+      patched_cuda_nvcc
     ];
-    postBuild = ''
-      # Patch math_functions.h and math_functions.hpp to fix conflict with glibc 2.42+
-      header="$out/include/crt/math_functions.h"
-      hpp="$out/include/crt/math_functions.hpp"
-
-      # Copy files to break symlinks so they can be patched
-      if [ -e "$header" ]; then
-        cp --remove-destination "$(readlink -f "$header")" "$header"
-        chmod +w "$header"
-      fi
-      if [ -e "$hpp" ]; then
-        cp --remove-destination "$(readlink -f "$hpp")" "$hpp"
-        chmod +w "$hpp"
-      fi
-
-      # Apply patch
-      ${gnupatch}/bin/patch -d "$out/include/crt" -p1 < ${./cuda-glibc-2.42.patch}
-    '';
   };
 in
 buildPythonPackage rec {

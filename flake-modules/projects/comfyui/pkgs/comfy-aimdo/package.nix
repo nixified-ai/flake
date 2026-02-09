@@ -4,6 +4,7 @@
   comfyuiLib,
   cudaPackages,
   autoAddDriverRunpath,
+  config,
 }:
 let
   npin = comfyuiLib.nodePropsFromNpinSource comfyuiNpins.comfy-aimdo;
@@ -25,16 +26,16 @@ python3Packages.callPackage (
       setuptools
       setuptools-scm
       wheel
+    ]
+    ++ lib.optionals config.cudaSupport [
       cudaPackages.cuda_nvcc
       autoAddDriverRunpath
     ];
 
-    buildInputs = [
-      cudaPackages.cuda_cudart
-    ];
+    buildInputs = lib.optional config.cudaSupport cudaPackages.cuda_cudart;
 
     # Manually compile the shared object
-    preBuild = ''
+    preBuild = lib.optionalString config.cudaSupport ''
       gcc -shared -o comfy_aimdo/aimdo.so -fPIC \
         -I${lib.getDev cudaPackages.cuda_cudart}/include \
         -I${lib.getDev cudaPackages.cuda_nvcc}/include \

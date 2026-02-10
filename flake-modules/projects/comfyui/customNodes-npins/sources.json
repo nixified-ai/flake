@@ -52,6 +52,19 @@
       "url": "https://github.com/calcuis/gguf/archive/e802c7831507af49eefa40324eb78378eec4f3cf.tar.gz",
       "hash": "sha256-2RflXleGcoioM+yYQ9GpntvSvktufYX4vVwmgUYUCKA="
     },
+    "comfyui-cg-image-filter": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "chrisgoringe",
+        "repo": "cg-image-filter"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "4ee968449203e1648960f2789c8128e2764e09f4",
+      "url": "https://github.com/chrisgoringe/cg-image-filter/archive/4ee968449203e1648960f2789c8128e2764e09f4.tar.gz",
+      "hash": "sha256-/LpbPb3XcZHVTvTs2iJFqWvi/Lf37Kj72RcuQTEqFQI="
+    },
     "comfyui-cg-use-everywhere": {
       "type": "Git",
       "repository": {
@@ -77,6 +90,35 @@
       "revision": "43ec2701a1390259a17ef3bea6244a3134aa5153",
       "url": "https://github.com/MinusZoneAI/ComfyUI-Kolors-MZ/archive/43ec2701a1390259a17ef3bea6244a3134aa5153.tar.gz",
       "hash": "sha256-E992li2t1x2QLKlcr7WVa0m9oVwew9n+wrRt8oNyeMA="
+    },
+    "comfyui-comfy-literals": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "M1kep",
+        "repo": "ComfyLiterals"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "bdddb08ca82d90d75d97b1d437a652e0284a32ac",
+      "url": "https://github.com/M1kep/ComfyLiterals/archive/bdddb08ca82d90d75d97b1d437a652e0284a32ac.tar.gz",
+      "hash": "sha256-4sP87Ntm5mrNcvKhbUjLVIsVtch/oMLAoGR1OCSfAaM="
+    },
+    "comfyui-comfy-mtb": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "melMass",
+        "repo": "comfy_mtb"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.5.4",
+      "revision": "7fb27804e17fcdc01fde26ebb715f9e7b8b5f958",
+      "url": "https://api.github.com/repos/melMass/comfy_mtb/tarball/refs/tags/v0.5.4",
+      "hash": "sha256-rxWKc7Ckdctwtxo3hVWePVANL7laoDv8eRPq33C/Muo="
     },
     "comfyui-comfyroll-custom_nodes": {
       "type": "Git",
@@ -415,6 +457,19 @@
       "revision": "ac5ffb4ed05546545ce7cf38e7b69b5152714eed",
       "url": "https://github.com/SeanScripts/ComfyUI-Unload-Model/archive/ac5ffb4ed05546545ce7cf38e7b69b5152714eed.tar.gz",
       "hash": "sha256-+9W5howotJGOepoXSPHP8rGhs+FvAUHtK3ZtPMQ6Y/4="
+    },
+    "comfyui-vae-utils": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "spacepxl",
+        "repo": "ComfyUI-VAE-Utils"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "5d46194fe7547e6afd63023d52b4ad60a57d4e84",
+      "url": "https://github.com/spacepxl/ComfyUI-VAE-Utils/archive/5d46194fe7547e6afd63023d52b4ad60a57d4e84.tar.gz",
+      "hash": "sha256-vJDXv+bZcfhHR4jkfES8fApFv71F3i6R+NvLeUKYbvc="
     },
     "comfyui-video-helper-suite": {
       "type": "Git",

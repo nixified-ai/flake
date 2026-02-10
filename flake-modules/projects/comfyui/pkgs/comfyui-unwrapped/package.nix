@@ -5,6 +5,7 @@
   comfyuiPackages,
   comfyuiNpins,
   comfyuiLib,
+  config,
 }:
 let
   propsFromNpin = comfyuiLib.nodePropsFromNpinSource comfyuiNpins.comfyui;
@@ -52,11 +53,16 @@ python3Packages.buildPythonApplication {
       pydantic
       pydantic-settings
     ]
-    ++ (with comfyuiPackages; [
-      comfyui-frontend-package
-      comfyui-workflow-templates
-      comfyui-embedded-docs
-    ]);
+    ++ (
+      with comfyuiPackages;
+      [
+        comfyui-frontend-package
+        comfyui-workflow-templates
+        comfyui-embedded-docs
+        comfy-aimdo
+      ]
+      ++ lib.optional config.cudaSupport comfy-kitchen
+    );
 
   format = "other";
 

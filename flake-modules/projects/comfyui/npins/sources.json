@@ -47,6 +47,38 @@
       "version": "0.3.114",
       "url": "https://files.pythonhosted.org/packages/44/ff/6058f1948d1db99fb3af04aab5cadbe8c4af1f4c09535672c37e0601ee69/comfyui_workflow_templates_core-0.3.114.tar.gz",
       "hash": "sha256-IgCX7i96V9Yzk94YYd/iNdMOmJfzDl1apxJRSG4mo0U="
+    },
+    "comfy-kitchen": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Comfy-Org",
+        "repo": "comfy-kitchen"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.2.7",
+      "revision": "v0.2.7",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-kitchen/tarball/refs/tags/v0.2.7",
+      "hash": "sha256-v0xNWBn/FiRsPYe1ayVI8jRouhrEcITxMTJYJ773+/s="
+    },
+    "comfy-aimdo": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Comfy-Org",
+        "repo": "comfy-aimdo"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.1.7",
+      "revision": "v0.1.7",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.1.7",
+      "hash": "sha256-RNORTKtnTHZ4lcEx5gM3jSr+ZffrV8cd+x74NeRhlsM="
     }
   },
   "version": 7

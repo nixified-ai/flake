@@ -467,9 +467,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "5d46194fe7547e6afd63023d52b4ad60a57d4e84",
-      "url": "https://github.com/spacepxl/ComfyUI-VAE-Utils/archive/5d46194fe7547e6afd63023d52b4ad60a57d4e84.tar.gz",
-      "hash": "sha256-vJDXv+bZcfhHR4jkfES8fApFv71F3i6R+NvLeUKYbvc="
+      "revision": "c0180e36d58e7038c61fffe1d6c2344de26366e4",
+      "url": "https://github.com/spacepxl/ComfyUI-VAE-Utils/archive/c0180e36d58e7038c61fffe1d6c2344de26366e4.tar.gz",
+      "hash": "sha256-uNyWodoHsUtFpF/W81qGkVvoOXTFHCkTnsPKDDKJ2m0="
     },
     "comfyui-video-helper-suite": {
       "type": "Git",

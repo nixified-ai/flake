@@ -389,9 +389,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "26a13291c8081135b9a80794daf818793c37ef24",
-      "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts/archive/26a13291c8081135b9a80794daf818793c37ef24.tar.gz",
-      "hash": "sha256-ZNgUa5JxJqr4EhDn/8OtB2Alta2PJymq4xXOASkLRT4="
+      "revision": "609f3afaa74b2f88ef9ce8d939626065e3247469",
+      "url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts/archive/609f3afaa74b2f88ef9ce8d939626065e3247469.tar.gz",
+      "hash": "sha256-2GgTS7l/sMSnJb07sBifL8NGnDBF3g9qdlSKr3gYFGQ="
     },
     "comfyui-res4lyf": {
       "type": "Git",

@@ -43,10 +43,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.13.0",
-      "revision": "6648ab68bc934a185c90a2a872c87dc64d093751",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.13.0",
-      "hash": "sha256-W2+4avF0XUrTO2rCC/okrkpIXInhbIW4NcbD8fpWuE8="
+      "version": "v0.14.1",
+      "revision": "19236edfa4d2f66070d66a6b3aee592c9c2ad574",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.14.1",
+      "hash": "sha256-ke0romlfoXPtiYJbVDE0RR/58DYCzY9+9WHQGYyAUU4="
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
@@ -68,17 +68,17 @@
       "type": "PyPi",
       "name": "comfyui-workflow-templates",
       "version_upper_bound": null,
-      "version": "0.8.42",
-      "url": "https://files.pythonhosted.org/packages/5a/0a/65dcd94a346c5d10b7185c29a24c269a46b7b2f017371feb854fd508d49b/comfyui_workflow_templates-0.8.42.tar.gz",
-      "hash": "sha256-gDR5K4vJSe2RB10Hgd4CrIABYQHhCU/x53j3VaOyC90="
+      "version": "0.8.43",
+      "url": "https://files.pythonhosted.org/packages/09/2a/f1ca140a904db21b788fca2da989674dfb521564bc91257e199c7d740dc5/comfyui_workflow_templates-0.8.43.tar.gz",
+      "hash": "sha256-XFwoSLDSp6h8/UKEg3J++PR8gVfZ1fEmrz0MBoEK60A="
     },
     "comfyui-workflow-templates-core": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-core",
       "version_upper_bound": null,
-      "version": "0.3.143",
-      "url": "https://files.pythonhosted.org/packages/67/44/6c92a02aafb287da2357abe73a6ceafc6992dd0bf5d86dd2019657379def/comfyui_workflow_templates_core-0.3.143.tar.gz",
-      "hash": "sha256-MdM6K639KU+hOMTrzQZsIP84AGIqdxpbDQSbg7fZP24="
+      "version": "0.3.145",
+      "url": "https://files.pythonhosted.org/packages/56/d3/2c8a286e4a5fb17992ccfcbcb7ba3b319e0d8301aad794c960b08407f5f8/comfyui_workflow_templates_core-0.3.145.tar.gz",
+      "hash": "sha256-a8FzBQpCv3SiSyRooHVWOlx1TFPzLFx1/rd3hJbIMWM="
     }
   },
   "version": 7

@@ -259,9 +259,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b02942210daad35db71f654038cebd541e81fe17",
-      "url": "https://github.com/Acly/comfyui-inpaint-nodes/archive/b02942210daad35db71f654038cebd541e81fe17.tar.gz",
-      "hash": "sha256-TfwtaI5tNCNkXtqZ607jxVJk673qOhdNlqMjReiyKW4="
+      "revision": "d74ecec6c377073a6885697f07a019d050f0d545",
+      "url": "https://github.com/Acly/comfyui-inpaint-nodes/archive/d74ecec6c377073a6885697f07a019d050f0d545.tar.gz",
+      "hash": "sha256-oVJE3Fu+O9eAje/5xYfsMG4P4DUE+DpLQ58SezZV+zg="
     },
     "comfyui-ip-adapter": {
       "type": "Git",

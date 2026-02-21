@@ -181,9 +181,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "2d395424eaaa9a06a794906f8e8d325f4c850376",
-      "url": "https://github.com/Acly/comfyui-tooling-nodes/archive/2d395424eaaa9a06a794906f8e8d325f4c850376.tar.gz",
-      "hash": "sha256-iuTINpVuPFOM+ZXWIKIlB8KOp6wyL/MulSL1pfNMUss="
+      "revision": "ed99942f861ff63af56c20f8ef4ff473e452c3c6",
+      "url": "https://github.com/Acly/comfyui-tooling-nodes/archive/ed99942f861ff63af56c20f8ef4ff473e452c3c6.tar.gz",
+      "hash": "sha256-StYJ1DVt5J+HIUMxbllVSZeE+3/xob1I8f8nwCLNdhg="
     },
     "comfyui-frame-interpolation": {
       "type": "Git",

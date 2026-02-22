@@ -79,6 +79,38 @@
       "version": "0.3.147",
       "url": "https://files.pythonhosted.org/packages/a4/a7/129c23610a513a3fe3d86b9577c2c827ec3fd89e7eae4c91bdbf0a64853a/comfyui_workflow_templates_core-0.3.147.tar.gz",
       "hash": "sha256-yaw4OVTIIwcphlib/6v8aOc8URbQfbSYQOWBD9Vkx2E="
+    },
+    "comfyui-workflow-templates-media-api": {
+      "type": "PyPi",
+      "name": "comfyui-workflow-templates-media-api",
+      "version_upper_bound": null,
+      "version": "0.3.54",
+      "url": "https://files.pythonhosted.org/packages/c2/e4/f89fcc278d340a5bd2312afd979e8f8e447b544343bde4143b066648d664/comfyui_workflow_templates_media_api-0.3.54.tar.gz",
+      "hash": "sha256-e/iJ1L+Tic5FFwqbW3s0oOif9xkqlGBvdwugsPf+sak="
+    },
+    "comfyui-workflow-templates-media-image": {
+      "type": "PyPi",
+      "name": "comfyui-workflow-templates-media-image",
+      "version_upper_bound": null,
+      "version": "0.3.90",
+      "url": "https://files.pythonhosted.org/packages/37/42/9d764a4f3f278a5b81ccf4600c8bcf80e47df7aa23cfa6201e91de476333/comfyui_workflow_templates_media_image-0.3.90.tar.gz",
+      "hash": "sha256-I86F1hJy2BMNXOhHJa/kjfIiHsf6Bp2qcmwBSdqiybI="
+    },
+    "comfyui-workflow-templates-media-other": {
+      "type": "PyPi",
+      "name": "comfyui-workflow-templates-media-other",
+      "version_upper_bound": null,
+      "version": "0.3.123",
+      "url": "https://files.pythonhosted.org/packages/66/61/440098444de05baa42697b0d2ee501d879fb995a9c68dccc47f36309c3b9/comfyui_workflow_templates_media_other-0.3.123.tar.gz",
+      "hash": "sha256-CS8uylOr7Wp2mjqZ1MJkRDS8IZxFsOvn4o1GbrbklwM="
+    },
+    "comfyui-workflow-templates-media-video": {
+      "type": "PyPi",
+      "name": "comfyui-workflow-templates-media-video",
+      "version_upper_bound": null,
+      "version": "0.3.49",
+      "url": "https://files.pythonhosted.org/packages/28/f5/30a9a276572e3f46e52326f89114dc101fae8cbc66f0e2621153b55a9016/comfyui_workflow_templates_media_video-0.3.49.tar.gz",
+      "hash": "sha256-n8WcG6bbm3K9Ht16DUxvQM59+1zDNa9ghWy+8gYjB5U="
     }
   },
   "version": 7

@@ -25,6 +25,10 @@ python3Packages.callPackage (
 
     propagatedBuildInputs = [
       comfyuiPackages.comfyui-workflow-templates-core
+      comfyuiPackages.comfyui-workflow-templates-media-api
+      comfyuiPackages.comfyui-workflow-templates-media-image
+      comfyuiPackages.comfyui-workflow-templates-media-other
+      comfyuiPackages.comfyui-workflow-templates-media-video
     ];
 
     pythonImportsCheck = [

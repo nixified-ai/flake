@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.2.11",
-      "revision": "9837cdeb2fee827474fc00dc5ff80876bba88d3f",
-      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.2.11",
-      "hash": "sha256-kNSwpCtGclz435uI+MaA3ZQl87/AZib8nOydgu9e75c="
+      "version": "v0.2.12",
+      "revision": "96b59fe91fdc434551b514badfc3e5dc897f2ef3",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.2.12",
+      "hash": "sha256-dChQapTOZupS7YrcRWV303hfhAtkFnfWm835JpTsink="
     },
     "comfy-kitchen": {
       "type": "GitRelease",
@@ -43,10 +43,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.17.1",
-      "revision": "b3f5f7e7bac54adb5de12d06512484a8a25f078f",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.17.1",
-      "hash": "sha256-wIBWK1IQzw5N6zFJR3lQkMQ8VO7uEK7adKKTG9LDc2s="
+      "version": "v0.17.2",
+      "revision": "040460495c5713b852e4aac29a909aa63b309da7",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.17.2",
+      "hash": "sha256-jymf2noIR/QUk7pd1yA3Z+HQ1BZdAVM3Wax91G/d35I="
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
@@ -60,9 +60,9 @@
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.42.4",
-      "url": "https://files.pythonhosted.org/packages/d0/57/058623ec184e1a589fb5c560adfd3da47323a82dc40924d6cefb01a916e4/comfyui_frontend_package-1.42.4.tar.gz",
-      "hash": "sha256-ifYlt2/zyUaylAfw7XGM3U0epZ+ldRSZiTsmDtX53zk="
+      "version": "1.42.5",
+      "url": "https://files.pythonhosted.org/packages/98/d7/2de11039959e3b59ba9c1a96daa3d2f3d9a620afa8e56514f05fa683cbea/comfyui_frontend_package-1.42.5.tar.gz",
+      "hash": "sha256-TOPvDBNsGKwm10SB377uqVjHmyZ1sWwKhyaNuSUWnik="
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",

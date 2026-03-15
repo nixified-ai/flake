@@ -194,9 +194,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "c66ffe51b597e85e18514bae373c3ee391438301",
-      "url": "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation/archive/c66ffe51b597e85e18514bae373c3ee391438301.tar.gz",
-      "hash": "sha256-moNOGqXqH/NSyRVkDr+u347wiu9jlyqIz4DrOEQdDys="
+      "revision": "1b1c9907540dc186dbd21b65061c16d6e1c652e5",
+      "url": "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation/archive/1b1c9907540dc186dbd21b65061c16d6e1c652e5.tar.gz",
+      "hash": "sha256-oSg88X5PfLWEy1pBrxOc2nGqzhbKW0OzGoIdZ32wT04="
     },
     "comfyui-gallery": {
       "type": "Git",

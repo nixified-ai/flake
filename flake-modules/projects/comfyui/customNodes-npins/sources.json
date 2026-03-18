@@ -480,9 +480,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "993082e4f2473bf4acaf06f51e33877a7eb38960",
-      "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/archive/993082e4f2473bf4acaf06f51e33877a7eb38960.tar.gz",
-      "hash": "sha256-oII4aAK8O44MBaxOATG7tAXmF1ESRm7nacNmj1E3pE8="
+      "revision": "449839959f0153fb8a57211a9364c55163935ca9",
+      "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/archive/449839959f0153fb8a57211a9364c55163935ca9.tar.gz",
+      "hash": "sha256-MAKWzhvAsxHTfdgM3ADnsutI/yFkPH6K7OYnw2pd2dM="
     },
     "comfyui-wan-block-swap": {
       "type": "Git",

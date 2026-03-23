@@ -33,6 +33,7 @@ python3Packages.buildPythonApplication {
       sentencepiece
       safetensors
       aiohttp
+      yarl
       pyyaml
       pillow
       scipy
@@ -40,10 +41,11 @@ python3Packages.buildPythonApplication {
       psutil
       alembic
       sqlalchemy
-
-      yarl
       av
       numpy
+      requests
+      simpleeval
+      blake3
 
       # optional dependencies
       kornia
@@ -52,6 +54,8 @@ python3Packages.buildPythonApplication {
       soundfile
       pydantic
       pydantic-settings
+      pyopengl
+      glfw
     ]
     ++ (
       with comfyuiPackages;

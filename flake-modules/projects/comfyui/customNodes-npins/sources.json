@@ -74,9 +74,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "a0c2bc74152ad626272b1d3629dffa6729b3a2c3",
-      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/a0c2bc74152ad626272b1d3629dffa6729b3a2c3.tar.gz",
-      "hash": "sha256-IGy2htyLS0zSAsWI1VW6lfFUd7DWe21gMDNSV+tzxx4="
+      "revision": "a3952a4480a07fc3df03ec8be315dfcd11bd5135",
+      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/a3952a4480a07fc3df03ec8be315dfcd11bd5135.tar.gz",
+      "hash": "sha256-zjY2UXnVQIJ0dMyeBiprHkbcpcKNB/66DurZo5HssBQ="
     },
     "comfyui-colors-mz": {
       "type": "Git",

@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "4ee968449203e1648960f2789c8128e2764e09f4",
-      "url": "https://github.com/chrisgoringe/cg-image-filter/archive/4ee968449203e1648960f2789c8128e2764e09f4.tar.gz",
-      "hash": "sha256-/LpbPb3XcZHVTvTs2iJFqWvi/Lf37Kj72RcuQTEqFQI="
+      "revision": "cb69dc21d9914516c9f8d95be35d00049f28a1ac",
+      "url": "https://github.com/chrisgoringe/cg-image-filter/archive/cb69dc21d9914516c9f8d95be35d00049f28a1ac.tar.gz",
+      "hash": "sha256-g6nJg0ksCEImQK9JKEeJaU99b1juqlwBreNdkI4iXfU="
     },
     "comfyui-cg-use-everywhere": {
       "type": "Git",
@@ -298,9 +298,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "81e05df377eb9705930f7c6ecca87e664c58ad89",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/81e05df377eb9705930f7c6ecca87e664c58ad89.tar.gz",
-      "hash": "sha256-PA5XI35A72IE9CtfgckqR9n09IvIiDAUWdp4nR/g5Hk="
+      "revision": "1fabf351945ed5e31fcbd9d3d0f55fb374f61ef5",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/1fabf351945ed5e31fcbd9d3d0f55fb374f61ef5.tar.gz",
+      "hash": "sha256-1AeNKXhcuE8z8sB98e2sv+qvxhkkt6f6XW3DcIBlMA4="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

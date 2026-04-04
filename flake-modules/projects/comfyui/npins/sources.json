@@ -43,10 +43,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.18.3",
-      "revision": "173e1aa2dfd8e7bae53f64a538faa4c51e9efbcb",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.18.3",
-      "hash": "sha256-ivyNuXXJJtmaXPgEJAwCESa+QgGzXawwQUw6m9A3X0o="
+      "version": "v0.18.5",
+      "revision": "7782171a272bca4bfb8586a5bb801c5c04b5ee6a",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.18.5",
+      "hash": "sha256-EUsmZGZs3Ixhu5p+RwTGCabG/Fg76ypjdSWBAq/esrg="
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
@@ -68,17 +68,17 @@
       "type": "PyPi",
       "name": "comfyui-workflow-templates",
       "version_upper_bound": null,
-      "version": "0.9.41",
-      "url": "https://files.pythonhosted.org/packages/61/61/847f8f2721b322b3d850f0cdb7b5726b3acb8ce5f23532694e66f787565d/comfyui_workflow_templates-0.9.41.tar.gz",
-      "hash": "sha256-Z7cltgjQjehSyKAvpDBDupzqO06PFuhOBqUNXru+Apg="
+      "version": "0.9.43",
+      "url": "https://files.pythonhosted.org/packages/c6/77/c180dc640d7437f548c470046b591c12d009d1312f96a7a779088db01835/comfyui_workflow_templates-0.9.43.tar.gz",
+      "hash": "sha256-0NdCEdkHyD/3EbWxNzvddzA/BYeHXDiMp8a6ROmKtRE="
     },
     "comfyui-workflow-templates-core": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-core",
       "version_upper_bound": null,
-      "version": "0.3.190",
-      "url": "https://files.pythonhosted.org/packages/9f/1f/6815c2e00105c3870b7d94b55c33a6b0c202bf86383b459a3f6827b13548/comfyui_workflow_templates_core-0.3.190.tar.gz",
-      "hash": "sha256-3MpPxCF8nIuPJQJid6LWnuRO6lhYXzW8UZqXPJ01YxM="
+      "version": "0.3.192",
+      "url": "https://files.pythonhosted.org/packages/ff/94/516150f460dee9202a912a402f409fa8925c9d82e691b8741c750411a170/comfyui_workflow_templates_core-0.3.192.tar.gz",
+      "hash": "sha256-cPqgRVsnUOzGWejhRhvVsdAaLDItag96J37RJ+HErQ0="
     },
     "comfyui-workflow-templates-media-api": {
       "type": "PyPi",
@@ -92,25 +92,25 @@
       "type": "PyPi",
       "name": "comfyui-workflow-templates-media-image",
       "version_upper_bound": null,
-      "version": "0.3.115",
-      "url": "https://files.pythonhosted.org/packages/69/98/c684e73cce930d026c0adfc676194905e6bbb869e8e9403e548ebaa9ec85/comfyui_workflow_templates_media_image-0.3.115.tar.gz",
-      "hash": "sha256-dNNfceKsnln8a1t5BJKI3OXocnovwtgi/xO28T4KJcQ="
+      "version": "0.3.117",
+      "url": "https://files.pythonhosted.org/packages/58/ab/90a49be3d27e53fd7c8d937397f9b6d71ecbc87f8ed5ce86faffbb70b98b/comfyui_workflow_templates_media_image-0.3.117.tar.gz",
+      "hash": "sha256-KRurXCJppEZwRtLt8tiknyDIsHeEpgvDB4UVZle+1HY="
     },
     "comfyui-workflow-templates-media-other": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-media-other",
       "version_upper_bound": null,
-      "version": "0.3.163",
-      "url": "https://files.pythonhosted.org/packages/bb/c0/1a5ab781ae35a95a843b2e3b3e0abb28784d06a7e3781b3c3a34c8a530a4/comfyui_workflow_templates_media_other-0.3.163.tar.gz",
-      "hash": "sha256-xv1D+0G2OoY5vbdRGZbiUA9mNiH10cjlt9w+vNYj0dM="
+      "version": "0.3.164",
+      "url": "https://files.pythonhosted.org/packages/46/b8/9955910521be10f8e71bed4f6109941428890c73f69e4c452dfc0e213893/comfyui_workflow_templates_media_other-0.3.164.tar.gz",
+      "hash": "sha256-Pm78quJ9+S7GDT/KAJyAoEqsPrwGoO7ixHCYGJG7L7E="
     },
     "comfyui-workflow-templates-media-video": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-media-video",
       "version_upper_bound": null,
-      "version": "0.3.69",
-      "url": "https://files.pythonhosted.org/packages/c0/69/3df734228af667052b553f42ffed5212e790eb0b25ebe72d277af09e2f4f/comfyui_workflow_templates_media_video-0.3.69.tar.gz",
-      "hash": "sha256-75hHJQTxX1p6MBE5ZCRA1dbuYKSettGGi6y+p4H9Qic="
+      "version": "0.3.71",
+      "url": "https://files.pythonhosted.org/packages/7a/6e/d2dc477b964e683295fa14cd0a5418b51cd238fa9bfedb3c21f2c6b94452/comfyui_workflow_templates_media_video-0.3.71.tar.gz",
+      "hash": "sha256-dS+sc6Udz4AqmPmQGe0K6GDwPOamGWcs2cLUehHKGys="
     }
   },
   "version": 7

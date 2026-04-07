@@ -415,9 +415,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8ff50e4521881eca1fe26aec9615fc9362474931",
-      "url": "https://github.com/rgthree/rgthree-comfy/archive/8ff50e4521881eca1fe26aec9615fc9362474931.tar.gz",
-      "hash": "sha256-MueLFV5gaK6vPI0BEPxL3ZueOK2eFcZzajLyo95HrOE="
+      "revision": "683836c46e898668936c433502504cc0627482c5",
+      "url": "https://github.com/rgthree/rgthree-comfy/archive/683836c46e898668936c433502504cc0627482c5.tar.gz",
+      "hash": "sha256-tjJDCgZ1Gh35QdrmoXOEEA+Bh8SFrbQSvvoeUbptz7s="
     },
     "comfyui-sdxl-prompt-styler": {
       "type": "Git",

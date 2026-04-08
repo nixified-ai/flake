@@ -155,9 +155,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8ba21d0b442002e66389d6e87faf828bfe05b2ad",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/8ba21d0b442002e66389d6e87faf828bfe05b2ad.tar.gz",
-      "hash": "sha256-YTXFBttynF9BFG/RKqDPxsPDpXq1wY4G9evIHf7Ot+g="
+      "revision": "b82bb48948cf0c3d4cf913e90aa880e84470137f",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/b82bb48948cf0c3d4cf913e90aa880e84470137f.tar.gz",
+      "hash": "sha256-tMP1lwfdN7uDpoIA9dqVMFWJPN7ZYrqcrXcKBSLOyaw="
     },
     "comfyui-essentials": {
       "type": "Git",
@@ -337,8 +337,8 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "2b020b743024efcd680e2f286635207c42fec353",
-      "url": "https://github.com/chflame163/ComfyUI_LayerStyle_Advance/archive/2b020b743024efcd680e2f286635207c42fec353.tar.gz",
+      "revision": "7b678b401a38307a4a7e99ef6630bd48f9cecedb",
+      "url": "https://github.com/chflame163/ComfyUI_LayerStyle_Advance/archive/7b678b401a38307a4a7e99ef6630bd48f9cecedb.tar.gz",
       "hash": "sha256-517tQR8XG0LJAqRQKnk2jYDmW1lyy3zTsKCg5p+VyIg="
     },
     "comfyui-logic": {

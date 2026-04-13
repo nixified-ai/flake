@@ -142,9 +142,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "95a13e2e5d8f8ae57583fbebb0be1f670889858b",
-      "url": "https://github.com/Fannovel16/comfyui_controlnet_aux/archive/95a13e2e5d8f8ae57583fbebb0be1f670889858b.tar.gz",
-      "hash": "sha256-5ZyU+mqxNTb/Gl+x5htFeYuI148niW0VIzvt0p60r+4="
+      "revision": "e8b689a513c3e6b63edc44066560ca5919c0576e",
+      "url": "https://github.com/Fannovel16/comfyui_controlnet_aux/archive/e8b689a513c3e6b63edc44066560ca5919c0576e.tar.gz",
+      "hash": "sha256-tMmERf4y7sfuEGao7JHC7FLjBgPuViCtHxr8f9NnHzo="
     },
     "comfyui-easy-use": {
       "type": "Git",
@@ -298,9 +298,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "068d4fee62d379723dd96dd3e768ed807f7d7135",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/068d4fee62d379723dd96dd3e768ed807f7d7135.tar.gz",
-      "hash": "sha256-t/pAoQdUQhBmYdKgP9KwRjIQ9UNBKrRYxJE++/6t1Es="
+      "revision": "52807058a17532dd3d03f2143fb4c52beab5f936",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/52807058a17532dd3d03f2143fb4c52beab5f936.tar.gz",
+      "hash": "sha256-OJC5WvAMpOmqBbS1OenS75Q68iimEFdmj0/WNkoWxg0="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

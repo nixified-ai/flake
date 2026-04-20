@@ -233,9 +233,9 @@
       },
       "branch": "Main",
       "submodules": false,
-      "revision": "6a517ebe06fea2b74fc41b3bd089c0d7173eeced",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/6a517ebe06fea2b74fc41b3bd089c0d7173eeced.tar.gz",
-      "hash": "sha256-BBHW3t122z+FC/VaD6MPp8l/ER9nEs3dJTcFU3Qeskg="
+      "revision": "429d0159ad429e64d2b3916e6e7be9c22d025c3c",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/429d0159ad429e64d2b3916e6e7be9c22d025c3c.tar.gz",
+      "hash": "sha256-Zom2ugLAnxDhjDxIGO5jpc2oACFD7S8TUkj9rRXN3xI="
     },
     "comfyui-impact-subpack": {
       "type": "Git",

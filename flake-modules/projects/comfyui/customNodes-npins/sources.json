@@ -155,9 +155,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ec4ca6717f539a8b8c48fa88645045846ca47669",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/ec4ca6717f539a8b8c48fa88645045846ca47669.tar.gz",
-      "hash": "sha256-zos7L9Hmt+vCXPgO9q46tullPHJKOrMhCtSJkep5w4Q="
+      "revision": "ff5e3a34fc793992e864529658c4394a35ba6a4a",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/ff5e3a34fc793992e864529658c4394a35ba6a4a.tar.gz",
+      "hash": "sha256-cHGZlpLxx+k/6bom5EfZ+t4d2UrOSgQAXCeallp1ZQ0="
     },
     "comfyui-essentials": {
       "type": "Git",

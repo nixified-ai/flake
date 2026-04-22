@@ -298,9 +298,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "38cccdee6a484a702e4ac1a8b9a3cee0c4ed83f4",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/38cccdee6a484a702e4ac1a8b9a3cee0c4ed83f4.tar.gz",
-      "hash": "sha256-IMBhJTi8uALWP9DatTjeDX7fBSzHcm60VfsvNyJU64c="
+      "revision": "8f54784b2c3971b0e2b6ab9bb1df207d554df3bd",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/8f54784b2c3971b0e2b6ab9bb1df207d554df3bd.tar.gz",
+      "hash": "sha256-9tP7AUH9ISJj5CHpI712Xk6msinKSAGQrsd7FPVRZh0="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

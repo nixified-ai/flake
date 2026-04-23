@@ -48,9 +48,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e527046134a2c577757edf1d0dc5697ad97236a0",
-      "url": "https://github.com/calcuis/gguf/archive/e527046134a2c577757edf1d0dc5697ad97236a0.tar.gz",
-      "hash": "sha256-Gga5NOhk948QOYATAZJvwtUgf0uvhstXBNVn+ey5znw="
+      "revision": "583a5b7116d35313f3e3545844229323a5a8c96a",
+      "url": "https://github.com/calcuis/gguf/archive/583a5b7116d35313f3e3545844229323a5a8c96a.tar.gz",
+      "hash": "sha256-MXhKO1+LWo6wSDAflKa7RW9+e3AbQY84tnUClqrX+k8="
     },
     "comfyui-cg-image-filter": {
       "type": "Git",
@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "cb69dc21d9914516c9f8d95be35d00049f28a1ac",
-      "url": "https://github.com/chrisgoringe/cg-image-filter/archive/cb69dc21d9914516c9f8d95be35d00049f28a1ac.tar.gz",
-      "hash": "sha256-g6nJg0ksCEImQK9JKEeJaU99b1juqlwBreNdkI4iXfU="
+      "revision": "1cfb4f6dcc56ff707d1a1138cb82ce99b9ec0075",
+      "url": "https://github.com/chrisgoringe/cg-image-filter/archive/1cfb4f6dcc56ff707d1a1138cb82ce99b9ec0075.tar.gz",
+      "hash": "sha256-ZuuyxsN/gMPQsSo6bz9dxz+N4IMnvSc6sqJhfzMXiXY="
     },
     "comfyui-cg-use-everywhere": {
       "type": "Git",
@@ -155,9 +155,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ff5e3a34fc793992e864529658c4394a35ba6a4a",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/ff5e3a34fc793992e864529658c4394a35ba6a4a.tar.gz",
-      "hash": "sha256-cHGZlpLxx+k/6bom5EfZ+t4d2UrOSgQAXCeallp1ZQ0="
+      "revision": "3cf9ab4e63c9cd2b6f4ebf5fa22f36d8152b3395",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/3cf9ab4e63c9cd2b6f4ebf5fa22f36d8152b3395.tar.gz",
+      "hash": "sha256-pGU3kHKs6V9emCJC2UupQdydrKmydtuAIGGZBhLadVs="
     },
     "comfyui-essentials": {
       "type": "Git",
@@ -298,9 +298,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8f54784b2c3971b0e2b6ab9bb1df207d554df3bd",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/8f54784b2c3971b0e2b6ab9bb1df207d554df3bd.tar.gz",
-      "hash": "sha256-9tP7AUH9ISJj5CHpI712Xk6msinKSAGQrsd7FPVRZh0="
+      "revision": "b559d31044db3d8a8b3274fd7163ba213f7b765f",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/b559d31044db3d8a8b3274fd7163ba213f7b765f.tar.gz",
+      "hash": "sha256-mzzcjxFPitDjKWTdUzZsIXa9zwneieOJvGCCxl+98cM="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

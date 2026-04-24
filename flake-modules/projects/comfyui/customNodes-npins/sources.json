@@ -48,9 +48,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "583a5b7116d35313f3e3545844229323a5a8c96a",
-      "url": "https://github.com/calcuis/gguf/archive/583a5b7116d35313f3e3545844229323a5a8c96a.tar.gz",
-      "hash": "sha256-MXhKO1+LWo6wSDAflKa7RW9+e3AbQY84tnUClqrX+k8="
+      "revision": "0960497be60bfaa5197a22e5c7741c0075a0aee7",
+      "url": "https://github.com/calcuis/gguf/archive/0960497be60bfaa5197a22e5c7741c0075a0aee7.tar.gz",
+      "hash": "sha256-L8fgxo1Gc4lg7fMb7yjV7sN9vmnjmOswysYJGIEr1eE="
     },
     "comfyui-cg-image-filter": {
       "type": "Git",
@@ -298,9 +298,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b559d31044db3d8a8b3274fd7163ba213f7b765f",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/b559d31044db3d8a8b3274fd7163ba213f7b765f.tar.gz",
-      "hash": "sha256-mzzcjxFPitDjKWTdUzZsIXa9zwneieOJvGCCxl+98cM="
+      "revision": "b7646ad70a7daa7aeb919ca542274758d26ba2df",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/b7646ad70a7daa7aeb919ca542274758d26ba2df.tar.gz",
+      "hash": "sha256-weTQsRK+x9g5SGRPAsy3HmFSiHwe3bIdk91QucTZv2o="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

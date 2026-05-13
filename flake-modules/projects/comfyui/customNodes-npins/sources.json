@@ -306,14 +306,14 @@
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "Charonartist",
+        "owner": "adrian-gierakowski",
         "repo": "comfyui-last-frame-extractor"
       },
       "branch": "master",
       "submodules": false,
-      "revision": "30f294b1a0a87c7abaf979f04ee74d887a87f027",
-      "url": "https://github.com/Charonartist/comfyui-last-frame-extractor/archive/30f294b1a0a87c7abaf979f04ee74d887a87f027.tar.gz",
-      "hash": "sha256-t41rXtFlEXHBNSUk42oWwUTs3Zi3SddX3T+raaOL6vM="
+      "revision": "edf614c51155179417799efa76a994108c75d983",
+      "url": "https://github.com/adrian-gierakowski/comfyui-last-frame-extractor/archive/edf614c51155179417799efa76a994108c75d983.tar.gz",
+      "hash": "sha256-H+ZPYZlYSOYYhjLcwR6mSAfKkuV/nty1tIKNvBUQRhE="
     },
     "comfyui-layer-style": {
       "type": "Git",

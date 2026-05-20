@@ -1,0 +1,11 @@
+diff --git a/web/styles.js b/web/styles.js
+index 843268d..d6d073a 100644
+--- a/web/styles.js
++++ b/web/styles.js
+@@ -1,5 +1,5 @@
+ import { utils } from './comfy/index.js';
+-utils.addStylesheet('extensions/ComfyUI-Crystools/monitor.css');
++utils.addStylesheet('extensions/comfyui-crystools/monitor.css');
+ export var Styles;
+ (function (Styles) {
+     Styles["BARS"] = "BARS";

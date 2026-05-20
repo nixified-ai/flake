@@ -146,6 +146,19 @@
       "url": "https://github.com/Fannovel16/comfyui_controlnet_aux/archive/e8b689a513c3e6b63edc44066560ca5919c0576e.tar.gz",
       "hash": "sha256-tMmERf4y7sfuEGao7JHC7FLjBgPuViCtHxr8f9NnHzo="
     },
+    "comfyui-crystools": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "crystian",
+        "repo": "ComfyUI-Crystools"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "2f18256c5b5063937106f29a8e0a7db3ae3869b7",
+      "url": "https://github.com/crystian/ComfyUI-Crystools/archive/2f18256c5b5063937106f29a8e0a7db3ae3869b7.tar.gz",
+      "hash": "sha256-IvLgvudqJV6QeNxwA3HbIlGxShCfUBBSZ8DSjOVlSyE="
+    },
     "comfyui-easy-use": {
       "type": "Git",
       "repository": {

@@ -311,9 +311,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9af049df498bdaa4e98a133f34553ffbc1660393",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/9af049df498bdaa4e98a133f34553ffbc1660393.tar.gz",
-      "hash": "sha256-BEFNHAmujlYO4ehO17Br5kJcE6+ZgK5/FH71TKnI+2U="
+      "revision": "d8e9d0a01bfd3fc85a18e75d3b297c77ab454588",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/d8e9d0a01bfd3fc85a18e75d3b297c77ab454588.tar.gz",
+      "hash": "sha256-alULKb9jrJaOJS3VKWxtTTJW5j5DAZ04uqDFKXGXsr4="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",
@@ -415,9 +415,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7b8b03f316ac8e05b0caf3a9de43e02c5ad56859",
-      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/7b8b03f316ac8e05b0caf3a9de43e02c5ad56859.tar.gz",
-      "hash": "sha256-D75SvPQV8v2HbyYdiPjBqTiZNXj3lDXIHzxrsSUtuu4="
+      "revision": "119679d8d8d26e6db52757e705488abb6399d7d4",
+      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/119679d8d8d26e6db52757e705488abb6399d7d4.tar.gz",
+      "hash": "sha256-cSej7/e2cfRsAVHvS/4vY1sml+tQncOBGXfIaX280EE="
     },
     "comfyui-rgthree": {
       "type": "Git",

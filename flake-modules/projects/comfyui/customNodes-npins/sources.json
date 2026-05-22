@@ -458,6 +458,19 @@
       "url": "https://github.com/shiimizu/ComfyUI-TiledDiffusion/archive/a155b1bac39147381aeaa52b9be42e545626a44f.tar.gz",
       "hash": "sha256-UDcjTWyA2kQKyeX5pZuvX0RnVAz56WCbak0JGSy4w0Y="
     },
+    "comfyui-ultimatesdupscale": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ssitu",
+        "repo": "ComfyUI_UltimateSDUpscale"
+      },
+      "branch": "main",
+      "submodules": true,
+      "revision": "bebd5696fddd61cb0d08949a222c508898ab5577",
+      "url": "https://github.com/ssitu/ComfyUI_UltimateSDUpscale/archive/bebd5696fddd61cb0d08949a222c508898ab5577.tar.gz",
+      "hash": "sha256-U1C0baJocG8HvKqhhgVj9TdO2yccfdG5wNMHFaxlfyI="
+    },
     "comfyui-unload-model": {
       "type": "Git",
       "repository": {

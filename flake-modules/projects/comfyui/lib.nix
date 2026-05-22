@@ -81,6 +81,7 @@ rec {
         owner = source.repository.owner;
         sha256 = source.hash;
         rev = source.revision;
+        fetchSubmodules = source.submodules or false;
       };
     };
 }

@@ -42,7 +42,7 @@ testers.nixosTest {
     { nodes, ... }:
     let
       imagePath1 = "${nodes.machine.services.comfyui.home}/.local/share/comfyui/output/ComfyUI_00001.png";
-      imagePath2 = "${nodes.machine.services.comfyui.home}/.local/share/comfyui/output/ComfyUI_00001_.png";
+      imagePath2 = "${nodes.machine.services.comfyui.home}/.local/share/comfyui/output/ComfyUI_00002_.png";
       apiTest = writeShellScript "" ''
         ${lib.getExe python3} ${./api.py} ${./custom-nodes-test.json} --port ${toString nodes.machine.services.comfyui.port}
       '';

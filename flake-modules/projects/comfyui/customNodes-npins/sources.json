@@ -298,9 +298,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "d18cdb18597f525ef8d613a0cb447080fbab8fce",
-      "url": "https://github.com/kijai/ComfyUI-WanVideoWrapper/archive/d18cdb18597f525ef8d613a0cb447080fbab8fce.tar.gz",
-      "hash": "sha256-EBJ1EsFp/5Q9f5T7SJ3jedzE9clm5jIrhNhHZ5/uY8Q="
+      "revision": "088128b224242e110d3906c6750e9a3a348a659b",
+      "url": "https://github.com/kijai/ComfyUI-WanVideoWrapper/archive/088128b224242e110d3906c6750e9a3a348a659b.tar.gz",
+      "hash": "sha256-/S6sr/6VXx3UxticdE+oxzRtbs+LiG54egMdqIYuB1M="
     },
     "comfyui-kjnodes": {
       "type": "Git",
@@ -311,9 +311,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "d8e9d0a01bfd3fc85a18e75d3b297c77ab454588",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/d8e9d0a01bfd3fc85a18e75d3b297c77ab454588.tar.gz",
-      "hash": "sha256-alULKb9jrJaOJS3VKWxtTTJW5j5DAZ04uqDFKXGXsr4="
+      "revision": "450dc91069e28496bbd67bd657f820ef0cb8d5ba",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/450dc91069e28496bbd67bd657f820ef0cb8d5ba.tar.gz",
+      "hash": "sha256-I12z6ZZbHLuXb9NDN7NYsZ462zdhnyPnIsJnM+zSerQ="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

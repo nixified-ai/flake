@@ -48,9 +48,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "4ef6a641b825a7b10336d101da6b5a6150f88a43",
-      "url": "https://github.com/calcuis/gguf/archive/4ef6a641b825a7b10336d101da6b5a6150f88a43.tar.gz",
-      "hash": "sha256-vUm71zCVZ29Ly5nMEMhEfmeU81jS2SWGFSR0GR6BEQk="
+      "revision": "1974848797d1aad4b3c80dad7959ec9c9f00475d",
+      "url": "https://github.com/calcuis/gguf/archive/1974848797d1aad4b3c80dad7959ec9c9f00475d.tar.gz",
+      "hash": "sha256-RXoIM+zoidPT069o6sKUdvGRL7zC3cU2W/SmEzjcT8o="
     },
     "comfyui-cg-image-filter": {
       "type": "Git",

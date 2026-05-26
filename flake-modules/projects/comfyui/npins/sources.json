@@ -52,17 +52,17 @@
       "type": "PyPi",
       "name": "comfyui-embedded-docs",
       "version_upper_bound": null,
-      "version": "0.5.0",
-      "url": "https://files.pythonhosted.org/packages/ec/5b/66a586b1e6aa6d0128a4a2bc3bc18797f525ae8decaf239595f60557e35c/comfyui_embedded_docs-0.5.0.tar.gz",
-      "hash": "sha256-kZjzRaDPqXfJ9702CaA1m66+WijwckujYqFZ5Nv9N2E="
+      "version": "0.5.1",
+      "url": "https://files.pythonhosted.org/packages/9a/79/4d767c262cd4b91015399f0c08d3ae23f1b08a3a200542a49de9b4c52a25/comfyui_embedded_docs-0.5.1.tar.gz",
+      "hash": "sha256-GfMgT7E6iRq5NL6/ZDqX3OhpBpQslecwA1Ij2+Dq+t8="
     },
     "comfyui-frontend-package": {
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.44.19",
-      "url": "https://files.pythonhosted.org/packages/f9/55/f111e9d4539b8365eacaaae49d9110263210e7d58ac92117eb1ba336e1ee/comfyui_frontend_package-1.44.19.tar.gz",
-      "hash": "sha256-QSCIe/xhnXO9MzkPbWpTDEORu6J5EJK+OogxpHaHrDU="
+      "version": "1.45.14",
+      "url": "https://files.pythonhosted.org/packages/bf/ae/08de6a27dccb12f24d2b6f32db5cf975fcfe1a32e657e35cb22ac553d342/comfyui_frontend_package-1.45.14.tar.gz",
+      "hash": "sha256-9g2Bk8XVgdnshRHmKQqzpw4ZRlvKfPKKzMFMmr5OEYA="
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",

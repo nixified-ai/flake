@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.4.5",
-      "revision": "d8bbd90055f68cd784dfd19a2763dfe66f4f5276",
-      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.4.5",
-      "hash": "sha256-YAL8EzX9+qUPEsa1VXxMZjTdaJE4ZyPQsrM2FmITb8A="
+      "version": "v0.4.6",
+      "revision": "b64a9c008fa80bb9832a04e3398660e249b8bf47",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.4.6",
+      "hash": "sha256-8o/+rgReJhTz2rjiWEj/6fZ+iBNHb4O0jtlSEIjVSBI="
     },
     "comfy-kitchen": {
       "type": "GitRelease",

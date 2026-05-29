@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.4.6",
-      "revision": "b64a9c008fa80bb9832a04e3398660e249b8bf47",
-      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.4.6",
-      "hash": "sha256-8o/+rgReJhTz2rjiWEj/6fZ+iBNHb4O0jtlSEIjVSBI="
+      "version": "v0.4.7",
+      "revision": "2b496dc178e45e4837057fad13fbe0250cc7a2ea",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.4.7",
+      "hash": "sha256-i37BByo/FYXXxLOYDPDeG1verE135jU6ixXoYmS9mLg="
     },
     "comfy-kitchen": {
       "type": "GitRelease",
@@ -27,10 +27,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.2.8",
-      "revision": "db09609495ffaa0b10466b103e21446a2df622b8",
-      "url": "https://api.github.com/repos/Comfy-Org/comfy-kitchen/tarball/refs/tags/v0.2.8",
-      "hash": "sha256-u83fTb65wALGzgBZO53UJMEFSm1w727IBhiS5XVEoc4="
+      "version": "v0.2.9",
+      "revision": "5b45bd0172cff1a837bbbd996a28a48f3c6d1e18",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-kitchen/tarball/refs/tags/v0.2.9",
+      "hash": "sha256-izyNXcyXO6dvMw3bw3ZdTN70lDeY/S+DDFJ5Uf+/OfM="
     },
     "comfyui": {
       "type": "GitRelease",

@@ -168,9 +168,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "5618a748c14858a6e95a583baa28bb7c8da7976a",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/5618a748c14858a6e95a583baa28bb7c8da7976a.tar.gz",
-      "hash": "sha256-XLeTv2kz2+EuT8zUNg6i4/QPtQi5Xa4qaBXMCw0by94="
+      "revision": "625efbfa2fc20c31797dfffcbb41a26b6d91ab7b",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/625efbfa2fc20c31797dfffcbb41a26b6d91ab7b.tar.gz",
+      "hash": "sha256-o0yzs7LsoihYV6fEmSHj0WbboW0H5BbKZ4L3Nf2UR9k="
     },
     "comfyui-essentials": {
       "type": "Git",
@@ -194,9 +194,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "d3c75155b4254d8125b837b7a36d21800920f0f5",
-      "url": "https://github.com/Acly/comfyui-tooling-nodes/archive/d3c75155b4254d8125b837b7a36d21800920f0f5.tar.gz",
-      "hash": "sha256-SxCd7zxzWmaZ1nvG/sJWyXMa5WT9pH4lnjQHf0pkHJQ="
+      "revision": "a1e51904dec9a73b92865b512aa417f10938d608",
+      "url": "https://github.com/Acly/comfyui-tooling-nodes/archive/a1e51904dec9a73b92865b512aa417f10938d608.tar.gz",
+      "hash": "sha256-xJxv4tC6p5zA6Iti+XwA89b2K10v4VSl7m5B2vE0Mhs="
     },
     "comfyui-frame-interpolation": {
       "type": "Git",
@@ -272,9 +272,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b32f293d3f3ed9f2bc11099b30c8695ff984a593",
-      "url": "https://github.com/Acly/comfyui-inpaint-nodes/archive/b32f293d3f3ed9f2bc11099b30c8695ff984a593.tar.gz",
-      "hash": "sha256-P2FIa2UYQPinFUzsUwjfeIkOOEW5ZdFAWQDRrM4bTfs="
+      "revision": "12937559e1aea4bb073e9e82f915d1dab92f248b",
+      "url": "https://github.com/Acly/comfyui-inpaint-nodes/archive/12937559e1aea4bb073e9e82f915d1dab92f248b.tar.gz",
+      "hash": "sha256-HmQ6++AB1r5L9VFnATAxaLfIF3C6PkNrWdT+UhaHDBM="
     },
     "comfyui-ip-adapter": {
       "type": "Git",
@@ -311,9 +311,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "da298783bf109c275d31a94966786a9a66a63def",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/da298783bf109c275d31a94966786a9a66a63def.tar.gz",
-      "hash": "sha256-2Ysjq4beSy5vcNahIMIJ8sJ7bQy1kmlwqz9I0xvZ88U="
+      "revision": "db8005454bd9d9b45a141642bfe1e881616268c9",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/db8005454bd9d9b45a141642bfe1e881616268c9.tar.gz",
+      "hash": "sha256-B83zP38Qrqoj0ysSAl6yhOsMa38NSyZu29JMHWfVWqc="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

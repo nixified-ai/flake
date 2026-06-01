@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e328ca5fc5dc86300f8d40e8bc1664b14ef26ad8",
-      "url": "https://github.com/chrisgoringe/cg-image-filter/archive/e328ca5fc5dc86300f8d40e8bc1664b14ef26ad8.tar.gz",
-      "hash": "sha256-PwA+Y8HJ6fUF9g/8L7VYIeJ2xlOoyUB2MblEhf7RlC8="
+      "revision": "694f8444e67f44d601861c5604bb3e55c35daf9d",
+      "url": "https://github.com/chrisgoringe/cg-image-filter/archive/694f8444e67f44d601861c5604bb3e55c35daf9d.tar.gz",
+      "hash": "sha256-6iclewUOmbPf3wsy4EO2Z8f03U9A7j9J/FMbwLwIkLQ="
     },
     "comfyui-cg-use-everywhere": {
       "type": "Git",

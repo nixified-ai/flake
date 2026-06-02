@@ -652,6 +652,19 @@
             "revision": "4d279969d7b08a24857f7455b362b745d6dcf2d0",
             "url": "https://github.com/heshengtao/comfyui_LLM_party/archive/4d279969d7b08a24857f7455b362b745d6dcf2d0.tar.gz",
             "hash": "sha256-Fxn+F/X1uZbDYiW0w+/H9z2GFqvuBj0bpqLFRyATWM8="
+        },
+        "comfyui-memory-cleanup": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "LAOGOU-666",
+                "repo": "Comfyui-Memory_Cleanup"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "58de13a6090e04408e343501ff8902c034d9f518",
+            "url": "https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup/archive/58de13a6090e04408e343501ff8902c034d9f518.tar.gz",
+            "hash": "sha256-/rZ31XHev15YttuxM0HRMf2gcUvp9iEVi1YGhDs8jb8="
         }
     },
     "version": 7

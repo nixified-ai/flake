@@ -691,6 +691,19 @@
             "revision": "23f4602191f5e15040f6bf5079ec5dd4ebd347a5",
             "url": "https://github.com/ShmuelRonen/ComfyUI-VideoUpscale_WithModel/archive/23f4602191f5e15040f6bf5079ec5dd4ebd347a5.tar.gz",
             "hash": "sha256-ii+BSd9jFPLLaWduHjlhQUx5IpfowOMHPV5lztjDO24="
+        },
+        "comfyui-tripleksampler": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "VraethrDalkr",
+                "repo": "ComfyUI-TripleKSampler"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "b35509c84ff8a82f9111418aad8611a2ec3ef216",
+            "url": "https://github.com/VraethrDalkr/ComfyUI-TripleKSampler/archive/b35509c84ff8a82f9111418aad8611a2ec3ef216.tar.gz",
+            "hash": "sha256-RCqNtRhfSUGl3cGRQwQxStgemCjZQUezG/e9IX0moW4="
         }
     },
     "version": 7

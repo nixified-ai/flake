@@ -639,6 +639,19 @@
             "revision": "b3e416cd27b764ada141e03964873d27361ec62a",
             "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/b3e416cd27b764ada141e03964873d27361ec62a.tar.gz",
             "hash": "sha256-6k0sdG7cH56eHmZ/ghP744VoIeI+CePVpqRp2lJ7MyY="
+        },
+        "comfyui-llm-party": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "heshengtao",
+                "repo": "comfyui_LLM_party"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "4d279969d7b08a24857f7455b362b745d6dcf2d0",
+            "url": "https://github.com/heshengtao/comfyui_LLM_party/archive/4d279969d7b08a24857f7455b362b745d6dcf2d0.tar.gz",
+            "hash": "sha256-Fxn+F/X1uZbDYiW0w+/H9z2GFqvuBj0bpqLFRyATWM8="
         }
     },
     "version": 7

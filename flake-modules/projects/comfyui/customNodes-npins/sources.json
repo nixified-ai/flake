@@ -704,6 +704,19 @@
             "revision": "b35509c84ff8a82f9111418aad8611a2ec3ef216",
             "url": "https://github.com/VraethrDalkr/ComfyUI-TripleKSampler/archive/b35509c84ff8a82f9111418aad8611a2ec3ef216.tar.gz",
             "hash": "sha256-RCqNtRhfSUGl3cGRQwQxStgemCjZQUezG/e9IX0moW4="
+        },
+        "comfyui-freememory": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "ShmuelRonen",
+                "repo": "ComfyUI-FreeMemory"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "44fc13f97feec9fdb50ccf342ad64eeb52a95512",
+            "url": "https://github.com/ShmuelRonen/ComfyUI-FreeMemory/archive/44fc13f97feec9fdb50ccf342ad64eeb52a95512.tar.gz",
+            "hash": "sha256-MNQWB2e2f//nuHG+WoXkkKrcfH3vKsS+tX5O07IZKFU="
         }
     },
     "version": 7

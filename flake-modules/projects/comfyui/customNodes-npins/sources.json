@@ -574,6 +574,19 @@
             "revision": "d23db9aa544de9a6d4c609cb7005fa9e0d42031d",
             "url": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack/archive/d23db9aa544de9a6d4c609cb7005fa9e0d42031d.tar.gz",
             "hash": "sha256-XjV52EyXQ9pqkntKFB53goJ2oTQ+wjTYQCmE9uVlgJM="
+        },
+        "comfyui-comfyroll-customnodes": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "Suzie1",
+                "repo": "ComfyUI_Comfyroll_CustomNodes"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+            "url": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/archive/d78b780ae43fcf8c6b7c6505e6ffb4584281ceca.tar.gz",
+            "hash": "sha256-+qhDJ9hawSEg9AGBz8w+UzohMFhgZDOzvenw8xVVyPc="
         }
     },
     "version": 7

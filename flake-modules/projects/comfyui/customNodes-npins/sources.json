@@ -678,6 +678,19 @@
             "revision": "5bd85aaf7616878471469c4ec7e11bbd0cef3bf2",
             "url": "https://github.com/jamesWalker55/comfyui-various/archive/5bd85aaf7616878471469c4ec7e11bbd0cef3bf2.tar.gz",
             "hash": "sha256-8Yhq5QWNg9etRyr/l5V55CIpW+SFA1E+iWJN8RuN/Pg="
+        },
+        "comfyui-videoupscale-withmodel": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "ShmuelRonen",
+                "repo": "ComfyUI-VideoUpscale_WithModel"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "23f4602191f5e15040f6bf5079ec5dd4ebd347a5",
+            "url": "https://github.com/ShmuelRonen/ComfyUI-VideoUpscale_WithModel/archive/23f4602191f5e15040f6bf5079ec5dd4ebd347a5.tar.gz",
+            "hash": "sha256-ii+BSd9jFPLLaWduHjlhQUx5IpfowOMHPV5lztjDO24="
         }
     },
     "version": 7

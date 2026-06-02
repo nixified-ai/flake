@@ -600,6 +600,19 @@
             "revision": "effd40139023520318e5ebd900d0a90d566ffc5f",
             "url": "https://github.com/woct0rdho/ComfyUI-RadialAttn/archive/effd40139023520318e5ebd900d0a90d566ffc5f.tar.gz",
             "hash": "sha256-gIkkWDPq7n/G2m7YETY6/IxIeQ73eRQs68N84iQV+IE="
+        },
+        "derfuu-comfyui-moddednodes": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "Derfuu",
+                "repo": "Derfuu_ComfyUI_ModdedNodes"
+            },
+            "branch": "master",
+            "submodules": false,
+            "revision": "d0905bed31249f2bd0814c67585cf4fe3c77c015",
+            "url": "https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes/archive/d0905bed31249f2bd0814c67585cf4fe3c77c015.tar.gz",
+            "hash": "sha256-6Sd0N5UG1ImYwhjPPBNpj4uoVhwrQr974QVRd0y0P9Q="
         }
     },
     "version": 7

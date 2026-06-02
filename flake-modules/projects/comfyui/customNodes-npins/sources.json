@@ -613,6 +613,19 @@
             "revision": "d0905bed31249f2bd0814c67585cf4fe3c77c015",
             "url": "https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes/archive/d0905bed31249f2bd0814c67585cf4fe3c77c015.tar.gz",
             "hash": "sha256-6Sd0N5UG1ImYwhjPPBNpj4uoVhwrQr974QVRd0y0P9Q="
+        },
+        "comfyui-huggingface": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "huchukato",
+                "repo": "ComfyUI-HuggingFace"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "f15b11c09a27441980849db35739a92872df9e80",
+            "url": "https://github.com/huchukato/ComfyUI-HuggingFace/archive/f15b11c09a27441980849db35739a92872df9e80.tar.gz",
+            "hash": "sha256-ySp9/oN9ycx79GT9ffLMVFGoVXaw2GEmjBnK4dZMCis="
         }
     },
     "version": 7

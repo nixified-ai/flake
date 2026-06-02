@@ -665,6 +665,19 @@
             "revision": "58de13a6090e04408e343501ff8902c034d9f518",
             "url": "https://github.com/LAOGOU-666/Comfyui-Memory_Cleanup/archive/58de13a6090e04408e343501ff8902c034d9f518.tar.gz",
             "hash": "sha256-/rZ31XHev15YttuxM0HRMf2gcUvp9iEVi1YGhDs8jb8="
+        },
+        "comfyui-various": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "jamesWalker55",
+                "repo": "comfyui-various"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "5bd85aaf7616878471469c4ec7e11bbd0cef3bf2",
+            "url": "https://github.com/jamesWalker55/comfyui-various/archive/5bd85aaf7616878471469c4ec7e11bbd0cef3bf2.tar.gz",
+            "hash": "sha256-8Yhq5QWNg9etRyr/l5V55CIpW+SFA1E+iWJN8RuN/Pg="
         }
     },
     "version": 7

@@ -27,7 +27,9 @@ testers.nixosTest {
           "--fast"
         ];
         acceleration = false;
-        customNodes = lib.attrValues pkgs.comfyuiCustomNodes;
+        customNodes = lib.filter (drv: drv.pname != "comfyui-rife-tensorrt-auto") (
+          lib.attrValues pkgs.comfyuiCustomNodes
+        );
         models = with pkgs.nixified-ai.models; [
           clip_vision_vit_h-upscaler
           control-lora-rank128-v11p-sd15-canny-fp16

@@ -626,6 +626,19 @@
             "revision": "f15b11c09a27441980849db35739a92872df9e80",
             "url": "https://github.com/huchukato/ComfyUI-HuggingFace/archive/f15b11c09a27441980849db35739a92872df9e80.tar.gz",
             "hash": "sha256-ySp9/oN9ycx79GT9ffLMVFGoVXaw2GEmjBnK4dZMCis="
+        },
+        "comfyui-rife-tensorrt-auto": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "huchukato",
+                "repo": "ComfyUI-RIFE-TensorRT-Auto"
+            },
+            "branch": "master",
+            "submodules": false,
+            "revision": "b3e416cd27b764ada141e03964873d27361ec62a",
+            "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/b3e416cd27b764ada141e03964873d27361ec62a.tar.gz",
+            "hash": "sha256-6k0sdG7cH56eHmZ/ghP744VoIeI+CePVpqRp2lJ7MyY="
         }
     },
     "version": 7

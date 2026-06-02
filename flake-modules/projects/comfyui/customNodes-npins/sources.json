@@ -587,6 +587,19 @@
             "revision": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
             "url": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes/archive/d78b780ae43fcf8c6b7c6505e6ffb4584281ceca.tar.gz",
             "hash": "sha256-+qhDJ9hawSEg9AGBz8w+UzohMFhgZDOzvenw8xVVyPc="
+        },
+        "comfyui-radialattn": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "woct0rdho",
+                "repo": "ComfyUI-RadialAttn"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "effd40139023520318e5ebd900d0a90d566ffc5f",
+            "url": "https://github.com/woct0rdho/ComfyUI-RadialAttn/archive/effd40139023520318e5ebd900d0a90d566ffc5f.tar.gz",
+            "hash": "sha256-gIkkWDPq7n/G2m7YETY6/IxIeQ73eRQs68N84iQV+IE="
         }
     },
     "version": 7

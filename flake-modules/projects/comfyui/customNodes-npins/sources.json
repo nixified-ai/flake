@@ -730,6 +730,19 @@
             "revision": "5e286e835bb6b36e610ee657e51e770a9eae207d",
             "url": "https://github.com/o-l-l-i/ComfyUI-Olm-DragCrop/archive/5e286e835bb6b36e610ee657e51e770a9eae207d.tar.gz",
             "hash": "sha256-GAkaHD+baOkFbHmyEeVv57t2N0sxFpsKFGkcjZhPw1c="
+        },
+        "comfyui-resolution-master": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "Azornes",
+                "repo": "Comfyui-Resolution-Master"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "b47aaf485aff6e3ef0242153212d66af489d763b",
+            "url": "https://github.com/Azornes/Comfyui-Resolution-Master/archive/b47aaf485aff6e3ef0242153212d66af489d763b.tar.gz",
+            "hash": "sha256-i2vs6u/vF4VjI8gqAeW/UrruWbwwCxCPyRTiRXiPpqo="
         }
     },
     "version": 7

@@ -717,6 +717,19 @@
             "revision": "44fc13f97feec9fdb50ccf342ad64eeb52a95512",
             "url": "https://github.com/ShmuelRonen/ComfyUI-FreeMemory/archive/44fc13f97feec9fdb50ccf342ad64eeb52a95512.tar.gz",
             "hash": "sha256-MNQWB2e2f//nuHG+WoXkkKrcfH3vKsS+tX5O07IZKFU="
+        },
+        "comfyui-olm-dragcrop": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "o-l-l-i",
+                "repo": "ComfyUI-Olm-DragCrop"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "5e286e835bb6b36e610ee657e51e770a9eae207d",
+            "url": "https://github.com/o-l-l-i/ComfyUI-Olm-DragCrop/archive/5e286e835bb6b36e610ee657e51e770a9eae207d.tar.gz",
+            "hash": "sha256-GAkaHD+baOkFbHmyEeVv57t2N0sxFpsKFGkcjZhPw1c="
         }
     },
     "version": 7

@@ -743,6 +743,58 @@
             "revision": "b47aaf485aff6e3ef0242153212d66af489d763b",
             "url": "https://github.com/Azornes/Comfyui-Resolution-Master/archive/b47aaf485aff6e3ef0242153212d66af489d763b.tar.gz",
             "hash": "sha256-i2vs6u/vF4VjI8gqAeW/UrruWbwwCxCPyRTiRXiPpqo="
+        },
+        "comfyui-florence2": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "kijai",
+                "repo": "ComfyUI-Florence2"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "9ece3de914214c5f581d725167bc9d0eeb0d1120",
+            "url": "https://github.com/kijai/ComfyUI-Florence2/archive/9ece3de914214c5f581d725167bc9d0eeb0d1120.tar.gz",
+            "hash": "sha256-TlAntRh6US5IkLzY32K5qTpr8KMQQmEQzUeExAHgDJA="
+        },
+        "comfyui-joycaption": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "1038lab",
+                "repo": "ComfyUI-JoyCaption"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "a0e9f0a17a5deb933fef341e2c7b0131e4f83c8a",
+            "url": "https://github.com/1038lab/ComfyUI-JoyCaption/archive/a0e9f0a17a5deb933fef341e2c7b0131e4f83c8a.tar.gz",
+            "hash": "sha256-w8kykoyTe7uPZFTP82WRAgf3KydMV8u5uubO1/X7MXE="
+        },
+        "comfyui-moondream": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "kijai",
+                "repo": "ComfyUI-moondream"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "b97ad4718821d7cee5eacce139c94c9de51268b8",
+            "url": "https://github.com/kijai/ComfyUI-moondream/archive/b97ad4718821d7cee5eacce139c94c9de51268b8.tar.gz",
+            "hash": "sha256-JIsV3DO3V2UB9j+TPWtuahHcn0ext/wFQWtuM9cp28I="
+        },
+        "comfyui-ollama": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "stavsap",
+                "repo": "comfyui-ollama"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "6db7560576e5a59488708e6be13e07b5aba2432a",
+            "url": "https://github.com/stavsap/comfyui-ollama/archive/6db7560576e5a59488708e6be13e07b5aba2432a.tar.gz",
+            "hash": "sha256-yUv3pZ9Xq8COyIqWOgN4N2UNX6Jx8GMgm5eXOmf0JLI="
         }
     },
     "version": 7

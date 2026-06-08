@@ -795,6 +795,19 @@
             "revision": "6db7560576e5a59488708e6be13e07b5aba2432a",
             "url": "https://github.com/stavsap/comfyui-ollama/archive/6db7560576e5a59488708e6be13e07b5aba2432a.tar.gz",
             "hash": "sha256-yUv3pZ9Xq8COyIqWOgN4N2UNX6Jx8GMgm5eXOmf0JLI="
+        },
+        "comfyui-simple-qwen3-vl-gguf": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "KLL535",
+                "repo": "ComfyUI_Simple_Qwen3-VL-gguf"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "bf8055ccb8a7ce970169f2ee0635764ec47d1560",
+            "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/bf8055ccb8a7ce970169f2ee0635764ec47d1560.tar.gz",
+            "hash": "sha256-d9jlWc+NQljP+Gga+X88RrTvQV7HbjTa6W7MZEDmT4c="
         }
     },
     "version": 7

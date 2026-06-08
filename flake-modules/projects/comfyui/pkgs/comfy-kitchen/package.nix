@@ -1,9 +1,12 @@
 {
+  config,
+  lib,
   python3Packages,
   comfyuiNpins,
   comfyuiLib,
   cudaPackages,
   COMFY_CUDA_ARCHS,
+  cudaSupport ? config.cudaSupport,
 }:
 let
   npin = comfyuiLib.nodePropsFromNpinSource comfyuiNpins.comfy-kitchen;
@@ -21,29 +24,33 @@ python3Packages.callPackage (
   buildPythonPackage {
     pname = "comfy-kitchen";
     inherit (npin) version src;
-    format = "pyproject";
+    # Build with setup.py directly, required for cudaless build
+    format = "setuptools";
 
     nativeBuildInputs = [
       cmake
       ninja
       # which
-      cudaPackages.cuda_nvcc
       setuptools
       wheel
       nanobind
-    ];
+    ] ++ lib.optional cudaSupport cudaPackages.cuda_nvcc;
 
-    buildInputs = [
+    buildInputs = lib.optional cudaSupport [
       cudaPackages.cuda_cudart
       cudaPackages.libcublas
     ];
 
-    env.COMFY_CUDA_ARCHS = builtins.replaceStrings [ "." ] [ "" ] COMFY_CUDA_ARCHS;
+    env = lib.optionalAttrs cudaSupport {
+      COMFY_CUDA_ARCHS = builtins.replaceStrings [ "." ] [ "" ] COMFY_CUDA_ARCHS;
+    };
+
+    setupPyGlobalFlags = lib.optional (!cudaSupport) "--no-cuda";
 
     # Disable standard CMake configure phase as setup.py handles it
     dontUseCmakeConfigure = true;
 
-    postPatch = ''
+    postPatch = lib.optionalString cudaSupport ''
       # 1. Patch setup.py to read COMFY_CUDA_ARCHS env var for default archs
       # match the whole assignment to be safe about quotes
       substituteInPlace setup.py \
@@ -66,7 +73,7 @@ python3Packages.callPackage (
       sed -i "s|\"libcublasLt.so.13\",|\"$LIB_CUBLASLT\", \"libcublasLt.so.12\", \"libcublasLt.so.11\", \"libcublasLt.so.13\",|g" comfy_kitchen/backends/cuda/cublaslt_runtime.h
     '';
 
-    preConfigure = ''
+    preConfigure = lib.optionalString cudaSupport ''
       export CUDA_HOME=${cudaPackages.cuda_nvcc}
     '';
 

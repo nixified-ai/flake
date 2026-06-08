@@ -311,9 +311,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ce5967b3bfbf569d14dd4d721ac9906458e5e7b6",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/ce5967b3bfbf569d14dd4d721ac9906458e5e7b6.tar.gz",
-      "hash": "sha256-mLHRcB1vsCe7gxTzQHzBS5lsIxL3jLOPvkz1FxHacTc="
+      "revision": "be1e8807bb8b21175ce91cd5018518337b94c3db",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/be1e8807bb8b21175ce91cd5018518337b94c3db.tar.gz",
+      "hash": "sha256-0Y7timzWBmaUEqdi1fGY1J/O4MFLjnPQZUvkUo5tvfU="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

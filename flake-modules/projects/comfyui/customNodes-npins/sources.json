@@ -220,9 +220,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e7b96a33f0e4349da829ce8a14c892efc64d7353",
-      "url": "https://github.com/PanicTitan/ComfyUI-Gallery/archive/e7b96a33f0e4349da829ce8a14c892efc64d7353.tar.gz",
-      "hash": "sha256-6IIi2Jm9i7yGJ/8nNqbP4W/pzoAiDjS0op2ikOlcHuM="
+      "revision": "7224b12bcc461837c95923a092696fa9b08046f9",
+      "url": "https://github.com/PanicTitan/ComfyUI-Gallery/archive/7224b12bcc461837c95923a092696fa9b08046f9.tar.gz",
+      "hash": "sha256-GIau01qyKtSCgQXX2Mi2KITkCFKcNqi+Uort4tslZZ4="
     },
     "comfyui-gguf": {
       "type": "Git",
@@ -311,9 +311,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "be1e8807bb8b21175ce91cd5018518337b94c3db",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/be1e8807bb8b21175ce91cd5018518337b94c3db.tar.gz",
-      "hash": "sha256-0Y7timzWBmaUEqdi1fGY1J/O4MFLjnPQZUvkUo5tvfU="
+      "revision": "e64fcbb92cf5a671a5b9aa808af28ce5932e05c9",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/e64fcbb92cf5a671a5b9aa808af28ce5932e05c9.tar.gz",
+      "hash": "sha256-EyOqObf/GQsUvLzDrHaT4ZZXUQWOibFcBauJ+lHKXxo="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

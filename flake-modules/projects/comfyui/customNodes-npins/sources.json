@@ -808,6 +808,19 @@
             "revision": "bf8055ccb8a7ce970169f2ee0635764ec47d1560",
             "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/bf8055ccb8a7ce970169f2ee0635764ec47d1560.tar.gz",
             "hash": "sha256-d9jlWc+NQljP+Gga+X88RrTvQV7HbjTa6W7MZEDmT4c="
+        },
+        "comfyui-gemma4-gguf": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "promptlo",
+                "repo": "ComfyUI-Gemma4-GGUF"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "71d6c5f20392ee3a448c9be9f11ea1feb25e2f31",
+            "url": "https://github.com/promptlo/ComfyUI-Gemma4-GGUF/archive/71d6c5f20392ee3a448c9be9f11ea1feb25e2f31.tar.gz",
+            "hash": "sha256-arvoNHr7oEDdYe3qa17Dk0dx4AirbAOJhtyWmpbZG0w="
         }
     },
     "version": 7

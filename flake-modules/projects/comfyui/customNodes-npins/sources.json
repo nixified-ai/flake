@@ -834,6 +834,45 @@
             "revision": "652565fc032c77855a99a941f2c3a33e603a8258",
             "url": "https://github.com/princepainter/ComfyUI-PainterI2V/archive/652565fc032c77855a99a941f2c3a33e603a8258.tar.gz",
             "hash": "sha256-EsU3lSSnE84n1ZRfsKVb2ivurC8MzQ3BH6eOD1Q2ODI="
+        },
+        "comfyui-asyncpause": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "vilanele",
+                "repo": "ComfyUI-AsyncPause"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "78fe62a28e40b40de1f4cd7b2aa2a0cf33092277",
+            "url": "https://github.com/vilanele/ComfyUI-AsyncPause/archive/78fe62a28e40b40de1f4cd7b2aa2a0cf33092277.tar.gz",
+            "hash": "sha256-BJaA6wxwKI14eotvMFSE3PBns5JEng5fhvxuxaAeGsM="
+        },
+        "comfyui-vfi": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "GACLove",
+                "repo": "ComfyUI-VFI"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "6176a430f12cd16003f4664c1e3c6af8e96cc3c6",
+            "url": "https://github.com/GACLove/ComfyUI-VFI/archive/6176a430f12cd16003f4664c1e3c6af8e96cc3c6.tar.gz",
+            "hash": "sha256-Iw8yzW01QVEAOvgc1S8z8+hhsybj/JProLSPtJtvvf0="
+        },
+        "comfyui-seedvr2-videoupscaler": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "numz",
+                "repo": "ComfyUI-SeedVR2_VideoUpscaler"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "4490bd1f482e026674543386bb2a4d176da245b9",
+            "url": "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler/archive/4490bd1f482e026674543386bb2a4d176da245b9.tar.gz",
+            "hash": "sha256-6nsqFflLw9vYH/du35ET46fdAm1NMjjTe2bA8JmaBE4="
         }
     },
     "version": 7

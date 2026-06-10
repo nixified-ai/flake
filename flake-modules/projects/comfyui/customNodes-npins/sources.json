@@ -873,6 +873,19 @@
             "revision": "4490bd1f482e026674543386bb2a4d176da245b9",
             "url": "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler/archive/4490bd1f482e026674543386bb2a4d176da245b9.tar.gz",
             "hash": "sha256-6nsqFflLw9vYH/du35ET46fdAm1NMjjTe2bA8JmaBE4="
+        },
+        "comfyui-pixaroma": {
+            "type": "Git",
+            "repository": {
+                "type": "GitLab",
+                "repo_path": "pixaroma/comfyui-pixaroma",
+                "server": "https://gitlab.com/"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "509ef341f439b381d07ceea5e5559eded186af50",
+            "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=509ef341f439b381d07ceea5e5559eded186af50",
+            "hash": "sha256-Gu2cLMyaUKGB+gpDhrIOl2IvHsjQmi7WyLQRAFvXR5w="
         }
     },
     "version": 7

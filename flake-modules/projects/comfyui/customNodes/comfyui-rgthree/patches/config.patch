@@ -18,7 +18,7 @@ new file mode 100644
 index 0000000..c5a1e6b
 --- /dev/null
 +++ b/py/patches.py
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,33 @@
 +import os
 +import shutil
 +
@@ -43,8 +43,11 @@ index 0000000..c5a1e6b
 +def get_file_path_for_model(model_type, file):
 +    """Get file path & symlink if it does not exist"""
 +    file_path = os.path.join(CONFIG_DIR, model_type, file)
++    src_full_path = folder_paths.get_full_path(model_type, file)
++    if src_full_path is None:
++        return file_path
 +    # Resolve symlink to avoid creating nested symlinks
-+    src_file_path = os.path.realpath(folder_paths.get_full_path(model_type, file))
++    src_file_path = os.path.realpath(src_full_path)
 +    if not file_exists(file_path) and file_exists(src_file_path):
 +        os.makedirs(os.path.dirname(file_path), exist_ok=True)
 +        os.symlink(src_file_path, file_path)

@@ -36,7 +36,7 @@ python3Packages.callPackage (
       nanobind
     ] ++ lib.optional cudaSupport cudaPackages.cuda_nvcc;
 
-    buildInputs = lib.optional cudaSupport [
+    buildInputs = lib.optionals cudaSupport [
       cudaPackages.cuda_cudart
       cudaPackages.libcublas
     ];

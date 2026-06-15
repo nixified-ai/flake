@@ -74,9 +74,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "353ef3d792d12ff2a593df60b510eb1996b7a41b",
-      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/353ef3d792d12ff2a593df60b510eb1996b7a41b.tar.gz",
-      "hash": "sha256-BIQPqnG7aPKFDbSBurbSundxjtng2rGdjRFC+rW1Zsg="
+      "revision": "632ed7bb51bb18ceb03ccaefe1f34be8bd416500",
+      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/632ed7bb51bb18ceb03ccaefe1f34be8bd416500.tar.gz",
+      "hash": "sha256-TWJbdU06FoRFwzxiNcM99muodyISkgvZDlfBR4bMrMc="
     },
     "comfyui-colors-mz": {
       "type": "Git",
@@ -415,9 +415,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "119679d8d8d26e6db52757e705488abb6399d7d4",
-      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/119679d8d8d26e6db52757e705488abb6399d7d4.tar.gz",
-      "hash": "sha256-cSej7/e2cfRsAVHvS/4vY1sml+tQncOBGXfIaX280EE="
+      "revision": "419de2d7c78f415dde9aa352a7231820ebfc17a4",
+      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/419de2d7c78f415dde9aa352a7231820ebfc17a4.tar.gz",
+      "hash": "sha256-kBm+jK2uuwGdK5NCH848AQB5WTtX/WeNsOqdGlS79Kk="
     },
     "comfyui-rgthree": {
       "type": "Git",

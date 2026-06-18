@@ -43,10 +43,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.25.0",
-      "revision": "135abed8da169e33ab0b86550e05e3ae55d6df8c",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.25.0",
-      "hash": "sha256-A7XuWe/A0We+OvASS+LgkQUHhxMFDRUA3BrxmY8ju9c="
+      "version": "v0.25.1",
+      "revision": "eca4757d653654deb5744edf16a862f352800fdc",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.25.1",
+      "hash": "sha256-wCszvmDR7wrmM5Yhl3jFEnqLTkmXZuPC5fTgiqugBG4="
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",

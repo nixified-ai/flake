@@ -886,6 +886,19 @@
             "revision": "509ef341f439b381d07ceea5e5559eded186af50",
             "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=509ef341f439b381d07ceea5e5559eded186af50",
             "hash": "sha256-Gu2cLMyaUKGB+gpDhrIOl2IvHsjQmi7WyLQRAFvXR5w="
+        },
+        "comfyui-ib-customnodes": {
+            "type": "Git",
+            "repository": {
+                "type": "GitHub",
+                "owner": "Chaoses-Ib",
+                "repo": "ComfyUI_Ib_CustomNodes"
+            },
+            "branch": "main",
+            "submodules": false,
+            "revision": "61b3e29078cde33237d2ca61f64defb86035e60a",
+            "url": "https://github.com/Chaoses-Ib/ComfyUI_Ib_CustomNodes/archive/61b3e29078cde33237d2ca61f64defb86035e60a.tar.gz",
+            "hash": "sha256-cd/jrXYb1bjbRHPTKZfAlaJ0BWkSatovNHETLGG3FF4="
         }
     },
     "version": 7

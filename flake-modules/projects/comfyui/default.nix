@@ -10,33 +10,54 @@
       self: super:
       let
         inherit (self) lib comfyuiLib customCustomNodesPins;
-        comfyuiCustomNodes = lib.mapAttrs (
-          name: pin:
-          let
-            inherit (self) callPackage;
-            packageBase = callPackage (
-              { stdenv }: stdenv.mkDerivation (comfyuiLib.nodePropsFromNpinSource pin)
-            ) { };
-            overridesFile = ./customNodes/${name}/package.nix;
-            packageWithOverrides =
-              if lib.pathExists overridesFile then
-                let
-                  overridePayload =
-                    lib.removeAttrs (callPackage overridesFile { })
-                      # these cuses issues down the line when building the package
-                      # TODO: is there a way to get callPackage style dependency
-                      # injection without these being added?
-                      [
-                        "override"
-                        "overrideDerivation"
-                      ];
-                in
-                packageBase.overrideAttrs overridePayload
-              else
-                packageBase;
-          in
-          comfyuiLib.mkComfyUICustomNode packageWithOverrides
-        ) customCustomNodesPins;
+        comfyuiCustomNodes =
+          (lib.mapAttrs (
+            name: pin:
+            let
+              inherit (self) callPackage;
+              packageBase = callPackage (
+                { stdenv }: stdenv.mkDerivation (comfyuiLib.nodePropsFromNpinSource pin)
+              ) { };
+              overridesFile = ./customNodes/${name}/package.nix;
+              packageWithOverrides =
+                if lib.pathExists overridesFile then
+                  let
+                    overridePayload =
+                      lib.removeAttrs (callPackage overridesFile { })
+                        # these cuses issues down the line when building the package
+                        # TODO: is there a way to get callPackage style dependency
+                        # injection without these being added?
+                        [
+                          "override"
+                          "overrideDerivation"
+                        ];
+                  in
+                  packageBase.overrideAttrs overridePayload
+                else
+                  packageBase;
+            in
+            comfyuiLib.mkComfyUICustomNode packageWithOverrides
+          ) customCustomNodesPins)
+          // (
+            let
+              localFreezeString = self.callPackage (
+                { stdenv }:
+                comfyuiLib.mkComfyUICustomNode (
+                  stdenv.mkDerivation {
+                    pname = "comfyui-freezestring";
+                    version = "0.1.0";
+                    src = ../../../ComfyUI-FreezeString;
+                  }
+                )
+              ) { };
+            in
+            {
+              comfyui-freezestring = localFreezeString;
+              cofmyui-freezestring = localFreezeString.overrideAttrs (old: {
+                pname = "cofmyui-freezestring";
+              });
+            }
+          );
       in
       {
         COMFY_CUDA_ARCHS = "8.6";
@@ -126,6 +147,9 @@
       checks = {
         comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
         comfyui-negative-test = pkgs.callPackage ./vm-test/negative-test.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
+        comfyui-freeze-string-test = pkgs.callPackage ./vm-test/freeze-string-test.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         };
       }

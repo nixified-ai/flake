@@ -20,10 +20,4 @@ finalAttrs: previousAttrs: {
     ]);
 
   env.DISABLE_TENSORRT_AUTO_INSTALL = "true";
-
-  postPatch = ''
-    # Disable the auto-installation logic that calls pip
-    substituteInPlace __init__.py \
-      --replace-fail "_auto_install_tensorrt()" "pass # Disabled for Nix"
-  '';
 }

@@ -123,7 +123,24 @@
           ];
     in
     {
-      checks.comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+      checks = {
+        comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+        comfyui-negative-test = pkgs.callPackage ./vm-test/negative-test.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
+      }
+      // (builtins.removeAttrs
+        (pkgs.callPackage ./vm-test/custom-nodes-tests.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        })
+        [
+          "override"
+          "overrideDerivation"
+          "comfyui-custom-node-comfyui-radialattn"
+          "comfyui-custom-node-comfyui-rife-tensorrt-auto"
+          "comfyui-custom-node-comfyui-seedvr2-videoupscaler"
+        ]
+      );
       packages = {
         comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui // {
           passthru = nvidiaPkgs.comfyuiPackages.comfyui.passthru // {

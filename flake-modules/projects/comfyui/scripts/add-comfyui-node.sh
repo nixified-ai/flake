@@ -30,7 +30,17 @@ if [[ ! "$NAME" == comfyui-* ]]; then
     NAME="comfyui-$NAME"
 fi
 
-echo "Adding $OWNER/$REPO as $NAME from $PROVIDER..."
-# Try main branch first, fallback to master if it fails
-comfyui-nodes-npins add "$PROVIDER" "$OWNER" "$REPO" --name "$NAME" -b main || \
-comfyui-nodes-npins add "$PROVIDER" "$OWNER" "$REPO" --name "$NAME" -b master
+echo "Detecting default branch for $OWNER/$REPO..."
+if [[ "$PROVIDER" == "gitlab" ]]; then
+    BRANCH=$(gitlab-get-default-branch "$OWNER/$REPO")
+else
+    BRANCH=$(github-get-default-branch "$OWNER/$REPO")
+fi
+
+if [[ -z "$BRANCH" || "$BRANCH" == "null" ]]; then
+    echo "Failed to detect default branch. Falling back to 'main'..."
+    BRANCH="main"
+fi
+
+echo "Adding $OWNER/$REPO as $NAME from $PROVIDER (branch: $BRANCH)..."
+comfyui-nodes-npins add "$PROVIDER" "$OWNER" "$REPO" --name "$NAME" -b "$BRANCH"

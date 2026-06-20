@@ -19,7 +19,7 @@ def find_sources(specified_path):
     env_path = os.environ.get("COMFYUI_SOURCES_JSON")
     if env_path and os.path.exists(env_path):
         return env_path
-    
+
     # Check relative to cwd
     cwd_paths = [
         "flake-modules/projects/comfyui/customNodes-npins/sources.json",
@@ -29,7 +29,7 @@ def find_sources(specified_path):
     for p in cwd_paths:
         if os.path.exists(p):
             return p
-            
+
     # Check relative to script
     script_dir = os.path.dirname(os.path.realpath(__file__))
     rel_paths = [
@@ -45,12 +45,12 @@ def get_node_map(specified_path):
     if specified_path:
         with open(specified_path, 'r') as f:
             return json.load(f)
-            
+
     env_path = os.environ.get("COMFYUI_EXTENSION_NODE_MAP")
     if env_path and os.path.exists(env_path):
         with open(env_path, 'r') as f:
             return json.load(f)
-            
+
     # Try downloading
     url = "https://raw.githubusercontent.com/Comfy-Org/ComfyUI-Manager/refs/heads/main/node_db/new/extension-node-map.json"
     try:
@@ -123,12 +123,14 @@ def main():
     normalized_repo_url = normalize_url(repo_url)
 
     nodes = None
+    found_repo = False
     for url, data in node_map.items():
         if normalize_url(url) == normalized_repo_url:
             nodes = data[0]
+            found_repo = True
             break
 
-    if not nodes:
+    if not found_repo:
         print(f"Error: Could not find nodes for {repo_url} in extension-node-map.json", file=sys.stderr)
         sys.exit(1)
 

@@ -48,9 +48,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "00058a4707495777a20778374b03d9e3c652d28e",
-      "url": "https://github.com/calcuis/gguf/archive/00058a4707495777a20778374b03d9e3c652d28e.tar.gz",
-      "hash": "sha256-nLkZVg+3OGFgkTjoWCYArKs9QIwFctVMKZZM3s/9EbQ="
+      "revision": "8430c05a3f99a43db61ba7727009be6bc30e0a57",
+      "url": "https://github.com/calcuis/gguf/archive/8430c05a3f99a43db61ba7727009be6bc30e0a57.tar.gz",
+      "hash": "sha256-UJZ9Ynqbu1sJ/kDt57gLiLjk/pJe/Yt8xhd4mfsjOQk="
     },
     "comfyui-cg-image-filter": {
       "type": "Git",
@@ -168,9 +168,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "625efbfa2fc20c31797dfffcbb41a26b6d91ab7b",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/625efbfa2fc20c31797dfffcbb41a26b6d91ab7b.tar.gz",
-      "hash": "sha256-o0yzs7LsoihYV6fEmSHj0WbboW0H5BbKZ4L3Nf2UR9k="
+      "revision": "54d080bf6a4f52da287e984f305243c10db097f5",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/54d080bf6a4f52da287e984f305243c10db097f5.tar.gz",
+      "hash": "sha256-40q3EN+ThHYyrGplYPFWpL71WR9/KXhbjX2T4uKfxfY="
     },
     "comfyui-essentials": {
       "type": "Git",

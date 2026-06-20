@@ -1,5 +1,21 @@
 {
   "pins": {
+    "ComfyUI-Manager": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Comfy-Org",
+        "repo": "ComfyUI-Manager"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "4.2.2",
+      "revision": "da5e88aae61c06e1396724e77dc5fa152732797f",
+      "url": "https://api.github.com/repos/Comfy-Org/ComfyUI-Manager/tarball/refs/tags/4.2.2",
+      "hash": "sha256-cnWBRuNj3ARQFWjy9j4tidL/e39spLqU/DG8xkwxvQg="
+    },
     "comfyui-adv-clip-emb": {
       "type": "Git",
       "repository": {

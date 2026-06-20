@@ -128,6 +128,9 @@
         [
           "override"
           "overrideDerivation"
+          "comfyui-custom-node-comfyui-radialattn"
+          "comfyui-custom-node-comfyui-rife-tensorrt-auto"
+          "comfyui-custom-node-comfyui-seedvr2-videoupscaler"
         ]
       );
       packages = {

@@ -117,6 +117,9 @@
     {
       checks = {
         comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+        comfyui-negative-test = pkgs.callPackage ./vm-test/negative-test.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
       }
       // (builtins.removeAttrs
         (pkgs.callPackage ./vm-test/custom-nodes-tests.nix {

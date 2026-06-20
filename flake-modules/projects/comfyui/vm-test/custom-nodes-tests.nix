@@ -89,17 +89,10 @@ let
     name: node:
     pkgs.testers.nixosTest {
       name = "comfyui-custom-node-${name}";
-      nodes.machine =
+      containers.machine =
         { pkgs, ... }:
         {
           imports = [ nixosModule ];
-          virtualisation.memorySize = 9216;
-          virtualisation.cores = 1;
-          zramSwap = {
-            enable = true;
-            algorithm = "zstd";
-            memoryPercent = 100;
-          };
           services.comfyui = {
             enable = true;
             host = "::,0.0.0.0";
@@ -114,9 +107,13 @@ let
               dummyOutputNodePkg
             ];
           };
+          systemd.services.comfyui.serviceConfig = {
+            PrivateUsers = lib.mkForce false;
+            ProtectSystem = lib.mkForce false;
+          };
         };
       testScript =
-        { nodes, ... }:
+        { containers, ... }:
         let
           test-workflow =
             pkgs.runCommand "test-workflow-${name}"
@@ -132,14 +129,14 @@ let
               '';
 
           apiTest = pkgs.writeShellScript "" ''
-            ${pkgs.lib.getExe pkgs.python3} ${./api.py} ${test-workflow}/workflow.json --port ${toString nodes.machine.services.comfyui.port}
+            ${pkgs.lib.getExe pkgs.python3} ${./api.py} ${test-workflow}/workflow.json --port ${toString containers.machine.services.comfyui.port}
           '';
         in
         ''
           start_all()
           machine.wait_for_unit("multi-user.target")
           machine.wait_for_unit("comfyui.service")
-          machine.wait_for_open_port(${toString nodes.machine.services.comfyui.port})
+          machine.wait_for_open_port(${toString containers.machine.services.comfyui.port})
           machine.succeed("${apiTest}")
         '';
     };

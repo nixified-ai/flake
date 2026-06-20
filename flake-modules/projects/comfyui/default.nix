@@ -112,7 +112,18 @@
           ];
     in
     {
-      checks.comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+      checks = {
+        comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+      }
+      // (builtins.removeAttrs
+        (pkgs.callPackage ./vm-test/custom-nodes-tests.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        })
+        [
+          "override"
+          "overrideDerivation"
+        ]
+      );
       packages = {
         comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui // {
           passthru = nvidiaPkgs.comfyuiPackages.comfyui.passthru // {

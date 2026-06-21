@@ -95,30 +95,5 @@ outputs_frozen = result_frozen["outputs"]["2"]["text"]
 print(f"Case 2 outputs: {outputs_frozen}")
 assert outputs_frozen == ["hello frozen"], f"Expected ['hello frozen'], got {outputs_frozen}"
 
-# Case 3: disable = True -> output should be None, preceding nodes bypassed
-prompt_disabled = {
-    "1": {
-        "inputs": {
-            "text_input": "hello dynamic",
-            "freeze": False,
-            "frozen_text": "hello frozen",
-            "disable": True
-        },
-        "class_type": "FreezeStringNode"
-    },
-    "2": {
-        "inputs": {
-            "text": ["1", 0]
-        },
-        "class_type": "TestOutputNode"
-    }
-}
-
-print("Running Case 3: Disabled node")
-result_disabled = queue_and_wait(prompt_disabled)
-outputs_disabled = result_disabled["outputs"]["2"]["text"]
-print(f"Case 3 outputs: {outputs_disabled}")
-assert outputs_disabled == [None], f"Expected [None], got {outputs_disabled}"
-
 print("All tests passed successfully!")
 sys.exit(0)

@@ -3,9 +3,11 @@ class FreezeStringNode:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "text_input": ("STRING", {"forceInput": True}),
                 "freeze": ("BOOLEAN", {"default": False}),
                 "frozen_text": ("STRING", {"multiline": True, "default": ""}),
+            },
+            "optional": {
+                "text_input": ("STRING", {"forceInput": True}),
             }
         }
 
@@ -15,11 +17,17 @@ class FreezeStringNode:
     CATEGORY = "utils"
     OUTPUT_NODE = True
 
-    def process(self, text_input, freeze, frozen_text):
+    @classmethod
+    def check_lazy_status(cls, freeze, frozen_text, **kwargs):
+        if freeze:
+            return []
+        return ["text_input"]
+
+    def process(self, freeze, frozen_text, text_input=None):
         if freeze:
             chosen_value = frozen_text
         else:
-            chosen_value = text_input
+            chosen_value = text_input if text_input is not None else ""
 
         # Batching Support: text_input might be a list of strings if batching is used.
         # Ensure the script handles converting lists into a single multiline string
@@ -37,7 +45,7 @@ class FreezeStringNode:
         }
 
     @classmethod
-    def IS_CHANGED(cls, text_input, freeze, frozen_text):
+    def IS_CHANGED(cls, freeze, frozen_text, text_input=None):
         if freeze:
             # If freeze is True, return the frozen_text string so ComfyUI caches it properly.
             return frozen_text

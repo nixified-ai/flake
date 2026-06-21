@@ -13,6 +13,7 @@ class FreezeStringNode:
     RETURN_NAMES = ("text",)
     FUNCTION = "process"
     CATEGORY = "utils"
+    OUTPUT_NODE = True
 
     def process(self, text_input, freeze, frozen_text):
         if freeze:

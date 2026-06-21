@@ -16,6 +16,10 @@ app.registerExtension({
                         // Extract text string from payload (handling array or single string)
                         const textValue = Array.isArray(message.text) ? message.text[0] : message.text;
                         widget.value = textValue;
+                        if (widget.inputEl) {
+                            widget.inputEl.value = textValue;
+                        }
+                        this.setDirtyCanvas(true, true);
                     }
                 }
             };

@@ -8,6 +8,11 @@ class FreezeStringNode:
             },
             "optional": {
                 "text_input": ("STRING", {"forceInput": True, "lazy": True}),
+            },
+            "hidden": {
+                "unique_id": "UNIQUE_ID",
+                "prompt": "PROMPT",
+                "extra_pnginfo": "EXTRA_PNGINFO",
             }
         }
 
@@ -22,7 +27,7 @@ class FreezeStringNode:
             return []
         return ["text_input"]
 
-    def process(self, freeze, frozen_text, text_input=None):
+    def process(self, freeze, frozen_text, text_input=None, unique_id=None, prompt=None, extra_pnginfo=None):
         if freeze:
             chosen_value = frozen_text
         else:
@@ -36,6 +41,25 @@ class FreezeStringNode:
         else:
             ui_text = str(chosen_value)
 
+        # Update the serialized workflow and prompt on the server-side during execution
+        # so that saved images contain the actual output string inside the node's widget metadata.
+        if not freeze:
+            if prompt is not None and unique_id in prompt:
+                prompt[unique_id]["inputs"]["frozen_text"] = ui_text
+
+            if extra_pnginfo is not None and "workflow" in extra_pnginfo:
+                workflow = extra_pnginfo["workflow"]
+                if "nodes" in workflow:
+                    for node in workflow["nodes"]:
+                        if str(node.get("id")) == str(unique_id):
+                            widgets_values = node.get("widgets_values")
+                            if widgets_values is not None:
+                                while len(widgets_values) <= 1:
+                                    widgets_values.append("")
+                                widgets_values[1] = ui_text
+                            else:
+                                node["widgets_values"] = [freeze, ui_text]
+
         return {
             "result": (chosen_value,),
             "ui": {
@@ -44,7 +68,7 @@ class FreezeStringNode:
         }
 
     @classmethod
-    def IS_CHANGED(cls, freeze, frozen_text, text_input=None):
+    def IS_CHANGED(cls, freeze, frozen_text, text_input=None, **kwargs):
         if freeze:
             # If freeze is True, return the frozen_text string so ComfyUI caches it properly.
             return frozen_text

@@ -7,7 +7,7 @@ class FreezeStringNode:
                 "frozen_text": ("STRING", {"multiline": True, "default": ""}),
             },
             "optional": {
-                "text_input": ("STRING", {"forceInput": True}),
+                "text_input": ("STRING", {"forceInput": True, "lazy": True}),
             }
         }
 
@@ -17,8 +17,7 @@ class FreezeStringNode:
     CATEGORY = "utils"
     OUTPUT_NODE = True
 
-    @classmethod
-    def check_lazy_status(cls, freeze, frozen_text, **kwargs):
+    def check_lazy_status(self, freeze, frozen_text, **kwargs):
         if freeze:
             return []
         return ["text_input"]

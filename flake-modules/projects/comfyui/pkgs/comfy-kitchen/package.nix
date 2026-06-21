@@ -34,7 +34,8 @@ python3Packages.callPackage (
       setuptools
       wheel
       nanobind
-    ] ++ lib.optional cudaSupport cudaPackages.cuda_nvcc;
+    ]
+    ++ lib.optional cudaSupport cudaPackages.cuda_nvcc;
 
     buildInputs = lib.optionals cudaSupport [
       cudaPackages.cuda_cudart

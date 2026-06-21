@@ -117,6 +117,7 @@
         comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui // {
           passthru = nvidiaPkgs.comfyuiPackages.comfyui.passthru // {
             inherit (nvidiaPkgs)
+              python3Packages
               customCustomNodesPins
               comfyuiCustomNodes
               comfyuiLib

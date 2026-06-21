@@ -1,6 +1,7 @@
 {
   lib,
   fetchFromGitHub,
+  fetchFromGitLab,
   python3Packages,
   stdenv,
 }:
@@ -48,6 +49,7 @@ rec {
       ];
       supportedRepoTypes = [
         "GitHub"
+        "GitLab"
       ];
     in
     { type, ... }@source:
@@ -63,7 +65,16 @@ rec {
       Supported types: ${lib.concatStringsSep ", " supportedRepoTypes}
     '';
     let
-      inherit (source.repository) repo;
+      repo =
+        if repoType == "GitLab" then
+          lib.last (lib.splitString "/" source.repository.repo_path)
+        else
+          source.repository.repo;
+      owner =
+        if repoType == "GitLab" then
+          lib.head (lib.splitString "/" source.repository.repo_path)
+        else
+          source.repository.owner;
       version =
         if source ? version then
           let
@@ -76,12 +87,19 @@ rec {
     {
       inherit version;
       pname = makePname repo;
-      src = fetchFromGitHub {
-        inherit repo;
-        owner = source.repository.owner;
-        sha256 = source.hash;
-        rev = source.revision;
-        fetchSubmodules = source.submodules or false;
-      };
+      src =
+        if repoType == "GitLab" then
+          fetchFromGitLab {
+            inherit owner repo;
+            sha256 = source.hash;
+            rev = source.revision;
+          }
+        else
+          fetchFromGitHub {
+            inherit owner repo;
+            sha256 = source.hash;
+            rev = source.revision;
+            fetchSubmodules = source.submodules or false;
+          };
     };
 }

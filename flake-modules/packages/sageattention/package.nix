@@ -9,17 +9,14 @@
   symlinkJoin,
   gnused,
   COMFY_CUDA_ARCHS,
+  gcc14Stdenv,
 }:
 let
-  patched_cuda_nvcc = cudaPackages.cuda_nvcc.overrideAttrs (oldAttrs: {
-    patches = (oldAttrs.patches or [ ]) ++ [ ./cuda-glibc-2.42.patch ];
-  });
-
   cuda-native-redist = symlinkJoin {
     name = "cuda-redist";
     paths = with cudaPackages; [
       cuda_cudart # cuda_runtime.h
-      patched_cuda_nvcc
+      cuda_nvcc
     ];
   };
 in
@@ -54,6 +51,7 @@ buildPythonPackage rec {
   ];
 
   preBuild = ''
+    export PATH=${gcc14Stdenv.cc}/bin:$PATH
     ${gnused}/bin/sed -i "/compute_capabilities = set()/a compute_capabilities = {\"$TORCH_CUDA_ARCH_LIST\"}" setup.py
   '';
 

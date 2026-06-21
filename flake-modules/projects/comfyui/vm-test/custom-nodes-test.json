@@ -592,5 +592,18 @@
     "_meta": {
       "title": "Convert Mask to Image"
     }
+  },
+  "200": {
+    "inputs": {
+      "noise_seed": 123,
+      "noise_mode": "CPU",
+      "batch_seed_mode": "incremental",
+      "variation_seed": 0,
+      "variation_strength": 0.0
+    },
+    "class_type": "RandomNoise //Inspire",
+    "_meta": {
+      "title": "RandomNoise (inspire)"
+    }
   }
 }

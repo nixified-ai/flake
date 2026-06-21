@@ -15,7 +15,7 @@
   which,
   ninja,
   pybind11,
-  gcc11Stdenv,
+  gcc14Stdenv,
 }:
 let
   cuda-native-redist = symlinkJoin {
@@ -43,7 +43,7 @@ buildPythonPackage rec {
   ];
 
   preBuild = ''
-    export PATH=${gcc11Stdenv.cc}/bin:$PATH
+    export PATH=${gcc14Stdenv.cc}/bin:$PATH
   '';
 
   nativeBuildInputs = [

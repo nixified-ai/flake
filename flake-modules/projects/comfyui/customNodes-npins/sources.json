@@ -591,6 +591,19 @@
       "url": "https://github.com/o-l-l-i/ComfyUI-Olm-DragCrop/archive/5e286e835bb6b36e610ee657e51e770a9eae207d.tar.gz",
       "hash": "sha256-GAkaHD+baOkFbHmyEeVv57t2N0sxFpsKFGkcjZhPw1c="
     },
+    "comfyui-one-node-flux-2-klein": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "yanokusnir-ai",
+        "repo": "one-node-flux-2-klein"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "e700bb81eb768911f403bdf86bd35fe7ef0e9df4",
+      "url": "https://github.com/yanokusnir-ai/one-node-flux-2-klein/archive/e700bb81eb768911f403bdf86bd35fe7ef0e9df4.tar.gz",
+      "hash": "sha256-KVlUFVTH3cZAbZ8taCDcKfpbPSZNQCDkGTS9PF8DaZs="
+    },
     "comfyui-painteri2v": {
       "type": "Git",
       "repository": {

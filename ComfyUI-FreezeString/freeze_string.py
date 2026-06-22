@@ -51,9 +51,12 @@ class FreezeStringNode:
 
         # Update the serialized workflow and prompt on the server-side during execution
         # so that saved images contain the actual output string inside the node's widget metadata.
-        if not freeze and not disable:
+        # We also force the saved metadata to have 'freeze' enabled so it defaults to True when loaded from file.
+        if not disable:
             if prompt is not None and unique_id in prompt:
-                prompt[unique_id]["inputs"]["frozen_text"] = ui_text
+                prompt[unique_id]["inputs"]["freeze"] = True
+                if not freeze:
+                    prompt[unique_id]["inputs"]["frozen_text"] = ui_text
 
             if extra_pnginfo is not None and "workflow" in extra_pnginfo:
                 workflow = extra_pnginfo["workflow"]
@@ -64,14 +67,17 @@ class FreezeStringNode:
                             if widgets_values is not None:
                                 while len(widgets_values) <= 1:
                                     widgets_values.append("")
-                                widgets_values[1] = ui_text
+                                widgets_values[0] = True  # Force freeze toggle to True
+                                if not freeze:
+                                    widgets_values[1] = ui_text
                             else:
-                                node["widgets_values"] = [freeze, ui_text, disable]
+                                node["widgets_values"] = [True, ui_text, disable]
 
         return {
             "result": (chosen_value,),
             "ui": {
-                "text": [ui_text]
+                "text": [ui_text],
+                "freeze": [freeze]
             }
         }
 

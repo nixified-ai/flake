@@ -19,7 +19,13 @@ python3Packages.callPackage (
       sha256 = npin.hash;
     };
 
-    format = "setuptools";
+    COMFYUI_FRONTEND_VERSION = version;
+
+    format = "pyproject";
+    nativeBuildInputs = [
+      python3Packages.setuptools
+      python3Packages.wheel
+    ];
     pythonImportsCheck = [
       pname
     ];

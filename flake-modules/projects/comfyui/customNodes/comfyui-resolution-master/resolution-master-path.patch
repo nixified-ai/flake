@@ -1,0 +1,24 @@
+diff --git a/core/log_system/log_funcs.py b/core/log_system/log_funcs.py
+index f5c9b08..3e60f9c 100644
+--- a/core/log_system/log_funcs.py
++++ b/core/log_system/log_funcs.py
+@@ -40,10 +40,17 @@ try:
+ 
+     logger.set_global_level(LogLevel[LOG_LEVEL])
+ 
++    import folder_paths
++    log_dir = os.environ.get(
++        "AZLOGS_LOG_DIR",
++        os.path.join(folder_paths.base_path, "custom_nodes_data", "comfyui-resolution-master")
++    )
++    log_to_file = os.environ.get("AZLOGS_LOG_TO_FILE", "False").lower() == "true"
++
+     logger.configure(
+         {
+-            "log_to_file": True,
+-            "log_dir": os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs"),
++            "log_to_file": log_to_file,
++            "log_dir": log_dir,
+             "use_colors": (
+                 logger.config["use_colors"]
+                 if "AZLOGS_USE_COLORS" in os.environ

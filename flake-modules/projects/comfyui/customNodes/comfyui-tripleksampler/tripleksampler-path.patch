@@ -1,0 +1,40 @@
+diff --git a/triple_ksampler/shared/config.py b/triple_ksampler/shared/config.py
+index aa1d7c1..f5f5950 100644
+--- a/triple_ksampler/shared/config.py
++++ b/triple_ksampler/shared/config.py
+@@ -64,16 +64,31 @@ def load_config(config_dir: Path | None = None) -> dict[str, Any]:
+             return _get_default_config()
+ 
+     # Determine config directory
+-    if config_dir is None:
+-        # Default to parent directory of shared/ (triple_ksampler/ root)
+-        config_dir = Path(__file__).resolve().parent.parent.parent
++    package_root = Path(__file__).resolve().parent.parent.parent.resolve()
++    
++    is_package_path = False
++    if config_dir is not None:
++        try:
++            is_package_path = str(config_dir.resolve()).startswith(str(package_root))
++        except Exception:
++            pass
++
++    if config_dir is None or is_package_path:
++        import os
++        import folder_paths
++        triple_ksampler_path = os.getenv(
++            "TRIPLE_KSAMPLER_PATH",
++            os.path.join(folder_paths.base_path, "custom_nodes_data", "comfyui-tripleksampler")
++        )
++        config_dir = Path(triple_ksampler_path)
+ 
+     user_config_path = config_dir / "config.toml"
+-    template_config_path = config_dir / "config.example.toml"
++    template_config_path = package_root / "config.example.toml"
+ 
+     # Auto-create config.toml from template if necessary
+     if not user_config_path.exists() and template_config_path.exists():
+         try:
++            config_dir.mkdir(parents=True, exist_ok=True)
+             shutil.copy2(template_config_path, user_config_path)
+             logging.getLogger(__name__).info("[TripleKSampler] Created config.toml from template")
+         except OSError as exc:

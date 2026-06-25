@@ -66,6 +66,14 @@
             ) warningMessage extraPackages;
           in
           extraPackagesWithWarning
+          // {
+            transformers = pyprev.transformers.overridePythonAttrs (oldAttrs: {
+              postPatch = (oldAttrs.postPatch or "") + ''
+                substituteInPlace src/transformers/utils/import_utils.py \
+                  --replace-fail 'PACKAGE_DISTRIBUTION_MAPPING["flash_attn"]' 'PACKAGE_DISTRIBUTION_MAPPING.get("flash_attn", [])'
+              '';
+            });
+          }
         );
       }
     );

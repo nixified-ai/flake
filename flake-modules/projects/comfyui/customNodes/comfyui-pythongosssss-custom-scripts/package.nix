@@ -13,6 +13,8 @@ in
   pname = "comfyui-pythongosssss-custom-scripts";
   patches = [ ./skip-install-js.patch ];
 
+  postPatch = "substituteInPlace py/play_sound.py \\\n    --replace-fail '    def IS_CHANGED(self, **kwargs):' '    @classmethod\n    def IS_CHANGED(cls, **kwargs):'\n";
+
   preInstall = ''
     ln -s pysssss.default.json pysssss.json
     mkdir -p web-extensions

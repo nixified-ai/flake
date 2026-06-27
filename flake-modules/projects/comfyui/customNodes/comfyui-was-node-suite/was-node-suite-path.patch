@@ -1,0 +1,95 @@
+diff --git a/WAS_Node_Suite.py b/WAS_Node_Suite.py
+index 165de3c..6db5615 100644
+--- a/WAS_Node_Suite.py
++++ b/WAS_Node_Suite.py
+@@ -153,7 +153,10 @@ MIDAS_INSTALLED = False
+ CUSTOM_NODES_DIR = comfy_paths.folder_names_and_paths["custom_nodes"][0][0]
+ MODELS_DIR =  comfy_paths.models_dir
+ WAS_SUITE_ROOT = os.path.dirname(NODE_FILE)
+-WAS_CONFIG_DIR = os.environ.get('WAS_CONFIG_DIR', WAS_SUITE_ROOT)
++WAS_SUITE_PATH = os.getenv('WAS_SUITE_PATH', os.path.join(comfy_paths.base_path, 'custom_nodes_data', 'was-node-suite'))
++if not os.path.exists(WAS_SUITE_PATH):
++    os.makedirs(WAS_SUITE_PATH, exist_ok=True)
++WAS_CONFIG_DIR = os.environ.get('WAS_CONFIG_DIR', WAS_SUITE_PATH)
+ WAS_DATABASE = os.path.join(WAS_CONFIG_DIR, 'was_suite_settings.json')
+ WAS_HISTORY_DATABASE = os.path.join(WAS_CONFIG_DIR, 'was_history.json')
+ WAS_CONFIG_FILE = os.path.join(WAS_CONFIG_DIR, 'was_suite_config.json')
+@@ -222,7 +225,7 @@ was_conf_template = {
+                         "avc1": ".mp4",
+                         "h264": ".mkv",
+                     },
+-                    "wildcards_path": os.path.join(WAS_SUITE_ROOT, "wildcards"),
++                    "wildcards_path": os.path.join(WAS_SUITE_PATH, "wildcards"),
+                     "wildcard_api": True,
+                 }
+ 
+@@ -301,8 +304,8 @@ if was_config.__contains__('show_startup_junk'):
+         cstr(f"Running From: {WAS_SUITE_ROOT}")
+ 
+ # Check Write Access
+-if not os.access(WAS_SUITE_ROOT, os.W_OK) or not os.access(MODELS_DIR, os.W_OK):
+-    cstr(f"There is no write access to `{WAS_SUITE_ROOT}` or `{MODELS_DIR}`. Write access is required!").error.print()
++if not os.access(MODELS_DIR, os.W_OK):
++    cstr(f"There is no write access to `{MODELS_DIR}`. Write access is required!").error.print()
+     exit
+ 
+ # SET TEXT TYPE
+@@ -576,7 +579,7 @@ def replace_wildcards(text, seed=None, noodle_key='__'):
+         return text
+ 
+     conf = getSuiteConfig()
+-    wildcard_dir = os.path.join(WAS_SUITE_ROOT, 'wildcards')
++    wildcard_dir = os.path.join(WAS_SUITE_PATH, 'wildcards')
+     if not os.path.exists(wildcard_dir):
+         os.makedirs(wildcard_dir, exist_ok=True)
+     if conf.__contains__('wildcards_path'):
+@@ -11958,12 +11961,19 @@ class WAS_SAM_Model_Loader:
+         if 'GitPython' not in packages():
+             install_package("gitpython")
+ 
+-        if not os.path.exists(os.path.join(WAS_SUITE_ROOT, 'repos'+os.sep+'SAM')):
++        has_sam = False
++        try:
++            import segment_anything
++            has_sam = True
++        except ImportError:
++            pass
++        if not has_sam and not os.path.exists(os.path.join(WAS_SUITE_PATH, 'repos'+os.sep+'SAM')):
+             from git.repo.base import Repo
+             cstr("Installing SAM...").msg.print()
+-            Repo.clone_from('https://github.com/facebookresearch/segment-anything', os.path.join(WAS_SUITE_ROOT, 'repos'+os.sep+'SAM'))
++            Repo.clone_from('https://github.com/facebookresearch/segment-anything', os.path.join(WAS_SUITE_PATH, 'repos'+os.sep+'SAM'))
+ 
+-        sys.path.append(os.path.join(WAS_SUITE_ROOT, 'repos'+os.sep+'SAM'))
++        if not has_sam:
++            sys.path.append(os.path.join(WAS_SUITE_PATH, 'repos'+os.sep+'SAM'))
+ 
+         sam_dir = os.path.join(MODELS_DIR, 'sam')
+         if not os.path.exists(sam_dir):
+@@ -14245,7 +14255,7 @@ class WAS_Cache:
+                 "conditioning_suffix": ("STRING", {"default": str(random.randint(999999, 99999999))+"_cache", "multiline":False}),
+             },
+             "optional": {
+-                "output_path": ("STRING", {"default": os.path.join(WAS_SUITE_ROOT, 'cache'), "multiline": False}),
++                "output_path": ("STRING", {"default": os.path.join(WAS_SUITE_PATH, 'cache'), "multiline": False}),
+                 "latent": ("LATENT",),
+                 "image": ("IMAGE",),
+                 "conditioning": ("CONDITIONING",),
+@@ -14266,7 +14276,7 @@ class WAS_Cache:
+ 
+         import joblib
+ 
+-        output = os.path.join(WAS_SUITE_ROOT, 'cache')
++        output = os.path.join(WAS_SUITE_PATH, 'cache')
+         if output_path:
+             if output_path.strip() not in ['', 'none', 'None']:
+                 output = output_path
+@@ -14330,7 +14340,7 @@ class WAS_Load_Cache:
+ 
+         import joblib
+ 
+-        input_path = os.path.join(WAS_SUITE_ROOT, 'cache')
++        input_path = os.path.join(WAS_SUITE_PATH, 'cache')
+ 
+         latent = None
+         image = None

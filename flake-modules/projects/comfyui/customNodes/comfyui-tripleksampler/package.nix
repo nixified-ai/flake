@@ -1,0 +1,6 @@
+{ }:
+{
+  patches = [
+    ./tripleksampler-path.patch
+  ];
+}

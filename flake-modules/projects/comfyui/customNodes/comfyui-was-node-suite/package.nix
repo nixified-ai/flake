@@ -8,6 +8,15 @@ finalAttrs: previousAttrs: {
   dontConfigure = true;
   dontBuild = true;
 
+  prePatch = ''
+    # Convert CRLF to LF line endings first to ensure the patch applies correctly
+    sed -i 's/\r$//' WAS_Node_Suite.py
+  '';
+
+  patches = [
+    ./was-node-suite-path.patch
+  ];
+
   was_suite_config = builtins.toJSON {
     "run_requirements" = true;
     "suppress_uncomfy_warnings" = true;
@@ -26,8 +35,7 @@ finalAttrs: previousAttrs: {
       "avc1" = ".mp4";
       "h264" = ".mkv";
     };
-    "wildcards_path" =
-      "$out/${python3Packages.python.sitePackages}/custom_nodes/${finalAttrs.pname}/wildcards";
+    "wildcards_path" = "";
     "wildcard_api" = true;
   };
 
@@ -56,5 +64,6 @@ finalAttrs: previousAttrs: {
     timm
     tqdm
     transformers
+    segment-anything
   ];
 }

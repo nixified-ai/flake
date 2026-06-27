@@ -59,7 +59,10 @@
               directory = ./../../packages;
             };
             names = lib.attrNames extraPackages;
-            extraPackagesAlreadyInPrev = lib.filter (name: pyprev ? ${name}) names;
+            ignoredOverlaps = [ "llama-cpp-python" ];
+            extraPackagesAlreadyInPrev = lib.filter (
+              name: pyprev ? ${name} && !lib.elem name ignoredOverlaps
+            ) names;
             warningMessage = "Some local python packages are already present in upstream: ${lib.concatStringsSep ", " extraPackagesAlreadyInPrev}";
             extraPackagesWithWarning = lib.warnIfNot (
               [ ] == extraPackagesAlreadyInPrev

@@ -37,11 +37,13 @@
       url = "github:hercules-ci/hercules-ci-effects";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    enable-container-tests.url = "path:./flags/container-tests/disabled";
   };
   outputs =
     {
       flake-parts,
       hercules-ci-effects,
+      enable-container-tests,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {

@@ -94,7 +94,7 @@
             transformers = pyprev.transformers.overridePythonAttrs (oldAttrs: {
               postPatch = (oldAttrs.postPatch or "") + ''
                 substituteInPlace src/transformers/utils/import_utils.py \
-                  --replace-fail 'PACKAGE_DISTRIBUTION_MAPPING["flash_attn"]' 'PACKAGE_DISTRIBUTION_MAPPING.get("flash_attn", [])'
+                  --replace-warn 'PACKAGE_DISTRIBUTION_MAPPING["flash_attn"]' 'PACKAGE_DISTRIBUTION_MAPPING.get("flash_attn", [])'
               '';
             });
           }
@@ -117,12 +117,9 @@
   };
   perSystem =
     {
-      config,
       lib,
       pkgs,
       nvidiaPkgs,
-      rocmPkgs,
-      system,
       ...
     }:
     let
@@ -142,10 +139,8 @@
             "packages"
             "recurseForDerivations"
           ];
-    in
-    {
-      checks = {
-        comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+      enableContainerTests = inputs.enable-container-tests.value;
+      container-tests = {
         comfyui-negative-test = pkgs.callPackage ./vm-test/negative-test.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         };
@@ -153,7 +148,7 @@
           nixosModule = inputs.self.nixosModules.comfyui;
         };
       }
-      // (builtins.removeAttrs
+      // (lib.removeAttrs
         (pkgs.callPackage ./vm-test/custom-nodes-tests.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         })
@@ -165,6 +160,12 @@
           "comfyui-custom-node-comfyui-seedvr2-videoupscaler"
         ]
       );
+    in
+    {
+      checks = {
+        comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+      }
+      // (lib.optionalAttrs enableContainerTests container-tests);
       packages = {
         comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui // {
           passthru = nvidiaPkgs.comfyuiPackages.comfyui.passthru // {
@@ -180,6 +181,12 @@
         # ROCm support in nixpkgs is pretty bad right now
         # comfyui-amd = rocmPkgs.comfyuiPackages.comfyui;
       };
-      legacyPackages.nixified-ai.internal = scripts;
+      legacyPackages.nixified-ai = {
+        internal = scripts;
+        inherit container-tests;
+        comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
+      };
     };
 }

@@ -65,40 +65,33 @@
         comfyuiNpins = (builtins.fromJSON (lib.readFile ./npins/sources.json)).pins;
         inherit comfyuiCustomNodes;
 
-        managerCustomNodes =
+        managerCustomNodesPins =
+          if lib.pathExists ./manager-npins/sources.json then
+            (builtins.fromJSON (lib.readFile ./manager-npins/sources.json)).pins
+          else
+            { };
+
+        managerCustomNodes = builtins.mapAttrs (
+          name: source:
           let
-            npins = import ./customNodes-npins/default.nix { };
-            managerNodesList = builtins.fromJSON (
-              lib.readFile "${npins.ComfyUI-Manager.outPath}/node_db/new/custom-node-list.json"
-            );
+            nodeProps = comfyuiLib.nodePropsFromNpinSource source;
+            inherit (self) callPackage;
+            packageBase = callPackage ({ stdenv }: stdenv.mkDerivation nodeProps) { };
+            overridesFile = ./customNodes/${name}/package.nix;
+            packageWithOverrides =
+              if lib.pathExists overridesFile then
+                let
+                  overridePayload = lib.removeAttrs (callPackage overridesFile { }) [
+                    "override"
+                    "overrideDerivation"
+                  ];
+                in
+                packageBase.overrideAttrs overridePayload
+              else
+                packageBase;
           in
-          builtins.listToAttrs (
-            builtins.map (
-              node:
-              let
-                nodeProps = comfyuiLib.nodePropsFromManagerNode node;
-                name = nodeProps.pname;
-                inherit (self) callPackage;
-                packageBase = callPackage ({ stdenv }: stdenv.mkDerivation nodeProps) { };
-                overridesFile = ./customNodes/${name}/package.nix;
-                packageWithOverrides =
-                  if lib.pathExists overridesFile then
-                    let
-                      overridePayload = lib.removeAttrs (callPackage overridesFile { }) [
-                        "override"
-                        "overrideDerivation"
-                      ];
-                    in
-                    packageBase.overrideAttrs overridePayload
-                  else
-                    packageBase;
-              in
-              {
-                inherit name;
-                value = comfyuiLib.mkComfyUICustomNode packageWithOverrides;
-              }
-            ) managerNodesList.custom_nodes
-          );
+          comfyuiLib.mkComfyUICustomNode packageWithOverrides
+        ) managerCustomNodesPins;
 
         comfyuiLib = self.callPackage ./lib.nix { };
         comfyuiPackages =

@@ -50,6 +50,7 @@ rec {
       supportedRepoTypes = [
         "GitHub"
         "GitLab"
+        "Git"
       ];
     in
     { type, ... }@source:
@@ -68,13 +69,20 @@ rec {
       repo =
         if repoType == "GitLab" then
           lib.last (lib.splitString "/" source.repository.repo_path)
+        else if repoType == "GitHub" then
+          source.repository.repo
         else
-          source.repository.repo;
+          let
+            urlParts = lib.splitString "/" source.repository.url;
+          in
+          lib.removeSuffix ".git" (lib.last urlParts);
       owner =
         if repoType == "GitLab" then
           lib.head (lib.splitString "/" source.repository.repo_path)
+        else if repoType == "GitHub" then
+          source.repository.owner
         else
-          source.repository.owner;
+          "unknown";
       version =
         if source ? version then
           let
@@ -94,12 +102,18 @@ rec {
             sha256 = source.hash;
             rev = source.revision;
           }
-        else
+        else if repoType == "GitHub" then
           fetchFromGitHub {
             inherit owner repo;
             sha256 = source.hash;
             rev = source.revision;
             fetchSubmodules = source.submodules or false;
+          }
+        else
+          builtins.fetchGit {
+            url = source.repository.url;
+            rev = source.revision;
+            submodules = source.submodules or false;
           };
     };
 

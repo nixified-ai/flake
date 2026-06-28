@@ -59,17 +59,47 @@
             }
           );
       in
-      {
+      rec {
         COMFY_CUDA_ARCHS = "8.6";
         customCustomNodesPins = (builtins.fromJSON (lib.readFile ./customNodes-npins/sources.json)).pins;
         comfyuiNpins = (builtins.fromJSON (lib.readFile ./npins/sources.json)).pins;
         inherit comfyuiCustomNodes;
+
+        managerCustomNodesPins =
+          if lib.pathExists ./manager-npins/sources.json then
+            (builtins.fromJSON (lib.readFile ./manager-npins/sources.json)).pins
+          else
+            { };
+
+        managerCustomNodes = builtins.mapAttrs (
+          name: source:
+          let
+            nodeProps = comfyuiLib.nodePropsFromNpinSource source;
+            inherit (self) callPackage;
+            packageBase = callPackage ({ stdenv }: stdenv.mkDerivation nodeProps) { };
+            overridesFile = ./customNodes/${name}/package.nix;
+            packageWithOverrides =
+              if lib.pathExists overridesFile then
+                let
+                  overridePayload = lib.removeAttrs (callPackage overridesFile { }) [
+                    "override"
+                    "overrideDerivation"
+                  ];
+                in
+                packageBase.overrideAttrs overridePayload
+              else
+                packageBase;
+          in
+          comfyuiLib.mkComfyUICustomNode packageWithOverrides
+        ) managerCustomNodesPins;
+
         comfyuiLib = self.callPackage ./lib.nix { };
         comfyuiPackages =
           (self.lib.packagesFromDirectoryRecursive {
             inherit (self) callPackage;
             directory = ./pkgs;
           })
+          // managerCustomNodes
           // comfyuiCustomNodes;
         comfyui = self.comfyuiPackages.comfyui;
         cudaPackages = super.cudaPackages.overrideScope (
@@ -178,6 +208,8 @@
               python3Packages
               customCustomNodesPins
               comfyuiCustomNodes
+              managerCustomNodesPins
+              managerCustomNodes
               comfyuiLib
               comfyuiPackages
               ;

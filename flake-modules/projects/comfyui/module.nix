@@ -5,9 +5,9 @@
   lib,
   pkgs,
   ...
-}@args:
+}:
 let
-  inherit (lib) literalExpression types;
+  inherit (lib) types;
 
   cfg = config.services.comfyui;
   comfyuiPackage = cfg.package.override {

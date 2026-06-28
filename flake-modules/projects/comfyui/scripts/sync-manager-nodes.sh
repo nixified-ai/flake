@@ -14,7 +14,7 @@ fi
 # Find the ComfyUI-Manager outPath using nix
 echo "Resolving ComfyUI-Manager pin..."
 MANAGER_OUT_PATH=$(nix eval --impure --raw --expr "(import $PROJECT_DIR/customNodes-npins/default.nix {}).ComfyUI-Manager.outPath")
-NODE_LIST_JSON="$MANAGER_OUT_PATH/node_db/new/custom-node-list.json"
+NODE_LIST_JSON="$MANAGER_OUT_PATH/comfyui_manager/custom-node-list.json"
 
 if [ ! -f "$NODE_LIST_JSON" ]; then
     echo "Could not find custom-node-list.json at $NODE_LIST_JSON"

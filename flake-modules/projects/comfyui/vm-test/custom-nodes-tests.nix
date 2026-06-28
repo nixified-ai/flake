@@ -12,10 +12,8 @@ let
     in
     noSlash2;
 
-  nodeMapFile = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/Comfy-Org/ComfyUI-Manager/refs/heads/main/node_db/new/extension-node-map.json";
-    sha256 = "sha256-ipPV6ALgPBpTiYX5SaqIGN85uEHaNzqurGiJajvXUwI=";
-  };
+  npins = import ../customNodes-npins/default.nix { };
+  nodeMapFile = "${npins.ComfyUI-Manager.outPath}/node_db/new/extension-node-map.json";
   nodeMap = builtins.fromJSON (builtins.readFile nodeMapFile);
   normalizedNodeMapKeys = lib.mapAttrs' (
     url: value: lib.nameValuePair (normalizeUrl url) true

@@ -7,17 +7,27 @@
 }:
 testers.nixosTest {
   name = "comfyui";
-  nodes.machine =
+  containers.machine =
     { pkgs, ... }:
     {
       imports = [ nixosModule ];
-      virtualisation.memorySize = 12288;
-      virtualisation.cores = 1;
-      zramSwap = {
-        enable = true;
-        algorithm = "zstd";
-        memoryPercent = 100;
+
+      systemd.services.comfyui.serviceConfig = {
+        PrivateUsers = lib.mkForce false;
+        ProtectSystem = lib.mkForce false;
       };
+
+      hardware.graphics.enable = true;
+      services.xserver.videoDrivers = [ "nvidia" ];
+      hardware.nvidia.open = false;
+
+      virtualisation.systemd-nspawn.options = [
+        "--bind=/dev/nvidia0"
+        "--bind=/dev/nvidiactl"
+        "--bind=/dev/nvidia-uvm"
+        "--bind=/dev/nvidia-uvm-tools"
+      ];
+
       services.comfyui = {
         enable = true;
         host = "::,0.0.0.0";
@@ -26,7 +36,7 @@ testers.nixosTest {
           "--deterministic"
           "--fast"
         ];
-        acceleration = false;
+        acceleration = "cuda";
         customNodes = lib.filter (drv: drv.pname != "comfyui-rife-tensorrt-auto") (
           lib.attrValues pkgs.comfyuiCustomNodes
         );
@@ -41,19 +51,19 @@ testers.nixosTest {
       };
     };
   testScript =
-    { nodes, ... }:
+    { containers, ... }:
     let
-      imagePath1 = "${nodes.machine.services.comfyui.home}/.local/share/comfyui/output/ComfyUI_00001.png";
-      imagePath2 = "${nodes.machine.services.comfyui.home}/.local/share/comfyui/output/ComfyUI_00002_.png";
+      imagePath1 = "${containers.machine.services.comfyui.home}/.local/share/comfyui/output/ComfyUI_00001.png";
+      imagePath2 = "${containers.machine.services.comfyui.home}/.local/share/comfyui/output/ComfyUI_00002_.png";
       apiTest = writeShellScript "" ''
-        ${lib.getExe python3} ${./api.py} ${./custom-nodes-test.json} --port ${toString nodes.machine.services.comfyui.port}
+        ${lib.getExe python3} ${./api.py} ${./custom-nodes-test.json} --port ${toString containers.machine.services.comfyui.port}
       '';
     in
     ''
       start_all()
       machine.wait_for_unit("multi-user.target")
       machine.wait_for_unit("comfyui.service")
-      machine.wait_for_open_port(${toString nodes.machine.services.comfyui.port})
+      machine.wait_for_open_port(${toString containers.machine.services.comfyui.port})
       machine.succeed("${apiTest}")
       machine.wait_for_file("${imagePath1}")
       machine.wait_for_file("${imagePath2}")

@@ -94,7 +94,7 @@
             transformers = pyprev.transformers.overridePythonAttrs (oldAttrs: {
               postPatch = (oldAttrs.postPatch or "") + ''
                 substituteInPlace src/transformers/utils/import_utils.py \
-                  --replace-fail 'PACKAGE_DISTRIBUTION_MAPPING["flash_attn"]' 'PACKAGE_DISTRIBUTION_MAPPING.get("flash_attn", [])'
+                  --replace-warn 'PACKAGE_DISTRIBUTION_MAPPING["flash_attn"]' 'PACKAGE_DISTRIBUTION_MAPPING.get("flash_attn", [])'
               '';
             });
           }
@@ -145,7 +145,7 @@
     in
     {
       checks = {
-        comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+        comfyui = nvidiaPkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
         comfyui-negative-test = pkgs.callPackage ./vm-test/negative-test.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         };

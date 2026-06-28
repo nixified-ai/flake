@@ -72,6 +72,11 @@
           })
           // comfyuiCustomNodes;
         comfyui = self.comfyuiPackages.comfyui;
+        cudaPackages = super.cudaPackages.overrideScope (
+          cudafinal: cudaprev: {
+            tensorrt = cudafinal.callPackage ./tensorrt.nix { };
+          }
+        );
         python3Packages = super.python3Packages.overrideScope (
           pyfinal: pyprev:
           let

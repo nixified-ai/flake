@@ -59,17 +59,54 @@
             }
           );
       in
-      {
+      rec {
         COMFY_CUDA_ARCHS = "8.6";
         customCustomNodesPins = (builtins.fromJSON (lib.readFile ./customNodes-npins/sources.json)).pins;
         comfyuiNpins = (builtins.fromJSON (lib.readFile ./npins/sources.json)).pins;
         inherit comfyuiCustomNodes;
+
+        managerCustomNodes =
+          let
+            npins = import ./customNodes-npins/default.nix { };
+            managerNodesList = builtins.fromJSON (
+              lib.readFile "${npins.ComfyUI-Manager.outPath}/node_db/new/custom-node-list.json"
+            );
+          in
+          builtins.listToAttrs (
+            builtins.map (
+              node:
+              let
+                nodeProps = comfyuiLib.nodePropsFromManagerNode node;
+                name = nodeProps.pname;
+                inherit (self) callPackage;
+                packageBase = callPackage ({ stdenv }: stdenv.mkDerivation nodeProps) { };
+                overridesFile = ./customNodes/${name}/package.nix;
+                packageWithOverrides =
+                  if lib.pathExists overridesFile then
+                    let
+                      overridePayload = lib.removeAttrs (callPackage overridesFile { }) [
+                        "override"
+                        "overrideDerivation"
+                      ];
+                    in
+                    packageBase.overrideAttrs overridePayload
+                  else
+                    packageBase;
+              in
+              {
+                inherit name;
+                value = comfyuiLib.mkComfyUICustomNode packageWithOverrides;
+              }
+            ) managerNodesList.custom_nodes
+          );
+
         comfyuiLib = self.callPackage ./lib.nix { };
         comfyuiPackages =
           (self.lib.packagesFromDirectoryRecursive {
             inherit (self) callPackage;
             directory = ./pkgs;
           })
+          // managerCustomNodes
           // comfyuiCustomNodes;
         comfyui = self.comfyuiPackages.comfyui;
         cudaPackages = super.cudaPackages.overrideScope (

@@ -151,9 +151,6 @@
     {
       checks = {
         comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
-        comfyui-container-gpu = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
-          nixosModule = inputs.self.nixosModules.comfyui;
-        };
         comfyui-negative-test = pkgs.callPackage ./vm-test/negative-test.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         };
@@ -174,6 +171,9 @@
         ]
       );
       packages = {
+        comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
         comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui // {
           passthru = nvidiaPkgs.comfyuiPackages.comfyui.passthru // {
             inherit (nvidiaPkgs)

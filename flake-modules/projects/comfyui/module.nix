@@ -19,7 +19,7 @@ let
     let
       nvidiaPkgs = (
         import pkgs.path {
-          system = pkgs.hostPlatform.system;
+          system = pkgs.stdenv.hostPlatform.system;
           config.cudaSupport = true;
           config.allowUnfree = true;
           overlays = overlays;
@@ -27,7 +27,7 @@ let
       );
       rocmPkgs = (
         import pkgs.path {
-          system = pkgs.hostPlatform.system;
+          system = pkgs.stdenv.hostPlatform.system;
           config.rocmSupport = true;
           config.allowUnfree = true;
           overlays = overlays;

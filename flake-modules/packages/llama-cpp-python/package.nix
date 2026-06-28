@@ -33,7 +33,6 @@
   config,
   cudaSupport ? config.cudaSupport,
   cudaPackages ? { },
-
 }:
 let
   stdenvTarget = if cudaSupport then gcc13Stdenv else stdenv;
@@ -128,7 +127,7 @@ buildPythonPackage.override { stdenv = stdenvTarget; } rec {
       rev-prefix = "v";
       allowedVersions = "^[.0-9]+$";
     };
-    tests = lib.optionalAttrs stdenvTarget.hostPlatform.isLinux {
+    tests = lib.optionalAttrs stdenv.hostPlatform.isLinux {
       withCuda = llama-cpp-python.override {
         cudaSupport = true;
       };

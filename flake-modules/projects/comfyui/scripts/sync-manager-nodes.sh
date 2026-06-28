@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+export GITHUB_TOKEN="${GITHUB_TOKEN:-${GH_TOKEN:-}}"
+
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 PROJECT_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
 
@@ -81,7 +83,7 @@ jq -c '.custom_nodes[]' "$NODE_LIST_JSON" | while read -r node; do
         echo "Adding $NAME ($url)..."
         
         # Use git ls-remote to avoid GitHub API rate limits
-        BRANCH=$(git ls-remote --symref "$url" HEAD 2>/dev/null | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2}' | head -n 1)
+        BRANCH=$(git ls-remote --symref "$url" HEAD 2>/dev/null | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2}' | head -n 1 || true)
         if [ -z "$BRANCH" ]; then
             echo "Failed to detect default branch for $url, falling back to 'main'"
             BRANCH="main"

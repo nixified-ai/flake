@@ -79,9 +79,6 @@
               config = {
                 cudaSupport = true;
                 allowUnfree = true;
-                permittedInsecurePackages = [
-                  "cuda12.9-tensorrt-10.14.1.48"
-                ];
               };
             }
             // common

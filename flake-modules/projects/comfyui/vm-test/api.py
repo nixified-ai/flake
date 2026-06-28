@@ -140,6 +140,8 @@ for node_id, node_data in prompt.items():
             node_copy["class_type"] = registered_class
             filtered_prompt[node_id] = node_copy
             registered_custom_nodes_count += 1
+        else:
+            print(f"WARNING: Node {class_type} (id {node_id}) is not registered in ComfyUI and will be removed.", file=sys.stderr)
 
 # 3. Assert that if the custom node package is expected to register nodes, at least one of them loaded successfully
 if original_custom_nodes_count > 0 and registered_custom_nodes_count == 0:

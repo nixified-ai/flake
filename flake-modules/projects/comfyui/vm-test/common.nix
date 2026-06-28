@@ -1,0 +1,48 @@
+{
+  lib,
+  python3,
+  writeShellScript,
+}:
+{
+  comfyuiConfig = pkgs: {
+    enable = true;
+    host = "::,0.0.0.0";
+    port = 8189;
+    extraFlags = [
+      "--deterministic"
+      "--fast"
+    ];
+    customNodes = lib.filter (drv: drv.pname != "comfyui-rife-tensorrt-auto") (
+      lib.attrValues pkgs.comfyuiCustomNodes
+    );
+    models = with pkgs.nixified-ai.models; [
+      clip_vision_vit_h-upscaler
+      control-lora-rank128-v11p-sd15-canny-fp16
+      face-yolov8m
+      hyper-sd15-1step-lora
+      ip-adapter-plus-sd15
+      stable-diffusion-v1-5
+    ];
+  };
+
+  testScript =
+    { home, port }:
+    let
+      imagePath1 = "${home}/.local/share/comfyui/output/ComfyUI_00001.png";
+      imagePath2 = "${home}/.local/share/comfyui/output/ComfyUI_00002_.png";
+      apiTest = writeShellScript "" ''
+        ${lib.getExe python3} ${./api.py} ${./custom-nodes-test.json} --port ${toString port}
+      '';
+    in
+    ''
+      start_all()
+      machine.wait_for_unit("multi-user.target")
+      machine.wait_for_unit("comfyui.service")
+      machine.wait_for_open_port(${toString port})
+      machine.succeed("${apiTest}")
+      machine.wait_for_file("${imagePath1}")
+      machine.wait_for_file("${imagePath2}")
+      machine.copy_from_vm("${imagePath1}")
+      machine.copy_from_vm("${imagePath2}")
+    '';
+}

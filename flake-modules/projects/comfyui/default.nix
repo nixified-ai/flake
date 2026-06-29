@@ -210,6 +210,8 @@
               python3Packages
               customCustomNodesPins
               comfyuiCustomNodes
+              managerCustomNodesPins
+              managerCustomNodes
               comfyuiLib
               comfyuiPackages
               ;

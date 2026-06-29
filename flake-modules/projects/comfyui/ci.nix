@@ -51,6 +51,14 @@ toplevel@{ inputs, withSystem, ... }:
               description = "update node packages";
             };
           };
+          comfyui-manager-nodes-update = {
+            # Daily at 5pm
+            when.hour = 17;
+            outputs.effects.comfyui-update = mkComfyuiUpdateEffect {
+              package = self'.legacyPackages.nixified-ai.internal.comfyui-manager-nodes-update;
+              description = "update manager node packages";
+            };
+          };
         }
       );
     };

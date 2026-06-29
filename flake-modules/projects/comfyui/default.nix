@@ -201,9 +201,6 @@
         ]
       );
       packages = {
-        comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
-          nixosModule = inputs.self.nixosModules.comfyui;
-        };
         comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui // {
           passthru = nvidiaPkgs.comfyuiPackages.comfyui.passthru // {
             inherit (nvidiaPkgs)
@@ -220,6 +217,10 @@
         # ROCm support in nixpkgs is pretty bad right now
         # comfyui-amd = rocmPkgs.comfyuiPackages.comfyui;
       };
-      legacyPackages.nixified-ai.internal = scripts;
+      legacyPackages.nixified-ai.internal = scripts // {
+        comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
+      };
     };
 }

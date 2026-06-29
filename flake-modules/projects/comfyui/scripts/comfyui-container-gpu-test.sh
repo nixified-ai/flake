@@ -16,7 +16,7 @@ if [ ! -e /dev/nvidia-uvm ] || [ ! -e /dev/nvidia-uvm-tools ] || [ ! -e /dev/nvi
 fi
 
 echo "Requirements met! Running the GPU container test..."
-echo "This will run 'nix build .#comfyui-container-gpu-test -L' with the required extra-sandbox-paths."
+echo "This will run 'nix build .#nixified-ai.internal.comfyui-container-gpu-test -L' with the required extra-sandbox-paths."
 echo ""
 
-exec nix build .#comfyui-container-gpu-test -L --extra-sandbox-paths "/dev/nvidia0 /dev/nvidiactl /dev/nvidia-uvm /dev/nvidia-uvm-tools" "$@"
+exec nix build .#nixified-ai.internal.comfyui-container-gpu-test -L --extra-sandbox-paths "/dev/nvidia0 /dev/nvidiactl /dev/nvidia-uvm /dev/nvidia-uvm-tools" "$@"

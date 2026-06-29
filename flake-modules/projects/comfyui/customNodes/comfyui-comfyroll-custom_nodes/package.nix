@@ -1,5 +1,6 @@
 {
   pkgs,
+  python3Packages,
   ...
 }:
 {
@@ -11,4 +12,10 @@
     substituteInPlace nodes/nodes_graphics_text.py \
       --replace 'font_dir = "/usr/share/fonts/truetype"' 'font_dir = "${pkgs.dejavu_fonts}/share/fonts/truetype"'
   '';
+
+  propagatedBuildInputs = with python3Packages; [
+    matplotlib
+    numpy
+    pillow
+  ];
 }

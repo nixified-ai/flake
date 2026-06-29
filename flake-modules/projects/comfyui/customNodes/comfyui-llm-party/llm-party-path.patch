@@ -1900,7 +1900,7 @@ index b26d8b4..dea9b66 100644
 +# 构建config.ini的绝对路径
 +config_path = os.path.join(llm_party_path, "config.ini")
 +def copy_config():
-+    __import__("os").makedirs(llm_party_path.path.join(__import__("folder_paths").base_path, "custom_nodes_data", "comfyui_llm_party")), exist_ok=True)
++    os.makedirs(llm_party_path, exist_ok=True)
 +    config_path = os.path.join(llm_party_path, "config.ini")
 +    config_example_path = os.path.join(current_dir_path, "config.ini.example")
 +    # 判断config.ini是否存在

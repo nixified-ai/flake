@@ -13,7 +13,7 @@ let
     noSlash2;
 
   npins = import ../customNodes-npins/default.nix { };
-  nodeMapFile = "${npins.ComfyUI-Manager.outPath}/node_db/new/extension-node-map.json";
+  nodeMapFile = "${npins.ComfyUI-Manager.outPath}/comfyui_manager/extension-node-map.json";
   nodeMap = builtins.fromJSON (builtins.readFile nodeMapFile);
   normalizedNodeMapKeys = lib.mapAttrs' (
     url: value: lib.nameValuePair (normalizeUrl url) true

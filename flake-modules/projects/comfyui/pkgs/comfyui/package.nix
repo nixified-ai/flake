@@ -92,9 +92,15 @@ symlinkJoin {
         echo ${toString supportedFolders}
         set -x
         DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}/comfyui"
+        echo "whoami: $(whoami)"
+        echo "UID: $UID"
+        echo "GID: $GID"
+        echo "HOME: $HOME"
+        echo "DATA_HOME: $DATA_HOME"
+        echo "XDG_DATA_HOME: $XDG_DATA_HOME"
         mkdir -p "$DATA_HOME"
         cp -rT ${comfyuiPackages.comfyui-unwrapped.src} "$DATA_HOME"
-        chmod -R +w "$DATA_HOME" || true
+        # chmod -R +w "$DATA_HOME" || true
       '';
     in
     ''

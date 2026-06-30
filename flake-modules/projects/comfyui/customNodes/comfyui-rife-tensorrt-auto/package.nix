@@ -10,7 +10,7 @@ finalAttrs: previousAttrs: {
     lib.optionals cudaSupport [
       python3Packages.tensorrt
       cudatoolkit
-      python3Packages.cuda-python
+      python3Packages.cuda-bindings
       python3Packages.polygraphy
     ]
     ++ (with python3Packages; [

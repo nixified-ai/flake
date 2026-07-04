@@ -152,12 +152,9 @@
   };
   perSystem =
     {
-      config,
       lib,
       pkgs,
       nvidiaPkgs,
-      rocmPkgs,
-      system,
       ...
     }:
     let
@@ -177,10 +174,13 @@
             "packages"
             "recurseForDerivations"
           ];
-    in
-    {
-      checks = {
-        comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+      # TODO: allow this to be overriden from command line when running
+      # nix flacke check
+      enableContainerTests = true;
+      container-tests = {
+        comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
         comfyui-negative-test = pkgs.callPackage ./vm-test/negative-test.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         };
@@ -188,7 +188,7 @@
           nixosModule = inputs.self.nixosModules.comfyui;
         };
       }
-      // (builtins.removeAttrs
+      // (lib.removeAttrs
         (pkgs.callPackage ./vm-test/custom-nodes-tests.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         })
@@ -200,6 +200,12 @@
           "comfyui-custom-node-comfyui-seedvr2-videoupscaler"
         ]
       );
+    in
+    {
+      checks = {
+        comfyui = pkgs.callPackage ./vm-test { nixosModule = inputs.self.nixosModules.comfyui; };
+      }
+      // (lib.optionalAttrs enableContainerTests container-tests);
       packages = {
         comfyui-nvidia = nvidiaPkgs.comfyuiPackages.comfyui // {
           passthru = nvidiaPkgs.comfyuiPackages.comfyui.passthru // {
@@ -217,10 +223,13 @@
         # ROCm support in nixpkgs is pretty bad right now
         # comfyui-amd = rocmPkgs.comfyuiPackages.comfyui;
       };
-      legacyPackages.nixified-ai.internal = scripts // {
-        comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
-          nixosModule = inputs.self.nixosModules.comfyui;
+      legacyPackages.nixified-ai = {
+        internal = scripts // {
+          comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
+            nixosModule = inputs.self.nixosModules.comfyui;
+          };
         };
+        inherit container-tests;
       };
     };
 }

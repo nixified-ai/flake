@@ -55,8 +55,8 @@ python3Packages.callPackage (
       # 1. Patch setup.py to read COMFY_CUDA_ARCHS env var for default archs
       # match the whole assignment to be safe about quotes
       substituteInPlace setup.py \
-        --replace-fail 'DEFAULT_CUDA_ARCHS_LINUX = "75-virtual;80;89;90a;100f;120f"' \
-                       'DEFAULT_CUDA_ARCHS_LINUX = os.environ.get("COMFY_CUDA_ARCHS", "75-virtual;80;89;90a;100f;120f")'
+        --replace-fail 'DEFAULT_CUDA_ARCHS_LINUX = "75-real;75-virtual;80;89;90a;100f;120f"' \
+                       'DEFAULT_CUDA_ARCHS_LINUX = os.environ.get("COMFY_CUDA_ARCHS", "75-real;75-virtual;80;89;90a;100f;120f")'
 
       # 2. Relax CUDA version check in setup.py (12.8 -> 11.0)
       substituteInPlace setup.py \

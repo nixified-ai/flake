@@ -38,6 +38,7 @@ ci
 # Ignore flake.nix anywhere except for the root and templates
 flake.nix
 !/flake.nix
+!/flags/**/flake.nix
 !**/templates/**/flake.nix
 !**/template/flake.nix
 

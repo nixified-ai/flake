@@ -174,9 +174,7 @@
             "packages"
             "recurseForDerivations"
           ];
-      # TODO: allow this to be overriden from command line when running
-      # nix flacke check
-      enableContainerTests = true;
+      enableContainerTests = inputs.enable-container-tests.value;
       container-tests = {
         comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
           nixosModule = inputs.self.nixosModules.comfyui;

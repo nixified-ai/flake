@@ -13,6 +13,7 @@ testers.nixosTest {
     { pkgs, ... }:
     {
       imports = [ nixosModule ];
+      nixpkgs.overlays = lib.mkForce [ ];
 
       systemd.services.comfyui.serviceConfig = {
         PrivateUsers = lib.mkForce false;

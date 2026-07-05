@@ -126,6 +126,11 @@
           in
           extraPackagesWithWarning
           // {
+            compressed-tensors = pyprev.compressed-tensors.overridePythonAttrs (oldAttrs: {
+              postPatch = (oldAttrs.postPatch or "") + ''
+                sed -i '/def test_quantization_enabled_disabled():/a \    torch.manual_seed(42)' tests/test_quantization/lifecycle/test_enabled.py
+              '';
+            });
             transformers = pyprev.transformers.overridePythonAttrs (oldAttrs: {
               postPatch = (oldAttrs.postPatch or "") + ''
                 substituteInPlace src/transformers/utils/import_utils.py \

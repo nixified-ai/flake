@@ -226,6 +226,7 @@
       legacyPackages.nixified-ai = {
         internal = scripts;
         inherit container-tests;
+        models = nvidiaPkgs.nixified-ai.models;
         comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         };

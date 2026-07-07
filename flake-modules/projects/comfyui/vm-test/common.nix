@@ -52,6 +52,7 @@
     { home, port }:
     let
       inputPath1 = "${home}/.local/share/comfyui/input/ComfyUI_00001.png";
+      outputPath = "${home}/.local/share/comfyui/output/gemma_output.txt";
       gemmaTest = writeShellScript "" ''
         ${lib.getExe python3} ${./api.py} ${./gemma3-test.json} --port ${toString port}
       '';
@@ -67,5 +68,9 @@
       machine.succeed("cp ${./ComfyUI_00001.png} ${inputPath1}")
       machine.succeed("chmod a+r ${inputPath1}")
       machine.succeed("${gemmaTest}")
+
+      # Wait and extract the saved text output
+      machine.wait_for_file("${outputPath}")
+      machine.copy_from_machine("${outputPath}")
     '';
 }

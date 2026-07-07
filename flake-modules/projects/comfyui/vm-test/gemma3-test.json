@@ -38,11 +38,15 @@
   },
   "4": {
     "inputs": {
+      "root_dir": "output",
+      "file": "gemma_output.txt",
+      "append": "overwrite",
+      "insert": true,
       "text": [
         "3",
         0
       ]
     },
-    "class_type": "ShowText|pysssss"
+    "class_type": "SaveText|pysssss"
   }
 }

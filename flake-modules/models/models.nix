@@ -551,4 +551,22 @@
       comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
     };
   };
+
+  gemma-4-e4b-uncensored-hauhaucs-aggressive-q8_k_p_gguf = fetchResource {
+    name = "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q8_K_P.gguf";
+    url = "https://huggingface.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive/resolve/main/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q8_K_P.gguf";
+    sha256 = "1njky1rci24qbvdvg5b14bwm76h75xsgnnk749jzbqypkxzigi54";
+    passthru = {
+      comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
+    };
+  };
+
+  mmproj-gemma-4-e4b-uncensored-hauhaucs-aggressive-f16 = fetchResource {
+    name = "mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf";
+    url = "https://huggingface.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf";
+    sha256 = "1ny72v5kqpc3fm8gsyy540imndz86pxp99lmfsv2l5f1p6dd7fny";
+    passthru = {
+      comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
+    };
+  };
 }

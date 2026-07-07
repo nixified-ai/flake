@@ -587,4 +587,49 @@
       comfyui.installPaths = [ "LLM" ];
     };
   };
+
+  refcontrol-flux2-klein-9b-pose = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-pose-lora/resolve/main/refcontrol_v2_poses.safetensors";
+    sha256 = "0fs7bl74vxcca9bbw3m0xwh3ba2jdgwl0jk88yibgkbc82jwcbm2";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-depth = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-depth-lora/resolve/main/flux2_klein_9b_refcontrol_depth.safetensors";
+    sha256 = "13dvr4r1i7hj12vljh3xn84hid3j1hd9l0hvjnrcg9x674fn69yn";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-lineart = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-lineart-lora/resolve/main/flux2_klein_9b_refcontrol_lineart.safetensors";
+    sha256 = "1xzd4pvj2cqyhfavahgzp7jdgrflm8jhvkzl9xxv4974ppmfk81q";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-canny = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-canny-lora/resolve/main/flux2_klein_9b_refcontrol_canny.safetensors";
+    sha256 = "0w4qjxxd740h5dlxd5g9z9dbjpfg4kj5qrgvmfhmav723vvdq5n8";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-normal = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-normal-lora/resolve/main/flux2_klein_9b_refcontrol_normal.safetensors";
+    sha256 = "1lizk2bnhgv9c0brdpl28aijg2b7j8rhdf0c1y2k10q4gllpzads";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
 }

@@ -14,7 +14,7 @@
       "context_size": 4096,
       "image_max_tokens": "280",
       "image_min_tokens": 0,
-      "keep_model_loaded": false
+      "keep_model_loaded": true
     },
     "class_type": "Gemma4GGUFModelLoader"
   },

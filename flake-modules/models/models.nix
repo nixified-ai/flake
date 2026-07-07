@@ -524,4 +524,22 @@
       comfyui.installPaths = [ "ultralytics_bbox" ];
     };
   };
+
+  gemma3-4b-it-gguf = fetchResource {
+    name = "google_gemma-3-4b-it-Q4_K_M.gguf";
+    url = "https://huggingface.co/bartowski/google_gemma-3-4b-it-GGUF/resolve/main/google_gemma-3-4b-it-Q4_K_M.gguf";
+    sha256 = "155fs6ky5cl88npc6821bv1chykqxm4kzy8z2nm40fjq881075j9";
+    passthru = {
+      comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
+    };
+  };
+
+  gemma3-4b-it-mmproj = fetchResource {
+    name = "mmproj-google_gemma-3-4b-it-f16.gguf";
+    url = "https://huggingface.co/bartowski/google_gemma-3-4b-it-GGUF/resolve/main/mmproj-google_gemma-3-4b-it-f16.gguf";
+    sha256 = "1js0djx274b4pwnvwqa5rbrqm1cj8xz2rbmaaql9g9hrn1jb03wc";
+    passthru = {
+      comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
+    };
+  };
 }

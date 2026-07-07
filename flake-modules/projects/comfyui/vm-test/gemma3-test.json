@@ -1,0 +1,48 @@
+{
+  "1": {
+    "inputs": {
+      "image": "ComfyUI_00001.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "2": {
+    "inputs": {
+      "model_file": "google_gemma-3-4b-it-Q4_K_M.gguf",
+      "mmproj_file": "mmproj-google_gemma-3-4b-it-f16.gguf",
+      "vram_limit": -1,
+      "n_gpu_layers": 100,
+      "context_size": 4096,
+      "image_max_tokens": "280",
+      "image_min_tokens": 0,
+      "keep_model_loaded": false
+    },
+    "class_type": "Gemma4GGUFModelLoader"
+  },
+  "3": {
+    "inputs": {
+      "system_prompt": "You are a helpful assistant.",
+      "preset_prompt": "detailed caption",
+      "user_prompt": "",
+      "max_tokens": 128,
+      "seed": 1,
+      "model": [
+        "2",
+        0
+      ],
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "Gemma4GGUFImageCaption"
+  },
+  "4": {
+    "inputs": {
+      "text": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss"
+  }
+}

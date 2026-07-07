@@ -35,9 +35,10 @@ let
         map (
           installPath:
           let
-            name = "${python3Packages.python.sitePackages}/models/${installPath}/${modelDrv.name}";
+            fileName = modelDrv.passthru.name or modelDrv.name;
+            name = "${python3Packages.python.sitePackages}/models/${installPath}/${fileName}";
             traceMessage = ''
-              installPath "${installPath}" for "${modelDrv.name}" does not occur in the models folder upstream, so may be unused comfyui at runtime
+              installPath "${installPath}" for "${fileName}" does not occur in the models folder upstream, so may be unused comfyui at runtime
             '';
             checkedName = lib.warnIfNot (lib.elem installPath (
               supportedFolders ++ comfyuiExtraValidModelDirs

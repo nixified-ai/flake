@@ -1,0 +1,29 @@
+--- a/folder_registry.py
++++ b/folder_registry.py
+@@ -6,8 +6,8 @@
+ import folder_paths
+ 
+ 
+-LLM_FOLDER = "llm_text_processor_models"
+-PROMPT_FOLDER = "llm_text_processor_prompts"
++LLM_FOLDER = "LLM"
++PROMPT_FOLDER = "prompts"
+ NO_SYSTEM_PROMPT = "none"
+ NO_MMPROJ = "none"
+ NO_MODELS_FOUND = "No GGUF models found"
+@@ -29,6 +29,15 @@
+     # register the custom keys directly with the same tuple shape ComfyUI uses.
+     llm_dir.mkdir(parents=True, exist_ok=True)
+     prompts_dir.mkdir(parents=True, exist_ok=True)
+-    folder_paths.folder_names_and_paths[LLM_FOLDER] = ([str(llm_dir)], {".gguf"})
+-    folder_paths.folder_names_and_paths[PROMPT_FOLDER] = ([str(prompts_dir)], {".txt"})
++    
++    if LLM_FOLDER in folder_paths.folder_names_and_paths:
++        folder_paths.folder_names_and_paths[LLM_FOLDER][0].append(str(llm_dir))
++    else:
++        folder_paths.folder_names_and_paths[LLM_FOLDER] = ([str(llm_dir)], {".gguf"})
++        
++    if PROMPT_FOLDER in folder_paths.folder_names_and_paths:
++        folder_paths.folder_names_and_paths[PROMPT_FOLDER][0].append(str(prompts_dir))
++    else:
++        folder_paths.folder_names_and_paths[PROMPT_FOLDER] = ([str(prompts_dir)], {".txt"})

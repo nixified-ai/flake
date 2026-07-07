@@ -292,6 +292,19 @@
       "url": "https://github.com/PanicTitan/ComfyUI-Gallery/archive/74639e68846f64c9f561f3a7745529de76376a97.tar.gz",
       "hash": "sha256-8/pC0vF00JiKhublrXrGYdpL4dpOXK459inlHb/nZoA="
     },
+    "comfyui-gemma4-gguf": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "promptlo",
+        "repo": "ComfyUI-Gemma4-GGUF"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "71d6c5f20392ee3a448c9be9f11ea1feb25e2f31",
+      "url": "https://github.com/promptlo/ComfyUI-Gemma4-GGUF/archive/71d6c5f20392ee3a448c9be9f11ea1feb25e2f31.tar.gz",
+      "hash": "sha256-arvoNHr7oEDdYe3qa17Dk0dx4AirbAOJhtyWmpbZG0w="
+    },
     "comfyui-gguf": {
       "type": "Git",
       "repository": {

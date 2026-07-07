@@ -53,6 +53,7 @@ cat << 'EOF'
         100,
         1,
         1,
+        "fixed",
         300,
         "off",
         true,

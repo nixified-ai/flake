@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7ce64deed34c4b2561de225e996fd8eb1c01225e",
-      "url": "https://github.com/calcuis/gguf/archive/7ce64deed34c4b2561de225e996fd8eb1c01225e.tar.gz",
-      "hash": "sha256-YVUbG+AMheme4U49cj7Y21vfrIavBVNu3FQc6kVZo9c="
+      "revision": "080e4ee22410687bb644c8aa8da7d808fe267fce",
+      "url": "https://github.com/calcuis/gguf/archive/080e4ee22410687bb644c8aa8da7d808fe267fce.tar.gz",
+      "hash": "sha256-l18KUxNRhTEuMSdq8R8ircNWezGwiGNZHAD7y4sjbzU="
     },
     "comfyui-cg-image-filter": {
       "type": "Git",
@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7a47b90a5553b1d5b96641d4b327720c8444773b",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=7a47b90a5553b1d5b96641d4b327720c8444773b",
-      "hash": "sha256-oUcQS1YLneAotcpXF0W1Hq4//W54ARNAVZwpfp1YDXk="
+      "revision": "7f284782fccaf33b1cb183a2f64bfc1e671f6dd4",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=7f284782fccaf33b1cb183a2f64bfc1e671f6dd4",
+      "hash": "sha256-zJ2YCsCH89H0Yx9zZYr7TqVBGHqo50uvNSf6zUCEVu4="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -714,9 +714,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9e6ff1da1e089ceca0e706bcf30634dbbe740611",
-      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/9e6ff1da1e089ceca0e706bcf30634dbbe740611.tar.gz",
-      "hash": "sha256-QoU+sMYiwLH7u4WlZH0I3MYg5aiP4fyGem53GDXF9qc="
+      "revision": "2a431790796e829551ec889861718227a11e6c80",
+      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/2a431790796e829551ec889861718227a11e6c80.tar.gz",
+      "hash": "sha256-1bIyBNWaPg2voLvxD9jmjvBPOHJQYaOI0dkCpWIZHvQ="
     },
     "comfyui-tiled-diffusion": {
       "type": "Git",

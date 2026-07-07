@@ -229,6 +229,9 @@
         comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
           nixosModule = inputs.self.nixosModules.comfyui;
         };
+        comfyui-container-gpu-test-gemma = nvidiaPkgs.callPackage ./vm-test/container-test-gemma.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
       };
     };
 }

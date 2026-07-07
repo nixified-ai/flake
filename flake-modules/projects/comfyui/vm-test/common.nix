@@ -32,12 +32,8 @@
     let
       imagePath1 = "${home}/.local/share/comfyui/output/ComfyUI_00001.png";
       imagePath2 = "${home}/.local/share/comfyui/output/ComfyUI_00002_.png";
-      inputPath1 = "${home}/.local/share/comfyui/input/ComfyUI_00001.png";
       apiTest = writeShellScript "" ''
         ${lib.getExe python3} ${./api.py} ${./custom-nodes-test.json} --port ${toString port}
-      '';
-      gemmaTest = writeShellScript "" ''
-        ${lib.getExe python3} ${./api.py} ${./gemma3-test.json} --port ${toString port}
       '';
     in
     ''
@@ -50,9 +46,25 @@
       machine.wait_for_file("${imagePath2}")
       machine.copy_from_machine("${imagePath1}")
       machine.copy_from_machine("${imagePath2}")
+    '';
 
-      # Copy output image to input directory for the gemma test
-      machine.succeed("cp ${imagePath1} ${inputPath1}")
+  testScriptGemma =
+    { home, port }:
+    let
+      inputPath1 = "${home}/.local/share/comfyui/input/ComfyUI_00001.png";
+      gemmaTest = writeShellScript "" ''
+        ${lib.getExe python3} ${./api.py} ${./gemma3-test.json} --port ${toString port}
+      '';
+    in
+    ''
+      start_all()
+      machine.wait_for_unit("multi-user.target")
+      machine.wait_for_unit("comfyui.service")
+      machine.wait_for_open_port(${toString port})
+
+      # Provide input image for the gemma test
+      machine.succeed("mkdir -p ${home}/.local/share/comfyui/input")
+      machine.succeed("cp ${./ComfyUI_00001.png} ${inputPath1}")
       machine.succeed("chmod a+r ${inputPath1}")
       machine.succeed("${gemmaTest}")
     '';

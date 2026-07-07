@@ -26,5 +26,8 @@
       
     substituteInPlace gemma4_engine.py \
       --replace-fail '"present_penalty": present_penalty,' '"presence_penalty": present_penalty,'
+
+    sed -i '/FUNCTION = "load_model"/a \ \ \ \ @classmethod\n\ \ \ \ def IS_CHANGED(cls, **kwargs):\n\ \ \ \ \ \ \ \ if not kwargs.get("keep_model_loaded", True):\n\ \ \ \ \ \ \ \ \ \ \ \ import time\n\ \ \ \ \ \ \ \ \ \ \ \ return time.time()\n\ \ \ \ \ \ \ \ return ""\n' gemma4_nodes.py
+
   '';
 }

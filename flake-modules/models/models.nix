@@ -534,6 +534,15 @@
     };
   };
 
+  gemma3-4b-it-abliterated-q8-gguf = fetchResource {
+    name = "gemma-3-4b-it-abliterated.q8_0.gguf";
+    url = "https://huggingface.co/mlabonne/gemma-3-4b-it-abliterated-GGUF/resolve/main/gemma-3-4b-it-abliterated.q8_0.gguf";
+    sha256 = "01rwm7idzzrhl5x3qk135qsgvfjsqwfq4di8ixv523ncdr2a0s17";
+    passthru = {
+      comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
+    };
+  };
+
   gemma3-4b-it-mmproj = fetchResource {
     name = "mmproj-google_gemma-3-4b-it-f16.gguf";
     url = "https://huggingface.co/bartowski/google_gemma-3-4b-it-GGUF/resolve/main/mmproj-google_gemma-3-4b-it-f16.gguf";

@@ -566,7 +566,7 @@
     url = "https://huggingface.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf";
     sha256 = "1ny72v5kqpc3fm8gsyy540imndz86pxp99lmfsv2l5f1p6dd7fny";
     passthru = {
-      comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
+      comfyui.installPaths = [ "LLM" ];
     };
   };
 
@@ -575,7 +575,7 @@
     url = "https://huggingface.co/HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced/resolve/main/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf";
     sha256 = "0d2ibdwcp4dsrjzlfvgc29zxjv71l97bc84ygslnqdynjis6srar";
     passthru = {
-      comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
+      comfyui.installPaths = [ "LLM" ];
     };
   };
 
@@ -584,7 +584,7 @@
     url = "https://huggingface.co/HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced/resolve/main/mmproj-Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-BF16.gguf";
     sha256 = "13mbfs96yq4c2hh33inb5c4ni8q4q626g7njbdkg1rdpg5a837mm";
     passthru = {
-      comfyui.installPaths = [ "LLM/Gemma4-GGUF" ];
+      comfyui.installPaths = [ "LLM" ];
     };
   };
 }

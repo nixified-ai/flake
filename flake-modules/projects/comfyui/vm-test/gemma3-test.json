@@ -7,34 +7,30 @@
   },
   "2": {
     "inputs": {
-      "model_file": "google_gemma-3-4b-it-Q4_K_M.gguf",
-      "mmproj_file": "mmproj-google_gemma-3-4b-it-f16.gguf",
-      "vram_limit": -1,
-      "n_gpu_layers": 100,
-      "context_size": 4096,
-      "image_max_tokens": "280",
-      "image_min_tokens": 0,
-      "keep_model_loaded": true
-    },
-    "class_type": "Gemma4GGUFModelLoader"
-  },
-  "3": {
-    "inputs": {
-      "system_prompt": "You are a helpful assistant.",
-      "preset_prompt": "detailed caption",
-      "user_prompt": "",
+      "model": "google_gemma-3-4b-it-Q4_K_M.gguf",
+      "mmproj": "mmproj-google_gemma-3-4b-it-f16.gguf",
+      "system_prompt": "none",
+      "prompt": "detailed caption",
       "max_tokens": 128,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "repeat_penalty": 1.0,
+      "ctx_size": 4096,
+      "memory_mode": "gpu_layers",
+      "n_gpu_layers": 100,
+      "n_cpu_moe_layers": 1,
       "seed": 1,
-      "model": [
-        "2",
-        0
-      ],
+      "timeout_seconds": 300,
+      "reasoning": "off",
+      "enable_processing": true,
+      "extra_args": "",
       "image": [
         "1",
         0
       ]
     },
-    "class_type": "Gemma4GGUFImageCaption"
+    "class_type": "LLMTextProcessor"
   },
   "4": {
     "inputs": {
@@ -43,7 +39,7 @@
       "append": "overwrite",
       "insert": true,
       "text": [
-        "3",
+        "2",
         0
       ]
     },

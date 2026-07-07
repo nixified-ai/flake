@@ -33,6 +33,10 @@ testers.nixosTest {
 
       services.comfyui = (common.comfyuiConfig pkgs) // {
         acceleration = "cuda";
+        models = with pkgs.nixified-ai.models; [
+          gemma3-4b-it-gguf
+          gemma3-4b-it-mmproj
+        ];
       };
     };
   testScript =

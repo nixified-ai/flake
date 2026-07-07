@@ -22,8 +22,6 @@
       hyper-sd15-1step-lora
       ip-adapter-plus-sd15
       stable-diffusion-v1-5
-      gemma3-4b-it-gguf
-      gemma3-4b-it-mmproj
     ];
   };
 

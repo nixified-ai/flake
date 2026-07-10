@@ -396,6 +396,19 @@
       "url": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack/archive/d23db9aa544de9a6d4c609cb7005fa9e0d42031d.tar.gz",
       "hash": "sha256-XjV52EyXQ9pqkntKFB53goJ2oTQ+wjTYQCmE9uVlgJM="
     },
+    "comfyui-int8-fast": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "BobJohnson24",
+        "repo": "ComfyUI-INT8-Fast"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "48a88b2fde88e986c6444fa1f51589b6089d04f3",
+      "url": "https://github.com/BobJohnson24/ComfyUI-INT8-Fast/archive/48a88b2fde88e986c6444fa1f51589b6089d04f3.tar.gz",
+      "hash": "sha256-yM2FHbGApWTHlin1YDQ8jDyO36qXw71qzEj36XbxK/s="
+    },
     "comfyui-ip-adapter": {
       "type": "Git",
       "repository": {

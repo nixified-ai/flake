@@ -27,10 +27,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.2.16",
-      "revision": "43b413e402c93b21b14f437758bcac0cd5130bd4",
-      "url": "https://api.github.com/repos/Comfy-Org/comfy-kitchen/tarball/refs/tags/v0.2.16",
-      "hash": "sha256-ukJUM7IpNVY0tYc7ICYLJxVwuh+Wu/Fd6C8lKvwUGXE="
+      "version": "v0.2.18",
+      "revision": "898017e5c0f23b5b7b9a8473746be6c419baffb3",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-kitchen/tarball/refs/tags/v0.2.18",
+      "hash": "sha256-OMikiwaX8X0FHq55HZmmIjlvTA43lZbbe5gSA9j3uss="
     },
     "comfyui": {
       "type": "GitRelease",

@@ -632,4 +632,67 @@
       comfyui.installPaths = [ "loras" ];
     };
   };
+
+  juggernautxl-juggxi-q4_0-gguf = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/hum-ma/SDXL-models-GGUF/resolve/main/juggernautXL_juggXIByRundiffusion-Q4_0.gguf";
+    sha256 = "";
+    passthru = {
+      comfyui.installPaths = [ "diffusion_models" ];
+    };
+  };
+
+  realcartoonpony-v2-q4_k_s-gguf = fetchResource rec {
+    name = "realcartoonPony_v2_Q4_K_S.gguf";
+    url = "https://huggingface.co/Old-Fisherman/SDXL_Finetune_GGUF_Files/resolve/main/GGUF_Models/realcartoonPony_v2_Q4_K_S.gguf";
+    sha256 = "";
+    passthru = {
+      comfyui.installPaths = [ "diffusion_models" ];
+    };
+  };
+
+  z-image-turbo-q4_k_m-gguf = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/vantagewithai/Z-Image-Turbo-GGUF/resolve/main/z_image_turbo-Q4_K_M.gguf";
+    sha256 = "";
+    passthru = {
+      comfyui.installPaths = [ "diffusion_models" ];
+    };
+  };
+
+  gemma4-26b-a4b-it-ud-q4_k_xl-gguf = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF/resolve/main/gemma-4-26B-A4B-it-UD-Q4_K_XL.gguf";
+    sha256 = "";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  mmproj-gemma4-26b-a4b-it-bf16 = fetchResource {
+    name = "mmproj-gemma4-26b-a4b-it-bf16.gguf";
+    url = "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF/resolve/main/mmproj-BF16.gguf";
+    sha256 = "";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma4-12b-it-ud-q4_k_xl-gguf = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/unsloth/gemma-4-12b-it-GGUF/resolve/main/gemma-4-12b-it-UD-Q4_K_XL.gguf";
+    sha256 = "";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  mmproj-gemma4-12b-it-bf16 = fetchResource {
+    name = "mmproj-gemma4-12b-it-bf16.gguf";
+    url = "https://huggingface.co/unsloth/gemma-4-12b-it-GGUF/resolve/main/mmproj-BF16.gguf";
+    sha256 = "";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
 }

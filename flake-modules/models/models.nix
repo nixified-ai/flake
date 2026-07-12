@@ -695,4 +695,31 @@
       comfyui.installPaths = [ "LLM" ];
     };
   };
+
+  sdxl-vae = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors";
+    sha256 = "0bifx60nxcw9f2y7g0wkc5dkhw9mh0z2v5lmac8irg7p1ywyrbk3";
+    passthru = {
+      comfyui.installPaths = [ "vae" ];
+    };
+  };
+
+  clip-l-sd35 = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/clip_l.safetensors";
+    sha256 = "1pbck8flk5npdibwih60yq6dpayj8w9ixln2i94xrsds39dny336";
+    passthru = {
+      comfyui.installPaths = [ "clip" ];
+    };
+  };
+
+  clip-g-sd35 = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/clip_g.safetensors";
+    sha256 = "1x5irmmkaal2zy6ivkhz9z6sh72r39h1nl909pi1ihvrmzr0scgc";
+    passthru = {
+      comfyui.installPaths = [ "clip" ];
+    };
+  };
 }

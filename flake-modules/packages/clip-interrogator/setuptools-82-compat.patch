@@ -1,0 +1,26 @@
+diff --git a/setup.py b/setup.py
+index a6db97a..e0a4bf0 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1,6 +1,6 @@
+ import os
+ 
+-import pkg_resources
++from packaging.requirements import Requirement
+ from setuptools import setup, find_packages
+ 
+ setup(
+@@ -15,10 +15,9 @@
+     long_description_content_type="text/markdown",
+     packages=find_packages(),
+     install_requires=[
+-        str(r)
+-        for r in pkg_resources.parse_requirements(
+-            open(os.path.join(os.path.dirname(__file__), "requirements.txt"))
+-        )
++        str(Requirement(line))
++        for line in open(os.path.join(os.path.dirname(__file__), "requirements.txt"))
++        if line.strip() and not line.strip().startswith(('#', '-r'))
+     ],
+     include_package_data=True,
+     extras_require={'dev': ['pytest']},

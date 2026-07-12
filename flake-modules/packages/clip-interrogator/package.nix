@@ -23,6 +23,8 @@ buildPythonPackage rec {
     hash = "sha256-55Qjcv6blhgYgfcIPjF53nRuWbDjxBmfs+Phm+9CFpM=";
   };
 
+  patches = [ ./setuptools-82-compat.patch ];
+
   build-system = [
     setuptools
   ];

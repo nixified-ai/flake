@@ -200,6 +200,14 @@
           "comfyui-custom-node-comfyui-seedvr2-videoupscaler"
         ]
       );
+      container-tests-gpu.nvidia = {
+        comfyui = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
+        comfyui-gemma = nvidiaPkgs.callPackage ./vm-test/container-test-gemma.nix {
+          nixosModule = inputs.self.nixosModules.comfyui;
+        };
+      };
     in
     {
       checks = {
@@ -225,14 +233,8 @@
       };
       legacyPackages.nixified-ai = {
         internal = scripts;
-        inherit container-tests;
+        inherit container-tests container-tests-gpu;
         models = nvidiaPkgs.nixified-ai.models;
-        comfyui-container-gpu-test = nvidiaPkgs.callPackage ./vm-test/container-test.nix {
-          nixosModule = inputs.self.nixosModules.comfyui;
-        };
-        comfyui-container-gpu-test-gemma = nvidiaPkgs.callPackage ./vm-test/container-test-gemma.nix {
-          nixosModule = inputs.self.nixosModules.comfyui;
-        };
       };
     };
 }

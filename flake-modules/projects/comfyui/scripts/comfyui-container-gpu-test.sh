@@ -19,4 +19,4 @@ echo "Requirements met! Running the GPU container test..."
 echo "This will run 'nix build .#nixified-ai.comfyui-container-gpu-test -L' with the required extra-sandbox-paths."
 echo ""
 
-exec nix build .#nixified-ai.comfyui-container-gpu-test -L --extra-sandbox-paths "/dev/nvidia0 /dev/nvidiactl /dev/nvidia-uvm /dev/nvidia-uvm-tools" "$@"
+exec nix build .#nixified-ai.container-tests-gpu.nvidia.comfyui -L --extra-sandbox-paths "/dev/nvidia0 /dev/nvidiactl /dev/nvidia-uvm /dev/nvidia-uvm-tools" "$@"

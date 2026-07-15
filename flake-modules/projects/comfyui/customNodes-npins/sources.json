@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "01fada1e65f1ee983d957c9eb164fbb25748bf30",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=01fada1e65f1ee983d957c9eb164fbb25748bf30",
-      "hash": "sha256-K92xpTCb3lubZ8FvVPq6A5aXrRcNqAQhyxY/AwvEHpQ="
+      "revision": "c176ba715967c0e9feb20d62b08aec91a7fe5986",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=c176ba715967c0e9feb20d62b08aec91a7fe5986",
+      "hash": "sha256-hMQBteT6GmM7X9M7V4MfP6SlDahwGOWzoVvlwxH5Nv8="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -649,9 +649,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "1cf42ce440e0a7c57ebdff9c317ef92323d3da0e",
-      "url": "https://github.com/Azornes/Comfyui-Resolution-Master/archive/1cf42ce440e0a7c57ebdff9c317ef92323d3da0e.tar.gz",
-      "hash": "sha256-xPOmxOP2wz9k79tKS6wI2Yej2NjwMmEEJwPrNghOokk="
+      "revision": "2982b9cdce66cc44c420798572a4ac5b52d58c4e",
+      "url": "https://github.com/Azornes/Comfyui-Resolution-Master/archive/2982b9cdce66cc44c420798572a4ac5b52d58c4e.tar.gz",
+      "hash": "sha256-T+DL5tRssMnB33E0DV9wMmWrfsmANHn3ULM0vgEFqgI="
     },
     "comfyui-rgthree": {
       "type": "Git",

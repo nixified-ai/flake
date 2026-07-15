@@ -27,10 +27,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.2.19",
-      "revision": "90a9c030717ade4250bb7a6ea2a4ddb6fd1d0eb7",
-      "url": "https://api.github.com/repos/Comfy-Org/comfy-kitchen/tarball/refs/tags/v0.2.19",
-      "hash": "sha256-6Cs2+SYszPXiNQ1QPMhQtPUwAaShl2+W5LNSzpg3TVk="
+      "version": "v0.2.20",
+      "revision": "911d47e6c355f31a1f66fe74ea64a1760fad581a",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-kitchen/tarball/refs/tags/v0.2.20",
+      "hash": "sha256-EsegrcBFT/DXlBF7GWhY5zK19ngHvgnDce2HYCf1AwM="
     },
     "comfyui": {
       "type": "GitRelease",
@@ -60,9 +60,9 @@
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.46.15",
-      "url": "https://files.pythonhosted.org/packages/47/d9/e51dfd39687450bc8aa6fc81a80723d9bc30bbc9c79280f89d6196d01ebc/comfyui_frontend_package-1.46.15.tar.gz",
-      "hash": "sha256-VAERpoFoSpAx9inAAIahX+LwqzZeMqzQyhI8xufliPI="
+      "version": "1.47.8",
+      "url": "https://files.pythonhosted.org/packages/ef/ca/c69e14ace20779bac111f2f8ad672a744ece464355c18420ae7ee96a844d/comfyui_frontend_package-1.47.8.tar.gz",
+      "hash": "sha256-XwU3jKtuZ2iLLpyaNaIEW61wBaiEzh+b22UVxU99bXE="
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",

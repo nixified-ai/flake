@@ -22,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ba0795aaaa6d100f8d84a1f060df682bcc1091fa",
-      "url": "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet/archive/ba0795aaaa6d100f8d84a1f060df682bcc1091fa.tar.gz",
-      "hash": "sha256-fFbVq+pcr0Ry+RQk3QMJxaRl+r3ue/CzWoZEFmvNxEM="
+      "revision": "e701735c5072780fb453ef47dc5595508fc19163",
+      "url": "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet/archive/e701735c5072780fb453ef47dc5595508fc19163.tar.gz",
+      "hash": "sha256-YgHXpkw0gwhtd6yoHrqxySRFpAmH7o4cH9o7MnHBO/Q="
     },
     "comfyui-asyncpause": {
       "type": "Git",

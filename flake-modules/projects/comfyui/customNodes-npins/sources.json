@@ -22,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e701735c5072780fb453ef47dc5595508fc19163",
-      "url": "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet/archive/e701735c5072780fb453ef47dc5595508fc19163.tar.gz",
-      "hash": "sha256-YgHXpkw0gwhtd6yoHrqxySRFpAmH7o4cH9o7MnHBO/Q="
+      "revision": "9e60d8a9c8016c5315063aa7af66b321a0444df7",
+      "url": "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet/archive/9e60d8a9c8016c5315063aa7af66b321a0444df7.tar.gz",
+      "hash": "sha256-yS/g3VQHn00mZpRKeDRvGRalaHA5lwmXs0tGi+TGKbs="
     },
     "comfyui-asyncpause": {
       "type": "Git",
@@ -636,9 +636,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "419de2d7c78f415dde9aa352a7231820ebfc17a4",
-      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/419de2d7c78f415dde9aa352a7231820ebfc17a4.tar.gz",
-      "hash": "sha256-kBm+jK2uuwGdK5NCH848AQB5WTtX/WeNsOqdGlS79Kk="
+      "revision": "20e175074952402e3febac7df21ceaf138d69c7b",
+      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/20e175074952402e3febac7df21ceaf138d69c7b.tar.gz",
+      "hash": "sha256-fZeVagJK78aSbCe1mSiFoChyTnsel3hnszhwgDkj37Q="
     },
     "comfyui-resolution-master": {
       "type": "Git",

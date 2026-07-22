@@ -87,9 +87,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "632ed7bb51bb18ceb03ccaefe1f34be8bd416500",
-      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/632ed7bb51bb18ceb03ccaefe1f34be8bd416500.tar.gz",
-      "hash": "sha256-TWJbdU06FoRFwzxiNcM99muodyISkgvZDlfBR4bMrMc="
+      "revision": "50ae9f8c5d8b9538589663c90a15d4067a02969c",
+      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/50ae9f8c5d8b9538589663c90a15d4067a02969c.tar.gz",
+      "hash": "sha256-nERiYN36pDjvK4dWb4qGn3MC4ohfnh0Icu8cYyJoQno="
     },
     "comfyui-colors-mz": {
       "type": "Git",
@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7b7fc0b84804536854ee748713649f6d65c55039",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=7b7fc0b84804536854ee748713649f6d65c55039",
-      "hash": "sha256-VpzJ9jDmoXyEbePn45SRJZPw/oeIbBfeKclqB30kH1w="
+      "revision": "0f7712f82d8ea827af4d477fdc7b58d01795d004",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=0f7712f82d8ea827af4d477fdc7b58d01795d004",
+      "hash": "sha256-CzJApTeF5+xKUyexIjRGbLyjsJQiNep191SZi07XMKg="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -649,9 +649,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e1855aecfcde0def9644f838ef8ec3fe38dccebc",
-      "url": "https://github.com/Azornes/Comfyui-Resolution-Master/archive/e1855aecfcde0def9644f838ef8ec3fe38dccebc.tar.gz",
-      "hash": "sha256-hH2yitEsmaaRAQsy5gfpuPH8FkgWLD8519Df+b5Rfu4="
+      "revision": "0c8ebd1db355a2e30cf220f56344c11c06f332c1",
+      "url": "https://github.com/Azornes/Comfyui-Resolution-Master/archive/0c8ebd1db355a2e30cf220f56344c11c06f332c1.tar.gz",
+      "hash": "sha256-muzndVMYKzsb9GQPFw7Ouvhkn8ymJ5o5R+Yp9MyzGvA="
     },
     "comfyui-rgthree": {
       "type": "Git",

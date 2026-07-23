@@ -454,9 +454,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "d94bef1ee5ed3656f5ff1bb2830a4ffd94f40935",
-      "url": "https://github.com/chflame163/ComfyUI_LayerStyle/archive/d94bef1ee5ed3656f5ff1bb2830a4ffd94f40935.tar.gz",
-      "hash": "sha256-sIRJ0Rjw7gELxKSyxh7dPw1N7IhoJj/BijUR600kYwY="
+      "revision": "02acdc50affb84cd24f341d1fc2d3a9134b2ad3d",
+      "url": "https://github.com/chflame163/ComfyUI_LayerStyle/archive/02acdc50affb84cd24f341d1fc2d3a9134b2ad3d.tar.gz",
+      "hash": "sha256-zR0eKqZzudx6c9N+6zCpC6PNTt6snWkU1Ecv1ftrBKg="
     },
     "comfyui-layer-style-advance": {
       "type": "Git",
@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8dc6152f60a4374a4691fa3425e32bc360210baa",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=8dc6152f60a4374a4691fa3425e32bc360210baa",
-      "hash": "sha256-eJDOz1DJgCCmGBTnV6NzYXB7frKxC1AU1WenyAF9G7A="
+      "revision": "bf763785de012dbd892039aca3ef4f677ab9cb78",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=bf763785de012dbd892039aca3ef4f677ab9cb78",
+      "hash": "sha256-1hIzuAbQwXHtO1gd82prnRS58TLTxj+NzIBPg50Z0J4="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",

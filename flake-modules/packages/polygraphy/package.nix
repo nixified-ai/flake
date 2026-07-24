@@ -2,6 +2,7 @@
   lib,
   buildPythonPackage,
   fetchurl,
+  cudaPackages,
 }:
 
 buildPythonPackage rec {
@@ -15,6 +16,11 @@ buildPythonPackage rec {
   };
 
   doCheck = false;
+
+  postInstall = ''
+    substituteInPlace $out/lib/python3*/site-packages/polygraphy/cuda/cuda.py \
+      --replace-warn 'fallback_lib = "libcudart.so"' 'fallback_lib = "${lib.getLib cudaPackages.cuda_cudart}/lib/libcudart.so"'
+  '';
 
   meta = with lib; {
     description = "A toolkit for TensorRT, including a Python API and command-line tools";

@@ -13,6 +13,7 @@
   gccStdenv,
   comfyuiLib,
   comfyuiExtraValidModelDirs ? [ ],
+  pkgs,
 }:
 let
   customNodes = withCustomNodes;
@@ -35,9 +36,10 @@ let
         map (
           installPath:
           let
-            name = "${python3Packages.python.sitePackages}/models/${installPath}/${modelDrv.name}";
+            fileName = modelDrv.passthru.name or modelDrv.name;
+            name = "${python3Packages.python.sitePackages}/models/${installPath}/${fileName}";
             traceMessage = ''
-              installPath "${installPath}" for "${modelDrv.name}" does not occur in the models folder upstream, so may be unused comfyui at runtime
+              installPath "${installPath}" for "${fileName}" does not occur in the models folder upstream, so may be unused comfyui at runtime
             '';
             checkedName = lib.warnIfNot (lib.elem installPath (
               supportedFolders ++ comfyuiExtraValidModelDirs
@@ -92,9 +94,14 @@ symlinkJoin {
         echo ${toString supportedFolders}
         set -x
         DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}/comfyui"
+        echo "whoami: $(whoami)"
+        echo "UID: $UID"
+        echo "GID: $GID"
+        echo "HOME: $HOME"
+        echo "DATA_HOME: $DATA_HOME"
+        echo "XDG_DATA_HOME: $XDG_DATA_HOME"
         mkdir -p "$DATA_HOME"
-        cp -rT ${comfyuiPackages.comfyui-unwrapped.src} "$DATA_HOME"
-        chmod -R +w "$DATA_HOME" || true
+        cp --no-preserve=mode -rT ${comfyuiPackages.comfyui-unwrapped.src} "$DATA_HOME"
       '';
     in
     ''
@@ -105,6 +112,17 @@ symlinkJoin {
       wrapProgram $out/bin/comfyui \
         --run ${preStartScript} \
         --prefix PYTHONPATH : "$PYTHONPATH" \
+        ${
+          lib.optionalString (pkgs.config.cudaSupport or false)
+            ''--prefix LD_LIBRARY_PATH : "${
+              lib.makeLibraryPath [
+                pkgs.cudaPackages.cudnn
+                pkgs.cudaPackages.libcublas
+                pkgs.cudaPackages.tensorrt
+                pkgs.cudaPackages.cuda_cudart
+              ]
+            }"''
+        } \
         --add-flags "--extra-model-paths-config $out/bin/extra_model_paths.yaml"
         cp --no-preserve=mode ${modelPathsFile} $out/bin/extra_model_paths.yaml
       substituteInPlace $out/bin/extra_model_paths.yaml --replace-fail "@CUSTOM_NODES@" "$out/${python3Packages.python.sitePackages}/custom_nodes"

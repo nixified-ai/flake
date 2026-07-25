@@ -194,9 +194,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "54d080bf6a4f52da287e984f305243c10db097f5",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/54d080bf6a4f52da287e984f305243c10db097f5.tar.gz",
-      "hash": "sha256-40q3EN+ThHYyrGplYPFWpL71WR9/KXhbjX2T4uKfxfY="
+      "revision": "960862223b7a896038850f56d8782df314a9a522",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/960862223b7a896038850f56d8782df314a9a522.tar.gz",
+      "hash": "sha256-I03QMuI6OGDSIdeetqlWjs3wz/uJRxGCqr4zj/TIr28="
     },
     "comfyui-essentials": {
       "type": "Git",
@@ -584,9 +584,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "652565fc032c77855a99a941f2c3a33e603a8258",
-      "url": "https://github.com/princepainter/ComfyUI-PainterI2V/archive/652565fc032c77855a99a941f2c3a33e603a8258.tar.gz",
-      "hash": "sha256-EsU3lSSnE84n1ZRfsKVb2ivurC8MzQ3BH6eOD1Q2ODI="
+      "revision": "956ae96a4e6922fc9a252dcfa7264b15bcd7880a",
+      "url": "https://github.com/princepainter/ComfyUI-PainterI2V/archive/956ae96a4e6922fc9a252dcfa7264b15bcd7880a.tar.gz",
+      "hash": "sha256-Ad/kds2yvLsgU4o+J0uISMhyn/vxW6EabJdFbdAs8uw="
     },
     "comfyui-pixaroma": {
       "type": "Git",
@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "bf763785de012dbd892039aca3ef4f677ab9cb78",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=bf763785de012dbd892039aca3ef4f677ab9cb78",
-      "hash": "sha256-1hIzuAbQwXHtO1gd82prnRS58TLTxj+NzIBPg50Z0J4="
+      "revision": "e52c84c55a70a686b64f42e7b75388e511a98296",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=e52c84c55a70a686b64f42e7b75388e511a98296",
+      "hash": "sha256-9SYRM15RMwtHBZj832wjrG/1jwr76ZNKTUG2kY4QZ1U="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -649,9 +649,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "0c8ebd1db355a2e30cf220f56344c11c06f332c1",
-      "url": "https://github.com/Azornes/Comfyui-Resolution-Master/archive/0c8ebd1db355a2e30cf220f56344c11c06f332c1.tar.gz",
-      "hash": "sha256-muzndVMYKzsb9GQPFw7Ouvhkn8ymJ5o5R+Yp9MyzGvA="
+      "revision": "02bc2df967d53780913033578fd85b2afefae8c6",
+      "url": "https://github.com/Azornes/Comfyui-Resolution-Master/archive/02bc2df967d53780913033578fd85b2afefae8c6.tar.gz",
+      "hash": "sha256-i/H8871eV29ecBS6gdy0cxbGSJZ/8EoFBRRjaU8Dy20="
     },
     "comfyui-rgthree": {
       "type": "Git",
@@ -662,9 +662,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "27b4f4cdcf3b127c29d5d8135ac1536ecbd4c383",
-      "url": "https://github.com/rgthree/rgthree-comfy/archive/27b4f4cdcf3b127c29d5d8135ac1536ecbd4c383.tar.gz",
-      "hash": "sha256-qFd0OblE70GBej/4L0m/FZIShihWEllKl7yxNk5NOXg="
+      "revision": "6b76ee6f2c5a007710b5a16f97c94330d6ecc871",
+      "url": "https://github.com/rgthree/rgthree-comfy/archive/6b76ee6f2c5a007710b5a16f97c94330d6ecc871.tar.gz",
+      "hash": "sha256-tcgwh2xiUXyQpLuYy/X2kxMKZz1+VlLPRf7HQA3lvhk="
     },
     "comfyui-rife-tensorrt-auto": {
       "type": "Git",

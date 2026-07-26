@@ -714,9 +714,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "2a431790796e829551ec889861718227a11e6c80",
-      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/2a431790796e829551ec889861718227a11e6c80.tar.gz",
-      "hash": "sha256-1bIyBNWaPg2voLvxD9jmjvBPOHJQYaOI0dkCpWIZHvQ="
+      "revision": "a6ad452e0f50f6cd7d7390da7c9ce581f351ea37",
+      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/a6ad452e0f50f6cd7d7390da7c9ce581f351ea37.tar.gz",
+      "hash": "sha256-4RcqXyDpH2H5Tj17I1k1v3hugmnFgDXblZEeRALnUzw="
     },
     "comfyui-tiled-diffusion": {
       "type": "Git",

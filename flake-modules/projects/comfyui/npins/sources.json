@@ -52,9 +52,9 @@
       "type": "PyPi",
       "name": "comfyui-embedded-docs",
       "version_upper_bound": null,
-      "version": "0.5.8",
-      "url": "https://files.pythonhosted.org/packages/53/78/a67c865524805d6e6d23b8a177cd8bc5baa7becf8aafc56deb358ccc7f19/comfyui_embedded_docs-0.5.8.tar.gz",
-      "hash": "sha256-w6fGpXHcTkx7Ur5qAw3kts2ZaNxqneLqKmd2/A5BjwU="
+      "version": "0.5.9",
+      "url": "https://files.pythonhosted.org/packages/a6/97/083f3178120b5756d6058efcf7ab5611d2544967a24a2108bca011ff9541/comfyui_embedded_docs-0.5.9.tar.gz",
+      "hash": "sha256-uz83lj91nLsqT4C/nHZdr1pfKI18FaFiU/dI2Dx9gZk="
     },
     "comfyui-frontend-package": {
       "type": "PyPi",

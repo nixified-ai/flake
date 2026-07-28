@@ -524,4 +524,400 @@
       comfyui.installPaths = [ "ultralytics_bbox" ];
     };
   };
+
+  gemma3-4b-it-gguf = fetchResource {
+    name = "google_gemma-3-4b-it-Q4_K_M.gguf";
+    url = "https://huggingface.co/bartowski/google_gemma-3-4b-it-GGUF/resolve/main/google_gemma-3-4b-it-Q4_K_M.gguf";
+    sha256 = "155fs6ky5cl88npc6821bv1chykqxm4kzy8z2nm40fjq881075j9";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma3-4b-it-abliterated-q8-gguf = fetchResource {
+    name = "gemma-3-4b-it-abliterated.q8_0.gguf";
+    url = "https://huggingface.co/mlabonne/gemma-3-4b-it-abliterated-GGUF/resolve/main/gemma-3-4b-it-abliterated.q8_0.gguf";
+    sha256 = "01rwm7idzzrhl5x3qk135qsgvfjsqwfq4di8ixv523ncdr2a0s17";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma3-4b-it-abliterated-v2-q8-gguf = fetchResource {
+    name = "gemma-3-4b-it-abliterated-v2.q8_0.gguf";
+    url = "https://huggingface.co/mlabonne/gemma-3-4b-it-abliterated-v2-GGUF/resolve/main/gemma-3-4b-it-abliterated-v2.q8_0.gguf";
+    sha256 = "0ay5697bgq5i286g1412iplawcwrfhlnb3kqxc2yzj65h9lrapf6";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma3-4b-it-abliterated-v2-q4_k_m-gguf = fetchResource {
+    name = "gemma-3-4b-it-abliterated-v2.q4_k_m.gguf";
+    url = "https://huggingface.co/mlabonne/gemma-3-4b-it-abliterated-v2-GGUF/resolve/main/gemma-3-4b-it-abliterated-v2.q4_k_m.gguf";
+    sha256 = "0km4lsp31jd8ddjanhxk8f3ggkwhnnk9ig10mkpwd04qxb0m4dcr";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma3-4b-it-mmproj = fetchResource {
+    name = "mmproj-google_gemma-3-4b-it-f16.gguf";
+    url = "https://huggingface.co/bartowski/google_gemma-3-4b-it-GGUF/resolve/main/mmproj-google_gemma-3-4b-it-f16.gguf";
+    sha256 = "1js0djx274b4pwnvwqa5rbrqm1cj8xz2rbmaaql9g9hrn1jb03wc";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma-4-e4b-uncensored-hauhaucs-aggressive-q8_k_p_gguf = fetchResource {
+    name = "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q8_K_P.gguf";
+    url = "https://huggingface.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive/resolve/main/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q8_K_P.gguf";
+    sha256 = "1njky1rci24qbvdvg5b14bwm76h75xsgnnk749jzbqypkxzigi54";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  mmproj-gemma-4-e4b-uncensored-hauhaucs-aggressive-f16 = fetchResource {
+    name = "mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf";
+    url = "https://huggingface.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf";
+    sha256 = "1ny72v5kqpc3fm8gsyy540imndz86pxp99lmfsv2l5f1p6dd7fny";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma4-12b-qat-uncensored-hauhaucs-balanced-q4_k_m_gguf = fetchResource {
+    name = "Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf";
+    url = "https://huggingface.co/HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced/resolve/main/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf";
+    sha256 = "0d2ibdwcp4dsrjzlfvgc29zxjv71l97bc84ygslnqdynjis6srar";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  mmproj-gemma4-12b-qat-uncensored-hauhaucs-balanced-bf16_gguf = fetchResource {
+    name = "mmproj-Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-BF16.gguf";
+    url = "https://huggingface.co/HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced/resolve/main/mmproj-Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-BF16.gguf";
+    sha256 = "13mbfs96yq4c2hh33inb5c4ni8q4q626g7njbdkg1rdpg5a837mm";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-pose = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-pose-lora/resolve/main/refcontrol_v2_poses.safetensors";
+    sha256 = "0fs7bl74vxcca9bbw3m0xwh3ba2jdgwl0jk88yibgkbc82jwcbm2";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-depth = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-depth-lora/resolve/main/flux2_klein_9b_refcontrol_depth.safetensors";
+    sha256 = "13dvr4r1i7hj12vljh3xn84hid3j1hd9l0hvjnrcg9x674fn69yn";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-lineart = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-lineart-lora/resolve/main/flux2_klein_9b_refcontrol_lineart.safetensors";
+    sha256 = "1xzd4pvj2cqyhfavahgzp7jdgrflm8jhvkzl9xxv4974ppmfk81q";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-canny = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-canny-lora/resolve/main/flux2_klein_9b_refcontrol_canny.safetensors";
+    sha256 = "0w4qjxxd740h5dlxd5g9z9dbjpfg4kj5qrgvmfhmav723vvdq5n8";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  refcontrol-flux2-klein-9b-normal = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/thedeoxen/refcontrol-FLUX.2-klein-9B-reference-normal-lora/resolve/main/flux2_klein_9b_refcontrol_normal.safetensors";
+    sha256 = "1lizk2bnhgv9c0brdpl28aijg2b7j8rhdf0c1y2k10q4gllpzads";
+    passthru = {
+      comfyui.installPaths = [ "loras" ];
+    };
+  };
+
+  juggernautxl-juggxi-q4_0-gguf = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/hum-ma/SDXL-models-GGUF/resolve/main/juggernautXL_juggXIByRundiffusion-Q4_0.gguf";
+    sha256 = "1s86kb3blq1hpycln9g0wadb9ykv077abji7m6yhxb9h2qxhgl6s";
+    passthru = {
+      comfyui.installPaths = [ "diffusion_models" ];
+    };
+  };
+
+  realcartoonpony-v2-q4_k_s-gguf = fetchResource rec {
+    name = "realcartoonPony_v2_Q4_K_S.gguf";
+    url = "https://huggingface.co/Old-Fisherman/SDXL_Finetune_GGUF_Files/resolve/main/GGUF_Models/realcartoonPony_v2_Q4_K_S.gguf";
+    sha256 = "0fw1hjjq5p0y5all99m0wwxynzpzyvg08xg9zlffviglnzkjsf08";
+    passthru = {
+      comfyui.installPaths = [ "diffusion_models" ];
+    };
+  };
+
+  z-image-turbo-q4_k_m-gguf = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/vantagewithai/Z-Image-Turbo-GGUF/resolve/main/z_image_turbo-Q4_K_M.gguf";
+    sha256 = "0g912s6gfmdvh0d828484w3ndg8cik25ykbrzmh0wvq8qylyqh34";
+    passthru = {
+      comfyui.installPaths = [ "diffusion_models" ];
+    };
+  };
+
+  gemma4-26b-a4b-it-ud-q4_k_xl-gguf = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF/resolve/main/gemma-4-26B-A4B-it-UD-Q4_K_XL.gguf";
+    sha256 = "0840dbn3ss3p5kxfw49b9xd2d83z9fw8g43ksng9p8l7p94z0g25";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  mmproj-gemma4-26b-a4b-it-bf16 = fetchResource {
+    name = "mmproj-gemma4-26b-a4b-it-bf16.gguf";
+    url = "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF/resolve/main/mmproj-BF16.gguf";
+    sha256 = "17ggiimn8rcyfqp175ih4nbnzsh552cq81ivsanzag20y7anx4j1";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma4-12b-it-ud-q4_k_xl-gguf = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/unsloth/gemma-4-12b-it-GGUF/resolve/main/gemma-4-12b-it-UD-Q4_K_XL.gguf";
+    sha256 = "083hjllqz7c32nab4bfmi7h9hcjzxpm4bilz4qfclyp0x1dsnczf";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  mmproj-gemma4-12b-it-bf16 = fetchResource {
+    name = "mmproj-gemma4-12b-it-bf16.gguf";
+    url = "https://huggingface.co/unsloth/gemma-4-12b-it-GGUF/resolve/main/mmproj-BF16.gguf";
+    sha256 = "1fxw733yzl6h23g8w7y2ci4jvm6nkdjfm078kkp6jldids89y9if";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  sdxl-vae = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors";
+    sha256 = "0bifx60nxcw9f2y7g0wkc5dkhw9mh0z2v5lmac8irg7p1ywyrbk3";
+    passthru = {
+      comfyui.installPaths = [ "vae" ];
+    };
+  };
+
+  clip-l-sd35 = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/clip_l.safetensors";
+    sha256 = "1pbck8flk5npdibwih60yq6dpayj8w9ixln2i94xrsds39dny336";
+    passthru = {
+      comfyui.installPaths = [ "clip" ];
+    };
+  };
+
+  clip-g-sd35 = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/clip_g.safetensors";
+    sha256 = "1x5irmmkaal2zy6ivkhz9z6sh72r39h1nl909pi1ihvrmzr0scgc";
+    passthru = {
+      comfyui.installPaths = [ "clip" ];
+    };
+  };
+
+  gemma4-26b-qat-uncensored-hauhaucs-balanced-q4_k_m_gguf = fetchResource {
+    name = "Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf";
+    url = "https://huggingface.co/HauhauCS/Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-MTP/resolve/main/Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf";
+    sha256 = "0g6pjwhdz3afm0fylijppgk9j8g4bb4dkcdqzwpk2cg4d4s164rw";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  mmproj-gemma4-26b-qat-uncensored-hauhaucs-balanced-bf16_gguf = fetchResource {
+    name = "mmproj-Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-BF16.gguf";
+    url = "https://huggingface.co/HauhauCS/Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-MTP/resolve/main/mmproj-Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-BF16.gguf";
+    sha256 = "1dqhmjh5834vpqsyla7s21sclj798f10nbcchwb5wvwhzmdnwd5m";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  gemma-4-e4b-it-obliterated-q4_k_m-gguf = fetchResource {
+    name = "gemma-4-E4B-it-OBLITERATED-Q4_K_M.gguf";
+    url = "https://huggingface.co/OBLITERATUS/gemma-4-E4B-it-OBLITERATED/resolve/main/gemma-4-E4B-it-OBLITERATED-Q4_K_M.gguf";
+    sha256 = "1qnlczajsvrbjga2abvzs4prlxj9x32vczgha0lscnlyrp1754w1";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  mmproj-gemma-4-e4b-it-obliterated-f16 = fetchResource {
+    name = "gemma-4-E4B-it-OBLITERATED-mmproj-f16.gguf";
+    url = "https://huggingface.co/OBLITERATUS/gemma-4-E4B-it-OBLITERATED/resolve/main/gemma-4-E4B-it-OBLITERATED-mmproj-f16.gguf";
+    sha256 = "1q3px8wgrn0vb78r6wd4zfz6m6jmifgybx2xjcnphkc0inydynmp";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  fourx-ultrasharp-upscaler = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth";
+    sha256 = "00gy4500rvw98k14hcjv7lq5sjcm85wbmvd512pl4swkzhqj50d5";
+    passthru = {
+      comfyui.installPaths = [ "upscale_models" ];
+    };
+  };
+
+  fourx-foolhardy-remacri-upscaler = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth";
+    sha256 = "0sm8pkw9sgvi8vhm75mxjalbaj4hd2c66x3l8x4sx89dkkc3p9z1";
+    passthru = {
+      comfyui.installPaths = [ "upscale_models" ];
+    };
+  };
+
+  fourx-animesharp-upscaler = fetchResource rec {
+    name = baseNameOf url;
+    url = "https://huggingface.co/Harvey6969/4x-AnimeSharp/resolve/main/4x-AnimeSharp.pth";
+    sha256 = "1awv6lfk9d2rm853yc76z3wsj4lpkv6vnaw6j8ciqcypmwnxx9z7";
+    passthru = {
+      comfyui.installPaths = [ "upscale_models" ];
+    };
+  };
+
+  qwen3-coder-30b-a3b-instruct-q5_k_m-gguf = fetchResource {
+    name = "Qwen3-Coder-30B-A3B-Instruct-Q5_K_M.gguf";
+    url = "https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q5_K_M.gguf";
+    sha256 = "01xrb370pnn882g5i4hvyhd754v7idhbyhjn9a729vn5prxq6y2b";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  huihui-qwen3-coder-30b-a3b-instruct-abliterated-i1-q5_k_m-gguf = fetchResource {
+    name = "Huihui-Qwen3-Coder-30B-A3B-Instruct-abliterated.i1-Q5_K_M.gguf";
+    url = "https://huggingface.co/mradermacher/Huihui-Qwen3-Coder-30B-A3B-Instruct-abliterated-i1-GGUF/resolve/main/Huihui-Qwen3-Coder-30B-A3B-Instruct-abliterated.i1-Q5_K_M.gguf";
+    sha256 = "0dz8qv48sabiwlk831w2y0pmjjglny31mw6zyvn5fb6gcds1vg0y";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3_6-27b-q4_k_m-gguf = fetchResource {
+    name = "Qwen3.6-27B-Q4_K_M.gguf";
+    url = "https://huggingface.co/unsloth/Qwen3.6-27B-GGUF/resolve/main/Qwen3.6-27B-Q4_K_M.gguf";
+    sha256 = "184jhdizlhw0qr5jann27mj74j7gk8pkkgam2x5qa2k5yh50vmjy";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3_6-27b-uncensored-hauhaucs-balanced-q4_k_p-gguf = fetchResource {
+    name = "Qwen3.6-27B-Uncensored-HauhauCS-Balanced-Q4_K_P.gguf";
+    url = "https://huggingface.co/HauhauCS/Qwen3.6-27B-Uncensored-HauhauCS-Balanced/resolve/main/Qwen3.6-27B-Uncensored-HauhauCS-Balanced-Q4_K_P.gguf";
+    sha256 = "0q0v4i1ggmi5dkfpaa5spn7dsjyk95q3s51r4vrwp54z7024wbpn";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-8b-instruct-q8_0-gguf = fetchResource {
+    name = "Qwen3VL-8B-Instruct-Q8_0.gguf";
+    url = "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct-GGUF/resolve/main/Qwen3VL-8B-Instruct-Q8_0.gguf";
+    sha256 = "1c5d8ic3zs2l2y6sp47w3vzqiq6s45aj9i3m9ykh0p8q84wln9hd";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-8b-instruct-mmproj = fetchResource {
+    name = "mmproj-Qwen3VL-8B-Instruct-F16.gguf";
+    url = "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct-GGUF/resolve/main/mmproj-Qwen3VL-8B-Instruct-F16.gguf";
+    sha256 = "0f4xry8lirjq4iz6jh95mfh0v7l70c6mh76vf2lcj9gqxc042lna";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-8b-instruct-abliterated-q6_k-gguf = fetchResource {
+    name = "Qwen3-VL-8B-Instruct-abliterated-v2.0.Q6_K.gguf";
+    url = "https://huggingface.co/mradermacher/Qwen3-VL-8B-Instruct-abliterated-v2.0-GGUF/resolve/main/Qwen3-VL-8B-Instruct-abliterated-v2.0.Q6_K.gguf";
+    sha256 = "0gxwy36nzrb20l1rjznrysqzmnhnp8mbhvlp0y7x136y174547l4";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-32b-instruct-q4_k_m-gguf = fetchResource {
+    name = "Qwen3VL-32B-Instruct-Q4_K_M.gguf";
+    url = "https://huggingface.co/Qwen/Qwen3-VL-32B-Instruct-GGUF/resolve/main/Qwen3VL-32B-Instruct-Q4_K_M.gguf";
+    sha256 = "1j4lmmqnb91zx1wn0kbiwba5vaqp7g4xh7y7irqr8qhxf9p17w2w";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-32b-instruct-mmproj = fetchResource {
+    name = "mmproj-Qwen3VL-32B-Instruct-F16.gguf";
+    url = "https://huggingface.co/Qwen/Qwen3-VL-32B-Instruct-GGUF/resolve/main/mmproj-Qwen3VL-32B-Instruct-F16.gguf";
+    sha256 = "1z62rbk4rj6qqk7z989mlh1i82pmvj251ba0915zi4fz754845w6";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-32b-instruct-uncensored-q4_k_m-gguf = fetchResource {
+    name = "Qwen3-VL-32B-Instruct-ultra-uncensored-heretic-Q4_K_M.gguf";
+    url = "https://huggingface.co/llmfan46/Qwen3-VL-32B-Instruct-ultra-uncensored-heretic-GGUF/resolve/main/Qwen3-VL-32B-Instruct-ultra-uncensored-heretic-Q4_K_M.gguf";
+    sha256 = "1lsxq08rcd0gzd7515lqwx91cxc7h0hcwk2hx680iy6y5d921q52";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-30b-a3b-instruct-q5_k_m-gguf = fetchResource {
+    name = "Qwen3-VL-30B-A3B-Instruct-Q5_K_M.gguf";
+    url = "https://huggingface.co/unsloth/Qwen3-VL-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-VL-30B-A3B-Instruct-Q5_K_M.gguf";
+    sha256 = "01xsfbrpzvs9ka6qfgv0y0wlgw0c3vpvk0hz9agh0767j07b9av5";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-30b-a3b-instruct-mmproj = fetchResource {
+    name = "mmproj-Qwen3-VL-30B-A3B-Instruct-F16.gguf";
+    url = "https://huggingface.co/unsloth/Qwen3-VL-30B-A3B-Instruct-GGUF/resolve/main/mmproj-F16.gguf";
+    sha256 = "0688sadk7jv6gzspx6qi5r5f2383w1fcnh5g4f5a16bm6n4q094z";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
+
+  qwen3-vl-30b-a3b-instruct-abliterated-q5_k_m-gguf = fetchResource {
+    name = "Huihui-Qwen3-VL-30B-A3B-Instruct-abliterated-Q5_K_M.gguf";
+    url = "https://huggingface.co/noctrex/Huihui-Qwen3-VL-30B-A3B-Instruct-abliterated-GGUF/resolve/main/Huihui-Qwen3-VL-30B-A3B-Instruct-abliterated-Q5_K_M.gguf";
+    sha256 = "1rk16a9zd35xz2my7gmqzacn5zrsdqj119np5ryxji2z187yz7n8";
+    passthru = {
+      comfyui.installPaths = [ "LLM" ];
+    };
+  };
 }

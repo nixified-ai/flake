@@ -11,14 +11,13 @@
       "https://ai.cachix.org"
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
-      "https://cuda-maintainers.cachix.org"
+      "https://cache.nixos-cuda.org"
       "https://numtide.cachix.org"
     ];
     extra-trusted-public-keys = [
       "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
     ];
   };
@@ -37,11 +36,18 @@
       url = "github:hercules-ci/hercules-ci-effects";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    enable-container-tests.url = "path:./flags/container-tests/disabled";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
       flake-parts,
       hercules-ci-effects,
+      enable-container-tests,
+      treefmt-nix,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -79,9 +85,6 @@
               config = {
                 cudaSupport = true;
                 allowUnfree = true;
-                permittedInsecurePackages = [
-                  "cuda12.9-tensorrt-10.14.1.48"
-                ];
               };
             }
             // common
@@ -89,7 +92,14 @@
           _module.args.pkgs = import inputs.nixpkgs ({
             inherit system;
           });
-          formatter = pkgs.nixfmt-tree;
+          treefmt.config = {
+            projectRootFile = "flake.nix";
+            programs.nixfmt.enable = true;
+            programs.ruff.enable = true;
+            programs.ruff.check = true;
+            programs.biome.enable = true;
+            settings.global.excludes = [ "**/sources.json" ];
+          };
           devShells.default = pkgs.mkShell {
             packages = [
               # adds treefmt which can be used to format entire tree
@@ -105,6 +115,7 @@
       imports = [
         ./flake-modules
         hercules-ci-effects.flakeModule
+        inputs.treefmt-nix.flakeModule
       ];
     };
 }

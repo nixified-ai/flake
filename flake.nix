@@ -37,11 +37,18 @@
       url = "github:hercules-ci/hercules-ci-effects";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    enable-container-tests.url = "path:./flags/container-tests/disabled";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
       flake-parts,
       hercules-ci-effects,
+      enable-container-tests,
+      treefmt-nix,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -79,9 +86,6 @@
               config = {
                 cudaSupport = true;
                 allowUnfree = true;
-                permittedInsecurePackages = [
-                  "cuda12.9-tensorrt-10.14.1.48"
-                ];
               };
             }
             // common
@@ -89,7 +93,14 @@
           _module.args.pkgs = import inputs.nixpkgs ({
             inherit system;
           });
-          formatter = pkgs.nixfmt-tree;
+          treefmt.config = {
+            projectRootFile = "flake.nix";
+            programs.nixfmt.enable = true;
+            programs.ruff.enable = true;
+            programs.ruff.check = true;
+            programs.biome.enable = true;
+            settings.global.excludes = [ "**/sources.json" ];
+          };
           devShells.default = pkgs.mkShell {
             packages = [
               # adds treefmt which can be used to format entire tree
@@ -105,6 +116,7 @@
       imports = [
         ./flake-modules
         hercules-ci-effects.flakeModule
+        inputs.treefmt-nix.flakeModule
       ];
     };
 }

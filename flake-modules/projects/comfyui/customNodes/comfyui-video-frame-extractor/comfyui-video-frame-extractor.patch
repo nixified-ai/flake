@@ -1,0 +1,141 @@
+diff --git a/video_frame_extractor.py b/video_frame_extractor.py
+index abab050..5f3a796 100644
+--- a/video_frame_extractor.py
++++ b/video_frame_extractor.py
+@@ -8,6 +8,10 @@ from PIL import Image
+ import cv2
+ 
+ 
++def is_webp(path: str) -> bool:
++    return path.lower().endswith(".webp")
++
++
+ # ---------------------------------------------------------------------------
+ # Helper utilities
+ # ---------------------------------------------------------------------------
+@@ -71,15 +75,21 @@ def format_bytes(n: int) -> str:
+ 
+ def get_video_info(video_path: str) -> dict:
+     """Return basic metadata for a video file."""
+-    cap = cv2.VideoCapture(video_path)
+-    if not cap.isOpened():
+-        raise ValueError(f"Cannot open video: {video_path}")
+-
+-    fps      = cap.get(cv2.CAP_PROP_FPS)
+-    total    = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+-    width    = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+-    height   = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+-    cap.release()
++    if is_webp(video_path):
++        with Image.open(video_path) as img:
++            total = getattr(img, "n_frames", 1)
++            duration_ms = img.info.get("duration", 100)
++            fps = 1000.0 / duration_ms if duration_ms > 0 else 10.0
++            width, height = img.size
++    else:
++        cap = cv2.VideoCapture(video_path)
++        if not cap.isOpened():
++            raise ValueError(f"Cannot open video: {video_path}")
++        fps      = cap.get(cv2.CAP_PROP_FPS)
++        total    = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
++        width    = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
++        height   = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
++        cap.release()
+ 
+     return {
+         "fps":          fps,
+@@ -102,19 +112,37 @@ def read_single_frame(cap: cv2.VideoCapture, frame_index: int,
+     return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+ 
+ 
++def _read_webp_frames(video_path: str, indices: list) -> np.ndarray:
++    indices_set = set(indices)
++    max_idx = max(indices) if indices else 0
++    frames_dict = {}
++    with Image.open(video_path) as img:
++        w, h = img.size
++        for i in range(min(max_idx + 1, getattr(img, "n_frames", 1))):
++            if i in indices_set:
++                img.seek(i)
++                frames_dict[i] = np.array(img.convert("RGB"))
++    
++    arr = np.empty((len(indices), h, w, 3), dtype=np.uint8)
++    for i, idx in enumerate(indices):
++        if idx in frames_dict:
++            arr[i] = frames_dict[idx]
++        else:
++            arr[i] = np.zeros((h, w, 3), dtype=np.uint8)
++    return arr
++
++
+ def extract_frames(video_path: str, start_frame: int, end_frame: int,
+                    num_frames: int) -> torch.Tensor:
+     """
+     Extract *num_frames* evenly-spaced frames from [start_frame, end_frame].
+     Returns a BHWC float32 tensor in [0, 1].
+     """
+-    cap = cv2.VideoCapture(video_path)
+-    if not cap.isOpened():
+-        raise ValueError(f"Cannot open video: {video_path}")
++    info = get_video_info(video_path)
++    total = info["total_frames"]
++    w = info["width"]
++    h = info["height"]
+ 
+-    total       = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+-    w           = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+-    h           = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+     start_frame = max(0, min(start_frame, total - 1))
+     end_frame   = max(start_frame, min(end_frame, total - 1))
+     num_frames  = max(1, num_frames)
+@@ -127,10 +155,16 @@ def extract_frames(video_path: str, start_frame: int, end_frame: int,
+             for i in range(num_frames)
+         ]
+ 
+-    arr = np.empty((len(indices), h, w, 3), dtype=np.uint8)
+-    for i, idx in enumerate(indices):
+-        arr[i] = read_single_frame(cap, idx, w, h)
+-    cap.release()
++    if is_webp(video_path):
++        arr = _read_webp_frames(video_path, indices)
++    else:
++        cap = cv2.VideoCapture(video_path)
++        if not cap.isOpened():
++            raise ValueError(f"Cannot open video: {video_path}")
++        arr = np.empty((len(indices), h, w, 3), dtype=np.uint8)
++        for i, idx in enumerate(indices):
++            arr[i] = read_single_frame(cap, idx, w, h)
++        cap.release()
+ 
+     float_arr = arr.astype(np.float32) / 255.0
+     del arr
+@@ -139,11 +173,15 @@ def extract_frames(video_path: str, start_frame: int, end_frame: int,
+ 
+ def frame_as_tensor(video_path: str, frame_index: int) -> torch.Tensor:
+     """Return a single frame as a (1, H, W, 3) float32 tensor."""
+-    cap   = cv2.VideoCapture(video_path)
+-    w     = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+-    h     = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+-    frame = read_single_frame(cap, frame_index, w, h)
+-    cap.release()
++    info = get_video_info(video_path)
++    w = info["width"]
++    h = info["height"]
++    if is_webp(video_path):
++        frame = _read_webp_frames(video_path, [frame_index])[0]
++    else:
++        cap   = cv2.VideoCapture(video_path)
++        frame = read_single_frame(cap, frame_index, w, h)
++        cap.release()
+     arr   = frame.astype(np.float32) / 255.0
+     return torch.from_numpy(arr).unsqueeze(0)   # 1HWC
+ 
+@@ -172,7 +210,7 @@ class VideoFrameExtractor:
+         video_files = []
+         input_dir = folder_paths.get_input_directory()
+         for fname in sorted(os.listdir(input_dir)):
+-            if fname.lower().endswith((".mp4", ".avi", ".mov", ".mkv", ".webm")):
++            if fname.lower().endswith((".mp4", ".avi", ".mov", ".mkv", ".webm", ".webp")):
+                 video_files.append(fname)
+         if not video_files:
+             video_files = [""]

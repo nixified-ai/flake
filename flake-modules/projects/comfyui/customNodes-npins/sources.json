@@ -22,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9e60d8a9c8016c5315063aa7af66b321a0444df7",
-      "url": "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet/archive/9e60d8a9c8016c5315063aa7af66b321a0444df7.tar.gz",
-      "hash": "sha256-yS/g3VQHn00mZpRKeDRvGRalaHA5lwmXs0tGi+TGKbs="
+      "revision": "27a67fee80cf46c198b10588a5651f23d67d1e95",
+      "url": "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet/archive/27a67fee80cf46c198b10588a5651f23d67d1e95.tar.gz",
+      "hash": "sha256-SZfXoqz05fmgX/BgvanldcgHdi9igskzycPdGR6U/qE="
     },
     "comfyui-asyncpause": {
       "type": "Git",
@@ -48,9 +48,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "2e395317b65c05a97a0ef566c4a8c7969305dafa",
-      "url": "https://github.com/Extraltodeus/ComfyUI-AutomaticCFG/archive/2e395317b65c05a97a0ef566c4a8c7969305dafa.tar.gz",
-      "hash": "sha256-Kc7JK53V3ptypJUNTyE4OPSZzWhIMYBAak6aJRZsscU="
+      "revision": "55b8302f7268fa8e6b630fdbe3fd46294b92a819",
+      "url": "https://github.com/Extraltodeus/ComfyUI-AutomaticCFG/archive/55b8302f7268fa8e6b630fdbe3fd46294b92a819.tar.gz",
+      "hash": "sha256-tkGMeUer2UtZo5bIS1aw+O3UuZUWPBdC5bhqGU7xR6Q="
     },
     "comfyui-calcuis-gguf": {
       "type": "Git",
@@ -194,9 +194,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "960862223b7a896038850f56d8782df314a9a522",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/960862223b7a896038850f56d8782df314a9a522.tar.gz",
-      "hash": "sha256-I03QMuI6OGDSIdeetqlWjs3wz/uJRxGCqr4zj/TIr28="
+      "revision": "595e0738a9e3f8d0d9c4d875461b2d2c9e7559c7",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/595e0738a9e3f8d0d9c4d875461b2d2c9e7559c7.tar.gz",
+      "hash": "sha256-aM2P8/UcNp6qeSdpHJhjNvohiaZzn30NXA3LftImRas="
     },
     "comfyui-essentials": {
       "type": "Git",
@@ -428,9 +428,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e27a505b3ba6ce42687fe00500deda103d9d6071",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/e27a505b3ba6ce42687fe00500deda103d9d6071.tar.gz",
-      "hash": "sha256-WutSBirMittIh6rVDMgEjPfRKK2duzjZ4sN6A/QHRKA="
+      "revision": "5219cd171cb44e2edce9e4daad6cc42c41eded5c",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/5219cd171cb44e2edce9e4daad6cc42c41eded5c.tar.gz",
+      "hash": "sha256-/L0J6RccL8NZuk96NCHTxTiNTGPNPEyZ4nta6rAkhWc="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",
@@ -454,9 +454,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "02acdc50affb84cd24f341d1fc2d3a9134b2ad3d",
-      "url": "https://github.com/chflame163/ComfyUI_LayerStyle/archive/02acdc50affb84cd24f341d1fc2d3a9134b2ad3d.tar.gz",
-      "hash": "sha256-zR0eKqZzudx6c9N+6zCpC6PNTt6snWkU1Ecv1ftrBKg="
+      "revision": "64f976fec8492ea4930c0e30c32369573189b23d",
+      "url": "https://github.com/chflame163/ComfyUI_LayerStyle/archive/64f976fec8492ea4930c0e30c32369573189b23d.tar.gz",
+      "hash": "sha256-kchl6B5NCHYIYXqkMgbYs7mXpkQ7ufXQFF2WACcnWQI="
     },
     "comfyui-layer-style-advance": {
       "type": "Git",
@@ -480,9 +480,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "39bca5e48505d3cfc292392479c065aa58cc2a48",
-      "url": "https://github.com/heshengtao/comfyui_LLM_party/archive/39bca5e48505d3cfc292392479c065aa58cc2a48.tar.gz",
-      "hash": "sha256-O+hA3V56abUykQpNCOlQupuq3O3oHISwuI6X+7Vbcfo="
+      "revision": "3790b26a438bb8e77c1ad24d93870f710cc8ae41",
+      "url": "https://github.com/heshengtao/comfyui_LLM_party/archive/3790b26a438bb8e77c1ad24d93870f710cc8ae41.tar.gz",
+      "hash": "sha256-65aygKOBkH6Usjaou1ythJxMaM1VQy3Yis7L06yJo0k="
     },
     "comfyui-logic": {
       "type": "Git",
@@ -584,9 +584,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "956ae96a4e6922fc9a252dcfa7264b15bcd7880a",
-      "url": "https://github.com/princepainter/ComfyUI-PainterI2V/archive/956ae96a4e6922fc9a252dcfa7264b15bcd7880a.tar.gz",
-      "hash": "sha256-Ad/kds2yvLsgU4o+J0uISMhyn/vxW6EabJdFbdAs8uw="
+      "revision": "c46e480c35d9a54e70139e354b1fc2975d0b6805",
+      "url": "https://github.com/princepainter/ComfyUI-PainterI2V/archive/c46e480c35d9a54e70139e354b1fc2975d0b6805.tar.gz",
+      "hash": "sha256-fPl99xxryATrbTv+JUnTtnRRuolH/AmAEobIUeCqiao="
     },
     "comfyui-pixaroma": {
       "type": "Git",
@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e52c84c55a70a686b64f42e7b75388e511a98296",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=e52c84c55a70a686b64f42e7b75388e511a98296",
-      "hash": "sha256-9SYRM15RMwtHBZj832wjrG/1jwr76ZNKTUG2kY4QZ1U="
+      "revision": "89cbc360c97a9d53fa2e9ff9f6430def50da7817",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=89cbc360c97a9d53fa2e9ff9f6430def50da7817",
+      "hash": "sha256-wdWRi7o/PUnNiXXn0hnFTll5Psx58cMN4aV7uz/AHXo="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -636,9 +636,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "022c873c6d198c67b3312a1804336533a050df18",
-      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/022c873c6d198c67b3312a1804336533a050df18.tar.gz",
-      "hash": "sha256-JxCbqzuQjCbp+rPyLWqa7UwtzglO5D79KPJUKysettg="
+      "revision": "e716cd1cb2c5cff90131bf4914b75b75a0489d48",
+      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/e716cd1cb2c5cff90131bf4914b75b75a0489d48.tar.gz",
+      "hash": "sha256-q+KSnwudhvoLIPu68/l5VEX58lVIt09znIgclhRrLNo="
     },
     "comfyui-resolution-master": {
       "type": "Git",
@@ -675,9 +675,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "b3e416cd27b764ada141e03964873d27361ec62a",
-      "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/b3e416cd27b764ada141e03964873d27361ec62a.tar.gz",
-      "hash": "sha256-6k0sdG7cH56eHmZ/ghP744VoIeI+CePVpqRp2lJ7MyY="
+      "revision": "9eefdbddfa5a8ced418ce53b3f0896af1a2d663c",
+      "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/9eefdbddfa5a8ced418ce53b3f0896af1a2d663c.tar.gz",
+      "hash": "sha256-LkpczoiPkiKuNnqZp+JYzEYOfQFy2wdg8zyA2ko87zM="
     },
     "comfyui-sdxl-prompt-styler": {
       "type": "Git",

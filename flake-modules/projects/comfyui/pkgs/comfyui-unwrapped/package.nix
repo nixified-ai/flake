@@ -57,16 +57,13 @@ python3Packages.buildPythonApplication {
       pyopengl
       glfw
     ]
-    ++ (
-      with comfyuiPackages;
-      [
-        comfyui-frontend-package
-        comfyui-workflow-templates
-        comfyui-embedded-docs
-        comfy-aimdo
-      ]
-      ++ lib.optional config.cudaSupport comfy-kitchen
-    );
+    ++ (with comfyuiPackages; [
+      comfyui-frontend-package
+      comfyui-workflow-templates
+      comfyui-embedded-docs
+      comfy-aimdo
+      comfy-kitchen
+    ]);
 
   format = "other";
 

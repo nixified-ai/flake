@@ -75,4 +75,8 @@ finalAttrs: previousAttrs: {
   patches = [
     ./llm-party-path.patch
   ];
+
+  prePatch = ''
+    find . -type f -name "*.py" -exec sed -i 's/\r$//' {} +
+  '';
 }

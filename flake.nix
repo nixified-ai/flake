@@ -27,7 +27,7 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs?ref=nixos-unstable-small";
+      url = "github:NixOS/nixpkgs?ref=567a49d1913ce81ac6e9582e3553dd90a955875f";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -79,6 +79,9 @@
               config = {
                 cudaSupport = true;
                 allowUnfree = true;
+                permittedInsecurePackages = [
+                  "cuda12.9-tensorrt-10.14.1.48"
+                ];
               };
             }
             // common

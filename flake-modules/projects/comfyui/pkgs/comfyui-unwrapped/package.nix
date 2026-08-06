@@ -64,6 +64,7 @@ python3Packages.buildPythonApplication {
       comfyui-embedded-docs
       comfy-aimdo
       comfy-kitchen
+      comfyuiPackages."comfy-angle"
     ]);
 
   format = "other";
@@ -97,6 +98,7 @@ python3Packages.buildPythonApplication {
 
     wrapProgram "$out/bin/comfyui" \
       --prefix PYTHONPATH : "$PYTHONPATH" \
+      --add-flags "--disable-dynamic-vram"
   '';
 
   meta = with lib; {

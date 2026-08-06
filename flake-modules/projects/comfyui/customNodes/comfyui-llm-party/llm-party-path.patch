@@ -41,7 +41,7 @@ index 11576cc..e64c13f 100644
  # 获取当前文件所在目录的路径
  current_dir_path = os.path.dirname(current_file_path)
  
-+from .paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
 +
  # 构建config.ini的绝对路径
 -config_path = os.path.join(current_dir_path, "config.ini")
@@ -66,7 +66,7 @@ index ae0ec52..10a1f48 100644
  import sys
  import asyncio
  import shlex
-+from .paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import json
  
 -config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
@@ -93,7 +93,7 @@ index 3ee858c..9a8f22e 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -123,7 +123,7 @@ index a32ee25..383c917 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -144,7 +144,7 @@ index dc12b8a..83a7a97 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -172,7 +172,7 @@ index db9bc8b..80483ae 100644
     lang = 'zh_CN'
  else:
     lang = 'en_US'
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -186,7 +186,7 @@ index 808e039..8dca010 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -207,7 +207,7 @@ index afc1897..4090205 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -228,7 +228,7 @@ index 010e51e..35cef5b 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -249,7 +249,7 @@ index cacb586..0c1680c 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -263,7 +263,7 @@ index 4df2ee0..1b71b56 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -277,7 +277,7 @@ index be8ce10..3cb304e 100644
  current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir_path, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -300,7 +300,7 @@ index 19bac2c..6e96877 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -322,7 +322,7 @@ index dc5179e..727d8a2 100644
 -config_path = os.path.join(current_dir_path, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
  import configparser
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  from openai import OpenAI,AzureOpenAI
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -390,7 +390,7 @@ index 55eb1b1..ffec6db 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -413,7 +413,7 @@ index ac3918c..ede9f58 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -427,7 +427,7 @@ index a3e6d3a..dadc3f9 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -448,7 +448,7 @@ index d7ec79c..622518b 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -469,7 +469,7 @@ index 5def0d6..0891995 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -483,7 +483,7 @@ index e53f4ee..3552c18 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -497,7 +497,7 @@ index ca81d77..8c7cb56 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -511,7 +511,7 @@ index dd2f878..2c2f582 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -525,7 +525,7 @@ index 63dd26b..fe1f8c7 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -539,7 +539,7 @@ index 05d9034..643d8dd 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -560,7 +560,7 @@ index ed679f6..3e92f3e 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -574,7 +574,7 @@ index 2461ad3..5a6d475 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -595,7 +595,7 @@ index d26b13b..9f6b9bb 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -609,7 +609,7 @@ index 5b0c969..e34defc 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -623,7 +623,7 @@ index 0447992..0b3071e 100644
  current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir_path, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -653,7 +653,7 @@ index 74332de..7fb5fe4 100644
  import os
  import shutil
  import locale
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  
  
@@ -687,7 +687,7 @@ index 0177194..ffdd14c 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -717,7 +717,7 @@ index 0fa3c5a..f69146a 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -738,7 +738,7 @@ index 387e4be..04ca68c 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -759,7 +759,7 @@ index 9dfd5d0..495f96d 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -780,7 +780,7 @@ index c622dd3..42e4741 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -801,7 +801,7 @@ index 418935f..428bad2 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -822,7 +822,7 @@ index 38be1ec..923bea7 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -843,7 +843,7 @@ index bf30711..c9a7526 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -864,7 +864,7 @@ index 017bfc7..485478f 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -877,7 +877,7 @@ index 8fb3290..6dece61 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
  sys.path.insert(0, current_dir) 
 -config_path = os.path.join(current_dir, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
 +config_path = os.path.join(llm_party_path, "config.ini")
  import configparser
  from transformers import AutoModelForPreTraining,AutoModelForCausalLM
@@ -899,7 +899,7 @@ index 01090d9..d38d85d 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -920,7 +920,7 @@ index 825f729..0902dff 100644
  current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir_path, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -934,7 +934,7 @@ index 16e2938..377f2d2 100644
  current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir_path, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -964,7 +964,7 @@ index 218f8e8..c3ebc2f 100644
  current_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir_path, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -992,7 +992,7 @@ index b19bb83..1134ff1 100644
     lang = 'zh_CN'
  else:
     lang = 'en_US'
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1013,7 +1013,7 @@ index 5939783..1e559f8 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1043,7 +1043,7 @@ index 66911d9..da925ac 100644
  else:
     lang = 'en_US'
  
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1064,7 +1064,7 @@ index 7f7345d..a0f74b5 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1087,7 +1087,7 @@ index 4a7d0e4..c2fe93e 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1106,7 +1106,7 @@ index 9eedec2..39b42c3 100644
  from datetime import datetime
  import configparser
  import locale
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import re
  
  
@@ -1129,7 +1129,7 @@ index f74fa27..a49586e 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1150,7 +1150,7 @@ index c13bc64..51393c0 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1180,7 +1180,7 @@ index 5a613ee..d70f602 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1194,7 +1194,7 @@ index 9755b35..0103eb1 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1215,7 +1215,7 @@ index 2da8f17..2edced2 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1243,7 +1243,7 @@ index ad9c6c6..e612bc7 100644
     lang = 'zh_CN'
  else:
     lang = 'en_US'
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1264,7 +1264,7 @@ index f185cbe..3564ac7 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1283,7 +1283,7 @@ index 3266a26..6842590 100644
  import os
  import configparser
  import torch
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  from datetime import datetime
  
  
@@ -1315,7 +1315,7 @@ index 8a4a074..9656c29 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1336,7 +1336,7 @@ index b639006..57a6758 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1366,7 +1366,7 @@ index 050252a..a31435e 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1387,7 +1387,7 @@ index d28cbc1..cc3496a 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1408,7 +1408,7 @@ index 7457007..fd56336 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1438,7 +1438,7 @@ index d87fae1..4f0e150 100644
  current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 -config_path = os.path.join(current_dir, "config.ini")
 +config_path = os.path.join(llm_party_path, "config.ini")
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import configparser
  config = configparser.ConfigParser()
  config.read(config_path)
@@ -1469,7 +1469,7 @@ index c6df162..3c7ea0c 100644
  else:
     lang = 'en_US'
  import os
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import sys
  
  
@@ -1497,7 +1497,7 @@ index 81718b1..b1d478b 100644
  
  
  from fastapi import FastAPI
-+from .paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  from fastapi.middleware.cors import CORSMiddleware
  
  app = FastAPI()
@@ -1545,7 +1545,7 @@ index b8e8927..508e170 100644
      return images, res
  
  from fastapi import FastAPI
-+from .paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  from fastapi.middleware.cors import CORSMiddleware
  
  app = FastAPI()
@@ -1575,7 +1575,7 @@ index 438c565..dea9b66 100644
  from requests import get
  # 获取当前文件的绝对路径
  import configparser
-+from .paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  import os
  current_file_path = os.path.abspath(__file__)
  
@@ -1609,7 +1609,7 @@ index 804d954..8588bc6 100644
  import datetime
  import random
  
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  from ..config import config_path, current_dir_path, load_api_keys
  
  
@@ -1639,7 +1639,7 @@ index b2dac2c..d8221de 100644
  import requests
  import torchaudio
  from openai import OpenAI,AzureOpenAI
-+from ..paths import llm_party_path
++import folder_paths; llm_party_path = __import__("os").path.join(folder_paths.base_path, "custom_nodes_data", "comfyui_llm_party")
  from ..config import config_path, current_dir_path, load_api_keys
  
  

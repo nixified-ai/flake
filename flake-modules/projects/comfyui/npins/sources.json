@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.4.12",
-      "revision": "d7d355c36bcb1d7df2bf439ed0ba1540cdac0d6a",
-      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.4.12",
-      "hash": "sha256-rCk0UzqW6LjazMtrrUSv1Z/yZnzuQYoYUD7zbInhpuc="
+      "version": "v0.4.13",
+      "revision": "6db7cb92a7141673e7abfb55c7b8dcd266bbb66d",
+      "url": "https://api.github.com/repos/Comfy-Org/comfy-aimdo/tarball/refs/tags/v0.4.13",
+      "hash": "sha256-cIgvOC4Ocv3JiAdVMUGjX4cv+bGFkaiw65PRi0ys2ig="
     },
     "comfy-kitchen": {
       "type": "GitRelease",
@@ -43,10 +43,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.30.1",
-      "revision": "0764232429b8cfb10b79b6f186c8cb23e0b22897",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.30.1",
-      "hash": "sha256-z8bBKnW2iF8WXI3Ju6Ei+8YpOWqmbUgYiErKiVBBwEk="
+      "version": "v0.30.2",
+      "revision": "dec5d9450a5290bcf63430409ea41018e67f41c3",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.30.2",
+      "hash": "sha256-fLtgJpK8hEuYcfu1vKGDJtszPfED4mmyKHZYrrq/uiA="
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
@@ -60,25 +60,25 @@
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.47.12",
-      "url": "https://files.pythonhosted.org/packages/69/3b/84d5ab1e01dcb0b9dc807a97952d061207b18a962462fccce853403a0060/comfyui_frontend_package-1.47.12.tar.gz",
-      "hash": "sha256-exS4vZBbwZ3KlYTv6OVljZTJKjSg3td2x7ZAj/aAUXk="
+      "version": "1.48.6",
+      "url": "https://files.pythonhosted.org/packages/50/70/9c2b2c418d6d59675c3f06299c1fdb36eb2443eb6657db95e4dba4338ff2/comfyui_frontend_package-1.48.6.tar.gz",
+      "hash": "sha256-jtZAn78l7hFF4896j7/LRiOnZ9Mc1XBOlC5xzWOyias="
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates",
       "version_upper_bound": null,
-      "version": "0.11.28",
-      "url": "https://files.pythonhosted.org/packages/0d/ec/255a1052e833a5370296d1b7936627e048523e673e66721169acce5b6710/comfyui_workflow_templates-0.11.28.tar.gz",
-      "hash": "sha256-DvEJK0mg7+3fQZxZuYKZ+UJZ0YrAkj22FOLcuwD+OB8="
+      "version": "0.11.31",
+      "url": "https://files.pythonhosted.org/packages/df/a6/7b14b4c651779910ddb0501e092b714e1388b371d674aa56104adf5a4e7c/comfyui_workflow_templates-0.11.31.tar.gz",
+      "hash": "sha256-tE2d5AgU39CW3PGYYW6k8a8YJU+MK837a0ms0gBOaS8="
     },
     "comfyui-workflow-templates-core": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-core",
       "version_upper_bound": null,
-      "version": "0.3.293",
-      "url": "https://files.pythonhosted.org/packages/7a/9c/b58749acb4dbeba66629a7f5bdddcc54cffd0225d5d49cad0a92aceba8aa/comfyui_workflow_templates_core-0.3.293.tar.gz",
-      "hash": "sha256-R2XwordCnksYBW4o1WdylajFUG5sy+lICZo1Z7B8ONc="
+      "version": "0.3.295",
+      "url": "https://files.pythonhosted.org/packages/8c/55/662b6d9ee2e9df07fa78d50adf09af757513714d38b4113a9f519de838ff/comfyui_workflow_templates_core-0.3.295.tar.gz",
+      "hash": "sha256-Udr0hfQ41AkE+OXAt/YLJZ3QSQiHWNqjPqaZo0WFIrA="
     },
     "comfyui-workflow-templates-media-api": {
       "type": "PyPi",

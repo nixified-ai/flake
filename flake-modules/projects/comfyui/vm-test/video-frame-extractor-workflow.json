@@ -1,0 +1,19 @@
+{
+	"1": {
+		"inputs": {
+			"video": "animated.webp",
+			"start_frame": 0,
+			"end_frame": 2,
+			"num_frames": 3,
+			"target_fps": 10.0
+		},
+		"class_type": "VideoFrameExtractor"
+	},
+	"2": {
+		"inputs": {
+			"filename_prefix": "ComfyUI",
+			"images": ["1", 2]
+		},
+		"class_type": "SaveImage"
+	}
+}

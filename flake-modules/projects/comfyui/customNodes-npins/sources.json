@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "080e4ee22410687bb644c8aa8da7d808fe267fce",
-      "url": "https://github.com/calcuis/gguf/archive/080e4ee22410687bb644c8aa8da7d808fe267fce.tar.gz",
-      "hash": "sha256-l18KUxNRhTEuMSdq8R8ircNWezGwiGNZHAD7y4sjbzU="
+      "revision": "e5fbd581b080a04f8122ce980291fb9cfe4a47cc",
+      "url": "https://github.com/calcuis/gguf/archive/e5fbd581b080a04f8122ce980291fb9cfe4a47cc.tar.gz",
+      "hash": "sha256-CKumTx++hHXOTXTp/2mZxcfY82XduP/lBFL6nlBV6k0="
     },
     "comfyui-cg-image-filter": {
       "type": "Git",
@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "428cd6470b411eb56ba196d6b1543acd71426043",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=428cd6470b411eb56ba196d6b1543acd71426043",
-      "hash": "sha256-6CUPcg75oP2zg9t0NJyAyZl3kucBhUGc7Dqzi6ZU/Vw="
+      "revision": "dc01158c938188989607a172a3743531d79e5146",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=dc01158c938188989607a172a3743531d79e5146",
+      "hash": "sha256-n/7lj8wGWGxG4Zc/0gGN0jQaBc9PxgzTUj5MYW7WxwU="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -675,9 +675,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "9eefdbddfa5a8ced418ce53b3f0896af1a2d663c",
-      "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/9eefdbddfa5a8ced418ce53b3f0896af1a2d663c.tar.gz",
-      "hash": "sha256-LkpczoiPkiKuNnqZp+JYzEYOfQFy2wdg8zyA2ko87zM="
+      "revision": "120f2ca1b1e226d7e3c23917647d78a6a3318b92",
+      "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/120f2ca1b1e226d7e3c23917647d78a6a3318b92.tar.gz",
+      "hash": "sha256-QeYIgjr6ncA+9lS2SXKzlsq74eoaMcqBTspZDqQMxpQ="
     },
     "comfyui-sdxl-prompt-styler": {
       "type": "Git",

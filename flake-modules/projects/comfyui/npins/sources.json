@@ -26,11 +26,11 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "submodules": false,
+      "submodules": true,
       "version": "v0.2.31",
       "revision": "7c6ca3a5b63857d42c2d49777d6afb69de23f13f",
       "url": "https://api.github.com/repos/Comfy-Org/comfy-kitchen/tarball/refs/tags/v0.2.31",
-      "hash": "sha256-i7v8f+ZNhYkvheufOeJYyCZYwMj79LOt1ZNC+8tgefw="
+      "hash": "sha256-apa7N9Y0bt4fpbMTP0qRUC0QnMuJvoxoCOeWONWCExo="
     },
     "comfyui": {
       "type": "GitRelease",

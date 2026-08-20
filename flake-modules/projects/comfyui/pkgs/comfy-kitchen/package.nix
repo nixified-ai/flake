@@ -52,22 +52,16 @@ python3Packages.callPackage (
     dontUseCmakeConfigure = true;
 
     postPatch = lib.optionalString cudaSupport ''
-      # 1. Patch setup.py to read COMFY_CUDA_ARCHS env var for default archs
-      # match the whole assignment to be safe about quotes
-      substituteInPlace setup.py \
-        --replace-fail 'DEFAULT_CUDA_ARCHS_LINUX = "75-real;75-virtual;80;89;90a;100f;120f"' \
-                       'DEFAULT_CUDA_ARCHS_LINUX = os.environ.get("COMFY_CUDA_ARCHS", "75-real;75-virtual;80;89;90a;100f;120f")'
-
-      # 2. Relax CUDA version check in setup.py (12.8 -> 11.0)
+      # 1. Relax CUDA version check in setup.py (12.8 -> 11.0)
       substituteInPlace setup.py \
         --replace-fail 'lowest_cuda_version = (12, 8)' 'lowest_cuda_version = (11, 0)'
 
-      # 3. Relax CUDA version check in CMakeLists.txt
+      # 2. Relax CUDA version check in CMakeLists.txt
       substituteInPlace comfy_kitchen/backends/cuda/CMakeLists.txt \
         --replace-fail 'VERSION_LESS "12.8"' 'VERSION_LESS "11.0"' \
         --replace-fail 'requires CUDA 12.8' 'requires CUDA 11.0'
 
-      # 4. Patch cublaslt_runtime.h to find the Nix store path for libcublasLt
+      # 3. Patch cublaslt_runtime.h to find the Nix store path for libcublasLt
       LIB_CUBLASLT="${cudaPackages.libcublas.lib}/lib/libcublasLt.so"
 
       # Use sed for complex replacement to ensure quotes are handled correctly

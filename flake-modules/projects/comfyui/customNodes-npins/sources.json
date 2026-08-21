@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "cec06088020e8c2b8e41c7500eee0aff7b175878",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=cec06088020e8c2b8e41c7500eee0aff7b175878",
-      "hash": "sha256-YyPyVG04bnv9NNWbbANzRyYdGosX0dmF2JPvNg5NyQ0="
+      "revision": "b8ae20e197bfa0d3ada293ef6d886899d0150c51",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=b8ae20e197bfa0d3ada293ef6d886899d0150c51",
+      "hash": "sha256-V/mLHat2leOcalID24a1YXZR9yuAj9yhAoCItMtimQQ="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -662,9 +662,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "f4bf78648bf7f72fb6ff1365a431ed510931b21a",
-      "url": "https://github.com/rgthree/rgthree-comfy/archive/f4bf78648bf7f72fb6ff1365a431ed510931b21a.tar.gz",
-      "hash": "sha256-mo/oVN70EczO9WrdYZjTlf8d1QKWhVMRYpixyeYjsNg="
+      "revision": "13b4399c00b5ef5a97b1b6800fc1185874740f5d",
+      "url": "https://github.com/rgthree/rgthree-comfy/archive/13b4399c00b5ef5a97b1b6800fc1185874740f5d.tar.gz",
+      "hash": "sha256-L5GvGas/zqQMTDm3KyExLnWzNYtn3YOht23aFOfotsY="
     },
     "comfyui-rife-tensorrt-auto": {
       "type": "Git",

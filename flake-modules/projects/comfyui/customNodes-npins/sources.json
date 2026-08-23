@@ -714,9 +714,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b994ed7be399e3dbde9c9e5066dd0604e878aee4",
-      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/b994ed7be399e3dbde9c9e5066dd0604e878aee4.tar.gz",
-      "hash": "sha256-4M65yTPagaleldKtsFCPGh7Sgcc0eiRSeaXzLVaVBFo="
+      "revision": "7d23df3e4968b7b266bf0a7ae2efd75d302f8d6d",
+      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/7d23df3e4968b7b266bf0a7ae2efd75d302f8d6d.tar.gz",
+      "hash": "sha256-aAR1j7go9hJMe/KVTyx+oTUXE4ODwLPn07F8j4ZZG9A="
     },
     "comfyui-tiled-diffusion": {
       "type": "Git",
@@ -779,9 +779,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "d69e7afaa9edc3cd99096dc063ec37e71b2d1184",
-      "url": "https://github.com/spacepxl/ComfyUI-VAE-Utils/archive/d69e7afaa9edc3cd99096dc063ec37e71b2d1184.tar.gz",
-      "hash": "sha256-WT9PDSlWVjREH1vr6H8+4/gGzW6jAHxyXKAK1Dwm+U8="
+      "revision": "b6a20ae18f1d4a363f0a0c88fbad9f63dee3d575",
+      "url": "https://github.com/spacepxl/ComfyUI-VAE-Utils/archive/b6a20ae18f1d4a363f0a0c88fbad9f63dee3d575.tar.gz",
+      "hash": "sha256-O+F1ADl7e5P00Hf708yNgNaQHLoHmS7M8/h6IcGPkTQ="
     },
     "comfyui-various": {
       "type": "Git",

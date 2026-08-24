@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b8ae20e197bfa0d3ada293ef6d886899d0150c51",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=b8ae20e197bfa0d3ada293ef6d886899d0150c51",
-      "hash": "sha256-V/mLHat2leOcalID24a1YXZR9yuAj9yhAoCItMtimQQ="
+      "revision": "818855ad05d31c41d9401aee72fa75b631b4e903",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=818855ad05d31c41d9401aee72fa75b631b4e903",
+      "hash": "sha256-7wRlCdA8Y2AI8F/E9RAq2QDCPjBcyrP8IBqFCBDKjZc="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -714,9 +714,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7d23df3e4968b7b266bf0a7ae2efd75d302f8d6d",
-      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/7d23df3e4968b7b266bf0a7ae2efd75d302f8d6d.tar.gz",
-      "hash": "sha256-aAR1j7go9hJMe/KVTyx+oTUXE4ODwLPn07F8j4ZZG9A="
+      "revision": "ed6895d9e6bcd6b9076678658d84256139881d9f",
+      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/ed6895d9e6bcd6b9076678658d84256139881d9f.tar.gz",
+      "hash": "sha256-5oRkKBesWSozlj9M2kG2z6xvucxgp9ScinCzbPYBfpo="
     },
     "comfyui-tiled-diffusion": {
       "type": "Git",

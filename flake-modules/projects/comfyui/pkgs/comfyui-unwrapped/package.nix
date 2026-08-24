@@ -18,6 +18,7 @@ python3Packages.buildPythonApplication {
   patches = [
     ./follow-symlinks-in-extensions.patch
     ./dont_use_cudnn_backend.patch
+    ./enable-comfy-kitchen-cuda-backend-on-cu12.patch
   ];
 
   dependencies =

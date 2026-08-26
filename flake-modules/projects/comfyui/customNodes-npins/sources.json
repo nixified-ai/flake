@@ -597,9 +597,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "2bd60dec69156762313721c18a12235f723f95ba",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=2bd60dec69156762313721c18a12235f723f95ba",
-      "hash": "sha256-jfucUxttPA2U/wDi0x28ZnYOLtpBzTjLf+eu7hl0z1A="
+      "revision": "eea6c69f40b0e71eacb0574272a546a0b18e5b0d",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=eea6c69f40b0e71eacb0574272a546a0b18e5b0d",
+      "hash": "sha256-3F9wxYNpUURliUfGP7wCZwWrd0gDKV5TU8xzwnilXPE="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -714,9 +714,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "aff1f104018c51132ced8d832e8af5e854ac304d",
-      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/aff1f104018c51132ced8d832e8af5e854ac304d.tar.gz",
-      "hash": "sha256-uqy0wT9Zak7f4FzVglddiWLlQ5qReLZpDcGusfBDAZc="
+      "revision": "062c1f39fe5197cd9b010b3054a2a7e3dba28810",
+      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/062c1f39fe5197cd9b010b3054a2a7e3dba28810.tar.gz",
+      "hash": "sha256-gDb1mtd4Vq5hMJBrsHQA1x0o+rHKdfjT3iT2/1/TwIM="
     },
     "comfyui-tiled-diffusion": {
       "type": "Git",
@@ -818,9 +818,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "02dfc5ee26ceaaabd4c4dbff53e2075e258a626f",
-      "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/archive/02dfc5ee26ceaaabd4c4dbff53e2075e258a626f.tar.gz",
-      "hash": "sha256-m+l2ylI1EuRks4rq+h1H8twskcs/nqozydeGlvkwnrw="
+      "revision": "115de7a9d9e34410cffb9ecfd268e993b11a50fb",
+      "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/archive/115de7a9d9e34410cffb9ecfd268e993b11a50fb.tar.gz",
+      "hash": "sha256-NgKlqrLOiCoFusVixdDPKYFs1rx4X48TxzVSObxrgl8="
     },
     "comfyui-videoupscale-withmodel": {
       "type": "Git",

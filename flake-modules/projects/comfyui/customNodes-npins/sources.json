@@ -168,9 +168,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e8b689a513c3e6b63edc44066560ca5919c0576e",
-      "url": "https://github.com/Fannovel16/comfyui_controlnet_aux/archive/e8b689a513c3e6b63edc44066560ca5919c0576e.tar.gz",
-      "hash": "sha256-tMmERf4y7sfuEGao7JHC7FLjBgPuViCtHxr8f9NnHzo="
+      "revision": "59b1fc411ede8623b2997855b8018f0b3b6cf49f",
+      "url": "https://github.com/Fannovel16/comfyui_controlnet_aux/archive/59b1fc411ede8623b2997855b8018f0b3b6cf49f.tar.gz",
+      "hash": "sha256-e+YG36EepsecZMc7es/yHIp+DGx2ai65/xcYiSwCioU="
     },
     "comfyui-crystools": {
       "type": "Git",
@@ -662,9 +662,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "13b4399c00b5ef5a97b1b6800fc1185874740f5d",
-      "url": "https://github.com/rgthree/rgthree-comfy/archive/13b4399c00b5ef5a97b1b6800fc1185874740f5d.tar.gz",
-      "hash": "sha256-L5GvGas/zqQMTDm3KyExLnWzNYtn3YOht23aFOfotsY="
+      "revision": "35c9f1e186603ba312d3b15350e89aa50b860ee6",
+      "url": "https://github.com/rgthree/rgthree-comfy/archive/35c9f1e186603ba312d3b15350e89aa50b860ee6.tar.gz",
+      "hash": "sha256-Yg3Q7BBKa0EMe+yWZUEUv+9+78/QNN1PHAZhbbWUWGM="
     },
     "comfyui-rife-tensorrt-auto": {
       "type": "Git",
@@ -675,9 +675,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "21326142428f595d34165f3c8a3096cd4523419f",
-      "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/21326142428f595d34165f3c8a3096cd4523419f.tar.gz",
-      "hash": "sha256-Lo+YBqw/TNv0ARTYD7yd8IC/lVVoa+JUxea7ZJ8wJao="
+      "revision": "38214ffb2a21cc6eed8f4368d9fd77034256d920",
+      "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/38214ffb2a21cc6eed8f4368d9fd77034256d920.tar.gz",
+      "hash": "sha256-VGHuwievcxW0Y78cMJQUSa7DVAEX9CHQZJJ41ard+1w="
     },
     "comfyui-sdxl-prompt-styler": {
       "type": "Git",

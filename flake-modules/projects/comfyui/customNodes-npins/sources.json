@@ -428,9 +428,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "3f20054214fec9f9234fd3841ae6f1e4287948f6",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/3f20054214fec9f9234fd3841ae6f1e4287948f6.tar.gz",
-      "hash": "sha256-2rurJ/wvr9zcHamGZhcTrM4D20/vMLw6xtN/+ZiHJgw="
+      "revision": "e8e88f7c88e3f6205b122f5de87e69a09fbce5ac",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/e8e88f7c88e3f6205b122f5de87e69a09fbce5ac.tar.gz",
+      "hash": "sha256-7bXZp9HupTHiPntUZCS21o6DFcFRp3F/e4bF745hCoA="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",
@@ -714,9 +714,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "217de600df6c29f3b15e79facbbcba5a1749b78f",
-      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/217de600df6c29f3b15e79facbbcba5a1749b78f.tar.gz",
-      "hash": "sha256-yG5f25gO4ff6LZeoY8ZMStNlzt/7504WgUvXstjKOmY="
+      "revision": "aefd5df8ba357866e75c74034b82e1ed484e64a4",
+      "url": "https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/archive/aefd5df8ba357866e75c74034b82e1ed484e64a4.tar.gz",
+      "hash": "sha256-NBnr98dETeU7mAADQ4oTFpbzSlpLWWhYw8QIrpSFOo8="
     },
     "comfyui-tiled-diffusion": {
       "type": "Git",

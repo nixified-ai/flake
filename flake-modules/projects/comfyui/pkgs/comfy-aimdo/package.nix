@@ -16,11 +16,19 @@ python3Packages.callPackage (
     setuptools,
     setuptools-scm,
     wheel,
+    fetchurl,
+    cmake,
   }:
   buildPythonPackage rec {
     pname = "comfy-aimdo";
     inherit (npin) version src;
     format = "pyproject";
+    dontUseCmakeConfigure = true;
+
+    funchookTarball = fetchurl {
+      url = "https://github.com/kubo/funchook/releases/download/v1.1.3/funchook-1.1.3.tar.gz";
+      sha256 = "1xafrbdcr4i94gafkwzfs5gw8dzfrxz9c1p0nrrw31i3blpni7fl";
+    };
 
     nativeBuildInputs = [
       setuptools
@@ -30,17 +38,17 @@ python3Packages.callPackage (
     ++ lib.optionals config.cudaSupport [
       cudaPackages.cuda_nvcc
       autoAddDriverRunpath
+      cmake
     ];
 
     buildInputs = lib.optional config.cudaSupport cudaPackages.cuda_cudart;
 
-    # Manually compile the shared object
     preBuild = lib.optionalString config.cudaSupport ''
-      gcc -shared -o comfy_aimdo/aimdo.so -fPIC \
-        -I${lib.getDev cudaPackages.cuda_cudart}/include \
-        -I${lib.getDev cudaPackages.cuda_nvcc}/include \
-        -L${lib.getLib cudaPackages.cuda_cudart}/lib/stubs \
-        src/control.c src/debug.c src/model-vbar.c src/pyt-cu-plug-alloc.c -lcuda
+      mkdir -p build
+      tar -xzf ${funchookTarball} -C build
+      patchShebangs scripts/build-linux-aimdo.sh
+      AIMDO_EXTRA_CFLAGS="-I${lib.getDev cudaPackages.cuda_cudart}/include -I${lib.getDev cudaPackages.cuda_nvcc}/include -L${lib.getLib cudaPackages.cuda_cudart}/lib/stubs" \
+      bash ./scripts/build-linux-aimdo.sh
     '';
 
     meta = with lib; {

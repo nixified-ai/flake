@@ -17,6 +17,11 @@ finalAttrs: previousAttrs: {
     ./was-node-suite-path.patch
   ];
 
+  postPatch = ''
+    substituteInPlace WAS_Node_Suite.py \
+      --replace-fail "except FileNotFoundError:" "except (FileNotFoundError, json.JSONDecodeError):"
+  '';
+
   was_suite_config = builtins.toJSON {
     "run_requirements" = true;
     "suppress_uncomfy_warnings" = true;

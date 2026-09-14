@@ -63,6 +63,7 @@ python3Packages.buildPythonApplication {
       comfyui-embedded-docs
       comfy-aimdo
       comfy-kitchen
+      comfyuiPackages."comfy-angle"
     ]);
 
   format = "other";

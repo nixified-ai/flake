@@ -54,6 +54,11 @@ testers.nixosTest {
       machine.wait_for_unit("multi-user.target")
       machine.wait_for_unit("comfyui.service")
       machine.wait_for_open_port(${toString nodes.machine.services.comfyui.port})
+
+      # Fail the test if the logs contain any node import errors
+      machine.fail("journalctl -u comfyui.service --no-pager | grep -qi 'import failed'")
+      machine.fail("journalctl -u comfyui.service --no-pager | grep -qi 'cannot import'")
+
       machine.succeed("${apiTest}")
       machine.wait_for_file("${imagePath1}")
       machine.wait_for_file("${imagePath2}")

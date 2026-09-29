@@ -27,10 +27,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": true,
-      "version": "v0.2.35",
-      "revision": "b2a2972ac68c395bbda8ad9030e8ae1089287815",
+      "version": "v0.2.36",
+      "revision": "888b13e2c0e721f6576fe351a2ad79894b1c451f",
       "url": null,
-      "hash": "sha256-ymNZ4uuM59cOf+neC6tfr+NXH9f7LpF9ml7gsYfB4Fk="
+      "hash": "sha256-bpx3hchFeOZXfyjtrP60DbjXjQMw4ZTEdTDQvlb1SYY="
     },
     "comfyui": {
       "type": "GitRelease",

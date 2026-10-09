@@ -60,9 +60,9 @@
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.55.15",
-      "url": "https://files.pythonhosted.org/packages/42/19/2ef8733285b728fb333122bcf85aa8cf7d3fb4513ec86a654fab16498cea/comfyui_frontend_package-1.55.15.tar.gz",
-      "hash": "sha256-mRqo6LyVsCFgcSa3DTMdFv8wbcgQ+9sh8bEMTf2OsSg="
+      "version": "1.55.16",
+      "url": "https://files.pythonhosted.org/packages/e0/00/d3e69e0f3f8ee5e3e00eede9c00a6d397c531d9e940cb0d67ab2ec6fe673/comfyui_frontend_package-1.55.16.tar.gz",
+      "hash": "sha256-VcDRRjsRIdd0Tafnw+pkDXwPTRK5hu6F4lzfmxQ5zlc="
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",

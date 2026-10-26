@@ -1,0 +1,20 @@
+--- a/comfy/quant_ops.py
++++ b/comfy/quant_ops.py
+@@ -21,11 +21,12 @@
+     _CK_AVAILABLE = True
+     if torch.version.cuda is None:
+         ck.registry.disable("cuda")
+-    else:
+-        cuda_version = tuple(map(int, str(torch.version.cuda).split('.')))
+-        if cuda_version < (13,):
+-            ck.registry.disable("cuda")
+-            logging.warning("WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.\nWARNING WARNING WARNING\nIf you are on nvidia 20 series and above it is required that you update your pytorch to cu130 or higher.\n")
++    # Upstream also disables the cuda backend when torch is built with CUDA < 13,
++    # because the prebuilt comfy-kitchen wheels are compiled against cuBLASLt from
++    # the nvidia.cu13 wheel and would be ABI-incompatible with a cu12x torch. Our
++    # comfy-kitchen is built from source against the same CUDA as torch, so that
++    # constraint does not apply; keep the backend enabled to get the fused
++    # int8/convrot kernels instead of the slow, memory-hungry eager fallback.
+ 
+     # comfy-kitchen picks its accelerated backend on import: the HIP backend registers
+     # itself on a supported AMD device and takes dispatch priority there, CUDA on NVIDIA.

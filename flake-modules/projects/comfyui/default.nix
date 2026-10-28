@@ -71,9 +71,10 @@
           extraPackagesWithWarning
           // {
             transformers = pyprev.transformers.overridePythonAttrs (oldAttrs: {
+              # Use --replace-warn because this was fixed in transformers 5.10.0
               postPatch = (oldAttrs.postPatch or "") + ''
                 substituteInPlace src/transformers/utils/import_utils.py \
-                  --replace-fail 'PACKAGE_DISTRIBUTION_MAPPING["flash_attn"]' 'PACKAGE_DISTRIBUTION_MAPPING.get("flash_attn", [])'
+                  --replace-warn 'PACKAGE_DISTRIBUTION_MAPPING["flash_attn"]' 'PACKAGE_DISTRIBUTION_MAPPING.get("flash_attn", [])'
               '';
             });
           }

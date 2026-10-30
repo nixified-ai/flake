@@ -30,13 +30,13 @@
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "vilanele",
-        "repo": "ComfyUI-AsyncPause"
+        "owner": "ComfyNodePRs",
+        "repo": "PR-ComfyUI-AsyncPause-edd148d4"
       },
       "branch": "main",
       "submodules": false,
       "revision": "78fe62a28e40b40de1f4cd7b2aa2a0cf33092277",
-      "url": "https://github.com/vilanele/ComfyUI-AsyncPause/archive/78fe62a28e40b40de1f4cd7b2aa2a0cf33092277.tar.gz",
+      "url": "https://github.com/ComfyNodePRs/PR-ComfyUI-AsyncPause-edd148d4/archive/78fe62a28e40b40de1f4cd7b2aa2a0cf33092277.tar.gz",
       "hash": "sha256-BJaA6wxwKI14eotvMFSE3PBns5JEng5fhvxuxaAeGsM="
     },
     "comfyui-automatic-cfg": {

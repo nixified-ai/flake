@@ -57,7 +57,7 @@ testers.nixosTest {
       machine.succeed("${apiTest}")
       machine.wait_for_file("${imagePath1}")
       machine.wait_for_file("${imagePath2}")
-      machine.copy_from_vm("${imagePath1}")
-      machine.copy_from_vm("${imagePath2}")
+      machine.copy_from_machine("${imagePath1}")
+      machine.copy_from_machine("${imagePath2}")
     '';
 }

@@ -27,7 +27,7 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs?ref=567a49d1913ce81ac6e9582e3553dd90a955875f";
+      url = "github:NixOS/nixpkgs?ref=674a2028661e550a97400c1cc992b9cca9a668a1";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

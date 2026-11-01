@@ -8,6 +8,7 @@
   cudaPackages,
   symlinkJoin,
   gnused,
+  ninja,
   COMFY_CUDA_ARCHS,
   gcc14Stdenv,
 }:
@@ -24,8 +25,8 @@ buildPythonPackage rec {
   pname = "sageattention";
   format = "setuptools";
 
-  CUDA_HOME = cuda-native-redist;
-  CUDA_VERSION = cudaPackages.cudaMajorMinorVersion;
+  env.CUDA_HOME = "${cuda-native-redist}";
+  env.CUDA_VERSION = cudaPackages.cudaMajorMinorVersion;
   env.TORCH_CUDA_ARCH_LIST = COMFY_CUDA_ARCHS;
   version = "unstable-2025-07-21";
 
@@ -45,6 +46,11 @@ buildPythonPackage rec {
     cudaPackages.cudatoolkit
   ];
 
+  dontUseNinjaBuild = true;
+  nativeBuildInputs = [
+    ninja
+  ];
+
   build-system = [
     setuptools
     wheel
@@ -52,6 +58,7 @@ buildPythonPackage rec {
 
   preBuild = ''
     export PATH=${gcc14Stdenv.cc}/bin:$PATH
+    substituteInPlace setup.py --replace-fail "-std=c++17" "-std=c++20"
     ${gnused}/bin/sed -i "/compute_capabilities = set()/a compute_capabilities = {\"$TORCH_CUDA_ARCH_LIST\"}" setup.py
   '';
 

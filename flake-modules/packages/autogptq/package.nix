@@ -32,10 +32,10 @@ buildPythonPackage rec {
   version = "0.4.2";
   format = "setuptools";
 
-  BUILD_CUDA_EXT = "1";
+  env.BUILD_CUDA_EXT = "1";
 
-  CUDA_HOME = cuda-native-redist;
-  CUDA_VERSION = cudaPackages.cudaMajorMinorVersion;
+  env.CUDA_HOME = "${cuda-native-redist}";
+  env.CUDA_VERSION = cudaPackages.cudaMajorMinorVersion;
 
   buildInputs = [
     pybind11

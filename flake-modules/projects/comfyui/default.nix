@@ -59,25 +59,13 @@
               directory = ./../../packages;
             };
             names = lib.attrNames extraPackages;
-            ignoredOverlaps = [ "llama-cpp-python" ];
-            extraPackagesAlreadyInPrev = lib.filter (
-              name: pyprev ? ${name} && !lib.elem name ignoredOverlaps
-            ) names;
+            extraPackagesAlreadyInPrev = lib.filter (name: pyprev ? ${name}) names;
             warningMessage = "Some local python packages are already present in upstream: ${lib.concatStringsSep ", " extraPackagesAlreadyInPrev}";
             extraPackagesWithWarning = lib.warnIfNot (
               [ ] == extraPackagesAlreadyInPrev
             ) warningMessage extraPackages;
           in
           extraPackagesWithWarning
-          // {
-            transformers = pyprev.transformers.overridePythonAttrs (oldAttrs: {
-              # Use --replace-warn because this was fixed in transformers 5.10.0
-              postPatch = (oldAttrs.postPatch or "") + ''
-                substituteInPlace src/transformers/utils/import_utils.py \
-                  --replace-warn 'PACKAGE_DISTRIBUTION_MAPPING["flash_attn"]' 'PACKAGE_DISTRIBUTION_MAPPING.get("flash_attn", [])'
-              '';
-            });
-          }
         );
       }
     );
@@ -91,6 +79,7 @@
         ];
       in
       {
+        disabledModules = [ "services/misc/comfyui.nix" ];
         imports = [ (import ./module.nix { inherit overlays; }) ];
         nixpkgs.overlays = overlays;
       };

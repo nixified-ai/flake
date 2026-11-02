@@ -12,7 +12,7 @@
   wget,
   easydict,
   pyyaml,
-  albumentations,
+  albumentationsx,
   albucore,
   pymatting,
 }:
@@ -31,6 +31,8 @@ buildPythonPackage rec {
 
   buildInputs = [ setuptools ];
 
+  pythonRemoveDeps = [ "albumentations" ];
+
   propagatedBuildInputs = [
     torch
     torchvision
@@ -42,7 +44,7 @@ buildPythonPackage rec {
     wget
     easydict
     pyyaml
-    albumentations
+    albumentationsx
     albucore
     pymatting
   ];

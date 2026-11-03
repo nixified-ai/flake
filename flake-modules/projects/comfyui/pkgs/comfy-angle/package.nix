@@ -4,7 +4,9 @@
   lib,
   stdenv,
   autoPatchelfHook,
-  xorg,
+  libx11,
+  libxext,
+  libxcb,
 }:
 python3Packages.buildPythonPackage rec {
   pname = "comfy-angle";
@@ -30,9 +32,9 @@ python3Packages.buildPythonPackage rec {
   # Make it dynamically linked with patchelf
   nativeBuildInputs = [ autoPatchelfHook ];
 
-  buildInputs = with xorg; [
-    libX11
-    libXext
+  buildInputs = [
+    libx11
+    libxext
     libxcb
   ];
 }

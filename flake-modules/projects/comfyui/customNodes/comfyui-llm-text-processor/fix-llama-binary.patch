@@ -1,0 +1,12 @@
+--- a/llama_binary.py
++++ b/llama_binary.py
+@@ -194,6 +194,9 @@
+ 
+ 
+ def ensure_llama_cli_paths() -> LlamaCliPaths:
++    if platform.system().lower() == "linux":
++        return LlamaCliPaths(cli=Path("@llama-cli@"))
++
+     spec = _platform_spec()
+     existing = _existing_install(spec)
+     if existing is not None:

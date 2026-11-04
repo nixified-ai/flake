@@ -13,6 +13,7 @@
   cudaPackages ? { },
   symlinkJoin,
   gnused,
+  ninja,
   COMFY_CUDA_ARCHS ? "",
   gcc14Stdenv,
   config,
@@ -58,6 +59,11 @@ buildPythonPackage rec {
     cudaPackages.cudatoolkit
   ];
 
+  dontUseNinjaBuild = true;
+  nativeBuildInputs = [
+    ninja
+  ];
+
   build-system = [
     setuptools
     wheel
@@ -65,6 +71,7 @@ buildPythonPackage rec {
 
   preBuild = ''
     export PATH=${gcc14Stdenv.cc}/bin:$PATH
+    substituteInPlace setup.py --replace-fail "-std=c++17" "-std=c++20"
   '';
 
   pythonImportsCheck = lib.optionals cudaSupport [

@@ -18,6 +18,7 @@
       protobuf
       pyloudnorm
       gguf
+      onnx
       gccStdenv.cc
     ]
     ++ lib.optional config.cudaSupport sageattention;

@@ -1,0 +1,42 @@
+{
+	"1": {
+		"inputs": {
+			"image": "ComfyUI_00001.png"
+		},
+		"class_type": "LoadImage"
+	},
+	"2": {
+		"inputs": {
+			"model": "google_gemma-3-4b-it-Q4_K_M.gguf",
+			"mmproj": "mmproj-google_gemma-3-4b-it-f16.gguf",
+			"system_prompt": "none",
+			"prompt": "detailed caption",
+			"max_tokens": 128,
+			"temperature": 0.7,
+			"top_p": 0.8,
+			"top_k": 20,
+			"repeat_penalty": 1.0,
+			"ctx_size": 4096,
+			"memory_mode": "gpu_layers",
+			"n_gpu_layers": 100,
+			"n_cpu_moe_layers": 1,
+			"seed": 1,
+			"timeout_seconds": 300,
+			"reasoning": "off",
+			"enable_processing": true,
+			"extra_args": "",
+			"image": ["1", 0]
+		},
+		"class_type": "LLMTextProcessor"
+	},
+	"4": {
+		"inputs": {
+			"root_dir": "output",
+			"file": "gemma_output.txt",
+			"append": "overwrite",
+			"insert": true,
+			"text": ["2", 0]
+		},
+		"class_type": "SaveText|pysssss"
+	}
+}

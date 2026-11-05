@@ -691,9 +691,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9240d24b60ab234b355cedea11045965b6683843",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=9240d24b60ab234b355cedea11045965b6683843",
-      "hash": "sha256-BnNeb2QYCL0JKYRZnaCVFTMWVXDH0rCZBEORmgYybac="
+      "revision": "824ccacccf3a9b5e0ac1a488a2eb18c0e6b65eba",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=824ccacccf3a9b5e0ac1a488a2eb18c0e6b65eba",
+      "hash": "sha256-eBSwVk7o8FgM3OuPgYHNvrBqjj5VV21801PuG8iw9lw="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -769,9 +769,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "554efabb1a4f290d42d662399e7bf55bc7a3c0aa",
-      "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/554efabb1a4f290d42d662399e7bf55bc7a3c0aa.tar.gz",
-      "hash": "sha256-AGAryziKTuH06kWbyU7nTh1ftr7hodk4dqOPtRDyWJg="
+      "revision": "7bf4b1be878e5a3e50fe27bde0fe6fab0867c940",
+      "url": "https://github.com/huchukato/ComfyUI-RIFE-TensorRT-Auto/archive/7bf4b1be878e5a3e50fe27bde0fe6fab0867c940.tar.gz",
+      "hash": "sha256-6AauR0JMwk2nPHJQfbHhg5wpHY3W5exCW9mU0x/K5ZA="
     },
     "comfyui-sdxl-prompt-styler": {
       "type": "Git",

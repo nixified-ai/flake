@@ -27,10 +27,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": true,
-      "version": "v0.2.40",
-      "revision": "f8b7e97a1418d2e529bd5405fbf86312be198ae6",
+      "version": "v0.2.41",
+      "revision": "cbc44a5b7cc3b8f910ef76ae5251c94971eb05d1",
       "url": null,
-      "hash": "sha256-hpEGSlrfbXm+b//BygmRA5pVSEkV/saUB4c9m4+YoD4="
+      "hash": "sha256-WbpiDqOvRxy5hTw7cpGqxOCBLJo9jnbDN0yJHm7gXEk="
     },
     "comfyui": {
       "type": "GitRelease",
@@ -43,42 +43,42 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.43.2",
-      "revision": "423cbd20511becb1f16122ab518e92e58bfa03d9",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.43.2",
-      "hash": "sha256-XhuqKAjyTeg2LmZPCfUhbpQZHDze/yBfQtRTuI22+mk="
+      "version": "v0.44.0",
+      "revision": "2c75dc1b379a59e0880619d029607af5169a62ef",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.44.0",
+      "hash": "sha256-iuuLmC1j4bsoLshCrO+RDcNO2JuvtoKzIqEGpmKNBN0="
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
       "name": "comfyui-embedded-docs",
       "version_upper_bound": null,
-      "version": "0.5.15",
-      "url": "https://files.pythonhosted.org/packages/ac/e8/a27e2572d3c3addccda6fef9280b0e4347d77e2246d771bba717422ed5e4/comfyui_embedded_docs-0.5.15.tar.gz",
-      "hash": "sha256-aVqB/G2njL/iCTmQSG9xpJn0VXha5sGuc16tVMFlen8="
+      "version": "0.5.16",
+      "url": "https://files.pythonhosted.org/packages/1f/3d/60b499333e95f096f80ecb36f74e471387036433264248b1741f36e447ac/comfyui_embedded_docs-0.5.16.tar.gz",
+      "hash": "sha256-1nfGN2EKnM/e3GrI34r0AAbKopfmCnbWaVRcH79IiCY="
     },
     "comfyui-frontend-package": {
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.58.4",
-      "url": "https://files.pythonhosted.org/packages/fb/1e/43f666841e31f6adf9f71da7abc7be0d7dc68a3b2189a20770d4f7d102f5/comfyui_frontend_package-1.58.4.tar.gz",
-      "hash": "sha256-CtoIRINBeYkxtA3T0E0WqNVbmWETXwLDNmMR6JkvE5U="
+      "version": "1.58.5",
+      "url": "https://files.pythonhosted.org/packages/a7/95/35052db164d0a43d7d1c21d64a5896e4c94470e3d4e47742764ad28dd49d/comfyui_frontend_package-1.58.5.tar.gz",
+      "hash": "sha256-9AdZkklHHi48hQhDWPKT8z0L/4pZ4vKm4m1jiAImjew="
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates",
       "version_upper_bound": null,
-      "version": "0.11.100",
-      "url": "https://files.pythonhosted.org/packages/50/96/bd3734b06fdeeaede10c248255382858d14694060132399a49ca068707c4/comfyui_workflow_templates-0.11.100.tar.gz",
-      "hash": "sha256-dbQRCdk5FWV6uji6NRSP7IshoWbUWFyfGVKQy+ytJLs="
+      "version": "0.11.102",
+      "url": "https://files.pythonhosted.org/packages/83/48/539a68e89a71bb46081e08f597474973aa404bc79e9022f7f8cab57fe5aa/comfyui_workflow_templates-0.11.102.tar.gz",
+      "hash": "sha256-Eqa6Yu16Yug6787AXd4y40kY3Y8E1RuAHlweb6Uc1Q0="
     },
     "comfyui-workflow-templates-core": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-core",
       "version_upper_bound": null,
-      "version": "0.3.391",
-      "url": "https://files.pythonhosted.org/packages/78/78/09522d7bfa9021fb0327d2dee1dfaf7598b803b538cccefc855bdbaf02cc/comfyui_workflow_templates_core-0.3.391.tar.gz",
-      "hash": "sha256-dHjjCP8vWFctybXtSkiTSDXI77xJ2ukz0K8xDzQARM0="
+      "version": "0.3.393",
+      "url": "https://files.pythonhosted.org/packages/02/fb/1fdce793dc28943e4c7f97fa2dfe83335f0d8ebea4c1348298899ef252bd/comfyui_workflow_templates_core-0.3.393.tar.gz",
+      "hash": "sha256-iL0CPCl9vmYsh7VhfYH+vwRwBPhmoCyHthlGYDgnaCA="
     },
     "comfyui-workflow-templates-media-api": {
       "type": "PyPi",

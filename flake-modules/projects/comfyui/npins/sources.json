@@ -60,25 +60,25 @@
       "type": "PyPi",
       "name": "comfyui-frontend-package",
       "version_upper_bound": null,
-      "version": "1.58.5",
-      "url": "https://files.pythonhosted.org/packages/a7/95/35052db164d0a43d7d1c21d64a5896e4c94470e3d4e47742764ad28dd49d/comfyui_frontend_package-1.58.5.tar.gz",
-      "hash": "sha256-9AdZkklHHi48hQhDWPKT8z0L/4pZ4vKm4m1jiAImjew="
+      "version": "1.58.7",
+      "url": "https://files.pythonhosted.org/packages/87/a2/65126c44ef5e2a5198a50791dae7fa219e68565c0dfc58c09ea189690a6a/comfyui_frontend_package-1.58.7.tar.gz",
+      "hash": "sha256-Vza79+fExXOFq9KOmZFC6iwbHEMqgjaOtSkskXkaJzg="
     },
     "comfyui-workflow-templates": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates",
       "version_upper_bound": null,
-      "version": "0.11.102",
-      "url": "https://files.pythonhosted.org/packages/83/48/539a68e89a71bb46081e08f597474973aa404bc79e9022f7f8cab57fe5aa/comfyui_workflow_templates-0.11.102.tar.gz",
-      "hash": "sha256-Eqa6Yu16Yug6787AXd4y40kY3Y8E1RuAHlweb6Uc1Q0="
+      "version": "0.11.103",
+      "url": "https://files.pythonhosted.org/packages/51/cb/2bcc88f2882b8160040d87dfc5ad3c0590c69d9bafd3dfeddb49b578f33b/comfyui_workflow_templates-0.11.103.tar.gz",
+      "hash": "sha256-Z7ZuizjGdnNghWtGU0hwGHuyEDxS9nC5QvHhf6RnkK4="
     },
     "comfyui-workflow-templates-core": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-core",
       "version_upper_bound": null,
-      "version": "0.3.393",
-      "url": "https://files.pythonhosted.org/packages/02/fb/1fdce793dc28943e4c7f97fa2dfe83335f0d8ebea4c1348298899ef252bd/comfyui_workflow_templates_core-0.3.393.tar.gz",
-      "hash": "sha256-iL0CPCl9vmYsh7VhfYH+vwRwBPhmoCyHthlGYDgnaCA="
+      "version": "0.3.394",
+      "url": "https://files.pythonhosted.org/packages/33/a5/3e4a09a9662c59d84ce0334b3c4bcb0b3579619f867efaea368d0ef96144/comfyui_workflow_templates_core-0.3.394.tar.gz",
+      "hash": "sha256-dZUzqSGWaptjQOlA6G93GIsLg23t7KPxKNSZyl3tof4="
     },
     "comfyui-workflow-templates-media-api": {
       "type": "PyPi",

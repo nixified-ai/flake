@@ -496,9 +496,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "c7b8f73af0badaf2a59bee6111ecdd004be15ab3",
-      "url": "https://github.com/chflame163/ComfyUI_LayerStyle/archive/c7b8f73af0badaf2a59bee6111ecdd004be15ab3.tar.gz",
-      "hash": "sha256-KtV1Kd0jxAS5UEPghb6UD5kTUY3KqAaTUBHs+aI/fTU="
+      "revision": "1f7edb65371526195621fdde274bf895e117120e",
+      "url": "https://github.com/chflame163/ComfyUI_LayerStyle/archive/1f7edb65371526195621fdde274bf895e117120e.tar.gz",
+      "hash": "sha256-PalqKgx2UstYG8oG29s9hamMDZn0CcYXsAlmTPE9qvc="
     },
     "comfyui-layer-style-advance": {
       "type": "Git",

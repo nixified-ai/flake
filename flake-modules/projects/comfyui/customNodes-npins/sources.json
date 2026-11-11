@@ -691,9 +691,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e7dd136175c6000039b36f2fe9f979a4e941ac4f",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=e7dd136175c6000039b36f2fe9f979a4e941ac4f",
-      "hash": "sha256-lNJNFFuleXTq9Qe9r4xqUtlnZEp6RV7Xfukkr/FsqLY="
+      "revision": "a350978508b2105b3107ae735c78b389701e16e1",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=a350978508b2105b3107ae735c78b389701e16e1",
+      "hash": "sha256-H4vh7Sc/FVZ6v1+QYVO4BnF8Smh2YRuASNcH7VrN4Ro="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",

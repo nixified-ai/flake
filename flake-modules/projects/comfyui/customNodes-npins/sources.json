@@ -574,9 +574,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "220e1d45aa0469f518e982102fca4dca92a61862",
-      "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/archive/220e1d45aa0469f518e982102fca4dca92a61862.tar.gz",
-      "hash": "sha256-XRC80C5PWQxb0HM3hEpQ2x3qOhfVNLlnKMhn3RN5o3Q="
+      "revision": "ced6bad92b82f90028e1e1fd5a37527302550fc5",
+      "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/archive/ced6bad92b82f90028e1e1fd5a37527302550fc5.tar.gz",
+      "hash": "sha256-CTQixwxaeaFiX3puXnZ656QKZZc179QSHw3F+JkEecg="
     },
     "comfyui-memory-cleanup": {
       "type": "Git",

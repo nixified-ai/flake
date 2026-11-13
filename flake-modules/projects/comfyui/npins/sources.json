@@ -43,10 +43,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.45.2",
-      "revision": "6e8488ef986067631e9c86e2a14360644b105663",
-      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.45.2",
-      "hash": "sha256-PQf4xmZivfLyBzWI+czTjrIB871JhKYwWR3K6Y2XNPk="
+      "version": "v0.45.3",
+      "revision": "71096d1af6c9d1c34fc42094ec4ec59768104786",
+      "url": "https://api.github.com/repos/comfyanonymous/ComfyUI/tarball/refs/tags/v0.45.3",
+      "hash": "sha256-m12nvUwPP27UoWsjQI1vy3JXSfPRSanZSZGFlRVRAaQ="
     },
     "comfyui-embedded-docs": {
       "type": "PyPi",
@@ -68,17 +68,17 @@
       "type": "PyPi",
       "name": "comfyui-workflow-templates",
       "version_upper_bound": null,
-      "version": "0.11.106",
-      "url": "https://files.pythonhosted.org/packages/99/67/3e365b9bdab8834eaaa2b06d130a6b8f48e3530c9e1404ed08cd5891ac88/comfyui_workflow_templates-0.11.106.tar.gz",
-      "hash": "sha256-lnk3+TnL/RNIKyAUyk4PVu81GxcwkWX1IXhOVuUmAVk="
+      "version": "0.11.107",
+      "url": "https://files.pythonhosted.org/packages/bf/65/26e754144c886db527995f725d3bc550ec1f497c9e8c40c6ebc557f4a418/comfyui_workflow_templates-0.11.107.tar.gz",
+      "hash": "sha256-dDrNlpB0LkavIfTmZN7E6BKPnlVrz6KPcvk7VXBLxRc="
     },
     "comfyui-workflow-templates-core": {
       "type": "PyPi",
       "name": "comfyui-workflow-templates-core",
       "version_upper_bound": null,
-      "version": "0.3.397",
-      "url": "https://files.pythonhosted.org/packages/76/26/44b24a9d3315532d07e3ca73044889dd2b0b635cab9668b83e90455f7a66/comfyui_workflow_templates_core-0.3.397.tar.gz",
-      "hash": "sha256-Ni3Fugvom35sky0bPVTG0rs8rMRcGpTg63JNO33nbuw="
+      "version": "0.3.398",
+      "url": "https://files.pythonhosted.org/packages/68/75/7d8957985335863c1d950e54f90403c3480e2f553890ccbfffea150170ff/comfyui_workflow_templates_core-0.3.398.tar.gz",
+      "hash": "sha256-SpAapdzWZ7FXyMoeFOrllB33WQ+qa5bCKOwanwRRX+U="
     },
     "comfyui-workflow-templates-media-api": {
       "type": "PyPi",

@@ -457,9 +457,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "088128b224242e110d3906c6750e9a3a348a659b",
-      "url": "https://github.com/kijai/ComfyUI-WanVideoWrapper/archive/088128b224242e110d3906c6750e9a3a348a659b.tar.gz",
-      "hash": "sha256-/S6sr/6VXx3UxticdE+oxzRtbs+LiG54egMdqIYuB1M="
+      "revision": "a7439db30bed0c5b5fa437d77ae8a7bb220dfd00",
+      "url": "https://github.com/kijai/ComfyUI-WanVideoWrapper/archive/a7439db30bed0c5b5fa437d77ae8a7bb220dfd00.tar.gz",
+      "hash": "sha256-ySiYwrms8QezjRQhKlEgIw6GuxYwDlFEVKzXjV8YwUU="
     },
     "comfyui-kjnodes": {
       "type": "Git",
@@ -470,9 +470,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ab72eda7ffad6280422d71ab7d54d3fb87c0ba18",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/ab72eda7ffad6280422d71ab7d54d3fb87c0ba18.tar.gz",
-      "hash": "sha256-FKBKcB3thkQ4UdTJQnGSatX0QYiN1VTvVBBTgDrmCCE="
+      "revision": "b23194124ef9751eb27cd1fb6aa7858080e692ac",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/b23194124ef9751eb27cd1fb6aa7858080e692ac.tar.gz",
+      "hash": "sha256-CzTXFwM8lWZXd7CsyVLNvHPc82Qd11XP5U0ofipCHaU="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",
@@ -691,9 +691,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "a350978508b2105b3107ae735c78b389701e16e1",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=a350978508b2105b3107ae735c78b389701e16e1",
-      "hash": "sha256-H4vh7Sc/FVZ6v1+QYVO4BnF8Smh2YRuASNcH7VrN4Ro="
+      "revision": "2c2b9854b183c0d4c7267fb1c5a43ce5009cdcde",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=2c2b9854b183c0d4c7267fb1c5a43ce5009cdcde",
+      "hash": "sha256-l+QMTIQxI/5ar3+2rmiJm3ukQ4Rs9pli1QvtUj70e9U="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
@@ -730,9 +730,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6780724de0ddb98e7454d54bb80387836a911ece",
-      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/6780724de0ddb98e7454d54bb80387836a911ece.tar.gz",
-      "hash": "sha256-IGYuFN586XMl3i1o2VzZApb8hyGgSKbcXkQ1xc6gS2c="
+      "revision": "cb2c312d979b3ab4aaca97a3b70f892f4be554f4",
+      "url": "https://github.com/ClownsharkBatwing/RES4LYF/archive/cb2c312d979b3ab4aaca97a3b70f892f4be554f4.tar.gz",
+      "hash": "sha256-eySRyLy03IIs9tL4FxmwqggtC1FkOtAAbXU4K4FOo38="
     },
     "comfyui-resolution-master": {
       "type": "Git",

@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "4.3",
-      "revision": "ffc746d5fe64cf9d4cac2a92c519d86fa25a847c",
-      "url": "https://api.github.com/repos/Comfy-Org/ComfyUI-Manager/tarball/refs/tags/4.3",
-      "hash": "sha256-/ddGc0runP4qlvk1S+AugBuKlejYdURTy4bfMJesY2U="
+      "version": "4.4",
+      "revision": "167293ab566564987b867351972d330a1bfdf4e6",
+      "url": "https://api.github.com/repos/Comfy-Org/ComfyUI-Manager/tarball/refs/tags/4.4",
+      "hash": "sha256-NC7QQtbUcRIlhZCUm4vxeQ7Os0Le9moTqwwG+iRkt2E="
     },
     "comfyui-adv-clip-emb": {
       "type": "Git",
@@ -366,9 +366,9 @@
       },
       "branch": "Main",
       "submodules": false,
-      "revision": "9e2d41da75c185bf7638f860d5d004035f378e9b",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/9e2d41da75c185bf7638f860d5d004035f378e9b.tar.gz",
-      "hash": "sha256-/cfuzUbqP1awpp3o92K4wXLrYzpTEE615TrgMkk3M+E="
+      "revision": "0778918a44803a7fc81bbdc9d0aa287ac2da1ad7",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/0778918a44803a7fc81bbdc9d0aa287ac2da1ad7.tar.gz",
+      "hash": "sha256-KMrq/L5VInulQPhEBo5JS0B3sVS3xL0kL/gBtqT7GCY="
     },
     "comfyui-impact-subpack": {
       "type": "Git",
@@ -470,9 +470,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "56781c108c520e9c75db140b6886927c1785e3d2",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/56781c108c520e9c75db140b6886927c1785e3d2.tar.gz",
-      "hash": "sha256-ArXZhrECiBz6QeI+cbtVjbh9tj38jn81RFQuY2sTWAc="
+      "revision": "70701d2a11d4797cf52733290ed0b6b5037148d9",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/70701d2a11d4797cf52733290ed0b6b5037148d9.tar.gz",
+      "hash": "sha256-+bDFqH7y8OBLVqu8PNy8LRaZB/YLHGuHNvtSarfiISI="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",

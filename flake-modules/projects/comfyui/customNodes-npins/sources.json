@@ -197,9 +197,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b9abafa1019e230ebd674e4ae93f11bdf9d8dfc2",
-      "url": "https://github.com/Fannovel16/comfyui_controlnet_aux/archive/b9abafa1019e230ebd674e4ae93f11bdf9d8dfc2.tar.gz",
-      "hash": "sha256-nPsaAqRzogIx0Ots5++teTzVbzyPAQtcURrlJ9fK+Fk="
+      "revision": "c2655d2970d810d8a3d71deed204cdf416b66132",
+      "url": "https://github.com/Fannovel16/comfyui_controlnet_aux/archive/c2655d2970d810d8a3d71deed204cdf416b66132.tar.gz",
+      "hash": "sha256-2tU4yIuElGOkwtwhmgvWLr0hOe+n5vdosvTGqS9qRcU="
     },
     "comfyui-crystools": {
       "type": "Git",
@@ -249,9 +249,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "0abe742480d4d2e98cc7c6f432f9442463a7bca3",
-      "url": "https://github.com/Acly/comfyui-tooling-nodes/archive/0abe742480d4d2e98cc7c6f432f9442463a7bca3.tar.gz",
-      "hash": "sha256-PZ/Bxl5OeKB0aFOsI5c8s2a6144LVhLQp7BC7TmA48U="
+      "revision": "77f0952c49ab7e907de46f7d9d05cdce03fdc750",
+      "url": "https://github.com/Acly/comfyui-tooling-nodes/archive/77f0952c49ab7e907de46f7d9d05cdce03fdc750.tar.gz",
+      "hash": "sha256-L7+aUIq/6YWLzQAKTnTsrsn4/VgkRDTIvE0rQTTrp1U="
     },
     "comfyui-florence2": {
       "type": "Git",
@@ -366,9 +366,9 @@
       },
       "branch": "Main",
       "submodules": false,
-      "revision": "4a8a239abae00e5e72a54481427d43e9362a42bb",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/4a8a239abae00e5e72a54481427d43e9362a42bb.tar.gz",
-      "hash": "sha256-RgSKeDZTGJs547GJ2eRpy7kGEMMS2fhdZIZhjdzR7ms="
+      "revision": "0c3fbe1e00cdab1eb9411d4767601764567fbdbe",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/0c3fbe1e00cdab1eb9411d4767601764567fbdbe.tar.gz",
+      "hash": "sha256-DSk7Hsg5+9SJ9tlf2VtUvlx9i4qi1QlSnlBZSWoMkWY="
     },
     "comfyui-impact-subpack": {
       "type": "Git",
@@ -405,9 +405,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "d23db9aa544de9a6d4c609cb7005fa9e0d42031d",
-      "url": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack/archive/d23db9aa544de9a6d4c609cb7005fa9e0d42031d.tar.gz",
-      "hash": "sha256-XjV52EyXQ9pqkntKFB53goJ2oTQ+wjTYQCmE9uVlgJM="
+      "revision": "04ed6f2abcbc34ccce9f3bb12b4e1e5bd286d6f6",
+      "url": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack/archive/04ed6f2abcbc34ccce9f3bb12b4e1e5bd286d6f6.tar.gz",
+      "hash": "sha256-U++icnft9p1i1Aj9L1NaTaeKVj5cbk7p0vZ1DM1Fu/E="
     },
     "comfyui-int8-fast": {
       "type": "Git",
@@ -691,9 +691,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "028c5dd70d34939691e8f273d55fc3a143cc66f5",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=028c5dd70d34939691e8f273d55fc3a143cc66f5",
-      "hash": "sha256-EABgh/NCHPwwLtaajtS5omb6CmxbkTXz8o1vY82YMwY="
+      "revision": "43c7f00b9f2b6331e4a50f7b5e3df52204e87f86",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=43c7f00b9f2b6331e4a50f7b5e3df52204e87f86",
+      "hash": "sha256-2z5BlxbLVYHGxCaVi03QTS4tqEBR3pMAztFp5p1j844="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",

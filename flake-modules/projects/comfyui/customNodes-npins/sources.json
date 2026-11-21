@@ -116,9 +116,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ffc99037eea8eac4d4ad20bb72a12a87740279a9",
-      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/ffc99037eea8eac4d4ad20bb72a12a87740279a9.tar.gz",
-      "hash": "sha256-L3WuhbONAQ4bu6Ft81NJolyBLPww4nvNwhTauih7RmQ="
+      "revision": "61e7bb9399b5f3cac9b1ff9a1197c5abc45edf21",
+      "url": "https://github.com/chrisgoringe/cg-use-everywhere/archive/61e7bb9399b5f3cac9b1ff9a1197c5abc45edf21.tar.gz",
+      "hash": "sha256-edWvu/sg7RoU5JoB1sgxF/MmwMyPY8CkRwnNReM8uGQ="
     },
     "comfyui-colors-mz": {
       "type": "Git",
@@ -223,9 +223,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "d08ce763bc28e952566ecda91235709aa3fc6bbb",
-      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/d08ce763bc28e952566ecda91235709aa3fc6bbb.tar.gz",
-      "hash": "sha256-rXuba06LDXaGnelxlR6xmCabkK86783PzeogA9iosiM="
+      "revision": "f141539dfea4e69ac742967d5380cf97d60c007d",
+      "url": "https://github.com/yolain/ComfyUI-Easy-Use/archive/f141539dfea4e69ac742967d5380cf97d60c007d.tar.gz",
+      "hash": "sha256-hfjyuuIkyH3sNn+lr+zR078iyv3zr1nWNnW2LoTdr7w="
     },
     "comfyui-essentials": {
       "type": "Git",
@@ -366,9 +366,9 @@
       },
       "branch": "Main",
       "submodules": false,
-      "revision": "65be933bb68f4cc2450ead15e1c1c5402419e994",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/65be933bb68f4cc2450ead15e1c1c5402419e994.tar.gz",
-      "hash": "sha256-2wI1lKk56nTc3CmFkKJgpH+iqunntpk6z2fLA/DziOw="
+      "revision": "6fed6073d0e7cc7b8bf34b121346f567282ef062",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/6fed6073d0e7cc7b8bf34b121346f567282ef062.tar.gz",
+      "hash": "sha256-5k+fQBNg+RZi1271NiDtm6SUeZ/keCamuF12cwgjd/s="
     },
     "comfyui-impact-subpack": {
       "type": "Git",
@@ -691,9 +691,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7ec7ed49f6bd23d76706e06d4d348b0d4e7284dc",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=7ec7ed49f6bd23d76706e06d4d348b0d4e7284dc",
-      "hash": "sha256-42THuIiMzc7KJKlPRyAcvHVoO5tZLYfNc1/AyPfjWzQ="
+      "revision": "f389185cc469a0b6cfaadd5eb3aef55f7c6d6383",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=f389185cc469a0b6cfaadd5eb3aef55f7c6d6383",
+      "hash": "sha256-0wRVL6Xp7xgTpEOnbETJd/V69vFvpKOUTZAOROFQMNA="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",

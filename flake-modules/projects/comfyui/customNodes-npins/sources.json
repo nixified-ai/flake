@@ -366,9 +366,9 @@
       },
       "branch": "Main",
       "submodules": false,
-      "revision": "e98ec4afb0d917b2848d1454b160395e805e7522",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/e98ec4afb0d917b2848d1454b160395e805e7522.tar.gz",
-      "hash": "sha256-JARDUEInux3maXz3FvnksrdwNE2bx8bQRXu22OV3eHY="
+      "revision": "b70d4f9c747a5e624965420996f90a7f8e193eaa",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/b70d4f9c747a5e624965420996f90a7f8e193eaa.tar.gz",
+      "hash": "sha256-AyNQ22IFkMvgeWgpfGvJZq7SxnFEd9Xi5SxJwU+uGt8="
     },
     "comfyui-impact-subpack": {
       "type": "Git",
@@ -379,9 +379,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "50c7b71a6a224734cc9b21963c6d1926816a97f1",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Subpack/archive/50c7b71a6a224734cc9b21963c6d1926816a97f1.tar.gz",
-      "hash": "sha256-+qYmGdHjrWYfJ+uqGURWk1y8kVR0pBc+ObjUyM0A7UA="
+      "revision": "31b729aaa8d5e5c183e2d5b942064a204eec2d34",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Subpack/archive/31b729aaa8d5e5c183e2d5b942064a204eec2d34.tar.gz",
+      "hash": "sha256-/px05e4JcvhVe2DGC+6UqjbHxoA/IvB55gjKXmsDZa4="
     },
     "comfyui-inpaint": {
       "type": "Git",
@@ -470,9 +470,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "aa2b5ea5e7f61b51f5d26d726f23c1d74e951016",
-      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/aa2b5ea5e7f61b51f5d26d726f23c1d74e951016.tar.gz",
-      "hash": "sha256-bd3CGd3i75r2sbWf9SBfS2rvyuPAAUb2HHQCgAs3Mtc="
+      "revision": "187868f53a7d9df007dbfe85891dab41453f7933",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes/archive/187868f53a7d9df007dbfe85891dab41453f7933.tar.gz",
+      "hash": "sha256-KPbXr7FVnT4y9V0zyqWk9Tnq4+dv/fO9qH3dCNgy+BI="
     },
     "comfyui-last-frame-extractor": {
       "type": "Git",
@@ -600,9 +600,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "c5392aa23762a440834c056c3e22cf99ccf52703",
-      "url": "https://github.com/MixLabPro/comfyui-mixlab-nodes/archive/c5392aa23762a440834c056c3e22cf99ccf52703.tar.gz",
-      "hash": "sha256-szHdofo9yFk8ZsCRiEdXXWwi8VEucIxTDrodZfXvCck="
+      "revision": "e8c9ff55c78da92ed8dc06c3943d7a149f7111a3",
+      "url": "https://github.com/MixLabPro/comfyui-mixlab-nodes/archive/e8c9ff55c78da92ed8dc06c3943d7a149f7111a3.tar.gz",
+      "hash": "sha256-AJX1OIx028zbxMG5Zx0lXX+NUlewvhIovkXBhKQa4DU="
     },
     "comfyui-moondream": {
       "type": "Git",

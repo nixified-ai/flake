@@ -366,9 +366,9 @@
       },
       "branch": "Main",
       "submodules": false,
-      "revision": "b70d4f9c747a5e624965420996f90a7f8e193eaa",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/b70d4f9c747a5e624965420996f90a7f8e193eaa.tar.gz",
-      "hash": "sha256-AyNQ22IFkMvgeWgpfGvJZq7SxnFEd9Xi5SxJwU+uGt8="
+      "revision": "1c346714edd9ef3181e0e696f05106f460058b39",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/1c346714edd9ef3181e0e696f05106f460058b39.tar.gz",
+      "hash": "sha256-LcGf9KDcKZ1el06I/2YlbcK8ajZAHDcLRhq6HK0ueJ0="
     },
     "comfyui-impact-subpack": {
       "type": "Git",
@@ -379,9 +379,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "31b729aaa8d5e5c183e2d5b942064a204eec2d34",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Subpack/archive/31b729aaa8d5e5c183e2d5b942064a204eec2d34.tar.gz",
-      "hash": "sha256-/px05e4JcvhVe2DGC+6UqjbHxoA/IvB55gjKXmsDZa4="
+      "revision": "b4bf952cde06df01eb3deff27d6dc6a9fc9d464a",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Subpack/archive/b4bf952cde06df01eb3deff27d6dc6a9fc9d464a.tar.gz",
+      "hash": "sha256-iYOoRNagtYjzbHx9fpRTGgfcgeSafc+QQpW2zD3g/Pc="
     },
     "comfyui-inpaint": {
       "type": "Git",
@@ -405,9 +405,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "04ed6f2abcbc34ccce9f3bb12b4e1e5bd286d6f6",
-      "url": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack/archive/04ed6f2abcbc34ccce9f3bb12b4e1e5bd286d6f6.tar.gz",
-      "hash": "sha256-U++icnft9p1i1Aj9L1NaTaeKVj5cbk7p0vZ1DM1Fu/E="
+      "revision": "1ea471b0622920fbcbbdc21bed2dbcba2fbadcff",
+      "url": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack/archive/1ea471b0622920fbcbbdc21bed2dbcba2fbadcff.tar.gz",
+      "hash": "sha256-1gKtwvMFnZAPdqcAlQF9He5JOjTlKCBhdd8HvnkEf9U="
     },
     "comfyui-int8-fast": {
       "type": "Git",
@@ -925,9 +925,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "4d907bee61e92c2e65af3bd6383a4e4d356126d1",
-      "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/archive/4d907bee61e92c2e65af3bd6383a4e4d356126d1.tar.gz",
-      "hash": "sha256-unh8GH5qdN+U9IgwWFl6/eAZfq9j3fxHC1UVb+ZTlS4="
+      "revision": "775ae691ecbab6a6d09a2c186f95d130cf8a10d3",
+      "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite/archive/775ae691ecbab6a6d09a2c186f95d130cf8a10d3.tar.gz",
+      "hash": "sha256-PmCH1DkVHi+qxXcNR7oo3763o68iBO+8hUka4WNE7NE="
     },
     "comfyui-videoupscale-withmodel": {
       "type": "Git",

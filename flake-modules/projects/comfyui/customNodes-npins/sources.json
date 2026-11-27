@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "4.4.2",
-      "revision": "92a05d0534e492c051780a253e9e4d116c5b5648",
-      "url": "https://api.github.com/repos/Comfy-Org/ComfyUI-Manager/tarball/refs/tags/4.4.2",
-      "hash": "sha256-BV/WzkBccV8129+wixYn+e9FXV7mGE89HFBcNhRr6yY="
+      "version": "4.4.3",
+      "revision": "5ebe39d7861a61fd975f8c0d46d906ee35080f67",
+      "url": "https://api.github.com/repos/Comfy-Org/ComfyUI-Manager/tarball/refs/tags/4.4.3",
+      "hash": "sha256-ripLJLEoxeL2UN3PG48cM4q8TE6R+c3540FdG9MATqw="
     },
     "comfyui-adv-clip-emb": {
       "type": "Git",
@@ -366,9 +366,9 @@
       },
       "branch": "Main",
       "submodules": false,
-      "revision": "1c346714edd9ef3181e0e696f05106f460058b39",
-      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/1c346714edd9ef3181e0e696f05106f460058b39.tar.gz",
-      "hash": "sha256-LcGf9KDcKZ1el06I/2YlbcK8ajZAHDcLRhq6HK0ueJ0="
+      "revision": "49b02c473345de019075c80c3debb0c67acc239b",
+      "url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack/archive/49b02c473345de019075c80c3debb0c67acc239b.tar.gz",
+      "hash": "sha256-5XxjOGqsejDWDjXj2WyfLUHADCTOW2I0L1BGlkt5BZQ="
     },
     "comfyui-impact-subpack": {
       "type": "Git",
@@ -691,9 +691,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "f389185cc469a0b6cfaadd5eb3aef55f7c6d6383",
-      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=f389185cc469a0b6cfaadd5eb3aef55f7c6d6383",
-      "hash": "sha256-0wRVL6Xp7xgTpEOnbETJd/V69vFvpKOUTZAOROFQMNA="
+      "revision": "7ce416bcf81d68937020a388f6acd6ae15d1e2e4",
+      "url": "https://gitlab.com/api/v4/projects/pixaroma%2Fcomfyui-pixaroma/repository/archive.tar.gz?sha=7ce416bcf81d68937020a388f6acd6ae15d1e2e4",
+      "hash": "sha256-uTp8nQPjgLucT5Rod4DE/WTWcxVO2MDhLrnUQoIfif4="
     },
     "comfyui-pythongosssss-custom-scripts": {
       "type": "Git",
